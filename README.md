@@ -20,10 +20,25 @@ Changes needed that I understand at this point are:
 - Change gear ratios
 - Debug what I have not tested yet...
 
-## Future
-Upcoming changes that are planned.
-- Debug after robot is built. Expect bugs at this point.
-- Integrate 2024 robot subsystems into codebase.
+## Subsystems
+- **Drivetrain**
+  The drivetrain is our typical swerve drive system that utilizes WCProduts.net swerve X modules. Our drivetrain utilized 3 modules instead of the typical 3.
+  The chassis, or frame, this year is a new approach utilizing 3 inch angle aluminum that is 3/16 inch thick. This is a high speed game and impacts are expected.
+  The choosen frame strucutre will not bend like our typical 2040 structure that has bent before. 
+- **Intake**
+  The intake is planned to be a rotating wheeled intake that rotates out over the bumpers picks up Notes from the floor only.
+  After picking up the note from the floor the Note is immediatley deliverd to the shooter or the Tramper.
+- **Shooter**
+  The shooter is a wheeled mechanism that launches the Note at varied angles to allow the robot to score from different distances
+- **Climber**
+  The climber is a two hook solution that raises the robot of the ground high enough for the Tramper to score in the Trap.
+- **Tramper**
+  The tramper is responsible for getting a game piece from the source area of from the intake. It is utilized to score in the Amp or Trap.
+
+## Vision - Camera
+Vision utilizes 1 or 2 cameras for vision object detection of AprilTags and Notes. Another camera is utilized for the driver on the Smartdashboard since there are some blind spots.
+Object detection of a note is mainly planned to be used for autonomous to grab the pixel at center field. AprilTag detection can be used to line up with the Speaker and determine distance to speaker.
+With angle and distance the robot can be automated to angle the shooter, adjuste the shooter speed and angle the robot for a speakers shot.
 
 ## Autonomous
 - Our basic drive strategy is to drive at a angle and velocity in Angle based field centric mode. This allows us to drive in any angle and have the robot PID to an angle. This prevents us from using a PID loop to drive to distance. Since the drive is in velociy mode the time we use is actual distance.
