@@ -14,11 +14,19 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commandGroups.AutoDoNothing;
+import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
+import frc.robot.commands.Intake.IntakeDefaultCommand;
+import frc.robot.commands.Shooter.ShooterDefaultCommand;
+import frc.robot.commands.Tramper.TramperDefaultCommand;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TramperSubsystem;
 
 /**
  * In command-based projects, very little robot logic should actually be handled in the {@link Robot}
@@ -28,38 +36,22 @@ import frc.robot.subsystems.DrivetrainSubsystem;
 public class RobotContainer {
   public static Set<ISubsystem> subsystems = new HashSet<>();
 
-  // private static final ArmSubsystem m_armSubsystem = new ArmSubsystem();
-  // private final ArmDefaultCommand m_armDefaultCommand = new ArmDefaultCommand(m_armSubsystem);
 
-  // private static final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
-  // private final ClimberDefaultCommand m_climberDefaultCommand = new ClimberDefaultCommand(m_climberSubsystem);
-
-  // private static final ClawSubsystem m_clawSubsystem = new ClawSubsystem();
-  // private final ClawDefaultCommand m_clawDefaultCommand = new ClawDefaultCommand(m_clawSubsystem);
+  private static final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  private final ClimberDefaultCommand m_climberDefaultCommand = new ClimberDefaultCommand(m_climberSubsystem);
 
   private static final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final DrivetrainDefaultCommand m_drivetrainDefaultCommand = new DrivetrainDefaultCommand(m_drivetrainSubsystem);
 
-  // private static final ElevatorSubsystem m_elevatorSubsystem = new ElevatorSubsystem();
-  // private final ElevatorDefaultCommand m_elevatorDefaultCommand = new ElevatorDefaultCommand(m_elevatorSubsystem);
+  private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intakeSubsystem);
 
-  // private static final ExtensionSubsystem m_extensionSubsystem = new ExtensionSubsystem();
-  // private final ExtensionDefaultCommand m_extensionDefaultCommand = new ExtensionDefaultCommand(m_extensionSubsystem);
+  private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
-  // private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  // private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intakeSubsystem);
+  private static final TramperSubsystem m_tramperSubsystem = new TramperSubsystem();
+  private final TramperDefaultCommand m_tramperDefaultCommand = new TramperDefaultCommand(m_tramperSubsystem);
 
-  // private static final LiftSubsystem m_liftSubsystem = new LiftSubsystem();
-  // private final LiftDefaultCommand m_liftDefaultCommand = new LiftDefaultCommand(m_liftSubsystem);
-
-  // private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  // private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
-
-  // private static final TurretSubsystem m_turretSubsystem = new TurretSubsystem();
-  // private final TurretDefaultCommand m_turretDefaultCommand = new TurretDefaultCommand(m_turretSubsystem);
-
-  // private static final TestSubsystem m_testSubsystem = new TestSubsystem();
-  // private final TestDefaultCommand m_testDefaultCommand = new TestDefaultCommand(m_testSubsystem);
   private Notifier m_telemetry;
 
   
@@ -77,21 +69,12 @@ public class RobotContainer {
   }
   /** This is the constructor for the class. */
   public RobotContainer() {
-    // m_armSubsystem.setDefaultCommand(m_armDefaultCommand);
-    // m_climberSubsystem.setDefaultCommand(m_climberDefaultCommand);
-    // m_clawSubsystem.setDefaultCommand(m_clawDefaultCommand);
+    m_climberSubsystem.setDefaultCommand(m_climberDefaultCommand);
     m_drivetrainSubsystem.setDefaultCommand(m_drivetrainDefaultCommand);
-    // m_elevatorSubsystem.setDefaultCommand(m_elevatorDefaultCommand);
-    // m_extensionSubsystem.setDefaultCommand(m_extensionDefaultCommand);
-    // m_intakeSubsystem.setDefaultCommand(m_intakeDefaultCommand);
-    // m_liftSubsystem.setDefaultCommand(m_liftDefaultCommand);
-    // m_shooterSubsystem.setDefaultCommand(m_shooterDefaultCommand);
-    // m_turretSubsystem.setDefaultCommand(m_turretDefaultCommand);
-    //m_testSubsystem.setDefaultCommand(m_testDefaultCommand);
+    m_intakeSubsystem.setDefaultCommand(m_intakeDefaultCommand);
+    m_shooterSubsystem.setDefaultCommand(m_shooterDefaultCommand);
+    m_tramperSubsystem.setDefaultCommand(m_tramperDefaultCommand);
     
-    // SmartDashboard.putNumber("Test Voltage", 0);
-    // SmartDashboard.putBoolean("Test Enable", false);
-
     // Configure the trigger bindings
     configureBindings();
 
