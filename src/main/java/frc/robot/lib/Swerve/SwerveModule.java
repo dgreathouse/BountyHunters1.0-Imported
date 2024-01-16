@@ -120,14 +120,14 @@ public class SwerveModule {
         m_steerVolts = m_steerProPID.calculate(m_steerActualAngle_deg,m_steerSetAngle_deg);
         // Limit the voltage for the steer
         m_steerVolts = MathUtil.clamp(m_steerVolts, -5, 5);  // TODO test this on the real robot when fully weighted 
-        m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts));
+        m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
 
         // Calculate the PID value of velocity in MPS
         m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
         m_driveVolts = MathUtil.clamp(m_driveVolts, -4, 4); // Limit the amount the PID can contribute to the Feedforward
         // Add the Feedforward to the PID volts
         m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
-        m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts));
+        m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
     }
 
     public SwerveModulePosition getPosition(boolean _refresh) {
@@ -159,7 +159,7 @@ public class SwerveModule {
         SmartDashboard.putNumber(m_name+"_set_mps", m_driveSetVelocity_mps);
         SmartDashboard.putNumber(m_name+"_act_deg", m_steerActualAngle_deg);
         SmartDashboard.putNumber(m_name+"_act_mps", m_driveActualVelocity_mps);
-        SmartDashboard.putNumber(m_name+"_CC_rot", m_steerPosition.getValueAsDouble());
+        SmartDashboard.putNumber(m_name+"_CC_rot", m_cancoder.getAbsolutePosition().getValueAsDouble());
         SmartDashboard.putNumber(m_name + "_steerVolts", m_steerVolts);
         SmartDashboard.putNumber(m_name + "_driveVolts", m_driveVolts);
     }

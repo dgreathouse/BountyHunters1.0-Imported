@@ -114,22 +114,22 @@ public class SwerveDrive {
         //SwerveModuleConstantsCreator m_constantsCreator = new SwerveModuleConstantsCreator();
         SwerveModuleConstants m_frontRight = new SwerveModuleConstants( 
             "fr",
-            23, false,
-            13, true, 
-            3, -0.15942,
+            13, true,
+            23, true, 
+            3, 0.0368,
             k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, -k.DRIVEBASE.WHEEL_BASE_Y_m / 2.0);
 
         SwerveModuleConstants m_frontLeft = new SwerveModuleConstants(
             "fl",
-            22, false,
-            12, false,  
-            2, -0.033936, 
+            12, false,
+            22, true,  
+            2, 0.167, 
             k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, k.DRIVEBASE.WHEEL_BASE_Y_m / 2.0);
         SwerveModuleConstants m_back = new SwerveModuleConstants(
             "b",
-            21, false,  
-            11, false, 
-            1, -0.085205, 
+            11, false,  
+            21, true, 
+            1, 0.3185, 
             -k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, 0.0);
 
         initialize(m_frontLeft, m_frontRight, m_back);    
