@@ -15,6 +15,12 @@ public class TramperSubsystem extends SubsystemBase  implements ISubsystem{
       SmartDashboard.putString("TramperSubsystem", this.getCurrentCommand().getName());
     }
   }
+  public void spin(double toes){ //FEET AND TOES
+
+  }
+  public void setangle(double feet){
+
+  }
   /** Creates a new ExtensionSubsystem. */
   public TramperSubsystem() {
 
