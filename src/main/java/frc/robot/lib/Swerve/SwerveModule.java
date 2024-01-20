@@ -51,9 +51,9 @@ public class SwerveModule {
 
     public SwerveModule(SwerveModuleConstants _constants) {
         
-        m_driveMotor = new TalonFX(_constants.m_driveMotorId, k.ROBOT.CANVORE_CANFD_NAME);     // Create a TalonFX object for the Drive Motor. Give it the CAN ID and Name of the CAN bus
-        m_steerMotor = new TalonFX(_constants.m_steerMotorId,  k.ROBOT.CANVORE_CANFD_NAME);     // Create a TalonFX object for the Steer Motor. Give it the CAN ID and Name of the CAN bus
-        m_cancoder = new CANcoder(_constants.m_CANcoderId,  k.ROBOT.CANVORE_CANFD_NAME);        // Create a CANCoder object. The CANCoder is used for the absolute wheel angle
+        m_driveMotor = new TalonFX(_constants.m_driveMotorId, k.CANIVORE_IDS.NAME);     // Create a TalonFX object for the Drive Motor. Give it the CAN ID and Name of the CAN bus
+        m_steerMotor = new TalonFX(_constants.m_steerMotorId,  k.CANIVORE_IDS.NAME);     // Create a TalonFX object for the Steer Motor. Give it the CAN ID and Name of the CAN bus
+        m_cancoder = new CANcoder(_constants.m_CANcoderId,  k.CANIVORE_IDS.NAME);        // Create a CANCoder object. The CANCoder is used for the absolute wheel angle
 
         m_name = _constants.m_name;                                             // Set the name of this module to the module level variable
         // Configure Drive Motor
