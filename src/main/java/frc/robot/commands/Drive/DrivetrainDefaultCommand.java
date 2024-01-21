@@ -41,10 +41,10 @@ public class DrivetrainDefaultCommand extends Command implements ICommand{
     double rightY = -RobotContainer.s_driverController.getRightY();
 
     // Limit the inputs for a deadband related to the joystick
-    leftY = MathUtil.applyDeadband(leftY, 0.02, 1.0);
-    leftX = MathUtil.applyDeadband(leftX, 0.02, 1.0);
-    rightY = MathUtil.applyDeadband(rightY, 0.02, 1.0);
-    rightX = MathUtil.applyDeadband(rightX, 0.02, 1.0);
+    leftY = MathUtil.applyDeadband(leftY, 0.08, 1.0);
+    leftX = MathUtil.applyDeadband(leftX, 0.08, 1.0);
+    rightY = MathUtil.applyDeadband(rightY, 0.08, 1.0);
+    rightX = MathUtil.applyDeadband(rightX, 0.08, 1.0);
 
     // Set the class variable ChassisSpeeds to the local variables in their
     // appropriate units.
