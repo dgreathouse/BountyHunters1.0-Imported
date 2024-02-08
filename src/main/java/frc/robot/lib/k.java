@@ -29,6 +29,9 @@ public final class k {
   }
   public static class ROBORIO_CAN_IDS{
     public static final String NAME = "rio";
+    public static final int SHOOTER_LEFT = 30;
+    public static final int SHOOTER_RIGHT = 31;
+    public static final int SHOOTER_ROTATE = 10;
   }
   public static class CONVERT{
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;
@@ -71,7 +74,7 @@ public final class k {
     public static final double GEAR_RATIO = (GEAR_1_TEETH/MOTOR_PINION_TEETH) * (GEAR_2_DRIVEN_TEETH / GEAR_2_DRIVE_TEETH) * (GEAR_BEVEL_DRIVEN_TEETH / GEAR_BEVEL_DRIVE_TEETH);
     public static final double WHEEL_DIAMETER_m = 0.10287;
     private static final double WHEEL_CIRCUMFERENCE_m = Math.PI * WHEEL_DIAMETER_m;
-    public static final double WHEEL_RotPerMeter = GEAR_RATIO / WHEEL_CIRCUMFERENCE_m;
+    public static final double WHEEL_MotRotPerMeter = GEAR_RATIO / WHEEL_CIRCUMFERENCE_m;
     private static final double MOTOR_MAX_VELOCITY_RotPerMin = 6380.0;
     private static final double MOTOR_MAX_VELOCITY_RotPerSec = MOTOR_MAX_VELOCITY_RotPerMin / 60.0;
     private static final double WHEEL_MAX_VELOCITY_RotPerSec = MOTOR_MAX_VELOCITY_RotPerSec / GEAR_RATIO;
@@ -102,6 +105,10 @@ public final class k {
     private static final double ROTATE_MOTOR_CNT_PER_REV = 42;
     private static final double ROTATE_SHAFT_CNTS_PER_REV = ROTATE_MOTOR_CNT_PER_REV * ROTATE_GEAR_RATIO;
     public static final double ROTATE_CNTS_PER_DEG = ROTATE_SHAFT_CNTS_PER_REV / 360;
+    private static final double SPIN_DRIVE_PULLEY_TEETH_COUNT = 24;
+    private static final double SPIN_DRIVEN_PULLEY_TEETH_COUNT = 18;
+    public static final double SPIN_PULLEY_RATIO = SPIN_DRIVEN_PULLEY_TEETH_COUNT/ SPIN_DRIVE_PULLEY_TEETH_COUNT;
+    public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
     
 
   }

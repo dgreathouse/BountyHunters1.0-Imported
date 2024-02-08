@@ -111,7 +111,7 @@ public class SwerveModule {
         m_driveSetVelocity_mps = optimized.speedMetersPerSecond; // Get the velocity we want to set
 
         // Get the actual angles and velocity that the motors are at.
-        m_driveActualVelocity_mps = m_driveMotor.getVelocity().getValueAsDouble() /  k.DRIVE.WHEEL_RotPerMeter;
+        m_driveActualVelocity_mps = m_driveMotor.getVelocity().getValueAsDouble() /  k.DRIVE.WHEEL_MotRotPerMeter;
         m_steerActualAngle_deg = m_steerMotor.getPosition().getValueAsDouble() * 360.0 / k.STEER.GEAR_RATIO;
         
         // m_driveActualVelocity_mps = m_driveVelocity.getValueAsDouble() /  k.DRIVE.WHEEL_RotPerMeter;
@@ -145,7 +145,7 @@ public class SwerveModule {
         // anagle_rot is the Motor rotations. Apply the gear ratio to get wheel rotations for steer
         angle_rot = angle_rot / k.STEER.GEAR_RATIO;
         /* And push them into a SwerveModuleState object to return */
-        m_internalState.distanceMeters = drive_rot / k.DRIVE.WHEEL_RotPerMeter;
+        m_internalState.distanceMeters = drive_rot / k.DRIVE.WHEEL_MotRotPerMeter;
         /* Angle is already in terms of steer rotations */
         m_internalState.angle = Rotation2d.fromRotations(angle_rot);
 
