@@ -93,10 +93,10 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     }
     m_robotDrive.updateDashboard();
   }
-  public void setShotData(double _robotTargetAngle, double _shooterAngle){
+  public void setShotData(double _robotTargetAngle, double _shooterAngle, double _shooterSpeed){
     GD.G_RobotTargetAngle.setTargetAngle(_robotTargetAngle);
     GD.G_ShooterAngle = _shooterAngle;
-    GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+    GD.G_ShooterSpeed = _shooterSpeed;
   }
   @Override
   public void periodic() {
