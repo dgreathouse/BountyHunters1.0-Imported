@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.EDriveMode;
+import frc.robot.lib.GD;
 import frc.robot.lib.ICommand;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
@@ -17,7 +18,7 @@ import frc.robot.lib.Swerve.SwerveDrive;
 public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public SwerveDrive m_robotDrive;
   public EDriveMode m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
-  public Rotation2d m_lastTargetAngle = new Rotation2d();
+
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() {
      m_robotDrive = new SwerveDrive();
@@ -41,13 +42,13 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   }
 
   public void driveAngleFieldCentric(double _x, double _y){
-    m_robotDrive.driveAngleFieldCentric(_x, _y, m_lastTargetAngle);
+    m_robotDrive.driveAngleFieldCentric(_x, _y, GD.G_RobotTargetAngle.getTargetAngle());
   }
 
   public void drivePolarFieldCentric(double _driveAngle_deg, double _speed, double _robotAngle_deg){
     double x = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     double y = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
-    m_lastTargetAngle = new Rotation2d(Units.degreesToRadians(_robotAngle_deg));
+    GD.G_RobotTargetAngle.setTargetAngle(Units.degreesToRadians(_robotAngle_deg));
     driveAngleFieldCentric(x, y);
   }
 
@@ -81,7 +82,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   }
 
   public void setLastTargetAngle(Rotation2d _targetAngle){
-    m_lastTargetAngle = _targetAngle;
+    GD.G_RobotTargetAngle.setTargetAngle(_targetAngle.getDegrees());
   }
 
   public void updateDashboard(){
@@ -92,7 +93,11 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     }
     m_robotDrive.updateDashboard();
   }
-
+  public void setShotData(double _robotTargetAngle, double _shooterAngle){
+    GD.G_RobotTargetAngle.setTargetAngle(_robotTargetAngle);
+    GD.G_ShooterAngle = _shooterAngle;
+    GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+  }
   @Override
   public void periodic() {
     

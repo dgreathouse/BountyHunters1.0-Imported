@@ -4,6 +4,7 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.lib.GD;
 import frc.robot.lib.ICommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -22,9 +23,10 @@ public class ShooterDefaultCommand extends Command implements ICommand {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(RobotContainer.s_operatorController.circle().getAsBoolean()){
-      m_shooter.spin(1.0);
-    }
+
+      m_shooter.spin(GD.G_ShooterSpeed);
+      m_shooter.rotate(GD.G_ShooterAngle);
+
     
   }
 
