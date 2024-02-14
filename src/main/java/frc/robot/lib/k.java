@@ -86,6 +86,7 @@ public final class k {
     public static final double PID_Ki = 0.1;
     public static final double PID_Kv = k.ROBOT.BATTERY_MAX_VOLTS/k.DRIVE.MAX_VELOCITY_MeterPerSec;
     public static final double PID_Ks = 0.18;
+    public static final double TARGET_ANGLE_DEADBAND = 0.8;
   }
   public static class STEER {
     private static final double MOTOR_PINION_TEETH = 8.0;

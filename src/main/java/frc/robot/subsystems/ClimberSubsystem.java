@@ -2,30 +2,21 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
-import frc.robot.lib.ICommand;
 import frc.robot.lib.ISubsystem;
-import frc.robot.lib.k;
 
 public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
-  TalonFX m_motor;
+  //TalonFX m_motor;
 
   public void updateDashboard() {
-    if(this.getCurrentCommand() != null){
-      ((ICommand)this.getCurrentCommand()).updateDashboard();
-      SmartDashboard.putString("ClimberSubsystem", this.getCurrentCommand().getName());
-    }
+
   }
 
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-    m_motor = new TalonFX(20, k.ROBORIO_CAN_IDS.NAME);
-    m_motor.setNeutralMode(NeutralModeValue.Brake);
+ //   m_motor = new TalonFX(20, k.ROBORIO_CAN_IDS.NAME);
+//    m_motor.setNeutralMode(NeutralModeValue.Brake);
 
     initialize();
   }

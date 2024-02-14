@@ -3,10 +3,9 @@
 package frc.robot.commands.Climber;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.lib.ICommand;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimberDefaultCommand extends Command  implements ICommand{
+public class ClimberDefaultCommand extends Command{
   ClimberSubsystem m_climber;
 
   /** Creates a new ClimberDefaultCommand. */
@@ -32,8 +31,5 @@ public class ClimberDefaultCommand extends Command  implements ICommand{
   public boolean isFinished() {
     return false;
   }
-  @Override
-  public void updateDashboard() {
 
-  }
 }

@@ -4,10 +4,9 @@ package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.lib.ICommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class AutoDriveTimeVel extends Command implements ICommand{
+public class AutoDriveTimeVel extends Command{
   DrivetrainSubsystem m_drivetrain;
   Timer m_timer = new Timer();
   double m_rampTime = 1.0; // Seconds
@@ -80,8 +79,5 @@ public class AutoDriveTimeVel extends Command implements ICommand{
     }
     return false;
   }
-  @Override
-  public void updateDashboard() {
-    
-  }
+
 }

@@ -18,7 +18,7 @@ public class TargetAngle {
 
     // BEGIN Class Constructors 
     public TargetAngle(){
-
+      m_targetAngle = new Rotation2d(0);
     }
     public TargetAngle(double _ang){
       m_discreteAngle = _ang;
@@ -37,32 +37,33 @@ public class TargetAngle {
     public Rotation2d setTargetAngle(double _x, double _y){
         double midAngle = m_discreteAngle;
         m_hyp = Math.hypot(_x, _y);
-        if(Math.abs(m_hyp) > 0.8){
+        if(Math.abs(m_hyp) > k.DRIVE.TARGET_ANGLE_DEADBAND){
           m_actualAngle = Math.toDegrees(Math.atan2(_y,_x));
           if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(0));
+            m_targetAngle =  Rotation2d.fromDegrees(0.0); 
           }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(-midAngle));
+            m_targetAngle = Rotation2d.fromDegrees(-midAngle);
           }else if(m_actualAngle >= -112.5 && m_actualAngle < -67.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(-90));
+            m_targetAngle = Rotation2d.fromDegrees(-90);
           }else if(m_actualAngle >= -157.5 && m_actualAngle < -112.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(-(180-midAngle)));
+            m_targetAngle = Rotation2d.fromDegrees(-(180-midAngle));
           }else if((m_actualAngle >= 157.5 && m_actualAngle <= 180.0) || (m_actualAngle <= -157.5 && m_actualAngle > -179.99)){
-            m_targetAngle = new Rotation2d(Math.toRadians((180)));
+            m_targetAngle = Rotation2d.fromDegrees(180);
           }else if(m_actualAngle <= 67.5 && m_actualAngle > 22.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(midAngle));
+            m_targetAngle = Rotation2d.fromDegrees(midAngle);
           }else if(m_actualAngle <= 112.5 && m_actualAngle > 67.5){
-            m_targetAngle = new Rotation2d(Math.toRadians(90));
+            m_targetAngle = Rotation2d.fromDegrees(90);
           }else if(m_actualAngle <= 157.5 && m_actualAngle > 112.5){
-            m_targetAngle = new Rotation2d(Math.toRadians((180-midAngle)));
-          }else {
-            m_targetAngle = new Rotation2d();
+            m_targetAngle =Rotation2d.fromDegrees(180-midAngle);
           }
         }
         return m_targetAngle;
     }
-    public void setTargetAngle(double _angle){
-      m_targetAngle = new Rotation2d(Math.toRadians(_angle));
+    public Rotation2d setTargetAngle(double _angle){
+      m_hyp = 0.0;
+      m_actualAngle = _angle;
+      m_targetAngle = Rotation2d.fromDegrees(_angle);
+      return m_targetAngle;
     }
     public Rotation2d getTargetAngle(){
         return m_targetAngle;

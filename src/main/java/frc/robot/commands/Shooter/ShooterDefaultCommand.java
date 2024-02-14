@@ -5,10 +5,9 @@ package frc.robot.commands.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
-import frc.robot.lib.ICommand;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterDefaultCommand extends Command implements ICommand {
+public class ShooterDefaultCommand extends Command{
   ShooterSubsystem m_shooter;
   /** Creates a new ShooterDefaultCommand. */
   public ShooterDefaultCommand(ShooterSubsystem _subsystem) {
@@ -23,11 +22,13 @@ public class ShooterDefaultCommand extends Command implements ICommand {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
       m_shooter.spin(GD.G_ShooterSpeed);
       m_shooter.rotate(GD.G_ShooterAngle);
-
-    
+      if(RobotContainer.s_operatorController.R1().getAsBoolean()){
+        m_shooter.ShootNote(true);
+      } else {
+        m_shooter.ShootNote(false);
+      }
   }
 
   // Called once the command ends or is interrupted.
@@ -39,8 +40,5 @@ public class ShooterDefaultCommand extends Command implements ICommand {
   public boolean isFinished() {
     return false;
   }
-  @Override
-  public void updateDashboard() {
 
-  }
 }

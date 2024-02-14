@@ -4,17 +4,18 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
- import com.revrobotics.CANSparkMax;
- import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
-import frc.robot.lib.ICommand;
+import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
@@ -23,7 +24,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;        // Declare a TalonFX motor controller class and call it m_leftMotor;
   TalonFX m_rightMotor;       // Declare a TalonFX motor controller class and call it m_rightMotor;
   CANSparkMax m_rotateMotor;  // Declare a CANSparkMax motor controller class and call it m_rotateMotor;
-
+  Servo m_leftServo;
+  Servo m_rightServo;
   // Declare and initialize a VoltageOut class and call the instance m_spinVoltageOut
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
   // Create the contraints our PID controller must follow 
@@ -45,11 +47,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    * 
    */
   public void updateDashboard() {
-    if(this.getCurrentCommand() != null){
-      ((ICommand)this.getCurrentCommand()).updateDashboard();
-      SmartDashboard.putString("ShooterSubsystem", this.getCurrentCommand().getName());
-    }
+
     SmartDashboard.putNumber("Shooter Actual Angle Deg", getActualAngle());
+    SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
     SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
     SmartDashboard.putData(m_rotatePID);
   }
@@ -66,7 +66,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT,k.ROBORIO_CAN_IDS.NAME);
     m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT,k.ROBORIO_CAN_IDS.NAME);
     m_rotateMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.SHOOTER_ROTATE, MotorType.kBrushless);
-    
+    m_leftServo = new Servo(1);
+    m_rightServo = new Servo(2);
     m_rotatePID.setIntegratorRange(-1, 1);
     m_rotatePID.setTolerance(0.5);
 
@@ -103,10 +104,20 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
       m_rotateMotor.setVoltage(volts);
     }else {
-      m_rotateMotor.setVoltage(pid + ff);
+     // m_rotateMotor.setVoltage(pid + ff);
     }
     
   }
+  public void ShootNote(boolean _shoot){
+    if(_shoot){
+      m_leftServo.set(0);
+      m_rightServo.set(0);
+    }else {
+      m_leftServo.set(50);
+      m_rightServo.set(50);
+    }
+  }
+
   public double getActualAngle(){
     return m_rotateMotor.getEncoder().getPosition() / k.SHOOTER.ROTATE_GEAR_RATIO * 360.0 + k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
   }

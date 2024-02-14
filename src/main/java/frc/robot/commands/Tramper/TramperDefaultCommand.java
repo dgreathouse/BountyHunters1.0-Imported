@@ -3,10 +3,9 @@
 package frc.robot.commands.Tramper;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.lib.ICommand;
 import frc.robot.subsystems.TramperSubsystem;
 
-public class TramperDefaultCommand extends Command implements ICommand {
+public class TramperDefaultCommand extends Command {
   TramperSubsystem m_tramper;
   /** Creates a new ExtensionDefaultCommand. */
   public TramperDefaultCommand(TramperSubsystem _subsystem) {
@@ -32,8 +31,5 @@ public class TramperDefaultCommand extends Command implements ICommand {
   public boolean isFinished() {
     return false;
   }
-  @Override
-  public void updateDashboard() {
 
-  }
 }

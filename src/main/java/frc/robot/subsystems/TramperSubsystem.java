@@ -2,18 +2,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
-import frc.robot.lib.ICommand;
 import frc.robot.lib.ISubsystem;
 
 public class TramperSubsystem extends SubsystemBase  implements ISubsystem{
   public void updateDashboard() {
-    if(this.getCurrentCommand() != null){
-      ((ICommand)this.getCurrentCommand()).updateDashboard();
-      SmartDashboard.putString("TramperSubsystem", this.getCurrentCommand().getName());
-    }
+
   }
   /** Creates a new ExtensionSubsystem. */
   public TramperSubsystem() {

@@ -183,8 +183,7 @@ public class SwerveDrive {
         var currentAngle = m_pigeon2.getRotation2d();
         double rotationalSpeed = m_turnPid.calculate(currentAngle.getRadians(), _targetAngle.getRadians());
 
-        var roboCentric = ChassisSpeeds.fromFieldRelativeSpeeds(
-                _xSpeeds, _ySpeeds, rotationalSpeed, m_pigeon2.getRotation2d());
+        var roboCentric = ChassisSpeeds.fromFieldRelativeSpeeds(_xSpeeds, _ySpeeds, rotationalSpeed, m_pigeon2.getRotation2d());
         var swerveStates = m_kinematics.toSwerveModuleStates(roboCentric);
         for (int i = 0; i < m_moduleCount; ++i) {
             m_modules[i].setDesiredState(swerveStates[i]);

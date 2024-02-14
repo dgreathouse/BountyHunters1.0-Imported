@@ -4,10 +4,9 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.lib.ICommand;
 import frc.robot.subsystems.IntakeSubsystem;
 
-public class IntakeDefaultCommand extends Command implements ICommand {
+public class IntakeDefaultCommand extends Command{
   IntakeSubsystem m_intake;
   /** Creates a new IntakeDefaultCommand. */
   public IntakeDefaultCommand(IntakeSubsystem _subsystem) {
@@ -38,8 +37,5 @@ public class IntakeDefaultCommand extends Command implements ICommand {
   public boolean isFinished() {
     return false;
   }
-  @Override
-  public void updateDashboard() {
 
-  }
 }

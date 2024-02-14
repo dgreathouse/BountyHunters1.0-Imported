@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.EDriveMode;
 import frc.robot.lib.GD;
-import frc.robot.lib.ICommand;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 import frc.robot.lib.Swerve.SwerveDrive;
@@ -87,16 +86,9 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
 
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
-    if(this.getCurrentCommand() != null){
-      ((ICommand)this.getCurrentCommand()).updateDashboard();
-      SmartDashboard.putString("DrivetrainSubsystem", this.getCurrentCommand().getName());
-    }
-    m_robotDrive.updateDashboard();
-  }
-  public void setShotData(double _robotTargetAngle, double _shooterAngle, double _shooterSpeed){
-    GD.G_RobotTargetAngle.setTargetAngle(_robotTargetAngle);
-    GD.G_ShooterAngle = _shooterAngle;
-    GD.G_ShooterSpeed = _shooterSpeed;
+    SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
+    
+    //m_robotDrive.updateDashboard();
   }
   @Override
   public void periodic() {

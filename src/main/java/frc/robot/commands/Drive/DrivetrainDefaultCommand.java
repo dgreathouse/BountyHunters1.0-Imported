@@ -8,11 +8,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
-import frc.robot.lib.ICommand;
 import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class DrivetrainDefaultCommand extends Command implements ICommand{
+public class DrivetrainDefaultCommand extends Command{
 
   private DrivetrainSubsystem m_drive;
   ChassisSpeeds m_speeds = new ChassisSpeeds();
@@ -54,9 +53,7 @@ public class DrivetrainDefaultCommand extends Command implements ICommand{
     m_speeds.omegaRadiansPerSecond = rightX * k.DRIVE.MAX_ANGULAR_VELOCITY_RadianPerSec;
 
     // If correct button is pressed, set the robot angle, shooter angle and shooter speed.
-    setShotData();
-    // if the right x&y are greater than a certain point. Lower shooter and turn off spinners and set robot angle
-    setStickAngles(rightX,rightY);
+    setShotData(rightX,rightY);
     
     // Call the appropriate drive mode. Selected by the driver controller Square button.
     
@@ -74,48 +71,59 @@ public class DrivetrainDefaultCommand extends Command implements ICommand{
         break;
     }
   }
-  /** Do the following if the x and y hyponteneus are greater than 0.8 
-   *  Set the Robot target angle to rotate to
-   *  Set the Shooter angle back to zero so note can be put in from the intake
-   *  Set the shooter speed to 0.
+
+  /** If right stick X,Y Hyp is >  0.8 then set the target angle
+   *  Reset the Shooter angle and speed to default if button not pressed.
    * 
-   * @param _x +/- 1 from the controller 
-   * @param _y +/- 1 from the controller 
-   */
-  private void setStickAngles(double _x, double _y){
-    if (Math.abs(Math.hypot(_x, _y)) > 0.8) {
-      GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
-      GD.G_ShooterAngle = 0.0;
-      GD.G_ShooterSpeed = 0.0;
-    }
-  }
-  /**
    * Set the following data if the appropriate buttons are pressed
    * Robot Angle to turn to
    * Shooter angle to move to
    * Shooter speed to run at.
    */
-  private void setShotData() {
-    // Handle target angle
+  private void setShotData(double _x, double _y) {
+    // set the target angle only if the x,y hyp are > deadband
+    GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
+    // if x,y hyp > deadband reset the shooter angle and speed 
+    if(GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND){
+      GD.G_ShooterAngle = 15.0;
+      GD.G_ShooterSpeed = 0.0;
+    }
+    // Handle target angle buttons if pressed to set angles and speeds
     if (RobotContainer.s_driverController.R1().getAsBoolean()) {
       if (RobotContainer.s_driverController.square().getAsBoolean()) {
-        m_drive.setShotData(60, 50, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
-        m_drive.setShotData(50, 40, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
-        m_drive.setShotData(40, 30, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
-        m_drive.setShotData(30, 20, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       }
     } else {
       if (RobotContainer.s_driverController.square().getAsBoolean()) {
-        m_drive.setShotData(20, 10, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
-        m_drive.setShotData(10, 0, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
-        m_drive.setShotData(0, -10, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
-        m_drive.setShotData(-10, -20, k.SHOOTER.SPIN_SHOT_SPEED_RPS);
+        GD.G_RobotTargetAngle.setTargetAngle(50);
+        GD.G_ShooterAngle = 40;
+        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       }
     }
   }
@@ -131,7 +139,7 @@ public class DrivetrainDefaultCommand extends Command implements ICommand{
     return false;
   }
 
-  @Override
+
   public void updateDashboard() {
     SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(X)", m_speeds.vxMetersPerSecond);
     SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(Y)", m_speeds.vyMetersPerSecond);
