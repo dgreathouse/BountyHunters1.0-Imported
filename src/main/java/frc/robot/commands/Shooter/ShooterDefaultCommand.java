@@ -3,9 +3,9 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.lib.k;
 
 public class ShooterDefaultCommand extends Command{
   ShooterSubsystem m_shooter;
@@ -24,7 +24,7 @@ public class ShooterDefaultCommand extends Command{
   public void execute() {
       m_shooter.spin(GD.G_ShooterSpeed);
       m_shooter.rotate(GD.G_ShooterAngle);
-      if(RobotContainer.s_operatorController.R1().getAsBoolean()){
+      if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean()) {
         m_shooter.ShootNote(true);
       } else {
         m_shooter.ShootNote(false);

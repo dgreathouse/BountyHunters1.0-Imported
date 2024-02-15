@@ -2,6 +2,9 @@
 
 package frc.robot.lib;
 
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.RobotContainer;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -50,8 +53,30 @@ public final class k {
     
   }
   public static class OI {
+    
+    
+
+    // Driver controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
+    public static Trigger DRIVER_SHOT_POSITION_1 = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_SHOT_POSITION_2 = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_3 = RobotContainer.s_driverController.triangle();
+    public static Trigger DRIVER_SHOT_POSITION_4 = RobotContainer.s_driverController.cross();
+
+    public static Trigger DRIVER_ENABLE_SECONDAY_TRIGGERS = RobotContainer.s_driverController.R1();
+    public static Trigger DRIVER_SHOT_POSITION_5 = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_SHOT_POSITION_6 = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_7 = RobotContainer.s_driverController.triangle();
+    public static Trigger DRIVER_SHOT_POSITION_8 = RobotContainer.s_driverController.cross();
+
+    public static Trigger DRIVER_CHANGE_DRIVE_MODE = RobotContainer.s_driverController.options();
+    public static Trigger DRIVER_RESET_YAW = RobotContainer.s_driverController.create();
+
+    // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
+
+    public static Trigger OPERATOR_SHOOT_NOTE = RobotContainer.s_operatorController.R1();
+    public static Trigger OPERATOR_INTAKE_RAISE = RobotContainer.s_operatorController.triangle();
   }
   public static class DRIVEBASE {
     public static final double WHEEL_BASE_Y_m = 0.47738;

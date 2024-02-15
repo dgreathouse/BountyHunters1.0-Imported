@@ -96,9 +96,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     //new Trigger(RobotContainer.m_drivetrainSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
-    s_driverController.square().onTrue(new InstantCommand(m_drivetrainSubsystem::changeDriveMode, m_drivetrainSubsystem));
-    s_driverController.triangle().onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
-   // s_operatorController.triangle().whileTrue(m_climberDefaultCommand)
+    k.OI.DRIVER_CHANGE_DRIVE_MODE.onTrue(new InstantCommand(m_drivetrainSubsystem::changeDriveMode, m_drivetrainSubsystem));
+    k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
+  
   }
   /**
    * @return the command to run in autonomous routine

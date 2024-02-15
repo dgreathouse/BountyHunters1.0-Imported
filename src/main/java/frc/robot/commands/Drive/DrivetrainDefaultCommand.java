@@ -89,38 +89,38 @@ public class DrivetrainDefaultCommand extends Command{
       GD.G_ShooterSpeed = 0.0;
     }
     // Handle target angle buttons if pressed to set angles and speeds
-    if (RobotContainer.s_driverController.R1().getAsBoolean()) {
-      if (RobotContainer.s_driverController.square().getAsBoolean()) {
+    if (k.OI.DRIVER_ENABLE_SECONDAY_TRIGGERS.getAsBoolean()) {
+      if (k.OI.DRIVER_SHOT_POSITION_5.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_6.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_7.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_8.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       }
     } else {
-      if (RobotContainer.s_driverController.square().getAsBoolean()) {
+      if (k.OI.DRIVER_SHOT_POSITION_1.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.circle().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.triangle().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
-      } else if (RobotContainer.s_driverController.cross().getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_4.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
         GD.G_ShooterAngle = 40;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
