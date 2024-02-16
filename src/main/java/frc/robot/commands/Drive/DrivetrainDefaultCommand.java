@@ -85,7 +85,7 @@ public class DrivetrainDefaultCommand extends Command{
     GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
     // if x,y hyp > deadband reset the shooter angle and speed 
     if(GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND){
-      GD.G_ShooterAngle = 15.0;
+      GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
       GD.G_ShooterSpeed = 0.0;
     }
     // Handle target angle buttons if pressed to set angles and speeds
@@ -114,7 +114,7 @@ public class DrivetrainDefaultCommand extends Command{
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
+        GD.G_ShooterAngle = 30;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);

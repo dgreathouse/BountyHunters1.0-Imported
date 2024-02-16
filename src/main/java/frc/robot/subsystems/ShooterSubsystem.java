@@ -33,7 +33,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   TrapezoidProfile.Constraints m_rotateContraints = new TrapezoidProfile.Constraints(0.5236, 1.05);
   // Create a profiled PID controller with the contraints 
   // kP and kI should be in Volt/Rad
-  ProfiledPIDController m_rotatePID = new ProfiledPIDController(0.01, 0.001, 0, m_rotateContraints);
+  ProfiledPIDController m_rotatePID = new ProfiledPIDController(1.15, 0.08, 0, m_rotateContraints);
   // Create a ArmFeedforward object to control the rotate motor.
   // ks in volts, kg in volts kv in volt seconds per radian and ka in volt seconds² per radian
   ArmFeedforward m_armFeedForward = new ArmFeedforward(0.0, 0.4, 1.18, 0.0);
@@ -48,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    */
   public void updateDashboard() {
 
-    SmartDashboard.putNumber("Shooter Actual Angle Deg", getActualAngle());
+    SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
     SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
     SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
     SmartDashboard.putData(m_rotatePID);
@@ -104,7 +104,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
       m_rotateMotor.setVoltage(volts);
     }else {
-     // m_rotateMotor.setVoltage(pid + ff);
+      m_rotateMotor.setVoltage(pid + ff);
     }
     
   }
@@ -119,7 +119,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
 
   public double getActualAngle(){
-    return m_rotateMotor.getEncoder().getPosition() / k.SHOOTER.ROTATE_GEAR_RATIO * 360.0 + k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
+    double angle_deg = m_rotateMotor.getEncoder().getPosition() / k.SHOOTER.ROTATE_GEAR_RATIO * 360.0 + k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
+    return angle_deg;
   }
 
   public double getRequestedAngle_deg() {

@@ -136,8 +136,8 @@ public final class k {
     private static final double SPIN_DRIVEN_PULLEY_TEETH_COUNT = 18;
     public static final double SPIN_PULLEY_RATIO = SPIN_DRIVEN_PULLEY_TEETH_COUNT/ SPIN_DRIVE_PULLEY_TEETH_COUNT;
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
-    public static final double ROTATE_OFFSET_ANGLE_DEG = 15;
-    public static final double SPIN_SHOT_SPEED_RPS = .7;
+    public static final double ROTATE_OFFSET_ANGLE_DEG = 29.85;
+    public static final double SPIN_SHOT_SPEED_RPS = .05;
 
   }
 
