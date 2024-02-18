@@ -5,6 +5,7 @@
 package frc.robot.lib;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** Add your docs here. */
 public class TargetAngle {
@@ -38,7 +39,8 @@ public class TargetAngle {
         double midAngle = m_discreteAngle;
         m_hyp = Math.hypot(_x, _y);
         if(Math.abs(m_hyp) > k.DRIVE.TARGET_ANGLE_DEADBAND){
-          m_actualAngle = Math.toDegrees(Math.atan2(_y,_x));
+          m_actualAngle = Math.toDegrees(Math.atan2(_x,_y));
+          SmartDashboard.putNumber("m_actualAngle", m_actualAngle);
           if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){
             m_targetAngle =  Rotation2d.fromDegrees(0.0); 
           }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){

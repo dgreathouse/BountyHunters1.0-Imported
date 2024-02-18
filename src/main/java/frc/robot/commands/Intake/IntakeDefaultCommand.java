@@ -27,6 +27,7 @@ public class IntakeDefaultCommand extends Command{
     }else {
       m_intake.spin(0);
     }
+    m_intake.rotate(0);
   }
 
   // Called once the command ends or is interrupted.

@@ -36,6 +36,7 @@ public final class k {
     public static final int SHOOTER_RIGHT = 31;
     public static final int SHOOTER_ROTATE = 10;
     public static final int INTAKE_SPIN = 40;
+    public static final int INTAKE_ROTATE = 41;
   }
   public static class CONVERT{
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;
@@ -58,10 +59,10 @@ public final class k {
 
     // Driver controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    public static Trigger DRIVER_SHOT_POSITION_1 = RobotContainer.s_driverController.square();
-    public static Trigger DRIVER_SHOT_POSITION_2 = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_1 = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_2 = RobotContainer.s_driverController.square();
     public static Trigger DRIVER_SHOT_POSITION_3 = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_4 = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_4 = RobotContainer.s_driverController.circle();
 
     public static Trigger DRIVER_ENABLE_SECONDAY_TRIGGERS = RobotContainer.s_driverController.R1();
     public static Trigger DRIVER_SHOT_POSITION_5 = RobotContainer.s_driverController.square();
@@ -84,8 +85,8 @@ public final class k {
     private static final double WHEEL_BASE_XY_AVG_m = (WHEEL_BASE_Y_m + WHEEL_BASE_X_m)/2.0;
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
-    public static final double TURN_KP = 5.0;
-    public static final double TURN_KI = 1.0;
+    public static final double TURN_KP = 6;
+    public static final double TURN_KI = 3.50;
     public static final double TURN_KD = 0.0;
   }
   public static class DRIVE {
@@ -136,9 +137,12 @@ public final class k {
     private static final double SPIN_DRIVEN_PULLEY_TEETH_COUNT = 18;
     public static final double SPIN_PULLEY_RATIO = SPIN_DRIVEN_PULLEY_TEETH_COUNT/ SPIN_DRIVE_PULLEY_TEETH_COUNT;
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
-    public static final double ROTATE_OFFSET_ANGLE_DEG = 29.85;
-    public static final double SPIN_SHOT_SPEED_RPS = .05;
+    public static final double ROTATE_OFFSET_ANGLE_DEG = 29.5;
+    public static final double SPIN_SHOT_SPEED_RPS = .72;
 
+  }
+  public static class INTAKE {
+    
   }
 
 }
