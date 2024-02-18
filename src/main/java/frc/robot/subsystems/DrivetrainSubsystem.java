@@ -83,7 +83,9 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void setLastTargetAngle(Rotation2d _targetAngle){
     GD.G_RobotTargetAngle.setTargetAngle(_targetAngle.getDegrees());
   }
-
+  public void resetPose(){
+    m_robotDrive.resetPose();
+  }
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());

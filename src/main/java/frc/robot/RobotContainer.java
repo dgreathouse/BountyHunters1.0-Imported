@@ -98,7 +98,7 @@ public class RobotContainer {
     //new Trigger(RobotContainer.m_drivetrainSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
     k.OI.DRIVER_CHANGE_DRIVE_MODE.onTrue(new InstantCommand(m_drivetrainSubsystem::changeDriveMode, m_drivetrainSubsystem));
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
-  
+    k.OI.DRIVER_RESET_POSE.onTrue(new InstantCommand(m_drivetrainSubsystem::resetPose, m_drivetrainSubsystem));
   }
   /**
    * @return the command to run in autonomous routine

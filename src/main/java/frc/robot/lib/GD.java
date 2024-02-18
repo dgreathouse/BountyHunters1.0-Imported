@@ -10,6 +10,6 @@ package frc.robot.lib;
 public class GD {
     public static RobotMode G_RobotMode = RobotMode.BOOT;
     public static double G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
-    public static double G_ShooterSpeed = 0.70;
+    public static double G_ShooterSpeed = 0.0;
     public static TargetAngle G_RobotTargetAngle = new TargetAngle(45);
 }

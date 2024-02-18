@@ -9,6 +9,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -158,6 +159,7 @@ public class SwerveDrive {
         m_turnPid.setTolerance(Math.toRadians(0.1));
         SmartDashboard.putData("Robot Turn PID",m_turnPid);
         m_odometryThread = new OdometryThread();
+        
         m_odometryThread.start();
     }
     private SwerveModulePosition[] getSwervePositions() {
@@ -201,7 +203,9 @@ public class SwerveDrive {
     public void resetYaw() {
         m_pigeon2.setYaw(0);
     }
-
+    public void resetPose(){
+        m_odometry.resetPosition(m_pigeon2.getRotation2d(), getSwervePositions(), new Pose2d(3.55,4.28,new Rotation2d()));
+    }
     public Pose2d getPoseMeters() {
         return m_odometry.getPoseMeters();
     }
@@ -223,14 +227,14 @@ public class SwerveDrive {
     }
          /* Put smartdashboard calls in separate thread to reduce performance impact */
     public void updateDashboard() {
-        SmartDashboard.putNumber("Successful Daqs", m_odometryThread.getSuccessfulDaqs());
-        SmartDashboard.putNumber("Failed Daqs", m_odometryThread.getFailedDaqs());
-        SmartDashboard.putNumber("X Pos", m_odometry.getPoseMeters().getX());
-        SmartDashboard.putNumber("Y Pos", m_odometry.getPoseMeters().getY());
-        SmartDashboard.putNumber("Angle", m_odometry.getPoseMeters().getRotation().getDegrees());
-        SmartDashboard.putNumber("Odometry Loop Time", m_odometryThread.getTime());
-        for (int i = 0; i < m_moduleCount; ++i) {
-            m_modules[i].updateDashboard();
-        }
+        // SmartDashboard.putNumber("Successful Daqs", m_odometryThread.getSuccessfulDaqs());
+        // SmartDashboard.putNumber("Failed Daqs", m_odometryThread.getFailedDaqs());
+        // SmartDashboard.putNumber("X Pos", m_odometry.getPoseMeters().getX());
+        // SmartDashboard.putNumber("Y Pos", m_odometry.getPoseMeters().getY());
+        // SmartDashboard.putNumber("Angle", m_odometry.getPoseMeters().getRotation().getDegrees());
+        // SmartDashboard.putNumber("Odometry Loop Time", m_odometryThread.getTime());
+        // for (int i = 0; i < m_moduleCount; ++i) {
+        //     m_modules[i].updateDashboard();
+        // }
     }
 }
