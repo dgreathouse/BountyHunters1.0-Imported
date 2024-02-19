@@ -2,8 +2,13 @@
 
 package frc.robot.commands.Drive;
 
+import java.util.Optional;
+
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
@@ -15,7 +20,9 @@ public class DrivetrainDefaultCommand extends Command{
 
   private DrivetrainSubsystem m_drive;
   ChassisSpeeds m_speeds = new ChassisSpeeds();
-
+  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(3);
+  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(3);
+  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(3);
   /** Creates a new DrivetrainDefaultCommand. */
   public DrivetrainDefaultCommand(DrivetrainSubsystem _drivetrain) {
     m_drive = _drivetrain;
@@ -35,28 +42,30 @@ public class DrivetrainDefaultCommand extends Command{
   public void execute() {
     
     // Set local variables to game thumbstick axis values
-    double leftY = -RobotContainer.s_driverController.getLeftY();
-    double leftX = -RobotContainer.s_driverController.getLeftX();
-    double rightX = -RobotContainer.s_driverController.getRightX();
-    double rightY = -RobotContainer.s_driverController.getRightY();
+    double leftYRaw = -RobotContainer.s_driverController.getLeftY();
+    double leftXRaw = -RobotContainer.s_driverController.getLeftX();
+    double rightXRaw = -RobotContainer.s_driverController.getRightX();
+    double rightYRaw = -RobotContainer.s_driverController.getRightY();
 
     // Limit the inputs for a deadband related to the joystick
-    leftY = MathUtil.applyDeadband(leftY, 0.08, 1.0);
-    leftX = MathUtil.applyDeadband(leftX, 0.08, 1.0);
-    rightY = MathUtil.applyDeadband(rightY, 0.15, 1.0);
-    rightX = MathUtil.applyDeadband(rightX, 0.15, 1.0);
+    double leftYFiltered = MathUtil.applyDeadband(leftYRaw, 0.08, 1.0);
+    double leftXFiltered = MathUtil.applyDeadband(leftXRaw, 0.08, 1.0);
+    //double rightYFiltered = MathUtil.applyDeadband(rightYRaw, 0.15, 1.0);
+    double rightXFiltered = MathUtil.applyDeadband(rightXRaw, 0.15, 1.0);
 
-    // Set the class variable ChassisSpeeds to the local variables in their
-    // appropriate units.
-    m_speeds.vxMetersPerSecond = leftY * k.DRIVE.MAX_VELOCITY_MeterPerSec;
-    m_speeds.vyMetersPerSecond = leftX * k.DRIVE.MAX_VELOCITY_MeterPerSec;
-    m_speeds.omegaRadiansPerSecond = rightX * k.DRIVE.MAX_ANGULAR_VELOCITY_RadianPerSec;
+    leftXFiltered = m_stickLimiterLX.calculate(leftXFiltered);
+    leftYFiltered = m_stickLimiterLY.calculate(leftYFiltered);
+    rightXFiltered = m_stickLimiterRX.calculate(rightXFiltered);
+
+    // Set the class variable ChassisSpeeds to the local variables in their appropriate units.
+    m_speeds.vxMetersPerSecond = leftYFiltered * k.DRIVE.MAX_VELOCITY_MeterPerSec;
+    m_speeds.vyMetersPerSecond = leftXFiltered * k.DRIVE.MAX_VELOCITY_MeterPerSec;
+    m_speeds.omegaRadiansPerSecond = rightXFiltered * k.DRIVE.MAX_ANGULAR_VELOCITY_RadianPerSec;
 
     // If correct button is pressed, set the robot angle, shooter angle and shooter speed.
-    setShotData(rightX,rightY);
+    setShotData(rightXRaw,rightYRaw);
     
-    // Call the appropriate drive mode. Selected by the driver controller Square button.
-    
+    // Call the appropriate drive mode. Selected by the driver controller Options button.
     switch (m_drive.getDriveMode()) {
       case FIELD_CENTRIC:
         m_drive.driveFieldCentric(m_speeds);
@@ -83,7 +92,11 @@ public class DrivetrainDefaultCommand extends Command{
   private void setShotData(double _x, double _y) {
     // set the target angle only if the x,y hyp are > deadband
     GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
-    
+    // Assume blue 
+    double allianceSign = 1.0;
+    allianceSign = GD.G_Alliance == Alliance.Red ? -allianceSign : allianceSign;
+
+
     // if x,y hyp > deadband reset the shooter angle and speed 
     if(GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND){
       GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
@@ -93,35 +106,35 @@ public class DrivetrainDefaultCommand extends Command{
     if (k.OI.DRIVER_ENABLE_SECONDAY_TRIGGERS.getAsBoolean()) {
       if (k.OI.DRIVER_SHOT_POSITION_5.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
+        GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_6.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
+        GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_7.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
+        GD.G_RobotTargetAngle.setTargetAngle(0);
+        GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_8.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
+        GD.G_RobotTargetAngle.setTargetAngle(-50);
+        GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       }
     } else {
-      if (k.OI.DRIVER_SHOT_POSITION_1.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(-27);
+      if (k.OI.DRIVER_SHOT_POSITION_1.getAsBoolean()) { // By the podium
+        GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
         GD.G_ShooterAngle = 51;
         GD.G_ShooterSpeed = 0.68;
-      } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) { // side of speaker
         GD.G_RobotTargetAngle.setTargetAngle(45);
         GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
-      } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) { // in the middle of speaker
         GD.G_RobotTargetAngle.setTargetAngle(0);
         GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
-      } else if (k.OI.DRIVER_SHOT_POSITION_4.getAsBoolean()) {
+      } else if (k.OI.DRIVER_SHOT_POSITION_4.getAsBoolean()) { // side of speaker
         GD.G_RobotTargetAngle.setTargetAngle(-45);
         GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
