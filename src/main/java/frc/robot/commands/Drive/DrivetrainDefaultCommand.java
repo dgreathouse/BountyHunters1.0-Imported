@@ -43,8 +43,8 @@ public class DrivetrainDefaultCommand extends Command{
     // Limit the inputs for a deadband related to the joystick
     leftY = MathUtil.applyDeadband(leftY, 0.08, 1.0);
     leftX = MathUtil.applyDeadband(leftX, 0.08, 1.0);
-    rightY = MathUtil.applyDeadband(rightY, 0.08, 1.0);
-    rightX = MathUtil.applyDeadband(rightX, 0.08, 1.0);
+    rightY = MathUtil.applyDeadband(rightY, 0.15, 1.0);
+    rightX = MathUtil.applyDeadband(rightX, 0.15, 1.0);
 
     // Set the class variable ChassisSpeeds to the local variables in their
     // appropriate units.
@@ -110,21 +110,21 @@ public class DrivetrainDefaultCommand extends Command{
       }
     } else {
       if (k.OI.DRIVER_SHOT_POSITION_1.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 40;
-        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+        GD.G_RobotTargetAngle.setTargetAngle(-27);
+        GD.G_ShooterAngle = 51;
+        GD.G_ShooterSpeed = 0.68;
       } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 42;
-        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+        GD.G_RobotTargetAngle.setTargetAngle(45);
+        GD.G_ShooterAngle = 65;
+        GD.G_ShooterSpeed = 0.6;
       } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 44;
-        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+        GD.G_RobotTargetAngle.setTargetAngle(0);
+        GD.G_ShooterAngle = 65;
+        GD.G_ShooterSpeed = 0.6;
       } else if (k.OI.DRIVER_SHOT_POSITION_4.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 47;
-        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+        GD.G_RobotTargetAngle.setTargetAngle(-45);
+        GD.G_ShooterAngle = 65;
+        GD.G_ShooterSpeed = 0.6;
       }
     }
   }
