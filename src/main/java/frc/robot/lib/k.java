@@ -87,7 +87,7 @@ public final class k {
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
     public static final double TURN_KP = 6;
-    public static final double TURN_KI = 3.50;
+    public static final double TURN_KI = 0;
     public static final double TURN_KD = 0.0;
   }
   public static class DRIVE {

@@ -140,8 +140,8 @@ public class SwerveModule {
         }
 
         /* Now latency-compensate our signals */
-        double drive_rot = BaseStatusSignal.getLatencyCompensatedValue(m_drivePosition, m_driveVelocity);
-        double angle_rot = BaseStatusSignal.getLatencyCompensatedValue(m_steerPosition, m_steerVelocity);
+        double drive_rot =  BaseStatusSignal.getLatencyCompensatedValue(m_drivePosition, m_driveVelocity);
+        double angle_rot =  BaseStatusSignal.getLatencyCompensatedValue(m_steerPosition, m_steerVelocity);
         // anagle_rot is the Motor rotations. Apply the gear ratio to get wheel rotations for steer
         angle_rot = angle_rot / k.STEER.GEAR_RATIO;
         /* And push them into a SwerveModuleState object to return */

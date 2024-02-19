@@ -5,6 +5,8 @@ package frc.robot.lib.Swerve;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.hardware.Pigeon2;
+
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.LinearFilter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -90,8 +92,7 @@ public class SwerveDrive {
                     m_modulePositions[i] = m_modules[i].getPosition(false);
                 }
                 // Assume Pigeon2 is flat-and-level so latency compensation can be performed
-                double yawDegrees = BaseStatusSignal.getLatencyCompensatedValue(
-                        m_pigeon2.getYaw(), m_pigeon2.getAngularVelocityZDevice());
+                double yawDegrees = m_pigeon2.getYaw().getValueAsDouble();//BaseStatusSignal.getLatencyCompensatedValue(m_pigeon2.getYaw(), m_pigeon2.getAngularVelocityZDevice());
 
                 m_odometry.update(Rotation2d.fromDegrees(yawDegrees), m_modulePositions);
                 m_field.setRobotPose(m_odometry.getPoseMeters());
@@ -139,6 +140,7 @@ public class SwerveDrive {
     public void initialize(SwerveModuleConstants... _modules){
         m_moduleCount = _modules.length;
         m_pigeon2 = new Pigeon2(k.CANIVORE_IDS.PIGEON2_CANID, k.CANIVORE_IDS.NAME);
+        
         m_modules = new SwerveModule[m_moduleCount];
         m_modulePositions = new SwerveModulePosition[m_moduleCount];
         m_moduleLocations = new Translation2d[m_moduleCount];
@@ -184,7 +186,8 @@ public class SwerveDrive {
     public void driveAngleFieldCentric(double _xSpeeds, double _ySpeeds, Rotation2d _targetAngle) {
         var currentAngle = m_pigeon2.getRotation2d();
         double rotationalSpeed = m_turnPid.calculate(currentAngle.getRadians(), _targetAngle.getRadians());
-
+        rotationalSpeed = MathUtil.applyDeadband(rotationalSpeed, 0.01);
+       SmartDashboard.putNumber("rotationalSpeed", rotationalSpeed);
         var roboCentric = ChassisSpeeds.fromFieldRelativeSpeeds(_xSpeeds, _ySpeeds, rotationalSpeed, m_pigeon2.getRotation2d());
         var swerveStates = m_kinematics.toSwerveModuleStates(roboCentric);
         for (int i = 0; i < m_moduleCount; ++i) {
@@ -219,6 +222,7 @@ public class SwerveDrive {
     }
 
     public double getRobotYaw() {
+        //return m_pigeon2.getAngle();
         return m_pigeon2.getYaw().getValueAsDouble();
     }
 
