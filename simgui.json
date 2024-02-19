@@ -3,7 +3,8 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/SmartDashboard/Autonomous Play": "String Chooser",
-      "/SmartDashboard/Field": "Field2d"
+      "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/ProfiledPIDController[4]": "ProfiledPIDController"
     }
   },
   "NetworkTables Info": {
