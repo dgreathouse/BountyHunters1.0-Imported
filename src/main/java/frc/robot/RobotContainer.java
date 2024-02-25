@@ -13,7 +13,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commandGroups.AutoBlueLeft;
+import frc.robot.commandGroups.AutoBlueMiddle;
+import frc.robot.commandGroups.AutoBlueRight;
 import frc.robot.commandGroups.AutoDoNothing;
+import frc.robot.commandGroups.AutoRedLeft;
+import frc.robot.commandGroups.AutoRedMiddle;
+import frc.robot.commandGroups.AutoRedRight;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
@@ -80,6 +86,12 @@ public class RobotContainer {
 
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
+    autoChooser.addOption("Blue Right", new AutoBlueRight());
+    autoChooser.addOption("Blue Middle", new AutoBlueMiddle());
+    autoChooser.addOption("Blue Left", new AutoBlueLeft());
+    autoChooser.addOption("Red Right", new AutoRedRight());
+    autoChooser.addOption("Red Middle", new AutoRedMiddle());
+    autoChooser.addOption("Red Left", new AutoRedLeft());
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.
