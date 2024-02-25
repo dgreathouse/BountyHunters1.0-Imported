@@ -118,8 +118,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   public void ShootNote(boolean _shoot){
     if(_shoot){
-      m_leftServo.set(0.4);
-      m_rightServo.set(0.49);
+      m_leftServo.set(0.2);
+      m_rightServo.set(0.69);
     }else {
       m_leftServo.set(.6);
       m_rightServo.set(.29);

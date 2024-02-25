@@ -20,9 +20,9 @@ public class DrivetrainDefaultCommand extends Command{
 
   private DrivetrainSubsystem m_drive;
   ChassisSpeeds m_speeds = new ChassisSpeeds();
-  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(3);
-  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(3);
-  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(3);
+  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(6);
+  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(6);
+  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(6);
   /** Creates a new DrivetrainDefaultCommand. */
   public DrivetrainDefaultCommand(DrivetrainSubsystem _drivetrain) {
     m_drive = _drivetrain;
@@ -113,9 +113,9 @@ public class DrivetrainDefaultCommand extends Command{
         GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
       } else if (k.OI.DRIVER_SHOT_POSITION_7.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(0);
-        GD.G_ShooterAngle = 50;
-        GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
+        GD.G_RobotTargetAngle.setTargetAngle(-30);
+        GD.G_ShooterAngle = 41;
+        GD.G_ShooterSpeed = 0.65;
       } else if (k.OI.DRIVER_SHOT_POSITION_8.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(-50);
         GD.G_ShooterAngle = 50;
