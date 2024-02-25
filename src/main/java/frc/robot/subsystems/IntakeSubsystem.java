@@ -5,6 +5,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkFlex;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.ISubsystem;
@@ -31,6 +32,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   }
   public void spin(double _speed){
     m_spinMotor.setVoltage(_speed * k.ROBOT.BATTERY_MAX_VOLTS);
+    SmartDashboard.putNumber("Intake Current", m_spinMotor.getOutputCurrent());
   }
 
   @Override

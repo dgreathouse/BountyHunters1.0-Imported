@@ -78,7 +78,7 @@ public final class k {
     public static final int OPERATOR_CONTROLLER_PORT = 1;
 
     public static Trigger OPERATOR_SHOOT_NOTE = RobotContainer.s_operatorController.R1();
-    public static Trigger OPERATOR_INTAKE_RAISE = RobotContainer.s_operatorController.triangle();
+    public static Trigger OPERATOR_INTAKE_SPIN = RobotContainer.s_operatorController.triangle();
   }
   public static class DRIVEBASE {
     public static final double WHEEL_BASE_Y_m = 0.47738;
