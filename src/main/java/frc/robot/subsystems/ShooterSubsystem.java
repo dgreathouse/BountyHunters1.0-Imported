@@ -98,6 +98,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    * @param _angle Degrees
    */
   public void rotate(double _angle){
+    if(_angle < k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG){ 
+      _angle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG; 
+    }
     // calculate the PID value based on the actual angle in degrees and the requested goal to achieve
     double pid = m_rotatePID.calculate(Math.toRadians(getActualAngle()), Math.toRadians(_angle));
     // calculate the FeedForward value based on the actual angle and the desired velocity the PID wants.
