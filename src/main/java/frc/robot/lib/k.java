@@ -35,8 +35,8 @@ public final class k {
     public static final int SHOOTER_LEFT = 30;
     public static final int SHOOTER_RIGHT = 31;
     public static final int SHOOTER_ROTATE = 10;
-    public static final int INTAKE_SPIN = 40;
-    public static final int INTAKE_ROTATE = 41;
+    public static final int INTAKE_RIGHT_SPIN = 40;
+    public static final int INTAKE_LEFT_SPIN = 41;
   }
   public static class CONVERT{
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;
@@ -78,7 +78,8 @@ public final class k {
     public static final int OPERATOR_CONTROLLER_PORT = 1;
 
     public static Trigger OPERATOR_SHOOT_NOTE = RobotContainer.s_operatorController.R1();
-    public static Trigger OPERATOR_INTAKE_SPIN = RobotContainer.s_operatorController.triangle();
+    public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
+    public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
   }
   public static class DRIVEBASE {
     public static final double WHEEL_BASE_Y_m = 0.47738;

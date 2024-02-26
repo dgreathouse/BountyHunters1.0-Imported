@@ -14,11 +14,9 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commandGroups.AutoBlueLeft;
-import frc.robot.commandGroups.AutoBlueMiddle;
 import frc.robot.commandGroups.AutoBlueRight;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoRedLeft;
-import frc.robot.commandGroups.AutoRedMiddle;
 import frc.robot.commandGroups.AutoRedRight;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
@@ -86,11 +84,9 @@ public class RobotContainer {
 
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    autoChooser.addOption("Blue Right", new AutoBlueRight());
-    autoChooser.addOption("Blue Middle", new AutoBlueMiddle());
+    autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Blue Left", new AutoBlueLeft());
     autoChooser.addOption("Red Right", new AutoRedRight());
-    autoChooser.addOption("Red Middle", new AutoRedMiddle());
     autoChooser.addOption("Red Left", new AutoRedLeft());
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
@@ -111,6 +107,8 @@ public class RobotContainer {
     k.OI.DRIVER_CHANGE_DRIVE_MODE.onTrue(new InstantCommand(m_drivetrainSubsystem::changeDriveMode, m_drivetrainSubsystem));
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
     k.OI.DRIVER_RESET_POSE.onTrue(new InstantCommand(m_drivetrainSubsystem::resetPose, m_drivetrainSubsystem));
+    k.OI.OPERATOR_INTAKE_SPIN_ON.onTrue(new InstantCommand(m_intakeSubsystem::spinOn, m_intakeSubsystem));
+    k.OI.OPERATOR_INTAKE_SPIN_OFF.onTrue(new InstantCommand(m_intakeSubsystem::spinOff, m_intakeSubsystem));
   }
   /**
    * @return the command to run in autonomous routine

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DriverStation.Alliance;
  * Therefore all other modules can read from here to get the values.
  */
 public class GD {
+    public static double G_Intake_Speed = 0;
     public static RobotMode G_RobotMode = RobotMode.BOOT;
     public static double G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
     public static double G_ShooterSpeed = 0.0;

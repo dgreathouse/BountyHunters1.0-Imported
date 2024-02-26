@@ -116,6 +116,16 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     }
     
   }
+  public void retractFlippers(){
+    m_leftServo.set(.6);
+    m_rightServo.set(.29);
+  }
+  public void extendFlippers(){
+    if(GD.G_ShooterSpeed > 0.15){
+      m_leftServo.set(0.2);
+      m_rightServo.set(0.69);
+    }
+  }
   public void ShootNote(boolean _shoot){
     if(_shoot){
       m_leftServo.set(0.2);

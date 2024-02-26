@@ -4,6 +4,7 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.GD;
+import frc.robot.lib.RobotMode;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.lib.k;
 
@@ -25,11 +26,14 @@ public class ShooterDefaultCommand extends Command{
     //m_shooter.spin(0);
       m_shooter.spin(GD.G_ShooterSpeed);
       m_shooter.rotate(GD.G_ShooterAngle);
-      if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean()) {
-        m_shooter.ShootNote(true);
-      } else {
-        m_shooter.ShootNote(false);
-      }
+      
+      if(GD.G_RobotMode != RobotMode.AUTONOMOUS_PERIODIC){
+        if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean() && GD.G_ShooterSpeed > 0.1){
+          m_shooter.extendFlippers();
+        } else {
+          m_shooter.retractFlippers();
+        }
+    }
   }
 
   // Called once the command ends or is interrupted.

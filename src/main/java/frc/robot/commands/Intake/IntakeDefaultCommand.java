@@ -1,12 +1,10 @@
 //Copyright (c) 2020-2023 Essexville Hampton Public Schools (FRC 8517)
 
 package frc.robot.commands.Intake;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.lib.k;
+import frc.robot.lib.GD;
+
 
 public class IntakeDefaultCommand extends Command{
   IntakeSubsystem m_intake;
@@ -23,13 +21,8 @@ public class IntakeDefaultCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(k.OI.OPERATOR_INTAKE_SPIN.getAsBoolean()){
-      m_intake.spin(1);
+    m_intake.spin(GD.G_Intake_Speed);
 
-    }else {
-      m_intake.spin(0);
-    }
-    //m_intake.rotate(0);
   }
 
   // Called once the command ends or is interrupted.
