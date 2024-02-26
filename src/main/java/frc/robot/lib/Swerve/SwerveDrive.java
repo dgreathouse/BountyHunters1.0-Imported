@@ -3,15 +3,15 @@
 package frc.robot.lib.Swerve;
 
 import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.Utils;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.filter.LinearFilter;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Transform2d;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -42,10 +42,10 @@ public class SwerveDrive {
         public int SuccessfulDaqs = 0;
         public int FailedDaqs = 0;
         
-        private LinearFilter lowpass = LinearFilter.movingAverage(50);
-        private double lastTime = 0;
-        private double currentTime = 0;
-        private double averageLoopTime = 0;
+        // private LinearFilter lowpass = LinearFilter.movingAverage(50);
+        // private double lastTime = 0;
+        // private double currentTime = 0;
+        // private double averageLoopTime = 0;
 
         public OdometryThread() {
             super();
@@ -72,17 +72,18 @@ public class SwerveDrive {
             /* Run as fast as possible, our signals will control the timing */
             while (true) {
                 /* Synchronously wait for all signals in drivetrain */
-                var status = BaseStatusSignal.waitForAll(0.1, m_allSignals);
-                lastTime = currentTime;
-                currentTime = Utils.getCurrentTimeSeconds();
-                averageLoopTime = lowpass.calculate(currentTime - lastTime);
+                //var status = BaseStatusSignal.waitForAll(0.1, m_allSignals);
+                BaseStatusSignal.waitForAll(0.1, m_allSignals);
+                // lastTime = currentTime;
+                // currentTime = Utils.getCurrentTimeSeconds();
+                // averageLoopTime = lowpass.calculate(currentTime - lastTime);
 
                 /* Get status of the waitForAll */
-                if (status.isOK()) {
-                    SuccessfulDaqs++;
-                } else {
-                    FailedDaqs++;
-                }
+                // if (status.isOK()) {
+                //     SuccessfulDaqs++;
+                // } else {
+                //     FailedDaqs++;
+                // }
 
                 /* Now update odometry */
                 for (int i = 0; i < m_moduleCount; ++i) {
@@ -99,17 +100,17 @@ public class SwerveDrive {
             }
         }
 
-        public double getTime() {
-            return averageLoopTime;
-        }
+        // public double getTime() {
+        //     return averageLoopTime;
+        // }
 
-        public int getSuccessfulDaqs() {
-            return SuccessfulDaqs;
-        }
+        // public int getSuccessfulDaqs() {
+        //     return SuccessfulDaqs;
+        // }
 
-        public int getFailedDaqs() {
-            return FailedDaqs;
-        }
+        // public int getFailedDaqs() {
+        //     return FailedDaqs;
+        // }
     }
    
     public SwerveDrive() {
@@ -187,7 +188,7 @@ public class SwerveDrive {
         var currentAngle = m_pigeon2.getRotation2d();
         double rotationalSpeed = m_turnPid.calculate(currentAngle.getRadians(), _targetAngle.getRadians());
         rotationalSpeed = MathUtil.applyDeadband(rotationalSpeed, 0.01);
-       SmartDashboard.putNumber("rotationalSpeed", rotationalSpeed);
+        SmartDashboard.putNumber("rotationalSpeed", rotationalSpeed);
         var roboCentric = ChassisSpeeds.fromFieldRelativeSpeeds(_xSpeeds, _ySpeeds, rotationalSpeed, m_pigeon2.getRotation2d());
         var swerveStates = m_kinematics.toSwerveModuleStates(roboCentric);
         for (int i = 0; i < m_moduleCount; ++i) {
