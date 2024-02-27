@@ -4,6 +4,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -52,10 +53,11 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    */
   public void updateDashboard() {
 
-    SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
-    SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
-    SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
-    SmartDashboard.putData(m_rotatePID);
+   // SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
+   // SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
+    //SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
+    //SmartDashboard.putData(m_rotatePID);
+    
   }
 
   /** Contructor that creates a new ShooterSubsystem. */
@@ -69,6 +71,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     RobotContainer.subsystems.add(this);
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT,k.ROBORIO_CAN_IDS.NAME);
     m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT,k.ROBORIO_CAN_IDS.NAME);
+    m_leftMotor.setNeutralMode(NeutralModeValue.Brake);
+    m_rightMotor.setNeutralMode(NeutralModeValue.Brake);
     m_rotateMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.SHOOTER_ROTATE, MotorType.kBrushless);
     m_rotateMotor.setIdleMode(IdleMode.kBrake);
     m_leftServo = new Servo(1);
@@ -77,8 +81,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rotatePID.setTolerance(0.01);
     m_rotatePID.reset();
     // Smartdashboard test variables
-    SmartDashboard.putBoolean("Shooter Rotate Enable", false);
-    SmartDashboard.putNumber("Shooter Test Volts", 0.0);
+    //SmartDashboard.putBoolean("Shooter Rotate Enable", false);
+    //SmartDashboard.putNumber("Shooter Test Volts", 0.0);
     
 
   }
@@ -107,16 +111,16 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), m_rotateProPID.getSetpoint().velocity);
     // Limit the amount the PID can contribute to the output since the FeedForward should do most of the work
     pid = MathUtil.clamp(pid, -1, 1);
-    SmartDashboard.putNumber("Shooter _angle", _angle);
+    //SmartDashboard.putNumber("Shooter _angle", _angle);
     SmartDashboard.putNumber("Shooter PID", pid);
     SmartDashboard.putNumber("Shooter ff", ff);
     // Set the actual voltage to the motor by combining the PID and Feedforward values
-    if(SmartDashboard.getBoolean("Shooter Rotate Enable", false)){
-      double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
-      m_rotateMotor.setVoltage(volts);
-    }else {
+    // if(SmartDashboard.getBoolean("Shooter Rotate Enable", false)){
+    //   double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
+    //   m_rotateMotor.setVoltage(volts);
+    // }else {
       m_rotateMotor.setVoltage(pid + ff);
-    }
+  //  }
     
   }
   public void retractFlippers(){
@@ -169,6 +173,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   @Override
   public void periodic() {
+    if(this.getCurrentCommand() != null){
+    SmartDashboard.putString("ShooterDefault",this.getCurrentCommand().toString());}
     // This method will be called once per scheduler run
   }
 }

@@ -14,9 +14,9 @@ import frc.robot.lib.k;
 
 public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;
-  TalonFX m_rightMotor;
+  //TalonFX m_rightMotor;
   VoltageOut leftVoltageOut = new VoltageOut(0);
-  VoltageOut rightVoltageOut = new VoltageOut(0);
+  //VoltageOut rightVoltageOut = new VoltageOut(0);
   public void updateDashboard() {
 
   }
@@ -30,7 +30,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   public void initialize() {
     RobotContainer.subsystems.add(this);
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_LEFT_SPIN);
-    m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_RIGHT_SPIN);
+    //m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_RIGHT_SPIN);
   }
   public void spinOn(){
     GD.G_Intake_Speed = 0.5;
@@ -40,7 +40,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   }
   public void spin(double _speed){
     m_leftMotor.setControl(leftVoltageOut.withOutput(_speed*k.ROBOT.BATTERY_MAX_VOLTS).withEnableFOC(true));
-    m_rightMotor.setControl(rightVoltageOut.withOutput(-_speed*k.ROBOT.BATTERY_MAX_VOLTS).withEnableFOC(true));
+   // m_rightMotor.setControl(rightVoltageOut.withOutput(-_speed*k.ROBOT.BATTERY_MAX_VOLTS).withEnableFOC(true));
   }
 
   @Override
