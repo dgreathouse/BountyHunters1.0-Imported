@@ -3,10 +3,12 @@
 package frc.robot.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drive.AutoDriveDelayCommand;
 import frc.robot.commands.Drive.AutoDriveRotateCommand;
 import frc.robot.commands.Drive.AutoDriveTimeVel;
+import frc.robot.commands.Shooter.ShooterDefaultCommand;
 import frc.robot.commands.Shooter.ShooterSetShotCommand;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -16,7 +18,7 @@ public class AutoBlueRight extends SequentialCommandGroup {
   /** Creates a new AutoBlueRight. */
   ShooterSubsystem m_shooterSubsystem;
   public AutoBlueRight(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
-
+    
     /** Auto Blue Right
      *  + Line up robot on right side pointing straight down field
      *  - Set Shooter Spin and Angle
@@ -36,15 +38,19 @@ public class AutoBlueRight extends SequentialCommandGroup {
      *  - Retract flippers
      *  - Drive to center field
      */
-    addCommands(
-      // new ShooterSetShotCommand(_shooter, 0, 0),
+    super(
+      new ParallelCommandGroup(
+        new ShooterSetShotCommand(_shooter, .3, 40),
+      new ShooterDefaultCommand(_shooter)
+      ),
+  
       // new AutoDriveRotateCommand(_drive, 0, 0),
       // new InstantCommand(_shooter::extendFlippers, _shooter),
-      // new AutoDriveDelayCommand(_drive, 1),
+       new AutoDriveDelayCommand(_drive, 10)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
       // new InstantCommand(_intake::spinOn, _intake),
-      // new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0),
+       //new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new AutoDriveDelayCommand(_drive, 1),
       // new InstantCommand(_intake::spinOff, _intake),
