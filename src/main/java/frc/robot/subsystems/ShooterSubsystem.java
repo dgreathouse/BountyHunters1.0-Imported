@@ -10,10 +10,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,55 +20,40 @@ import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
 public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
-  
-  TalonFX m_leftMotor;        // Declare a TalonFX motor controller class and call it m_leftMotor;
-  TalonFX m_rightMotor;       // Declare a TalonFX motor controller class and call it m_rightMotor;
-  CANSparkMax m_rotateMotor;  // Declare a CANSparkMax motor controller class and call it m_rotateMotor;
+
+  TalonFX m_leftMotor; // Declare a TalonFX motor controller class and call it m_leftMotor;
+  TalonFX m_rightMotor; // Declare a TalonFX motor controller class and call it m_rightMotor;
+  CANSparkMax m_rotateMotor; // Declare a CANSparkMax motor controller class and call it m_rotateMotor;
   Servo m_leftServo;
   Servo m_rightServo;
   // Declare and initialize a VoltageOut class and call the instance m_spinVoltageOut
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
-  // Create the contraints our PID controller must follow 
-  // Velocity and Acceleration contraints must be in Rad/Sec and Rad/Sec^2
-  TrapezoidProfile.Constraints m_rotateContraints = new TrapezoidProfile.Constraints(0.7236, 1.05);
-  // Create a profiled PID controller with the contraints 
-  // kP and kI should be in Volt/Rad/sec ?
-  //ProfiledPIDController m_rotateProPID = new ProfiledPIDController(15.15, 5.58, 0, m_rotateContraints);
-  PIDController m_rotatePID = new PIDController(10, 04, 0);
- // ProfiledPIDController m_rotatePID = new ProfiledPIDController(0, 0.0, 0, m_rotateContraints);
-  // Create a ArmFeedforward object to control the rotate motor.
-  // ks in volts, kg in volts kv in volt seconds per radian and ka in volt seconds² per radian
-  ArmFeedforward m_armFeedForward = new ArmFeedforward(0.0, 0.7, 1.58, 0.0);
-
-  double m_requestedAngle_deg = 0; // Angle data to store the requested Angle the shooter should rotate to.
-  double m_requestedVelocity_rps = 0;
-
-  double m_spinSpeed_v = 0;
-
-  /** Any dashboard telemetry should be set here in this method
+  PIDController m_rotatePID = new PIDController(k.SHOOTER.ROTATE_PID_KP, k.SHOOTER.ROTATE_PID_KI, 0);
+  double m_Rotate_PID_volts = 0;
+  double m_Rotate_FF_volts = 0;
+  /**
+   * Any dashboard telemetry should be set here in this method
    * 
    */
   public void updateDashboard() {
 
-   SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
-   SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
-  // SmartDashboard.putNumber("Shooter SetPoint Vel", m_rotateProPID.getSetpoint().velocity);
-    //SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
-    SmartDashboard.putData(m_rotatePID);
+    SmartDashboard.putNumber("Shooter Actual Angle Deg", getActualAngle());
+    SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
+    SmartDashboard.putBoolean("Shooter In Range", isRotateInRange());
     
+    SmartDashboard.putNumber("Shooter PID", m_Rotate_PID_volts);
+    SmartDashboard.putNumber("Shooter Feedforward", m_Rotate_FF_volts);
   }
 
   /** Contructor that creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-
     initialize();
   }
 
   public void initialize() {
-
     RobotContainer.subsystems.add(this);
-    m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT,k.ROBORIO_CAN_IDS.NAME);
-    m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT,k.ROBORIO_CAN_IDS.NAME);
+    m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT, k.ROBORIO_CAN_IDS.NAME);
+    m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, k.ROBORIO_CAN_IDS.NAME);
     m_leftMotor.setNeutralMode(NeutralModeValue.Brake);
     m_rightMotor.setNeutralMode(NeutralModeValue.Brake);
     m_rotateMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.SHOOTER_ROTATE, MotorType.kBrushless);
@@ -82,112 +64,103 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rotatePID.setTolerance(0.01);
     m_rotatePID.reset();
     // Smartdashboard test variables
-    //SmartDashboard.putBoolean("Shooter Rotate Enable", false);
-    //SmartDashboard.putNumber("Shooter Test Volts", 0.0);
-    
+    // SmartDashboard.putBoolean("Shooter Rotate Enable", false);
+    // SmartDashboard.putNumber("Shooter Test Volts", 0.0);
 
   }
-  /** Spin the spinners
+
+  /**
+   * Spin the spinners
    * 
    * @param _speed +/- 1.0
    */
-  public void spin(double _speed){
-    m_spinSpeed_v = _speed * k.ROBOT.BATTERY_MAX_VOLTS;
+  public void spin(double _speed) {
     // Set the left and right motor voltage.
-    m_leftMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(m_spinSpeed_v));
-    m_rightMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(-m_spinSpeed_v));
+    m_leftMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(_speed * k.ROBOT.BATTERY_MAX_VOLTS));
+    m_rightMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(-_speed * k.ROBOT.BATTERY_MAX_VOLTS));
   }
 
-  /** Rotate the shooter to an angle
+  /**
+   * Rotate the shooter to an angle
    * 
    * @param _angle Degrees
    */
-  public void rotate(double _angle){
-    if(_angle < k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG){ 
-      _angle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG; 
+  public void rotate(double _angle) {
+
+    if (_angle < k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG) {
+      _angle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
     }
     // calculate the PID value based on the actual angle in degrees and the requested goal to achieve
-    double pid = m_rotatePID.calculate(Math.toRadians(getActualAngle()), Math.toRadians(_angle));
-    // calculate the FeedForward value based on the actual angle and the desired velocity the PID wants.
-    double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), 0);
-    //double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), m_rotateProPID.getSetpoint().velocity);
+    m_Rotate_PID_volts = m_rotatePID.calculate(Math.toRadians(getActualAngle()), Math.toRadians(_angle));
+    // calculate the FeedForward value based on the actual angle and gravity
+    m_Rotate_FF_volts = Math.cos(Math.toRadians(getActualAngle()) * k.SHOOTER.ROTATE_FEEDFORWARD_KG);
     // Limit the amount the PID can contribute to the output since the FeedForward should do most of the work
-    pid = MathUtil.clamp(pid, -1, 1);
-    //SmartDashboard.putNumber("Shooter _angle", _angle);
-    SmartDashboard.putNumber("Shooter PID", pid);
-    SmartDashboard.putNumber("Shooter ff", ff);
-    // Set the actual voltage to the motor by combining the PID and Feedforward values
-    // if(SmartDashboard.getBoolean("Shooter Rotate Enable", false)){
-    //   double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
-    //   m_rotateMotor.setVoltage(volts);
-    // }else {
-      m_rotateMotor.setVoltage(pid + ff);
-  //  }
+    m_Rotate_PID_volts = MathUtil.clamp(m_Rotate_PID_volts, -2, 2);
+
     
+    // if(SmartDashboard.getBoolean("Shooter Rotate Enable", false)){
+    // double volts = SmartDashboard.getNumber("Shooter Test Volts", 0.0);
+    // m_rotateMotor.setVoltage(volts);
+    // }else {
+    // Set the actual voltage to the motor by combining the PID and Feedforward values
+    m_rotateMotor.setVoltage(m_Rotate_PID_volts + m_Rotate_FF_volts);
+
+    // }
+
   }
-  public void setFlippersRetracted(){
+  private boolean isRotateInRange(){
+    double tolerance = m_rotatePID.getPositionTolerance();
+    double diff = getActualAngle() - GD.G_ShooterAngle;
+    if(Math.abs(diff) < Math.toDegrees(tolerance)){
+      return true;
+    }
+    return false;
+  }
+  public void setFlippersRetracted() {
     GD.G_ShooterIsFlipperRetracted = true;
   }
-  public void setFlipperExtended(){
+
+  public void setFlipperExtended() {
     GD.G_ShooterIsFlipperRetracted = false;
   }
-  private void retractFlippers(){
-    
+
+  private void retractFlippers() {
+
     m_leftServo.set(.6);
     m_rightServo.set(.29);
   }
-  private void extendFlippers(){
-    
-      m_leftServo.set(0.2);
-      m_rightServo.set(0.69);
+
+  private void extendFlippers() {
+
+    m_leftServo.set(0.2);
+    m_rightServo.set(0.69);
 
   }
-  public void ShootNote(boolean _shoot){
-    if(_shoot){
+
+  public void ShootNote(boolean _shoot) {
+    if (_shoot) {
       m_leftServo.set(0.2);
       m_rightServo.set(0.69);
-    }else {
+    } else {
       m_leftServo.set(.6);
       m_rightServo.set(.29);
     }
   }
 
-  public double getActualAngle(){
-    double angle_deg = m_rotateMotor.getEncoder().getPosition() / k.SHOOTER.ROTATE_GEAR_RATIO * 360.0 + k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
+  public double getActualAngle() {
+    double angle_deg = m_rotateMotor.getEncoder().getPosition() / k.SHOOTER.ROTATE_GEAR_RATIO * 360.0
+        + k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
     return angle_deg;
   }
 
-  public double getRequestedAngle_deg() {
-    return m_requestedAngle_deg;
-  }
-
-  public void setRequestedAngle_deg(double _requestedAngle_deg) {
-    this.m_requestedAngle_deg = _requestedAngle_deg;
-  }
-
-  public double getRequestedVelocity_rps() {
-    return m_requestedVelocity_rps;
-  }
-
-  public void setRequestedVelocity_rps(double _requestedVelocity_rps) {
-    this.m_requestedVelocity_rps = _requestedVelocity_rps;
-  }
-  public double getSpinnerActualVelocity(){
-    double motorVelocity = (m_leftMotor.getVelocity().getValueAsDouble() - m_rightMotor.getVelocity().getValueAsDouble())/2.0;
-
-    return motorVelocity;
-  }
-  public double getRotateActualVelocity(){
-    return 0.0;
-  }
   @Override
   public void periodic() {
     spin(GD.G_ShooterSpeed);
     rotate(GD.G_ShooterAngle);
-    if(GD.G_ShooterSpeed > 0.1){
-      if(GD.G_ShooterIsFlipperRetracted){
+    if (GD.G_ShooterSpeed > 0.1) {
+      if (GD.G_ShooterIsFlipperRetracted) {
         retractFlippers();
-      }else {
+      } else {
         extendFlippers();
       }
     }

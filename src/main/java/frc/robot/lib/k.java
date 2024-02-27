@@ -141,6 +141,9 @@ public final class k {
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
     public static final double ROTATE_OFFSET_ANGLE_DEG = 29.5;
     public static final double SPIN_SHOT_SPEED_RPS = .30;
+    public static final double ROTATE_FEEDFORWARD_KG = 0.7;
+    public static double ROTATE_PID_KP = 10.0;
+    public static double ROTATE_PID_KI = 4.0;
 
   }
   public static class INTAKE {

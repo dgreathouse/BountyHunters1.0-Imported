@@ -31,13 +31,13 @@ public class AutoDriveTimeVel extends Command{
    * @param _timeOut_sec The time to stop driving in seconds.
    * @param _rampEnable  Enable the ramp of velocity at the start.
    */
-  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed, double _driveAngle, double _robotAngle,
+  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle,
       double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec) {
     m_drivetrain = _drive;
     m_timeOut_sec = _timeOut_sec;
     m_driveAngle = _driveAngle;
     m_robotAngle = _robotAngle;
-    m_speed = _speed;
+    m_speed = _speed_mps;
     m_rampUpTime_sec = _rampUpTime_sec;
     m_rampDownTime_sec = _rampDownTime_sec;
     m_currentSpeed = m_speed;

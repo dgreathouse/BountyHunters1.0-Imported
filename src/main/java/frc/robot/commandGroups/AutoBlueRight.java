@@ -38,7 +38,7 @@ public class AutoBlueRight extends SequentialCommandGroup {
      *  - Retract flippers
      *  - Drive to center field
      */
-    super(
+    addCommands(
       
       //new InstantCommand(_intake::spinOn, _intake),
      // new ShooterSetShotCommand(_shooter, 0.15, 40),
