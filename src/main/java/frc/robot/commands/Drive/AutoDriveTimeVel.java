@@ -3,6 +3,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -62,7 +63,7 @@ public class AutoDriveTimeVel extends Command{
     } else { // past the ramp up time and not in ramp down time
       m_currentSpeed = m_speed;
     }
-
+    SmartDashboard.putNumber("ADV Current Speed", m_currentSpeed);
     m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_currentSpeed, m_robotAngle);
   }
 
