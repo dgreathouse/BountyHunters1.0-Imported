@@ -144,7 +144,7 @@ public final class k {
 
   }
   public static class INTAKE {
-    
+    public static final double SPIN_SPEED_DEFAULT_VOLT = 3.0;
   }
 
 }

@@ -14,6 +14,7 @@ public class GD {
     public static RobotMode G_RobotMode = RobotMode.BOOT;
     public static double G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
     public static double G_ShooterSpeed = 0.0;
+    public static boolean G_ShooterIsFlipperRetracted = true;
     public static TargetAngle G_RobotTargetAngle = new TargetAngle(45);
     public static Alliance G_Alliance = Alliance.Blue;
 }

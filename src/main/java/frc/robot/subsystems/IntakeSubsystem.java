@@ -33,7 +33,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_RIGHT_SPIN);
   }
   public void spinOn(){
-    GD.G_Intake_Speed = 0.5;
+    GD.G_Intake_Speed = k.INTAKE.SPIN_SPEED_DEFAULT_VOLT;
   }
   public void spinOff(){
     GD.G_Intake_Speed = 0.0;
@@ -45,6 +45,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
 
   @Override
   public void periodic() {
+    spin(GD.G_Intake_Speed);
     // This method will be called once per scheduler run
   }
 }

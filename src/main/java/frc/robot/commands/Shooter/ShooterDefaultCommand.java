@@ -23,17 +23,12 @@ public class ShooterDefaultCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //m_shooter.spin(0);
-      m_shooter.spin(GD.G_ShooterSpeed);
-      m_shooter.rotate(GD.G_ShooterAngle);
-      
-      if(GD.G_RobotMode != RobotMode.AUTONOMOUS_PERIODIC){
-        if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean() && GD.G_ShooterSpeed > 0.1){
-          m_shooter.extendFlippers();
-        } else {
-          m_shooter.retractFlippers();
-        }
+    if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean() && GD.G_ShooterSpeed > 0.1){
+      GD.G_ShooterIsFlipperRetracted = false;
+    } else {
+      GD.G_ShooterIsFlipperRetracted = true;
     }
+
   }
 
   // Called once the command ends or is interrupted.

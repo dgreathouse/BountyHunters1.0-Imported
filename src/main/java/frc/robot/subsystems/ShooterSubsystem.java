@@ -169,6 +169,15 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   @Override
   public void periodic() {
+    spin(GD.G_ShooterSpeed);
+    rotate(GD.G_ShooterAngle);
+    if(GD.G_ShooterSpeed > 0.1){
+      if(GD.G_ShooterIsFlipperRetracted){
+        retractFlippers();
+      }else {
+        extendFlippers();
+      }
+    }
     // This method will be called once per scheduler run
   }
 }
