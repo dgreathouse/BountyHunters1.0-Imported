@@ -40,21 +40,21 @@ public class AutoBlueRight extends SequentialCommandGroup {
      */
     super(
       
-      new InstantCommand(_intake::spinOn, _intake),
-      new ShooterSetShotCommand(_shooter, 0.3, 40),
-      // new AutoDriveRotateCommand(_drive, 0, 0),
-       new InstantCommand(_shooter::extendFlippers, _shooter)
+      //new InstantCommand(_intake::spinOn, _intake),
+     // new ShooterSetShotCommand(_shooter, 0.15, 40),
+       //new AutoDriveRotateCommand(_drive, 0, 3)
+     //  new InstantCommand(_shooter::setFlippersRetracted, _shooter)
        //new AutoDriveDelayCommand(_drive, 10)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
       // new InstantCommand(_intake::spinOn, _intake),
-       //new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0)
+       new AutoDriveTimeVel(_drive, 1, 45,45, 1, 0.2, 0.2)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new AutoDriveDelayCommand(_drive, 1),
       // new InstantCommand(_intake::spinOff, _intake),
       // new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
-      // new AutoDriveDelayCommand(_drive, 1),
+    //   new AutoDriveDelayCommand(_drive, 20)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
       // new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0),

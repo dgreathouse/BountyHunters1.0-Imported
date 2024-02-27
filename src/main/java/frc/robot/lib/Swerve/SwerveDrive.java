@@ -197,11 +197,16 @@ public class SwerveDrive {
     }
 
     public void driveStopMotion() {
+        m_modules[0].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0))));
+        m_modules[1].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0))));
+       m_modules[2].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0))));
         /* Point every module toward (0,0) to make it close to a X configuration */
-        for (int i = 0; i < m_moduleCount; ++i) {
-            var angle = m_moduleLocations[i].getAngle();
-            m_modules[i].setDesiredState(new SwerveModuleState(0, angle));
-        }
+        // for (int i = 0; i < m_moduleCount; ++i) {
+
+        //     var angle = m_moduleLocations[i].getAngle();
+
+        //     m_modules[i].setDesiredState(new SwerveModuleState(0, angle));
+        // }
     }
 
     public void resetYaw() {

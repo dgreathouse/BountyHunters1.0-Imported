@@ -45,9 +45,9 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   }
 
   public void drivePolarFieldCentric(double _driveAngle_deg, double _speed, double _robotAngle_deg){
-    double x = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
-    double y = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
-    GD.G_RobotTargetAngle.setTargetAngle(Units.degreesToRadians(_robotAngle_deg));
+    double y = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
+    double x = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
+    GD.G_RobotTargetAngle.setTargetAngle(_robotAngle_deg);
     driveAngleFieldCentric(x, y);
   }
 

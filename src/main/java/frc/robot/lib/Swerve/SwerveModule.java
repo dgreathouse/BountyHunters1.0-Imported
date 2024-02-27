@@ -10,6 +10,8 @@ import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -58,12 +60,12 @@ public class SwerveModule {
         m_name = _constants.m_name;                                             // Set the name of this module to the module level variable
         // Configure Drive Motor
         TalonFXConfiguration talonDriveConfigs = new TalonFXConfiguration();    // Create a new Configuration for a Talon motor
-
+        
         talonDriveConfigs.MotorOutput.Inverted =                                // If the motor is inverted set the configuration parameter
             _constants.m_isDriveMotorReversed 
             ? InvertedValue.Clockwise_Positive 
             : InvertedValue.CounterClockwise_Positive;
-
+        m_driveMotor.setNeutralMode(NeutralModeValue.Brake);
         m_driveMotor.getConfigurator().apply(talonDriveConfigs);                // Apply the drive motor configuration
 
         // Configure Steer Motor
@@ -76,7 +78,7 @@ public class SwerveModule {
             : InvertedValue.CounterClockwise_Positive;
         
         m_steerMotor.getConfigurator().apply(talonSteerConfigs);
-
+        m_steerMotor.setNeutralMode(NeutralModeValue.Brake);
         CANcoderConfiguration cancoderConfigs = new CANcoderConfiguration();
         cancoderConfigs.MagnetSensor.MagnetOffset = _constants.m_CANcoderOffset_deg; // Set the CANCoder to the straight ahead value in rotations
         //cancoderConfigs.MagnetSensor.MagnetOffset = 0.0; // Uncomment to check actual offset. Comment the above line
@@ -129,7 +131,10 @@ public class SwerveModule {
         m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
         m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
     }
-
+    public void stopMotors(){
+        m_steerMotor.setControl(m_steerVoltageOut.withOutput(0).withEnableFOC(true));
+        m_driveMotor.setControl(m_driveVoltageOut.withOutput(0).withEnableFOC(true));
+    }
     public SwerveModulePosition getPosition(boolean _refresh) {
         if (_refresh) {
             /* Refresh all signals */
@@ -140,8 +145,8 @@ public class SwerveModule {
         }
 
         /* Now latency-compensate our signals */
-        double drive_rot =  BaseStatusSignal.getLatencyCompensatedValue(m_drivePosition, m_driveVelocity);
-        double angle_rot =  BaseStatusSignal.getLatencyCompensatedValue(m_steerPosition, m_steerVelocity);
+        double drive_rot =  m_driveMotor.getPosition().getValueAsDouble();// BaseStatusSignal.getLatencyCompensatedValue(m_drivePosition, m_driveVelocity);
+        double angle_rot =  m_steerMotor.getPosition().getValueAsDouble();// BaseStatusSignal.getLatencyCompensatedValue(m_steerPosition, m_steerVelocity);
         // anagle_rot is the Motor rotations. Apply the gear ratio to get wheel rotations for steer
         angle_rot = angle_rot / k.STEER.GEAR_RATIO;
         /* And push them into a SwerveModuleState object to return */

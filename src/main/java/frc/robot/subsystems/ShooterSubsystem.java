@@ -36,7 +36,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   TrapezoidProfile.Constraints m_rotateContraints = new TrapezoidProfile.Constraints(0.7236, 1.05);
   // Create a profiled PID controller with the contraints 
   // kP and kI should be in Volt/Rad/sec ?
-  ProfiledPIDController m_rotateProPID = new ProfiledPIDController(15.15, 5.58, 0, m_rotateContraints);
+  //ProfiledPIDController m_rotateProPID = new ProfiledPIDController(15.15, 5.58, 0, m_rotateContraints);
   PIDController m_rotatePID = new PIDController(10, 04, 0);
  // ProfiledPIDController m_rotatePID = new ProfiledPIDController(0, 0.0, 0, m_rotateContraints);
   // Create a ArmFeedforward object to control the rotate motor.
@@ -53,10 +53,11 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    */
   public void updateDashboard() {
 
-   // SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
-   // SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
+   SmartDashboard.putNumber("Shooter Actual Angle Deg",getActualAngle());
+   SmartDashboard.putNumber("Shooter Requested Angle Deg", GD.G_ShooterAngle);
+  // SmartDashboard.putNumber("Shooter SetPoint Vel", m_rotateProPID.getSetpoint().velocity);
     //SmartDashboard.putNumber("Shooter Actual Velocity RPS", getSpinnerActualVelocity());
-    //SmartDashboard.putData(m_rotatePID);
+    SmartDashboard.putData(m_rotatePID);
     
   }
 
@@ -108,7 +109,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     // calculate the PID value based on the actual angle in degrees and the requested goal to achieve
     double pid = m_rotatePID.calculate(Math.toRadians(getActualAngle()), Math.toRadians(_angle));
     // calculate the FeedForward value based on the actual angle and the desired velocity the PID wants.
-    double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), m_rotateProPID.getSetpoint().velocity);
+    double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), 0);
+    //double ff = m_armFeedForward.calculate(Math.toRadians(getActualAngle()), m_rotateProPID.getSetpoint().velocity);
     // Limit the amount the PID can contribute to the output since the FeedForward should do most of the work
     pid = MathUtil.clamp(pid, -1, 1);
     //SmartDashboard.putNumber("Shooter _angle", _angle);
@@ -123,15 +125,22 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   //  }
     
   }
-  public void retractFlippers(){
+  public void setFlippersRetracted(){
+    GD.G_ShooterIsFlipperRetracted = true;
+  }
+  public void setFlipperExtended(){
+    GD.G_ShooterIsFlipperRetracted = false;
+  }
+  private void retractFlippers(){
+    
     m_leftServo.set(.6);
     m_rightServo.set(.29);
   }
-  public void extendFlippers(){
-    if(GD.G_ShooterSpeed > 0.15){
+  private void extendFlippers(){
+    
       m_leftServo.set(0.2);
       m_rightServo.set(0.69);
-    }
+
   }
   public void ShootNote(boolean _shoot){
     if(_shoot){

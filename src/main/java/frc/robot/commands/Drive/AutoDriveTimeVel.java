@@ -75,6 +75,7 @@ public class AutoDriveTimeVel extends Command{
   @Override
   public boolean isFinished() {
     if (m_timer.hasElapsed(m_timeOut_sec)) {
+      m_drivetrain.driveStopMotion();
       return true;
     }
     return false;

@@ -104,7 +104,7 @@ public class DrivetrainDefaultCommand extends Command{
     if(GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND){
       GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
       GD.G_ShooterSpeed = 0.0;
-      GD.G_Intake_Speed = 0.5;
+      GD.G_Intake_Speed = 3;
     }
     // Handle target angle buttons if pressed to set angles and speeds
     if (k.OI.DRIVER_ENABLE_SECONDAY_TRIGGERS.getAsBoolean()) {
