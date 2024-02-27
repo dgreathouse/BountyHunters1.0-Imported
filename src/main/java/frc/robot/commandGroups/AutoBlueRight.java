@@ -39,14 +39,12 @@ public class AutoBlueRight extends SequentialCommandGroup {
      *  - Drive to center field
      */
     super(
-      new ParallelCommandGroup(
-        new ShooterSetShotCommand(_shooter, .3, 40),
-      new ShooterDefaultCommand(_shooter)
-      ),
-  
+      
+      new InstantCommand(_intake::spinOn, _intake),
+      new ShooterSetShotCommand(_shooter, 0.3, 40),
       // new AutoDriveRotateCommand(_drive, 0, 0),
-      // new InstantCommand(_shooter::extendFlippers, _shooter),
-       new AutoDriveDelayCommand(_drive, 10)
+       new InstantCommand(_shooter::extendFlippers, _shooter)
+       //new AutoDriveDelayCommand(_drive, 10)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
       // new InstantCommand(_intake::spinOn, _intake),

@@ -3,7 +3,7 @@
 package frc.robot.commands.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.lib.GD;
+
 
 
 public class IntakeDefaultCommand extends Command{
