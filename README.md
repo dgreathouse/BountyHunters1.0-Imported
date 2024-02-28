@@ -2,9 +2,9 @@
 
 ## Overview
 This code is a remake of the CTRE swerve module code. The code has been integrated into the command based programming framework.
-This remake drastically changes the CTRE swerve code. Most importantly the PID loops for the Drive and Steer were taken out of the Motor controllers.
-All PIDs are calcualted in Degrees->Volts and MPS->Volts with a Feedforward term. CTRE changes were not updated soon enough to test the code before kickoff.
-Since time was limited the appoach was to use CTRE VoltageOut mode with the above PIDs and Feedforward values. 
+This remake drastically changes the CTRE swerve code to a point that there is nothing left of the CTRE code. Most importantly the PID loops for the Drive and Steer were taken out of the Motor controllers.
+All PIDs are calcualted in Degrees->Volts and MPS->Volts with a Feedforward term. CTRE code was to complex for students and major unexplained issues were happening. 
+
 
 ## Robot 
 The robot used for this code is our typical 3 wheel swerve drive using Swerve Xs from WCProducts.net. All motors are Falcon FXs with CANCoders.
@@ -26,22 +26,15 @@ Changes needed that I understand at this point are:
   The chassis, or frame, this year is a new approach utilizing 3 inch angle aluminum that is 3/16 inch thick. This is a high speed game and impacts are expected.
   The choosen frame strucutre will not bend like our typical 2040 structure that has bent before. 
 - **Intake**
-  The intake is planned to be a rotating wheeled intake that rotates out over the bumpers picks up Notes from the floor only.
-  After picking up the note from the floor the Note is immediatley deliverd to the shooter or the Tramper.
+  The Intake is a under the bumper wheeled intake with 1 Falcon Fx
 - **Shooter**
   The shooter is a wheeled mechanism that launches the Note at varied angles to allow the robot to score from different distances
 - **Climber**
-  The climber is a two hook solution that raises the robot of the ground high enough for the Tramper to score in the Trap.
-- **Tramper**
-  The tramper is responsible for getting a game piece from the source area of from the intake. It is utilized to score in the Amp or Trap.
+  The climber is a two hook solution that raises the robot off the ground.
 
-## Vision - Camera
-Vision utilizes 1 or 2 cameras for vision object detection of AprilTags and Notes. Another camera is utilized for the driver on the Smartdashboard since there are some blind spots.
-Object detection of a note is mainly planned to be used for autonomous to grab the pixel at center field. AprilTag detection can be used to line up with the Speaker and determine distance to speaker.
-With angle and distance the robot can be automated to angle the shooter, adjuste the shooter speed and angle the robot for a speakers shot.
 
 ## Autonomous
-- Our basic drive strategy is to drive at a angle and velocity in Angle based field centric mode. This allows us to drive in any angle and have the robot PID to an angle. This prevents us from using a PID loop to drive to distance. Since the drive is in velociy mode the time we use is actual distance.
+- Our basic drive strategy is to drive at a angle and velocity in Angle based field centric mode. This allows us to drive in any angle and have the robot PID to an angle. This prevents us from using a PID loop to drive to distance. Since the drive is in velociy mode the time we drive is converted to actual distance.
 
 ## Pull/Push Requests
 Please add a Pull Request for changes that you would like to see.
