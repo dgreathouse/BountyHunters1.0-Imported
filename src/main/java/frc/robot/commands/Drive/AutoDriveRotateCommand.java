@@ -35,7 +35,7 @@ public class AutoDriveRotateCommand extends Command{
   @Override
   public void initialize() {
     m_timer.start();
-    m_drivetrain.setLastTargetAngle(new Rotation2d(m_robotAngle));
+    m_drivetrain.setLastTargetAngle(new Rotation2d(Math.toRadians(m_robotAngle)));
    //m_rotationAngle = new Rotation2d(m_robotAngle);
   }
 

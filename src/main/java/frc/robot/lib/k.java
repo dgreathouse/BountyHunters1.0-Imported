@@ -88,7 +88,7 @@ public final class k {
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
     public static final double TURN_KP = 6;
-    public static final double TURN_KI = 0;
+    public static final double TURN_KI = 1;
     public static final double TURN_KD = 0.0;
   }
   public static class DRIVE {
@@ -110,7 +110,7 @@ public final class k {
     private static final double MOTOR_PEAK_EFFICIENCY_percent = 85.0;
     public static final double MAX_VELOCITY_MeterPerSec = WHEEL_CIRCUMFERENCE_m * WHEEL_MAX_VELOCITY_RotPerSec * MOTOR_PEAK_EFFICIENCY_percent / 100.0;
     public static final double MAX_ANGULAR_VELOCITY_RadianPerSec = MAX_VELOCITY_MeterPerSec * (1/DRIVEBASE.WHEEL_BASE_MeterPerRad);
-    public static final double PID_Kp = 0.125;
+    public static final double PID_Kp = 0.015;
     public static final double PID_Ki = 0.1;
     public static final double PID_Kv = k.ROBOT.BATTERY_MAX_VOLTS/k.DRIVE.MAX_VELOCITY_MeterPerSec;
     public static final double PID_Ks = 0.18;
@@ -124,8 +124,8 @@ public final class k {
     private static final double CANCODER_GEAR_RATIO = 1.0;
     public static final double GEAR_RATIO = 1/((MOTOR_PINION_TEETH/MOTOR_DRIVE_GEAR_TEETH)*(GEAR_1_DRIVE_TEETH/GEAR_1_DRIVEN_TEETH));
     public static final double GEAR_RATIO_TO_CANCODER = GEAR_RATIO * CANCODER_GEAR_RATIO;
-    public static final double PID_Kp = 0.125;
-    public static final double PID_Ki = 0.05;
+    public static final double PID_Kp = 0.1;
+    public static final double PID_Ki = 0.0;
     public static final double PID_MaxV = 0.0;
     public static final double PID_MaxA = 0.0;
 

@@ -116,7 +116,7 @@ public class SwerveModule {
         
         // Calculate the PID value for the angle in Degrees
         m_steerVolts = m_steerPID.calculate(m_steerActualAngle_deg,m_steerSetAngle_deg);
-        m_steerVolts = m_steerSlewRateLimiter.calculate(m_steerVolts);
+        //m_steerVolts = m_steerSlewRateLimiter.calculate(m_steerVolts);
         m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
 
         // Calculate the PID value of velocity in MPS
