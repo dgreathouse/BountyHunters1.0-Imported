@@ -6,7 +6,10 @@ import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.MathUtil;
@@ -26,6 +29,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   CANSparkMax m_rotateMotor; // Declare a CANSparkMax motor controller class and call it m_rotateMotor;
   Servo m_leftServo;
   Servo m_rightServo;
+  Rev2mDistanceSensor m_distanceSensor;
   // Declare and initialize a VoltageOut class and call the instance m_spinVoltageOut
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
   PIDController m_rotatePID = new PIDController(k.SHOOTER.ROTATE_PID_KP, k.SHOOTER.ROTATE_PID_KI, 0);
@@ -43,6 +47,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     
     SmartDashboard.putNumber("Shooter PID", m_Rotate_PID_volts);
     SmartDashboard.putNumber("Shooter Feedforward", m_Rotate_FF_volts);
+    SmartDashboard.putNumber("Distance", m_distanceSensor.getRange());
   }
 
   /** Contructor that creates a new ShooterSubsystem. */
@@ -63,6 +68,11 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rotatePID.setIntegratorRange(-1, 1);
     m_rotatePID.setTolerance(0.01);
     m_rotatePID.reset();
+    m_distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
+    m_distanceSensor.setRangeProfile(RangeProfile.kHighAccuracy);
+    m_distanceSensor.setAutomaticMode(true);
+    m_distanceSensor.setEnabled(true);
+
     // Smartdashboard test variables
     // SmartDashboard.putBoolean("Shooter Rotate Enable", false);
     // SmartDashboard.putNumber("Shooter Test Volts", 0.0);
