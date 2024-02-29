@@ -8,6 +8,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.Rev2mDistanceSensor.Port;
 import com.revrobotics.Rev2mDistanceSensor.RangeProfile;
+import com.revrobotics.Rev2mDistanceSensor.Unit;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.CANSparkBase.IdleMode;
@@ -35,6 +36,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   PIDController m_rotatePID = new PIDController(k.SHOOTER.ROTATE_PID_KP, k.SHOOTER.ROTATE_PID_KI, 0);
   double m_Rotate_PID_volts = 0;
   double m_Rotate_FF_volts = 0;
+  double[] m_distanceAverage = new double[4];
+  int m_distanceAvgIndex = 0;
+  double m_distance = 0;
   /**
    * Any dashboard telemetry should be set here in this method
    * 
@@ -47,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     
     SmartDashboard.putNumber("Shooter PID", m_Rotate_PID_volts);
     SmartDashboard.putNumber("Shooter Feedforward", m_Rotate_FF_volts);
-    SmartDashboard.putNumber("Distance", m_distanceSensor.getRange());
+    SmartDashboard.putNumber("Shooter Distance", getDistance());
   }
 
   /** Contructor that creates a new ShooterSubsystem. */
@@ -69,11 +73,12 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rotatePID.setTolerance(0.01);
     m_rotatePID.reset();
     
-    m_distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
-    m_distanceSensor.setRangeProfile(RangeProfile.kHighAccuracy);
+    m_distanceSensor = new Rev2mDistanceSensor(Port.kMXP, Unit.kMillimeters, RangeProfile.kHighAccuracy);
     m_distanceSensor.setAutomaticMode(true);
     m_distanceSensor.setEnabled(true);
-
+    for(int i = 0; i < 4; i++){
+      m_distanceAverage[i] = k.SHOOTER.ROTATE_DS_OFFSET_DISTANCE_MM;
+    }
     // Smartdashboard test variables
     // SmartDashboard.putBoolean("Shooter Rotate Enable", false);
     // SmartDashboard.putNumber("Shooter Test Volts", 0.0);
@@ -90,7 +95,14 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(_speed * k.ROBOT.BATTERY_MAX_VOLTS));
     m_rightMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(-_speed * k.ROBOT.BATTERY_MAX_VOLTS));
   }
-
+  public void rotateDis(double _mm){
+    double mm = k.SHOOTER.ROTATE_DS_OFFSET_DISTANCE_MM + _mm;
+    m_Rotate_PID_volts = m_rotatePID.calculate(getDistance(), mm);
+    // Deal with a linear relation from resting spot to Max distance. 
+    m_Rotate_FF_volts = k.SHOOTER.ROTATE_DS_FEEDFORWARD_KG * ((k.SHOOTER.ROTATE_DS_MAX + k.SHOOTER.ROTATE_DS_OFFSET_DISTANCE_MM - mm)/k.SHOOTER.ROTATE_DS_MAX); // This is close enough to Cos. PID will deal with the rest.
+    m_Rotate_PID_volts = MathUtil.clamp(m_Rotate_PID_volts, -3, 3);
+    m_rotateMotor.setVoltage(m_Rotate_PID_volts + m_Rotate_FF_volts);
+  }
   /**
    * Rotate the shooter to an angle
    * 
@@ -118,6 +130,20 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
     // }
 
+  }
+  public double getDistance(){
+    double range = m_distanceSensor.GetRange();
+    if(range > 0){
+      m_distanceAverage[m_distanceAvgIndex] = m_distanceSensor.GetRange();
+      m_distanceAvgIndex++;
+      m_distanceAvgIndex = m_distanceAvgIndex == 4 ? 0 : m_distanceAvgIndex;
+      m_distance = 0;
+      for(int i = 0; i < 4; i++){
+        m_distance += m_distanceAverage[i];
+      }
+      m_distance /= 4;
+    }
+    return m_distance;
   }
   private boolean isRotateInRange(){
     double tolerance = m_rotatePID.getPositionTolerance();

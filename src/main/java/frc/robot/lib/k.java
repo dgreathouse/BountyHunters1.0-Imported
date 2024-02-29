@@ -142,14 +142,16 @@ public final class k {
     public static final double ROTATE_OFFSET_ANGLE_DEG = 29.5;
     public static final double SPIN_SHOT_SPEED_RPS = .30;
     public static final double ROTATE_FEEDFORWARD_KG = 0.7;
+    public static final double ROTATE_DS_FEEDFORWARD_KG = 0.5;
     public static double ROTATE_PID_KP = 10.0;
     public static double ROTATE_PID_KI = 4.0;
-    public static double ROTATE_DS_OFFSET_DISTANCE_INCHES = 4.25;
-    public static double ROTATE_DS_SHOT1_INCHES = 1.0;
-    public static double ROTATE_DS_SHOT2_INCHES = 2.0;
-    public static double ROTATE_DS_SHOT3_INCHES = 3.0;
-    public static double ROTATE_DS_SHOT4_INCHES = 4.0;
-    public static double ROTATE_DS_SHOT5_INCHES = 5.0;
+    public static double ROTATE_DS_OFFSET_DISTANCE_MM = 108;
+    public static double ROTATE_DS_MAX = 300;
+    public static double ROTATE_DS_SHOT1_MM = 25.0;
+    public static double ROTATE_DS_SHOT2_MM = 50.0;
+    public static double ROTATE_DS_SHOT3_MM = 75.0;
+    public static double ROTATE_DS_SHOT4_MM = 100.0;
+    public static double ROTATE_DS_SHOT5_MM = 125.0;
 
   }
   public static class INTAKE {
