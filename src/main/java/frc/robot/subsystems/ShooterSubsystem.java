@@ -68,6 +68,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rotatePID.setIntegratorRange(-1, 1);
     m_rotatePID.setTolerance(0.01);
     m_rotatePID.reset();
+    
     m_distanceSensor = new Rev2mDistanceSensor(Port.kOnboard);
     m_distanceSensor.setRangeProfile(RangeProfile.kHighAccuracy);
     m_distanceSensor.setAutomaticMode(true);
