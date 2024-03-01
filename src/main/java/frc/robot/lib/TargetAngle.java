@@ -44,19 +44,19 @@ public class TargetAngle {
           if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){
             m_targetAngle =  Rotation2d.fromDegrees(0.0); 
           }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){
-            m_targetAngle = Rotation2d.fromDegrees(-midAngle);
+            m_targetAngle = Rotation2d.fromDegrees(-30);
           }else if(m_actualAngle >= -112.5 && m_actualAngle < -67.5){
             m_targetAngle = Rotation2d.fromDegrees(-90);
           }else if(m_actualAngle >= -157.5 && m_actualAngle < -112.5){
-            m_targetAngle = Rotation2d.fromDegrees(-(180-midAngle));
+            m_targetAngle = Rotation2d.fromDegrees(-(150));
           }else if((m_actualAngle >= 157.5 && m_actualAngle <= 180.0) || (m_actualAngle <= -157.5 && m_actualAngle > -179.99)){
             m_targetAngle = Rotation2d.fromDegrees(180);
           }else if(m_actualAngle <= 67.5 && m_actualAngle > 22.5){
-            m_targetAngle = Rotation2d.fromDegrees(midAngle);
+            m_targetAngle = Rotation2d.fromDegrees(30);
           }else if(m_actualAngle <= 112.5 && m_actualAngle > 67.5){
             m_targetAngle = Rotation2d.fromDegrees(90);
           }else if(m_actualAngle <= 157.5 && m_actualAngle > 112.5){
-            m_targetAngle =Rotation2d.fromDegrees(180-midAngle);
+            m_targetAngle =Rotation2d.fromDegrees(150);
           }
         }
         return m_targetAngle;
