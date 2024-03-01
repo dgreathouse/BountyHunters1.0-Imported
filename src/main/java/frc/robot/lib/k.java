@@ -143,10 +143,10 @@ public final class k {
     public static final double SPIN_SHOT_SPEED_RPS = .30;
     public static final double ROTATE_FEEDFORWARD_KG = 0.7;
     public static final double ROTATE_DS_FEEDFORWARD_KG = 0.5;
-    public static double ROTATE_PID_KP = 10.0;
-    public static double ROTATE_PID_KI = 4.0;
-    public static double ROTATE_DS_OFFSET_DISTANCE_MM = 108;
-    public static double ROTATE_DS_MAX = 300;
+    public static double ROTATE_PID_KP = 0.05;//10.0;
+    public static double ROTATE_PID_KI = 0.004;//4.0;
+    public static double ROTATE_DS_OFFSET_DISTANCE_MM = 58;
+    public static double ROTATE_DS_MAX = 170;
     public static double ROTATE_DS_SHOT1_MM = 25.0;
     public static double ROTATE_DS_SHOT2_MM = 50.0;
     public static double ROTATE_DS_SHOT3_MM = 75.0;
@@ -155,7 +155,7 @@ public final class k {
 
   }
   public static class INTAKE {
-    public static final double SPIN_SPEED_DEFAULT_VOLT = 3.0;
+    public static final double SPIN_SPEED_DEFAULT_VOLT = 3.5;
   }
 
 }
