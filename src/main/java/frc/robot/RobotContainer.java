@@ -26,6 +26,7 @@ import frc.robot.commands.Tramper.TramperDefaultCommand;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
+import frc.robot.lib.Vision.OrangePi5Vision;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -57,7 +58,7 @@ public class RobotContainer {
   private final TramperDefaultCommand m_tramperDefaultCommand = new TramperDefaultCommand(m_tramperSubsystem);
 
   private Notifier m_telemetry;
-
+  public static final OrangePi5Vision m_vision = new OrangePi5Vision();
   
   public static final CommandPS5Controller s_driverController = new CommandPS5Controller(k.OI.DRIVER_CONTROLLER_PORT);
   public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(k.OI.OPERATOR_CONTROLLER_PORT);
