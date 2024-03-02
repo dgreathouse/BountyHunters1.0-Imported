@@ -117,14 +117,14 @@ public class SwerveModule {
         // Calculate the PID value for the angle in Degrees
         m_steerVolts = m_steerPID.calculate(m_steerActualAngle_deg,m_steerSetAngle_deg);
         //m_steerVolts = m_steerSlewRateLimiter.calculate(m_steerVolts);
-        m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
+     //   m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
 
         // Calculate the PID value of velocity in MPS
         m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
         m_driveVolts = MathUtil.clamp(m_driveVolts, -4, 4); // Limit the amount the PID can contribute to the Feedforward
         // Add the Feedforward to the PID volts
         m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
-        m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
+      //  m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
     }
     public void stopMotors(){
         m_steerMotor.setControl(m_steerVoltageOut.withOutput(0).withEnableFOC(true));
