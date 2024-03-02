@@ -6,5 +6,6 @@ package frc.robot.lib;
 public enum EDriveMode {
     ANGLE_FIELD_CENTRIC,
     FIELD_CENTRIC,
-    ROBOT_CENTRIC
+    ROBOT_CENTRIC,
+    POLAR_CENTRIC
 }

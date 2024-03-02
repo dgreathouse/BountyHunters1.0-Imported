@@ -13,7 +13,8 @@ public class OrangePi5Vision {
     PhotonCamera camera;
     public OrangePi5Vision(){
         camera = new PhotonCamera("photonvision");
-
+        setDriverMode(false);
+        setPipelineIndex(2);
     }
     public PhotonPipelineResult getResults(){
         return camera.getLatestResult();
@@ -33,5 +34,11 @@ public class OrangePi5Vision {
         }else {
             return 180.0;
         }
+    }
+    public void setPipelineIndex(int _x){
+        camera.setPipelineIndex(_x);
+    }
+    public void setDriverMode(boolean _mode){
+        camera.setDriverMode(_mode);
     }
 }
