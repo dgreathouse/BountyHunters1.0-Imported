@@ -98,12 +98,16 @@ public class RobotContainer {
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
    */
   private void configureBindings() {
-    //new Trigger(RobotContainer.m_drivetrainSubsystem::exampleCondition).onTrue(new ExampleCommand(m_exampleSubsystem));
-    k.OI.DRIVER_CHANGE_DRIVE_MODE.onTrue(new InstantCommand(m_drivetrainSubsystem::changeDriveMode, m_drivetrainSubsystem));
+
+    
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
-    k.OI.DRIVER_RESET_POSE.onTrue(new InstantCommand(m_drivetrainSubsystem::resetPose, m_drivetrainSubsystem));
+
     k.OI.OPERATOR_INTAKE_SPIN_ON.onTrue(new InstantCommand(m_intakeSubsystem::spinOn, m_intakeSubsystem));
     k.OI.OPERATOR_INTAKE_SPIN_OFF.onTrue(new InstantCommand(m_intakeSubsystem::spinOff, m_intakeSubsystem));
+    k.OI.OPERATOR_SHOOTER_ON_HIGH.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHigh, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_ON_LOW.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
+
   }
   /**
    * @return the command to run in autonomous routine

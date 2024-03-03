@@ -6,7 +6,6 @@ package frc.robot.lib.Vision;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
-import org.photonvision.targeting.PhotonTrackedTarget;
 
 /** Add your docs here. */
 public class OrangePi5Vision {
