@@ -59,23 +59,16 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     double x = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     driveAngleFieldCentric(x, y, new Rotation2d(Math.toRadians(_robotAngle_deg)));
   }
-
-  public void changeDriveMode(){
-    switch(m_driveMode){
-      case FIELD_CENTRIC:
-        m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
-      break;
-      case ANGLE_FIELD_CENTRIC:
-        m_driveMode = EDriveMode.ROBOT_CENTRIC;
-      break;
-      case ROBOT_CENTRIC:
-        m_driveMode = EDriveMode.FIELD_CENTRIC;
-      break;
-      default:
-        m_driveMode = EDriveMode.ROBOT_CENTRIC;
-      break;
-    }
+  public void setDriveMode_FieldCentric(){
+    m_driveMode = EDriveMode.FIELD_CENTRIC;
   }
+  public void setDriverMode_AngleFieldCentric(){
+    m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
+  }
+  public void setDriverMode_RobotCentric(){
+    m_driveMode = EDriveMode.ROBOT_CENTRIC;
+  }
+
 
   public EDriveMode getDriveMode(){
     return m_driveMode;
