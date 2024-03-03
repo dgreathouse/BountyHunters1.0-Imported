@@ -17,7 +17,7 @@ import frc.robot.lib.Swerve.SwerveDrive;
 public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public SwerveDrive m_robotDrive;
   public EDriveMode m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
-
+  
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() {
      m_robotDrive = new SwerveDrive();
@@ -31,7 +31,10 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void driveStopMotion(){
     m_robotDrive.driveStopMotion();
   }
-
+  public void driveRobotCentric(double _driveAngle, double _robotAngle, double _speed){
+    double y = Math.sin(Units.degreesToRadians(_driveAngle)) * _speed;
+    double x = Math.cos(Units.degreesToRadians(_driveAngle)) * _speed;
+  }
   public void driveRobotCentric(ChassisSpeeds _speeds){
     m_robotDrive.driveRobotCentric(_speeds);
   }
@@ -92,7 +95,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
     SmartDashboard.putNumber("Robot Angle", getRobotAngle());
     SmartDashboard.putNumber("Note Yaw", RobotContainer.m_vision.getYaw());
-    m_robotDrive.updateDashboard();
+    //m_robotDrive.updateDashboard();
   }
   @Override
   public void periodic() {

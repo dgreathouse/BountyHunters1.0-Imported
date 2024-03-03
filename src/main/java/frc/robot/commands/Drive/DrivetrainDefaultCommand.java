@@ -73,7 +73,8 @@ public class DrivetrainDefaultCommand extends Command {
       // Call the appropriate drive mode. Selected by the driver controller Options button.
       
       if (m_vYaw < 90 && RobotContainer.s_operatorController.square().getAsBoolean()) {
-        m_drive.drivePolarFieldCentric(m_vYaw + m_drive.getRobotAngle(), 4, GD.G_RobotTargetAngle.getTargetAngle().getDegrees());
+        double angle = m_drive.getRobotAngle();
+        
       } else {
         switch (m_drive.getDriveMode()) {
           case FIELD_CENTRIC:

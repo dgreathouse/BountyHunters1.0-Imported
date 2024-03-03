@@ -12,7 +12,8 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 public class OrangePi5Vision {
     PhotonCamera camera;
     public OrangePi5Vision(){
-        camera = new PhotonCamera("photonvision");
+       camera = new PhotonCamera("NexiGo");
+       //camera = new PhotonCamera("photonvision");
         setDriverMode(false);
         setPipelineIndex(2);
     }
@@ -30,7 +31,7 @@ public class OrangePi5Vision {
         PhotonPipelineResult results = camera.getLatestResult();
 
         if(results.hasTargets()){
-            return results.getBestTarget().getYaw();
+            return -results.getBestTarget().getYaw();
         }else {
             return 180.0;
         }
