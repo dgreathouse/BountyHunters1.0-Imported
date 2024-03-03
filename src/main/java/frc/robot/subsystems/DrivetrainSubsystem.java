@@ -94,7 +94,8 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
     SmartDashboard.putNumber("Robot Angle", getRobotAngle());
-    SmartDashboard.putNumber("Note Yaw", RobotContainer.m_vision.getYaw());
+    double yaw = SmartDashboard.getNumber("SmartDashboard/photonvision/NexiGo/targetYaw", 180);
+    SmartDashboard.putNumber("TargetYaw", RobotContainer.m_vision.getYaw());
     //m_robotDrive.updateDashboard();
   }
   @Override
