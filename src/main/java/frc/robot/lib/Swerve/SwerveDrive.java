@@ -243,12 +243,7 @@ public class SwerveDrive {
     }
          /* Put smartdashboard calls in separate thread to reduce performance impact */
     public void updateDashboard() {
-        // SmartDashboard.putNumber("Successful Daqs", m_odometryThread.getSuccessfulDaqs());
-        // SmartDashboard.putNumber("Failed Daqs", m_odometryThread.getFailedDaqs());
-        // SmartDashboard.putNumber("X Pos", m_odometry.getPoseMeters().getX());
-        // SmartDashboard.putNumber("Y Pos", m_odometry.getPoseMeters().getY());
-        // SmartDashboard.putNumber("Angle", m_odometry.getPoseMeters().getRotation().getDegrees());
-        // SmartDashboard.putNumber("Odometry Loop Time", m_odometryThread.getTime());
+
         for (int i = 0; i < m_moduleCount; ++i) {
             m_modules[i].updateDashboard();
         }

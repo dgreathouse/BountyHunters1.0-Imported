@@ -22,7 +22,6 @@ import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
-import frc.robot.commands.Tramper.TramperDefaultCommand;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
@@ -31,7 +30,6 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TramperSubsystem;
 
 /**
  * In command-based projects, very little robot logic should actually be handled in the {@link Robot}
@@ -54,9 +52,6 @@ public class RobotContainer {
   private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
-  private static final TramperSubsystem m_tramperSubsystem = new TramperSubsystem();
-  private final TramperDefaultCommand m_tramperDefaultCommand = new TramperDefaultCommand(m_tramperSubsystem);
-
   private Notifier m_telemetry;
   public static final OrangePi5Vision m_vision = new OrangePi5Vision();
   
@@ -78,7 +73,6 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(m_drivetrainDefaultCommand);
     m_intakeSubsystem.setDefaultCommand(m_intakeDefaultCommand);
     m_shooterSubsystem.setDefaultCommand(m_shooterDefaultCommand);
-    m_tramperSubsystem.setDefaultCommand(m_tramperDefaultCommand);
     
     // Configure the trigger bindings
     configureBindings();

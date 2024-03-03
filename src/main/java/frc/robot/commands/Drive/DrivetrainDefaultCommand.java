@@ -5,7 +5,6 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.networktables.RawPublisher;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -67,15 +66,15 @@ public class DrivetrainDefaultCommand extends Command {
     // speed.
     setShotData(rightXRaw, rightYRaw);
 
-    m_vYaw = RobotContainer.m_vision.getYaw();
+    m_vYaw = RobotContainer.m_vision.getNoteYaw();
     
     if (GD.G_RobotMode != RobotMode.AUTONOMOUS_PERIODIC) {
       // Call the appropriate drive mode. Selected by the driver controller Options button.
       
-      if (m_vYaw < 90 && RobotContainer.s_operatorController.square().getAsBoolean()) {
-        double angle = m_drive.getRobotAngle();
+      // if (m_vYaw < 90 && RobotContainer.s_operatorController.square().getAsBoolean()) {
+      //   m_drive.drivePolarFieldCentric(GD.G_RobotTargetAngle.getTargetAngle().getDegrees(), GD.G_RobotTargetAngle.getTargetAngle().getDegrees(), 3, true);
         
-      } else {
+      //} else {
         switch (m_drive.getDriveMode()) {
           case FIELD_CENTRIC:
             m_drive.driveFieldCentric(m_speeds);
@@ -84,13 +83,12 @@ public class DrivetrainDefaultCommand extends Command {
             m_drive.driveRobotCentric(m_speeds);
             break;
           case ANGLE_FIELD_CENTRIC:
-
-            m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond);
+            m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond, GD.G_RobotTargetAngle.getTargetAngle());
             break;
           default:
             break;
         }
-      }
+     // }
     } else {
       m_drive.driveStopMotion();
     }

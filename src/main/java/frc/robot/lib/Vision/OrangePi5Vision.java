@@ -12,6 +12,7 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 public class OrangePi5Vision {
     PhotonCamera camera;
     PhotonPipelineResult results;
+    public static double m_yaw;
     public OrangePi5Vision(){
        camera = new PhotonCamera("NexiGo");
        //camera = new PhotonCamera("photonvision");
@@ -28,7 +29,7 @@ public class OrangePi5Vision {
      * 
      * @return The Yaw in degrees with Positive right
      */
-    public double getYaw(){
+    private double getCameraNoteYaw(){
         results = camera.getLatestResult();
 
         if(results.hasTargets()){
@@ -42,5 +43,11 @@ public class OrangePi5Vision {
     }
     public void setDriverMode(boolean _mode){
         camera.setDriverMode(_mode);
+    }
+    public double getNoteYaw(){
+        return m_yaw;
+    }
+    public void findNote(){
+        getCameraNoteYaw();
     }
 }

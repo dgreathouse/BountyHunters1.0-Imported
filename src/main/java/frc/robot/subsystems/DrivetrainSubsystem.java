@@ -43,15 +43,21 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     m_robotDrive.driveFieldCentric(_speeds);
   }
 
-  public void driveAngleFieldCentric(double _x, double _y){
-    m_robotDrive.driveAngleFieldCentric(_x, _y, GD.G_RobotTargetAngle.getTargetAngle());
+  public void driveAngleFieldCentric(double _x, double _y, Rotation2d _targetAngle){
+    m_robotDrive.driveAngleFieldCentric(_x, _y, _targetAngle);
   }
 
-  public void drivePolarFieldCentric(double _driveAngle_deg, double _speed, double _robotAngle_deg){
+  public void drivePolarFieldCentric(double _driveAngle_deg, double _robotAngle_deg, double _speed, boolean _toNote){
+    if(_toNote){
+      double yaw = RobotContainer.m_vision.getNoteYaw();
+      if(yaw < 90){
+        _driveAngle_deg += yaw;
+        _robotAngle_deg += yaw;
+      }
+    }
     double y = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     double x = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
-    GD.G_RobotTargetAngle.setTargetAngle(_robotAngle_deg);
-    driveAngleFieldCentric(x, y);
+    driveAngleFieldCentric(x, y, new Rotation2d(Math.toRadians(_robotAngle_deg)));
   }
 
   public void changeDriveMode(){
@@ -94,13 +100,13 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
     SmartDashboard.putNumber("Robot Angle", getRobotAngle());
-    double yaw = SmartDashboard.getNumber("SmartDashboard/photonvision/NexiGo/targetYaw", 180);
-    SmartDashboard.putNumber("TargetYaw", RobotContainer.m_vision.getYaw());
+    SmartDashboard.putNumber("TargetYaw", RobotContainer.m_vision.getNoteYaw());
     //m_robotDrive.updateDashboard();
   }
   @Override
   public void periodic() {
-    
+
+    RobotContainer.m_vision.findNote();
 
   }
 }
