@@ -6,7 +6,6 @@ package frc.robot.lib.Vision;
 
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
-import org.photonvision.targeting.PhotonTrackedTarget;
 
 /** Add your docs here. */
 public class OrangePi5Vision {
@@ -48,6 +47,6 @@ public class OrangePi5Vision {
         return m_yaw;
     }
     public void findNote(){
-        getCameraNoteYaw();
+        m_yaw = getCameraNoteYaw();
     }
 }

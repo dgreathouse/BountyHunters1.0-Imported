@@ -64,7 +64,7 @@ public class AutoDriveTimeVel extends Command{
       m_currentSpeed = m_speed;
     }
     SmartDashboard.putNumber("ADV Current Speed", m_currentSpeed);
-    m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_currentSpeed, m_robotAngle);
+    m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_currentSpeed, m_robotAngle,false);
   }
 
   // Called once the command ends or is interrupted.

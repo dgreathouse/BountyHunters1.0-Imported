@@ -112,52 +112,52 @@ public class DrivetrainDefaultCommand extends Command {
 
     // if x,y hyp > deadband reset the shooter angle and speed
     if (GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND) {
-      GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
+     // GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
       GD.G_ShooterSpeed = 0.0;
-      GD.G_Intake_Speed = 3;
+      GD.G_Intake_Speed = 0.0;
     }
     // Handle target angle buttons if pressed to set angles and speeds
     if (k.OI.DRIVER_ENABLE_SECONDAY_TRIGGERS.getAsBoolean()) {
       if (k.OI.DRIVER_SHOT_POSITION_5.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 50;
+        //GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_6.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(50);
-        GD.G_ShooterAngle = 50;
+        //GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_7.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(-30);
-        GD.G_ShooterAngle = 41;
+        //GD.G_ShooterAngle = 41;
         GD.G_ShooterSpeed = 0.65;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_8.getAsBoolean()) {
         GD.G_RobotTargetAngle.setTargetAngle(-50);
-        GD.G_ShooterAngle = 50;
+        //GD.G_ShooterAngle = 50;
         GD.G_ShooterSpeed = k.SHOOTER.SPIN_SHOT_SPEED_RPS;
         GD.G_Intake_Speed = 0;
       }
     } else {
       if (k.OI.DRIVER_SHOT_POSITION_1.getAsBoolean()) { // By the podium
         GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
-        GD.G_ShooterAngle = 51;
+        //GD.G_ShooterAngle = 51;
         GD.G_ShooterSpeed = 0.68;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_2.getAsBoolean()) { // side of speaker
         GD.G_RobotTargetAngle.setTargetAngle(45);
-        GD.G_ShooterAngle = 65;
+        //GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_3.getAsBoolean()) { // in the middle of speaker
         GD.G_RobotTargetAngle.setTargetAngle(0);
-        GD.G_ShooterAngle = 65;
+       // GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
         GD.G_Intake_Speed = 0;
       } else if (k.OI.DRIVER_SHOT_POSITION_4.getAsBoolean()) { // side of speaker
         GD.G_RobotTargetAngle.setTargetAngle(-45);
-        GD.G_ShooterAngle = 65;
+        //GD.G_ShooterAngle = 65;
         GD.G_ShooterSpeed = 0.6;
         GD.G_Intake_Speed = 0;
       }
