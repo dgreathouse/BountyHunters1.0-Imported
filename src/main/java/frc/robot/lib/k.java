@@ -67,10 +67,10 @@ public final class k {
 
     
     public static Trigger DRIVER_ENABLE_RIGHT_TRIGGERS = RobotContainer.s_driverController.R1();
-    public static Trigger DRIVER_SHOT_POSITION_R1 = RobotContainer.s_driverController.square();
-    public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.circle();
-    public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_R1 = RobotContainer.s_driverController.triangle();
+    public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.circle();
 
     public static Trigger DRIVER_DRIVE_MODE_FIELDCENTRIC = RobotContainer.s_driverController.povLeft();
     public static Trigger DRIVER_DRIVE_MODE_ROBOTCENTRIC = RobotContainer.s_driverController.povRight();
