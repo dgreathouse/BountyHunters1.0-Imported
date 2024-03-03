@@ -3,6 +3,7 @@
 package frc.robot.commandGroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoRedLeft extends SequentialCommandGroup {
   /** Creates a new AutoRedLeft. */

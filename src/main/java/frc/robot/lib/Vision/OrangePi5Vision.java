@@ -48,6 +48,6 @@ public class OrangePi5Vision {
         return m_yaw;
     }
     public void findNote(){
-        getCameraNoteYaw();
+        m_yaw = getCameraNoteYaw();
     }
 }

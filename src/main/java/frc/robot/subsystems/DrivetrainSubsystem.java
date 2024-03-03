@@ -47,14 +47,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     m_robotDrive.driveAngleFieldCentric(_x, _y, _targetAngle);
   }
 
-  public void drivePolarFieldCentric(double _driveAngle_deg, double _robotAngle_deg, double _speed, boolean _toNote){
-    if(_toNote){
-      double yaw = RobotContainer.m_vision.getNoteYaw();
-      if(yaw < 90){
-        _driveAngle_deg += yaw;
-        _robotAngle_deg += yaw;
-      }
-    }
+  public void drivePolarFieldCentric(double _driveAngle_deg, double _robotAngle_deg, double _speed){
     double y = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     double x = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     driveAngleFieldCentric(x, y, new Rotation2d(Math.toRadians(_robotAngle_deg)));

@@ -10,6 +10,7 @@ import frc.robot.commands.Drive.AutoDriveRotateCommand;
 import frc.robot.commands.Drive.AutoDriveTimeVel;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
 import frc.robot.commands.Shooter.ShooterSetShotCommand;
+import frc.robot.lib.Vision.OrangePi5Vision;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -17,7 +18,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class AutoBlueRight extends SequentialCommandGroup {
   /** Creates a new AutoBlueRight. */
   ShooterSubsystem m_shooterSubsystem;
-  public AutoBlueRight(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
+  public AutoBlueRight(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake, OrangePi5Vision _vision) {
     
     /** Auto Blue Right
      *  + Line up robot on right side pointing straight down field
@@ -39,18 +40,26 @@ public class AutoBlueRight extends SequentialCommandGroup {
      *  - Drive to center field
      */
     addCommands(
+
+      new AutoDriveTimeVel(_drive,2, 0,0, 1.5, 0.5 , 0.5, false),
+      new AutoDriveTimeVel(_drive,0, 0,0, 2, 0 , 0, false),
+      new AutoDriveTimeVel(_drive,3, -28,-28, 1.3, 0.5 , 0, false),
+      new InstantCommand(_intake::spinOn, _intake),
+      new AutoDriveTimeVel(_drive,1.5, -22,-22, 1, 0 , 0.5, true),
+      new AutoDriveTimeVel(_drive,3, 175,-45, 1.5, 0.5 , 0, false),
+      new AutoDriveTimeVel(_drive,0, 0,0, 2, 0 , 0, false),
+      new InstantCommand(_intake::spinOff, _intake)
       
-      //new InstantCommand(_intake::spinOn, _intake),
      // new ShooterSetShotCommand(_shooter, 0.15, 40),
-       new AutoDriveRotateCommand(_drive, -40, 2),
+      // new AutoDriveRotateCommand(_drive, -40, 2),
      //  new InstantCommand(_shooter::setFlippersRetracted, _shooter)
        //new AutoDriveDelayCommand(_drive, 10)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new InstantCommand(_shooter::retractFlippers, _shooter),
       // new InstantCommand(_intake::spinOn, _intake),
-       new AutoDriveTimeVel(_drive, 3, -22,-22, 2.8, 0.5, 0.5),
+      
       // new AutoDriveDelayCommand(_drive, 1),
-       new AutoDriveTimeVel(_drive, 3, 180-22,-35, 1.8, 0.5, 0.5)
+      // new AutoDriveTimeVel(_drive, 3, 180-22,-35, 1.8, 0.5, 0.5)
       // new ShooterSetShotCommand(_shooter, 0, 0),
       // new AutoDriveDelayCommand(_drive, 1),
       // new InstantCommand(_intake::spinOff, _intake),
