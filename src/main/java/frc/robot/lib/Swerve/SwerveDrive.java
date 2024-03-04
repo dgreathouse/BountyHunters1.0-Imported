@@ -206,13 +206,13 @@ public class SwerveDrive {
 
     }
     public void driveStopMotion() {
-        m_modules[0].stopMotors(); // FR
-        m_modules[1].stopMotors(); // FL
-        m_modules[2].stopMotors(); // B
+        // m_modules[0].stopMotors(); // FR
+        // m_modules[1].stopMotors(); // FL
+        // m_modules[2].stopMotors(); // B
 
-        // m_modules[0].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0)))); // FR
-        // m_modules[1].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0)))); // FL
-        // m_modules[2].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(0)))); // B
+        m_modules[0].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(-45)))); // FR
+        m_modules[1].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(45)))); // FL
+        m_modules[2].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.toRadians(90)))); // B
     }
 
     public void resetYaw() {

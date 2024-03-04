@@ -39,37 +39,29 @@ public class AutoBlueRight extends SequentialCommandGroup {
      *  - Retract flippers
      *  - Drive to center field
      */
-    addCommands(
+    addCommands( // Yay, explanation!
 
-      new AutoDriveTimeVel(_drive,2, 0,0, 1.5, 0.5 , 0.5, false),
-      new AutoDriveTimeVel(_drive,0, 0,0, 2, 0 , 0, false),
-      new AutoDriveTimeVel(_drive,3, -28,-28, 1.3, 0.5 , 0, false),
-      new InstantCommand(_intake::spinOn, _intake),
-      new AutoDriveTimeVel(_drive,1.5, -22,-22, 1, 0 , 0.5, true),
-      new AutoDriveTimeVel(_drive,3, 175,-45, 1.5, 0.5 , 0, false),
-      new AutoDriveTimeVel(_drive,0, 0,0, 2, 0 , 0, false),
-      new InstantCommand(_intake::spinOff, _intake)
-      
-     // new ShooterSetShotCommand(_shooter, 0.15, 40),
-      // new AutoDriveRotateCommand(_drive, -40, 2),
-     //  new InstantCommand(_shooter::setFlippersRetracted, _shooter)
-       //new AutoDriveDelayCommand(_drive, 10)
-      // new ShooterSetShotCommand(_shooter, 0, 0),
-      // new InstantCommand(_shooter::retractFlippers, _shooter),
-      // new InstantCommand(_intake::spinOn, _intake),
-      
-      // new AutoDriveDelayCommand(_drive, 1),
-      // new AutoDriveTimeVel(_drive, 3, 180-22,-35, 1.8, 0.5, 0.5)
-      // new ShooterSetShotCommand(_shooter, 0, 0),
-      // new AutoDriveDelayCommand(_drive, 1),
-      // new InstantCommand(_intake::spinOff, _intake),
-      // new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0),
-      // new InstantCommand(_shooter::retractFlippers, _shooter),
-    //   new AutoDriveDelayCommand(_drive, 20)
-      // new ShooterSetShotCommand(_shooter, 0, 0),
-      // new InstantCommand(_shooter::retractFlippers, _shooter),
-      // new AutoDriveTimeVel(_drive, 0, 0, 0, 0, 0, 0),
+      new ShooterSetShotCommand(_shooter, 0.65, 0), // Fire up the shooter.
+      new AutoDriveTimeVel(_drive,2.15, 0,0, 1.7, 1 , 0.5, false), // Drive forward speedy out of the autonamous start area.
+      new AutoDriveTimeVel(_drive,0, 0,-35, 0.7, 0 , 0, false), // Stop AND set the face the robot towards the speaker.
+      new InstantCommand(_shooter::setFlipperExtended, _shooter), // FIRE!!!! (Extend the flippers)
+      new AutoDriveDelayCommand(_drive, 0.5),
+      new AutoDriveTimeVel(_drive,3, -28.5,-28.5, 1.3, 0.5 , 0, false), // Speed away breaking several traffic laws.
+      new InstantCommand(_shooter::setFlippersRetracted, _shooter), // Pull back the flipper bois.
+      new ShooterSetShotCommand(_shooter, 0, 0),
+      new InstantCommand(_intake::spinOn, _intake), // Make intake spinny.
+      new AutoDriveTimeVel(_drive,1.5, -28.5,-28.5, 1.5, 0 , 0.75, true), // Go and suck up the note. This looks awsome by the way.
+      new ShooterSetShotCommand(_shooter, 0.65, 0),
+      new AutoDriveTimeVel(_drive,3, 156,-45, 1.8, 0.5 , 0, false), // Drive away from the note towards firing position.
+      new AutoDriveTimeVel(_drive,0, 0,-40, 0.7, 0 , 0, false), // Stop and face speaker.
+      new InstantCommand(_intake::spinOff, _intake), // No more intake spinny.
+      new InstantCommand(_shooter::setFlipperExtended, _shooter), // FIREEEEEEEEEEEEEE!!!!!!!!!!!!!!!!!!!!!!!!!!!! (Extend the flippers again)
+      new AutoDriveDelayCommand(_drive, 1),
+      new ShooterSetShotCommand(_shooter, 0, 0),
+      new InstantCommand(_shooter::setFlipperExtended, _shooter),
+      new AutoDriveTimeVel(_drive,1, 20,20, 4, 0.5 , 0, false)
 
+      // TO BE CONTINUED...
     );
   }
 }

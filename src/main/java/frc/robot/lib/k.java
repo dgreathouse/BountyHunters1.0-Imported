@@ -117,7 +117,7 @@ public final class k {
     private static final double MOTOR_PEAK_EFFICIENCY_percent = 85.0;
     public static final double MAX_VELOCITY_MeterPerSec = WHEEL_CIRCUMFERENCE_m * WHEEL_MAX_VELOCITY_RotPerSec * MOTOR_PEAK_EFFICIENCY_percent / 100.0;
     public static final double MAX_ANGULAR_VELOCITY_RadianPerSec = MAX_VELOCITY_MeterPerSec * (1/DRIVEBASE.WHEEL_BASE_MeterPerRad);
-    public static final double PID_Kp = 0.015;
+    public static final double PID_Kp = 0.5;
     public static final double PID_Ki = 0.1;
     public static final double PID_Kv = k.ROBOT.BATTERY_MAX_VOLTS/k.DRIVE.MAX_VELOCITY_MeterPerSec;
     public static final double PID_Ks = 0.18;

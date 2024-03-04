@@ -61,7 +61,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterIsFlipperRetracted = false;
   }
   public void setShooterOnHigh(){
-    GD.G_ShooterSpeed = 0.6;
+    GD.G_ShooterSpeed = 0.65;
   }
   public void setShooterOnLow(){
     GD.G_ShooterSpeed = 0.4;
@@ -72,7 +72,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   private void retractFlippers() {
     m_leftServo.set(.6);
-    m_rightServo.set(.29);
+    m_rightServo.set(.325);
   }
 
   private void extendFlippers() {
