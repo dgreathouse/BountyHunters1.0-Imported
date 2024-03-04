@@ -83,7 +83,7 @@ public class DrivetrainDefaultCommand extends Command {
             m_drive.driveRobotCentric(m_speeds);
             break;
           case ANGLE_FIELD_CENTRIC:
-            m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond, GD.G_RobotTargetAngle.getTargetAngle());
+            m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond, GD.G_RobotTargetAngle.getTargetAngle(), true, true);
             break;
           default:
             break;

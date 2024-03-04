@@ -31,10 +31,6 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void driveStopMotion(){
     m_robotDrive.driveStopMotion();
   }
-  public void driveRobotCentric(double _driveAngle, double _robotAngle, double _speed){
-    double y = Math.sin(Units.degreesToRadians(_driveAngle)) * _speed;
-    double x = Math.cos(Units.degreesToRadians(_driveAngle)) * _speed;
-  }
   public void driveRobotCentric(ChassisSpeeds _speeds){
     m_robotDrive.driveRobotCentric(_speeds);
   }
@@ -43,14 +39,14 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     m_robotDrive.driveFieldCentric(_speeds);
   }
 
-  public void driveAngleFieldCentric(double _x, double _y, Rotation2d _targetAngle){
-    m_robotDrive.driveAngleFieldCentric(_x, _y, _targetAngle);
+  public void driveAngleFieldCentric(double _x, double _y, Rotation2d _targetAngle, boolean _enableSteer, boolean _enableDrive){
+    m_robotDrive.driveAngleFieldCentric(_x, _y, _targetAngle, _enableSteer, _enableDrive);
   }
 
-  public void drivePolarFieldCentric(double _driveAngle_deg, double _robotAngle_deg, double _speed){
+  public void drivePolarFieldCentric(double _driveAngle_deg, double _robotAngle_deg, double _speed, boolean _enableSteer, boolean _enableDrive){
     double y = Math.sin(Units.degreesToRadians(_driveAngle_deg)) * _speed;
     double x = Math.cos(Units.degreesToRadians(_driveAngle_deg)) * _speed;
-    driveAngleFieldCentric(x, y, new Rotation2d(Math.toRadians(_robotAngle_deg)));
+    driveAngleFieldCentric(x, y, new Rotation2d(Math.toRadians(_robotAngle_deg)), _enableSteer, _enableDrive);
   }
   public void setDriveMode_FieldCentric(){
     m_driveMode = EDriveMode.FIELD_CENTRIC;

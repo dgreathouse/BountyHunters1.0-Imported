@@ -42,7 +42,7 @@ public class AutoDriveRotateCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.driveAngleFieldCentric(0, 0, null);
+    m_drivetrain.driveAngleFieldCentric(0, 0, new Rotation2d(Math.toRadians(m_robotAngle)),true, true );
   }
 
   // Called once the command ends or is interrupted.

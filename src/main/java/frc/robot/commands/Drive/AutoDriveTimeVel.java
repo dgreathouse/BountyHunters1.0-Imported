@@ -3,12 +3,8 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.lib.Swerve.SwerveDrive;
-import frc.robot.lib.Vision.OrangePi5Vision;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveTimeVel extends Command {
@@ -23,7 +19,8 @@ public class AutoDriveTimeVel extends Command {
   double m_rampDownTime_sec;
   double m_currentSpeed = 0;
   boolean m_goToNote;
-  double driveAng = m_driveAngle;
+  boolean m_enableStartSteering;
+  double m_driveAngleAdjusted = m_driveAngle;
   /**
    * * AutoDriveTimeVel
    * <p>
@@ -37,8 +34,7 @@ public class AutoDriveTimeVel extends Command {
    * @param _timeOut_sec The time to stop driving in seconds.
    * @param _rampEnable  Enable the ramp of velocity at the start.
    */
-  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle,
-      double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote) {
+  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _enableStartSteering) {
     m_drivetrain = _drive;
     m_timeOut_sec = _timeOut_sec;
     m_driveAngle = _driveAngle;
@@ -48,7 +44,7 @@ public class AutoDriveTimeVel extends Command {
     m_rampDownTime_sec = _rampDownTime_sec;
     m_currentSpeed = m_speed;
     m_goToNote = _goToNote;
-    
+    m_enableStartSteering = _enableStartSteering;
     addRequirements(m_drivetrain);
 
   }
@@ -57,33 +53,31 @@ public class AutoDriveTimeVel extends Command {
   @Override
   public void initialize() {
     m_timer.start();
-    driveAng = m_driveAngle;
+    m_driveAngleAdjusted = m_driveAngle;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_goToNote == true) { // IF note yaw is greater than 180:
-
-      if (RobotContainer.m_vision.getNoteYaw() != 180) {
-        driveAng = RobotContainer.m_vision.getNoteYaw() + m_driveAngle;
-      }
-      m_currentSpeed = m_speed; // Set the speed.
-      m_drivetrain.drivePolarFieldCentric(driveAng, m_robotAngle, m_currentSpeed);
-
-    } else if (m_goToNote == false) {
-
-      double currentTime_sec = m_timer.get();
-      if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
-        m_currentSpeed = m_speed * (m_timeOut_sec - currentTime_sec) / m_rampDownTime_sec;
-      } else if (currentTime_sec < m_rampUpTime_sec) {// In the ramp up time
-        m_currentSpeed = m_speed * currentTime_sec / m_rampUpTime_sec;
-      } else { // past the ramp up time and not in ramp down time
-        m_currentSpeed = m_speed;
-      }
-      SmartDashboard.putNumber("ADV Current Speed", m_currentSpeed);
-      m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_robotAngle, m_currentSpeed);
+    m_driveAngleAdjusted = m_driveAngle;
+    if (RobotContainer.m_vision.getNoteYaw() < 90 && m_goToNote) {
+      m_driveAngleAdjusted = RobotContainer.m_vision.getNoteYaw() + m_driveAngle;
     }
+    double currentTime_sec = m_timer.get();
+    if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
+      m_currentSpeed = m_speed * (m_timeOut_sec - currentTime_sec) / m_rampDownTime_sec;
+    } else if (currentTime_sec < m_rampUpTime_sec) {// In the ramp up time
+      m_currentSpeed = m_speed * currentTime_sec / m_rampUpTime_sec;
+    } else { // past the ramp up time and not in ramp down time
+      m_currentSpeed = m_speed;
+    }
+    if(!m_timer.hasElapsed(0.2) && m_enableStartSteering){
+      m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,false);
+    }else {
+      m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,true);
+    }
+    
+
   }
 
   // Called once the command ends or is interrupted.

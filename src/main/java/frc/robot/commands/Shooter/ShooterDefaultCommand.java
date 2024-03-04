@@ -4,7 +4,6 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.GD;
-import frc.robot.lib.RobotMode;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.lib.k;
 

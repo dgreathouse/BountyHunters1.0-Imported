@@ -2,8 +2,6 @@
 
 package frc.robot.lib.Swerve;
 
-import com.ctre.phoenix6.BaseStatusSignal;
-import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
@@ -11,16 +9,12 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-//import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-//import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.lib.k;
 
@@ -30,11 +24,6 @@ public class SwerveModule {
     private TalonFX m_steerMotor;
     private CANcoder m_cancoder;
     private String m_name;
-    // private StatusSignal<Double> m_drivePosition;
-    // private StatusSignal<Double> m_driveVelocity;
-    // private StatusSignal<Double> m_steerPosition;
-    // private StatusSignal<Double> m_steerVelocity;
-    // private BaseStatusSignal[] m_signals;
     private double m_driveSetVelocity_mps = 0;
     private double m_steerSetAngle_deg = 0;
     private double m_driveActualVelocity_mps = 0;
@@ -50,7 +39,6 @@ public class SwerveModule {
     private VoltageOut m_steerVoltageOut = new VoltageOut(0.0);
     private VoltageOut m_driveVoltageOut = new VoltageOut(0.0);
     private SwerveModulePosition m_internalState = new SwerveModulePosition();
-    private SlewRateLimiter m_steerSlewRateLimiter = new SlewRateLimiter(12);
 
     public SwerveModule(SwerveModuleConstants _constants) {
         
@@ -86,62 +74,39 @@ public class SwerveModule {
         m_cancoder.getConfigurator().apply(cancoderConfigs);
 
         m_steerMotor.setPosition(m_cancoder.getPosition().getValueAsDouble() * k.STEER.GEAR_RATIO);
-        // // TODO: remove CANCoder reliance for position. Use it only for initialization of steer motor encoder
-        // m_drivePosition = m_driveMotor.getPosition();
-        // m_driveVelocity = m_driveMotor.getVelocity();
-        // m_steerPosition = m_steerMotor.getPosition();         // Set Steer position to what the CANCoder has been offset to. This is the initialization of the steering postion
-        // m_steerVelocity = m_steerMotor.getVelocity();
 
-        // m_signals = new BaseStatusSignal[4];
-        // m_signals[0] = m_drivePosition;
-        // m_signals[1] = m_driveVelocity;
-        // m_signals[2] = m_steerPosition;
-        // m_signals[3] = m_steerVelocity;
     }
 
     /** Set the desired Drive Speed and Steer Angle. This method commands the motors.
      * 
      * @param _state The module state which contains Steer Angle and Drive Speed
      */
-    public void setDesiredState(SwerveModuleState _state) {
+    public void setDesiredState(SwerveModuleState _state, boolean _enableSteer, boolean _enableDrive) {
         // Optimize the angle so the wheel will not rotate more than 90 deg
         SwerveModuleState optimized = SwerveModuleState.optimize(_state, m_internalState.angle);
         
-        m_steerSetAngle_deg = optimized.angle.getDegrees(); // Get the angle in degrees that we want to set
-        m_driveSetVelocity_mps = optimized.speedMetersPerSecond; // Get the velocity we want to set
-
-        // Get the actual angles and velocity that the motors are at.
-        m_driveActualVelocity_mps = m_driveMotor.getVelocity().getValueAsDouble() /  k.DRIVE.WHEEL_MotRotPerMeter;
-        m_steerActualAngle_deg = m_steerMotor.getPosition().getValueAsDouble() * 360.0 / k.STEER.GEAR_RATIO;
-        
-        // Calculate the PID value for the angle in Degrees
-        m_steerVolts = m_steerPID.calculate(m_steerActualAngle_deg,m_steerSetAngle_deg);
-        //m_steerVolts = m_steerSlewRateLimiter.calculate(m_steerVolts);
-        m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
-
-        // Calculate the PID value of velocity in MPS
-        m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
-        m_driveVolts = MathUtil.clamp(m_driveVolts, -4, 4); // Limit the amount the PID can contribute to the Feedforward
-        // Add the Feedforward to the PID volts
-        m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
-        m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
+        if(_enableSteer){
+            m_steerSetAngle_deg = optimized.angle.getDegrees(); // Get the angle in degrees that we want to set
+            m_steerActualAngle_deg = m_steerMotor.getPosition().getValueAsDouble() * 360.0 / k.STEER.GEAR_RATIO;
+            m_steerVolts = m_steerPID.calculate(m_steerActualAngle_deg,m_steerSetAngle_deg);
+            m_steerMotor.setControl(m_steerVoltageOut.withOutput(m_steerVolts).withEnableFOC(true));
+        }
+        if(_enableDrive){
+            m_driveSetVelocity_mps = optimized.speedMetersPerSecond; // Get the velocity we want to set
+            m_driveActualVelocity_mps = m_driveMotor.getVelocity().getValueAsDouble() /  k.DRIVE.WHEEL_MotRotPerMeter;
+            m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
+            m_driveVolts = MathUtil.clamp(m_driveVolts, -6, 6); // Limit the amount the PID can contribute to the Feedforward
+            m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
+            m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
+        }
     }
     public void stopMotors(){
         m_steerMotor.setControl(m_steerVoltageOut.withOutput(0).withEnableFOC(true));
         m_driveMotor.setControl(m_driveVoltageOut.withOutput(0).withEnableFOC(true));
     }
     public SwerveModulePosition getPosition(boolean _refresh) {
-        // if (_refresh) {
-        //     /* Refresh all signals */
-        //     m_drivePosition.refresh();
-        //     m_driveVelocity.refresh();
-        //     m_steerPosition.refresh();
-        //     m_steerVelocity.refresh();
-        // }
-
-        /* Now latency-compensate our signals */
-        double drive_rot =  m_driveMotor.getPosition().getValueAsDouble();// BaseStatusSignal.getLatencyCompensatedValue(m_drivePosition, m_driveVelocity);
-        double angle_rot =  m_steerMotor.getPosition().getValueAsDouble();// BaseStatusSignal.getLatencyCompensatedValue(m_steerPosition, m_steerVelocity);
+        double drive_rot =  m_driveMotor.getPosition().getValueAsDouble();
+        double angle_rot =  m_steerMotor.getPosition().getValueAsDouble();
         // anagle_rot is the Motor rotations. Apply the gear ratio to get wheel rotations for steer
         angle_rot = angle_rot / k.STEER.GEAR_RATIO;
         /* And push them into a SwerveModuleState object to return */
@@ -151,9 +116,7 @@ public class SwerveModule {
 
         return m_internalState;
     }
-    // BaseStatusSignal[] getSignals() {
-    //     return m_signals;
-    // }
+
     public void updateDashboard(){
         SmartDashboard.putNumber(m_name+"_set_deg", m_steerSetAngle_deg);
         SmartDashboard.putNumber(m_name+"_set_mps", m_driveSetVelocity_mps);
