@@ -40,16 +40,16 @@ public class RobotContainer {
 
   public static Set<ISubsystem> subsystems = new HashSet<>();
 
-  private static final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public static final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   private final ClimberDefaultCommand m_climberDefaultCommand = new ClimberDefaultCommand(m_climberSubsystem);
 
-  private static final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
+  public static final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();
   private final DrivetrainDefaultCommand m_drivetrainDefaultCommand = new DrivetrainDefaultCommand(m_drivetrainSubsystem);
 
-  private static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  public static final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intakeSubsystem);
 
-  private static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
   private Notifier m_telemetry;

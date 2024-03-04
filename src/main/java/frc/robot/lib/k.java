@@ -37,6 +37,9 @@ public final class k {
     public static final int SHOOTER_ROTATE = 10;
     public static final int INTAKE_RIGHT_SPIN = 40;
     public static final int INTAKE_LEFT_SPIN = 41;
+    public static final int CLIMBER_LEFT = 50;
+    public static final int CLIMBER_RIGHT = 51;
+
   }
   public static class CONVERT{
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;
@@ -163,6 +166,11 @@ public final class k {
   }
   public static class INTAKE {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 3.5;
+  }
+  public static class CLIMBER {
+    public static final double LIMIT_UP_ROTATIONS = 10;
+    public static final double LIMIT_DOWN_ROTATIONS = -10;
+    public static final double HOLD_VOLTAGE = 3.2;
   }
 
 }
