@@ -55,10 +55,10 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void setDriveMode_FieldCentric(){
     m_driveMode = EDriveMode.FIELD_CENTRIC;
   }
-  public void setDriverMode_AngleFieldCentric(){
+  public void setDriveMode_AngleFieldCentric(){
     m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
   }
-  public void setDriverMode_RobotCentric(){
+  public void setDriveMode_RobotCentric(){
     m_driveMode = EDriveMode.ROBOT_CENTRIC;
   }
 
