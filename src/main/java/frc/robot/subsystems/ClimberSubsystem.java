@@ -37,15 +37,16 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
     return avg;
   }
   public void setVoltage(double _volts){
-
-
-    if(_volts >= 0){
-     
+    double setVoltage = 0;
+    if(_volts >= 0 && getRotations() > k.CLIMBER.LIMIT_UP_ROTATIONS){
+      setVoltage = 0;
+    } else if(_volts < 0 && getRotations() < k.CLIMBER.LIMIT_DOWN_ROTATIONS){
+      setVoltage = 0;
     }else {
-
+      setVoltage = _volts;
     }
-    leftMotor.setVoltage(_volts);
-    rightMotor.setVoltage(-_volts);
+    leftMotor.setVoltage(setVoltage);
+    rightMotor.setVoltage(-setVoltage);
   }
   @Override
   public void periodic() {
