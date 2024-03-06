@@ -4,51 +4,93 @@
 
 package frc.robot.lib.Vision;
 
+import java.util.List;
+
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonPipelineResult;
+import org.photonvision.targeting.PhotonTrackedTarget;
+
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.lib.GD;
 
 /** Add your docs here. */
 public class OrangePi5Vision {
-    PhotonCamera camera;
-    PhotonCamera camera2;
-    PhotonPipelineResult results;
-    public static double m_yaw;
+    PhotonCamera m_noteCam;
+    PhotonCamera m_aprilCam;
+    PhotonPipelineResult resultsNote;
+    PhotonPipelineResult resultsApril;
+    public static double m_noteYaw;
+    public static double m_aprilYaw;
+    List<PhotonTrackedTarget> m_aprilTargets;
+    PhotonTrackedTarget m_aprilTarget;
     public OrangePi5Vision(){
-       camera = new PhotonCamera("NexiGo");
+       m_noteCam = new PhotonCamera("NexiGo");
+       m_aprilCam = new PhotonCamera("N300");
        
-       //camera = new PhotonCamera("photonvision");
-        setDriverMode(false);
-        setPipelineIndex(0);
+
+       m_aprilCam.setPipelineIndex(0);
+       m_aprilCam.setDriverMode(false);
+
+
+       m_noteCam.setPipelineIndex(0);
+       m_noteCam.setDriverMode(false);
+
     }
-    public PhotonPipelineResult getResults(){
-        return camera.getLatestResult();
+    public PhotonPipelineResult getNoteResults(){
+        return m_noteCam.getLatestResult();
     }
-    public boolean hasTargets(){
-        return getResults().hasTargets();
+    public boolean hasNoteTargets(){
+        return getNoteResults().hasTargets();
     }
+
+    public PhotonPipelineResult getAprilResults(){
+        return m_aprilCam.getLatestResult();
+    }
+    public boolean hasAprilTargets(){
+        return getAprilResults().hasTargets();
+    }
+
     /**
      * 
      * @return The Yaw in degrees with Positive right
      */
     private double getCameraNoteYaw(){
-        results = camera.getLatestResult();
-
-        if(results.hasTargets()){
-            return -results.getBestTarget().getYaw();
+        resultsNote = m_noteCam.getLatestResult();
+        
+        if(resultsNote.hasTargets()){
+            return -resultsNote.getBestTarget().getYaw();
         }else {
             return 180.0;
         }
     }
-    public void setPipelineIndex(int _x){
-        camera.setPipelineIndex(_x);
-    }
-    public void setDriverMode(boolean _mode){
-        camera.setDriverMode(_mode);
+
+    private double getCameraAprilYaw(){
+        resultsApril = m_aprilCam.getLatestResult();
+
+        m_aprilTarget = resultsApril.getBestTarget();
+        if(resultsApril.hasTargets()){
+            if(GD.G_Alliance == Alliance.Blue && m_aprilTarget.getFiducialId() == 11){
+                return -resultsApril.getBestTarget().getYaw();
+            }else if(GD.G_Alliance == Alliance.Blue && m_aprilTarget.getFiducialId() == 16){
+                return -resultsApril.getBestTarget().getYaw();
+            }else {
+                return 0;
+            }
+            
+        }else {
+            return 180.0;
+        }
     }
     public double getNoteYaw(){
-        return m_yaw;
+        return m_noteYaw;
+    }
+    public double getAprilYaw(){
+        return m_aprilYaw;
     }
     public void findNote(){
-        m_yaw = getCameraNoteYaw();
+        m_noteYaw = getCameraNoteYaw();
+    }
+    public void findApril(){
+        m_aprilYaw = getCameraAprilYaw();
     }
 }
