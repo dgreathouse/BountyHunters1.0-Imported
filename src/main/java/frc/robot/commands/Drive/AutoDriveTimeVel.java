@@ -71,11 +71,11 @@ public class AutoDriveTimeVel extends Command {
     } else { // past the ramp up time and not in ramp down time
       m_currentSpeed = m_speed;
     }
-    if(!m_timer.hasElapsed(0.2) && m_enableStartSteering){
-      m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,false);
-    }else {
+    // if(!m_timer.hasElapsed(0) && m_enableStartSteering){
+    //   m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,false);
+    // }else {
       m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,true);
-    }
+    // }
     
 
   }

@@ -22,6 +22,7 @@ public class DrivetrainDefaultCommand extends Command {
   SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(6);
   SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(6);
   double m_vYaw = 0;
+
   /** Creates a new DrivetrainDefaultCommand. */
   public DrivetrainDefaultCommand(DrivetrainSubsystem _drivetrain) {
     m_drive = _drivetrain;
@@ -67,28 +68,32 @@ public class DrivetrainDefaultCommand extends Command {
     setShotData(rightXRaw, rightYRaw);
 
     m_vYaw = RobotContainer.m_vision.getNoteYaw();
-    
+
     if (GD.G_RobotMode != RobotMode.AUTONOMOUS_PERIODIC) {
-      // Call the appropriate drive mode. Selected by the driver controller Options button.
-      
-      // if (m_vYaw < 90 && RobotContainer.s_operatorController.square().getAsBoolean()) {
-      //   m_drive.drivePolarFieldCentric(GD.G_RobotTargetAngle.getTargetAngle().getDegrees(), GD.G_RobotTargetAngle.getTargetAngle().getDegrees(), 3, true);
-        
-      //} else {
-        switch (m_drive.getDriveMode()) {
-          case FIELD_CENTRIC:
-            m_drive.driveFieldCentric(m_speeds);
-            break;
-          case ROBOT_CENTRIC:
-            m_drive.driveRobotCentric(m_speeds);
-            break;
-          case ANGLE_FIELD_CENTRIC:
-            m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond, GD.G_RobotTargetAngle.getTargetAngle(), true, true);
-            break;
-          default:
-            break;
-        }
-     // }
+      // Call the appropriate drive mode. Selected by the driver controller Options
+      // button.
+
+      // if (m_vYaw < 90 &&
+      // RobotContainer.s_operatorController.square().getAsBoolean()) {
+      // m_drive.drivePolarFieldCentric(GD.G_RobotTargetAngle.getTargetAngle().getDegrees(),
+      // GD.G_RobotTargetAngle.getTargetAngle().getDegrees(), 3, true);
+
+      // } else {
+      switch (m_drive.getDriveMode()) {
+        case FIELD_CENTRIC:
+          m_drive.driveFieldCentric(m_speeds);
+          break;
+        case ROBOT_CENTRIC:
+          m_drive.driveRobotCentric(m_speeds);
+          break;
+        case ANGLE_FIELD_CENTRIC:
+          m_drive.driveAngleFieldCentric(m_speeds.vxMetersPerSecond, m_speeds.vyMetersPerSecond,
+              GD.G_RobotTargetAngle.getTargetAngle(), true, true);
+          break;
+        default:
+          break;
+      }
+      // }
     } else {
       m_drive.driveStopMotion();
     }
@@ -112,32 +117,79 @@ public class DrivetrainDefaultCommand extends Command {
 
     // if x,y hyp > deadband reset the shooter angle and speed
     // if (GD.G_RobotTargetAngle.getHyp() > k.DRIVE.TARGET_ANGLE_DEADBAND) {
-    //  // GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
-    //   GD.G_ShooterSpeed = 0.0;
-    //   GD.G_Intake_Speed = 0.0;
+    // // GD.G_ShooterAngle = k.SHOOTER.ROTATE_OFFSET_ANGLE_DEG;
+    // GD.G_ShooterSpeed = 0.0;
+    // GD.G_Intake_Speed = 0.0;
     // }
     // Handle target angle buttons if pressed to set angles and speeds
-    if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
-      if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-      } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(50);
-      } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(-30);
-      } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
-        GD.G_RobotTargetAngle.setTargetAngle(-50);
-      }
-    } else if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()){
-      if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) { 
-        GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
-      } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) { 
-        GD.G_RobotTargetAngle.setTargetAngle(45);
-      } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) { 
-        GD.G_RobotTargetAngle.setTargetAngle(0);
-      } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) { 
-        GD.G_RobotTargetAngle.setTargetAngle(-45);
-      }
+    switch (GD.G_Alliance) {
+      case Blue:
+        if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(15);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(30);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-30);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-8);
+          }
+        } else if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-32);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(0);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-42);
+          }
+        } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-61);
+          } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(59);
+          } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(180);
+          }
+        }
+        break;
+      case Red:
+        if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-15);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(5);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(30);
+          } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-30);
+          }
+        } else if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-15);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(42);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(0);
+          } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(32);
+          }
+        } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
+          if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(-61);
+          } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(59);
+          } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
+            GD.G_RobotTargetAngle.setTargetAngle(180);
+          }
+        }
+        break;
+      default:
+        break;
+
     }
+
   }
 
   // Called once the command ends or is interrupted.
@@ -155,7 +207,8 @@ public class DrivetrainDefaultCommand extends Command {
   public void updateDashboard() {
     SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(X)", m_speeds.vxMetersPerSecond);
     SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(Y)", m_speeds.vyMetersPerSecond);
-    SmartDashboard.putNumber("ChassisSpeeds(Command) Deg/Sec", m_speeds.omegaRadiansPerSecond * k.CONVERT.RADIANS_TO_DEGREES);
+    SmartDashboard.putNumber("ChassisSpeeds(Command) Deg/Sec",
+        m_speeds.omegaRadiansPerSecond * k.CONVERT.RADIANS_TO_DEGREES);
     SmartDashboard.putNumber("vYaw", m_vYaw);
   }
 }

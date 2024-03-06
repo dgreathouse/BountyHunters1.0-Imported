@@ -12,8 +12,8 @@ import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
 public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
-  CANSparkMax leftMotor;
-  CANSparkMax rightMotor;
+  // CANSparkMax leftMotor;
+  // CANSparkMax rightMotor;
 
   public void updateDashboard() {
 
@@ -21,21 +21,21 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
 
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-    leftMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_LEFT, MotorType.kBrushless);
-    rightMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_RIGHT, MotorType.kBrushless);
-    leftMotor.setIdleMode(IdleMode.kBrake);
-    rightMotor.setIdleMode(IdleMode.kBrake);
+    // leftMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_LEFT, MotorType.kBrushless);
+    // rightMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_RIGHT, MotorType.kBrushless);
+    // leftMotor.setIdleMode(IdleMode.kBrake);
+    // rightMotor.setIdleMode(IdleMode.kBrake);
     initialize();
   }
   private void initialize(){
     RobotContainer.subsystems.add(this);
   }
-  public double getRotations(){
-    double leftRotations = leftMotor.getEncoder().getPosition();
-    double rightRotations = rightMotor.getEncoder().getPosition();
-    double avg = (Math.abs(rightRotations) + Math.abs(leftRotations)) /2.0;
-    return avg;
-  }
+  // public double getRotations(){
+    // double leftRotations = leftMotor.getEncoder().getPosition();
+    // double rightRotations = rightMotor.getEncoder().getPosition();
+    // double avg = (Math.abs(rightRotations) + Math.abs(leftRotations)) /2.0;
+    // return avg;
+  // }
   public void setVoltage(double _volts){
 
 
@@ -44,8 +44,8 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
     }else {
 
     }
-    leftMotor.setVoltage(_volts);
-    rightMotor.setVoltage(-_volts);
+    // leftMotor.setVoltage(_volts);
+    // rightMotor.setVoltage(-_volts);
   }
   @Override
   public void periodic() {

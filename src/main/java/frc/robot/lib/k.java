@@ -2,6 +2,8 @@
 
 package frc.robot.lib;
 
+import edu.wpi.first.wpilibj.ADXL345_I2C.Axes;
+import edu.wpi.first.wpilibj.PS5Controller.Axis;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.RobotContainer;
 
@@ -74,6 +76,11 @@ public final class k {
     public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.square();
     public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.cross();
     public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.circle();
+
+    public static Trigger DRIVER_ENABLE_CLIMB_TRIGGERS = RobotContainer.s_driverController.R2();
+    public static Trigger DRIVER_CLIMB_POSITION_1 = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_CLIMB_POSITION_2 = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_CLIMB_POSITION_3 = RobotContainer.s_driverController.triangle();
 
     public static Trigger DRIVER_DRIVE_MODE_FIELDCENTRIC = RobotContainer.s_driverController.povLeft();
     public static Trigger DRIVER_DRIVE_MODE_ROBOTCENTRIC = RobotContainer.s_driverController.povRight();
