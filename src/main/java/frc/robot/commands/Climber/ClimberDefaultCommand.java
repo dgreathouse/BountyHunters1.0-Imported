@@ -26,16 +26,9 @@ public class ClimberDefaultCommand extends Command{
     double upVoltage = RobotContainer.s_operatorController.getR2Axis() * k.ROBOT.BATTERY_MAX_VOLTS;
     double downVoltage = RobotContainer.s_operatorController.getL2Axis() * k.ROBOT.BATTERY_MAX_VOLTS;
     double voltage = upVoltage - downVoltage;
-    // double position = m_climber.getRotations();
-
-    double setVoltage = 0;
-    // if(voltage >= 0 && position > k.CLIMBER.LIMIT_UP_ROTATIONS){
-    //   m_climber.setVoltage(0);
-    // } else if(voltage < 0 && position < k.CLIMBER.LIMIT_DOWN_ROTATIONS){
-    //   m_climber.setVoltage(k.CLIMBER.HOLD_VOLTAGE);
-    // }else {
-    //   m_climber.setVoltage(voltage);
-    // }
+    if(Math.abs(voltage) > 0.5){ // Prevent the climber from creeping up or down.
+      m_climber.setVoltage(voltage);
+    }
     
   }
 

@@ -12,8 +12,8 @@ import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
 public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
-  // CANSparkMax leftMotor;
-  // CANSparkMax rightMotor;
+  CANSparkMax leftMotor;
+  CANSparkMax rightMotor;
 
   public void updateDashboard() {
 
@@ -30,22 +30,23 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
   private void initialize(){
     RobotContainer.subsystems.add(this);
   }
-  // public double getRotations(){
-    // double leftRotations = leftMotor.getEncoder().getPosition();
-    // double rightRotations = rightMotor.getEncoder().getPosition();
-    // double avg = (Math.abs(rightRotations) + Math.abs(leftRotations)) /2.0;
-    // return avg;
-  // }
+  public double getRotations(){
+    double leftRotations = leftMotor.getEncoder().getPosition();
+    double rightRotations = rightMotor.getEncoder().getPosition();
+    double avg = (Math.abs(rightRotations) + Math.abs(leftRotations)) /2.0;
+    return avg;
+  }
   public void setVoltage(double _volts){
-
-
-    if(_volts >= 0){
-     
+    double setVoltage = 0;
+    if(_volts >= 0 && getRotations() > k.CLIMBER.LIMIT_UP_ROTATIONS){
+      setVoltage = 0;
+    } else if(_volts < 0 && getRotations() < k.CLIMBER.LIMIT_DOWN_ROTATIONS){
+      setVoltage = 0;
     }else {
-
+      setVoltage = _volts;
     }
-    // leftMotor.setVoltage(_volts);
-    // rightMotor.setVoltage(-_volts);
+    leftMotor.setVoltage(setVoltage);
+    rightMotor.setVoltage(-setVoltage);
   }
   @Override
   public void periodic() {
