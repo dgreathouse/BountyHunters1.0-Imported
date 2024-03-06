@@ -180,8 +180,8 @@ public class SwerveDrive {
     }
     /* Put smartdashboard calls in separate thread to reduce performance impact */
     public void updateDashboard() {
-    //    for (int i = 0; i < m_moduleCount; ++i) {
-    //        m_modules[i].updateDashboard();
-    //    }
+       for (int i = 0; i < m_moduleCount; ++i) {
+           m_modules[i].updateDashboard();
+       }
     }
 }

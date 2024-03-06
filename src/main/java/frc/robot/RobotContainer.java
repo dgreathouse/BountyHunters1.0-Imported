@@ -79,8 +79,8 @@ public class RobotContainer {
 
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem,m_vision));
-    autoChooser.addOption("Blue Left", new AutoBlueLeft());
+    autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Blue Left", new AutoBlueLeft(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Red Right", new AutoRedRight());
     autoChooser.addOption("Red Left", new AutoRedLeft());
     SmartDashboard.putData("Autonomous Play",autoChooser);

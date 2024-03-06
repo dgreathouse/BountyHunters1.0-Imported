@@ -83,7 +83,7 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
     SmartDashboard.putNumber("Robot Angle", getRobotAngle());
     SmartDashboard.putNumber("TargetYaw", RobotContainer.m_vision.getNoteYaw());
-    //m_robotDrive.updateDashboard();
+    m_robotDrive.updateDashboard();
   }
   @Override
   public void periodic() {

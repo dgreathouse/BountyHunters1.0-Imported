@@ -10,10 +10,12 @@ import org.photonvision.targeting.PhotonPipelineResult;
 /** Add your docs here. */
 public class OrangePi5Vision {
     PhotonCamera camera;
+    PhotonCamera camera2;
     PhotonPipelineResult results;
     public static double m_yaw;
     public OrangePi5Vision(){
        camera = new PhotonCamera("NexiGo");
+       
        //camera = new PhotonCamera("photonvision");
         setDriverMode(false);
         setPipelineIndex(0);

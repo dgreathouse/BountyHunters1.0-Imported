@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
         GD.G_Alliance = Alliance.Red;
       }
     }
+    RobotContainer.m_drivetrainSubsystem.resetYaw();
     GD.G_RobotMode = RobotMode.AUTONOMOUS_INIT;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     
