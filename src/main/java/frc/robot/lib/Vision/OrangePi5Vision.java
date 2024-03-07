@@ -21,17 +21,16 @@ public class OrangePi5Vision {
     PhotonPipelineResult resultsApril;
     public static double m_noteYaw;
     public static double m_aprilYaw;
+    public static double m_aprilArea;
     List<PhotonTrackedTarget> m_aprilTargets;
     PhotonTrackedTarget m_aprilTarget;
     public OrangePi5Vision(){
-       m_noteCam = new PhotonCamera("NexiGo");
-       m_aprilCam = new PhotonCamera("N300");
        
+      m_aprilCam = new PhotonCamera("N300");
+      m_aprilCam.setPipelineIndex(0);
+      m_aprilCam.setDriverMode(false);
 
-       m_aprilCam.setPipelineIndex(0);
-       m_aprilCam.setDriverMode(false);
-
-
+       m_noteCam = new PhotonCamera("NexiGo");
        m_noteCam.setPipelineIndex(0);
        m_noteCam.setDriverMode(false);
 
@@ -72,6 +71,7 @@ public class OrangePi5Vision {
             if(GD.G_Alliance == Alliance.Blue && m_aprilTarget.getFiducialId() == 11){
                 return -resultsApril.getBestTarget().getYaw();
             }else if(GD.G_Alliance == Alliance.Blue && m_aprilTarget.getFiducialId() == 16){
+                m_aprilArea = resultsApril.getBestTarget().getArea();
                 return -resultsApril.getBestTarget().getYaw();
             }else {
                 return 0;
@@ -92,5 +92,8 @@ public class OrangePi5Vision {
     }
     public void findApril(){
         m_aprilYaw = getCameraAprilYaw();
+    }
+    public double getAprilArea(){
+        return m_aprilArea;
     }
 }

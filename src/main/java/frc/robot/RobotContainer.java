@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commandGroups.AutoBlueLeft;
+import frc.robot.commandGroups.AutoBlueRightNoteR;
 import frc.robot.commandGroups.AutoBlueRight;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoRedLeft;
@@ -80,7 +80,7 @@ public class RobotContainer {
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
     autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Blue Left", new AutoBlueLeft(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Blue Left", new AutoBlueRightNoteR(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Red Right", new AutoRedRight());
     autoChooser.addOption("Red Left", new AutoRedLeft());
     SmartDashboard.putData("Autonomous Play",autoChooser);

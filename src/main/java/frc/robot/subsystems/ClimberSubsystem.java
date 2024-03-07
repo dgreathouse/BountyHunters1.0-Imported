@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.ISubsystem;
@@ -21,10 +22,11 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
 
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-    // leftMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_LEFT, MotorType.kBrushless);
-    // rightMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_RIGHT, MotorType.kBrushless);
-    // leftMotor.setIdleMode(IdleMode.kBrake);
-    // rightMotor.setIdleMode(IdleMode.kBrake);
+    leftMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_LEFT, MotorType.kBrushless);
+    rightMotor = new CANSparkMax(k.ROBORIO_CAN_IDS.CLIMBER_RIGHT, MotorType.kBrushless);
+    
+    leftMotor.setIdleMode(IdleMode.kBrake);
+    rightMotor.setIdleMode(IdleMode.kBrake);
     initialize();
   }
   private void initialize(){
@@ -37,16 +39,18 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
     return avg;
   }
   public void setVoltage(double _volts){
-    double setVoltage = 0;
-    if(_volts >= 0 && getRotations() > k.CLIMBER.LIMIT_UP_ROTATIONS){
-      setVoltage = 0;
-    } else if(_volts < 0 && getRotations() < k.CLIMBER.LIMIT_DOWN_ROTATIONS){
-      setVoltage = 0;
-    }else {
-      setVoltage = _volts;
-    }
+     double setVoltage = 0;
+    // if(_volts >= 0 && getRotations() > k.CLIMBER.LIMIT_UP_ROTATIONS){
+    //   setVoltage = 0;
+    // } else if(_volts < 0 && getRotations() < k.CLIMBER.LIMIT_DOWN_ROTATIONS){
+    //   setVoltage = 0;
+    // }else {
+    //   setVoltage = _volts;
+    // }
+    setVoltage = _volts*5;
+    SmartDashboard.putNumber("Climber Volts In Climber", setVoltage);
     leftMotor.setVoltage(setVoltage);
-    rightMotor.setVoltage(-setVoltage);
+    rightMotor.setVoltage(setVoltage);
   }
   @Override
   public void periodic() {

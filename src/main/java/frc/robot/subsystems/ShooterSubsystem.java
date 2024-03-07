@@ -6,6 +6,7 @@ import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
@@ -37,7 +38,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, k.ROBORIO_CAN_IDS.NAME);
     m_leftMotor.setNeutralMode(NeutralModeValue.Brake);
     m_rightMotor.setNeutralMode(NeutralModeValue.Brake);
-
+    SmartDashboard.putNumber("Shot Speed", 0);
     m_leftServo = new Servo(1);
     m_rightServo = new Servo(2);
   }
@@ -64,7 +65,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterSpeed = 0.65;
   }
   public void setShooterOnLow(){
-    GD.G_ShooterSpeed = 0.4;
+    GD.G_ShooterSpeed = SmartDashboard.getNumber("Shot Speed", 0);
   }
   public void setShooterOff(){
     GD.G_ShooterSpeed = 0.0;

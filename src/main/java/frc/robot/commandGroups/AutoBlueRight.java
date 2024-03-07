@@ -39,7 +39,7 @@ public class AutoBlueRight extends SequentialCommandGroup {
     addCommands( // Yay, explanation!
 
       // new ShooterSetShotCommand(_shooter, 0.65, 0), // Fire up the shooter.
-      new AutoDriveTimeVel(_drive,1.5, 0,0, 2, 0.2 , 0.3, false, false) // Drive forward speedy out of the autonamous start area.
+      //new AutoDriveTimeVel(_drive,1.5, 0,0, 2, 0.2 , 0.3, false, false) // Drive forward speedy out of the autonamous start area.
       // new AutoDriveTimeVel(_drive,0, 0,-33, 1, 0 , 0, false, true), // Stop AND set the face the robot towards the speaker.
       // // new InstantCommand(_shooter::setFlipperExtended, _shooter), // FIRE!!!! (Extend the flippers)
       // // new AutoDriveDelayCommand(_drive, 0.8),

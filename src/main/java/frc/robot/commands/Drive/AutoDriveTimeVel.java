@@ -19,6 +19,7 @@ public class AutoDriveTimeVel extends Command {
   double m_rampDownTime_sec;
   double m_currentSpeed = 0;
   boolean m_goToNote;
+  boolean m_goToApril;
   boolean m_enableStartSteering;
   double m_driveAngleAdjusted = m_driveAngle;
   /**
@@ -34,7 +35,7 @@ public class AutoDriveTimeVel extends Command {
    * @param _timeOut_sec The time to stop driving in seconds.
    * @param _rampEnable  Enable the ramp of velocity at the start.
    */
-  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _enableStartSteering) {
+  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _goToApril,  boolean _enableStartSteering) {
     m_drivetrain = _drive;
     m_timeOut_sec = _timeOut_sec;
     m_driveAngle = _driveAngle;
@@ -44,6 +45,7 @@ public class AutoDriveTimeVel extends Command {
     m_rampDownTime_sec = _rampDownTime_sec;
     m_currentSpeed = m_speed;
     m_goToNote = _goToNote;
+    m_goToApril = _goToApril;
     m_enableStartSteering = _enableStartSteering;
     addRequirements(m_drivetrain);
 
@@ -54,6 +56,10 @@ public class AutoDriveTimeVel extends Command {
   public void initialize() {
     m_timer.start();
     m_driveAngleAdjusted = m_driveAngle;
+    if(m_goToApril){
+      if(m_drivetrain.getAprilAreaTime() < 1)
+        m_timeOut_sec = 2.0-m_drivetrain.getAprilAreaTime();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -61,7 +67,7 @@ public class AutoDriveTimeVel extends Command {
   public void execute() {
     m_driveAngleAdjusted = m_driveAngle;
     if (RobotContainer.m_vision.getNoteYaw() < 90 && m_goToNote) {
-      m_driveAngleAdjusted = RobotContainer.m_vision.getNoteYaw() + m_driveAngle;
+      m_driveAngleAdjusted = -RobotContainer.m_vision.getNoteYaw() + m_driveAngle;
     }
     double currentTime_sec = m_timer.get();
     if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
