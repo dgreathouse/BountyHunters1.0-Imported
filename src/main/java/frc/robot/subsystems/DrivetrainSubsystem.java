@@ -77,12 +77,15 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void resetPose(){
     m_robotDrive.resetPose();
   }
-  public double getAprilAreaTime(){
-    double aprilArea = RobotContainer.m_vision.getAprilArea();
-
-    return aprilArea;
+  public double getAprilArea(){
+    return RobotContainer.m_vision.getAprilArea();
   }
-
+  public double getAprilYaw(){
+    return RobotContainer.m_vision.getAprilYaw();
+  }
+  public double getNoteYaw(){
+    return RobotContainer.m_vision.getNoteYaw();
+  }
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());

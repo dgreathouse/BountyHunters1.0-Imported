@@ -5,9 +5,10 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class AutoDriveTimeVel extends Command {
+public class AutoDriveTimeVelToApril extends Command {
   DrivetrainSubsystem m_drivetrain;
   Timer m_timer = new Timer();
   double m_rampTime = 1.0; // Seconds
@@ -18,9 +19,7 @@ public class AutoDriveTimeVel extends Command {
   double m_rampUpTime_sec;
   double m_rampDownTime_sec;
   double m_currentSpeed = 0;
-  boolean m_goToNote;
-  boolean m_goToApril;
-  boolean m_enableStartSteering;
+
   double m_driveAngleAdjusted = m_driveAngle;
   /**
    * * AutoDriveTimeVel
@@ -35,20 +34,15 @@ public class AutoDriveTimeVel extends Command {
    * @param _timeOut_sec The time to stop driving in seconds.
    * @param _rampEnable  Enable the ramp of velocity at the start.
    */
-  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _goToApril,  boolean _enableStartSteering) {
+  public AutoDriveTimeVelToApril(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle) {
     m_drivetrain = _drive;
-    m_timeOut_sec = _timeOut_sec;
     m_driveAngle = _driveAngle;
     m_robotAngle = _robotAngle;
     m_speed = _speed_mps;
-    m_rampUpTime_sec = _rampUpTime_sec;
-    m_rampDownTime_sec = _rampDownTime_sec;
+    m_rampUpTime_sec = 0.1;
+    m_rampDownTime_sec = 0.1;
     m_currentSpeed = m_speed;
-    m_goToNote = _goToNote;
-    m_goToApril = _goToApril;
-    m_enableStartSteering = _enableStartSteering;
     addRequirements(m_drivetrain);
-
   }
 
   // Called when the command is initially scheduled.
@@ -56,9 +50,10 @@ public class AutoDriveTimeVel extends Command {
   public void initialize() {
     m_timer.start();
     m_driveAngleAdjusted = m_driveAngle;
-    if(m_goToApril){
-      if(m_drivetrain.getAprilArea() < 1)
-        m_timeOut_sec = 2.0-m_drivetrain.getAprilArea();
+    m_timeOut_sec = 0.0;
+    if(m_drivetrain.getAprilArea() < 1 && m_drivetrain.getAprilYaw() < 30){
+      m_timeOut_sec = (k.DRIVE.APRIL_AREA_SHOT - m_drivetrain.getAprilArea()) * k.DRIVE.APRIL_AREA_FACTOR;
+      m_driveAngleAdjusted = m_driveAngleAdjusted + (m_drivetrain.getAprilYaw() * k.DRIVE.APRIL_YAW_FACTOR);
     }
   }
 
@@ -66,9 +61,6 @@ public class AutoDriveTimeVel extends Command {
   @Override
   public void execute() {
     m_driveAngleAdjusted = m_driveAngle;
-    if (RobotContainer.m_vision.getNoteYaw() < 90 && m_goToNote) {
-      m_driveAngleAdjusted = -RobotContainer.m_vision.getNoteYaw() + m_driveAngle;
-    }
     double currentTime_sec = m_timer.get();
     if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
       m_currentSpeed = m_speed * (m_timeOut_sec - currentTime_sec) / m_rampDownTime_sec;

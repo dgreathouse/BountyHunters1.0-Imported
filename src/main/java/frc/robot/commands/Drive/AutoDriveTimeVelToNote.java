@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
-public class AutoDriveTimeVel extends Command {
+public class AutoDriveTimeVelToNote extends Command {
   DrivetrainSubsystem m_drivetrain;
   Timer m_timer = new Timer();
   double m_rampTime = 1.0; // Seconds
@@ -35,7 +35,7 @@ public class AutoDriveTimeVel extends Command {
    * @param _timeOut_sec The time to stop driving in seconds.
    * @param _rampEnable  Enable the ramp of velocity at the start.
    */
-  public AutoDriveTimeVel(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _goToApril,  boolean _enableStartSteering) {
+  public AutoDriveTimeVelToNote(DrivetrainSubsystem _drive, double _speed_mps, double _driveAngle, double _robotAngle, double _timeOut_sec, double _rampUpTime_sec, double _rampDownTime_sec, boolean _goToNote, boolean _goToApril,  boolean _enableStartSteering) {
     m_drivetrain = _drive;
     m_timeOut_sec = _timeOut_sec;
     m_driveAngle = _driveAngle;
