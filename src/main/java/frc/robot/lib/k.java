@@ -96,6 +96,7 @@ public final class k {
     public static Trigger OPERATOR_FLIPPER_BACK = RobotContainer.s_operatorController.touchpad();
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
+    public static Trigger OPERATOR_INTAKE_SPIN_REVERSE = RobotContainer.s_operatorController.square();
     public static Trigger OPERATOR_SHOOTER_ON_HIGH = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_ON_LOW = RobotContainer.s_operatorController.povLeft();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();

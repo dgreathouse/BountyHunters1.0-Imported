@@ -98,6 +98,11 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         extendFlippers();
       }
     }
+    if(GD.G_FlipperState == FlipperStates.BACK){
+      RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+    } else {
+      RobotContainer.m_LEDs.setAllianceColor();
+    }
 
   }
 }
