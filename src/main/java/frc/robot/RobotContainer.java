@@ -21,7 +21,9 @@ import frc.robot.commandGroups.AutoRedRight;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
+import frc.robot.commands.Shooter.FlipperSetCommand;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
+import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
@@ -80,7 +82,7 @@ public class RobotContainer {
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
     autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Blue Left", new AutoBlueRightNoteR(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Blue Note R 1", new AutoBlueRightNoteR(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Red Right", new AutoRedRight());
     autoChooser.addOption("Red Left", new AutoRedLeft());
     SmartDashboard.putData("Autonomous Play",autoChooser);
@@ -104,7 +106,9 @@ public class RobotContainer {
     k.OI.OPERATOR_SHOOTER_ON_HIGH.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHigh, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_ON_LOW.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
-
+    k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.SHOOT));
+    k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.PRELOAD));
+    k.OI.OPERATOR_FLIPPER_BACK.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.BACK));
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_AngleFieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_FIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_FieldCentric, m_drivetrainSubsystem));

@@ -22,11 +22,7 @@ public class ShooterDefaultCommand extends Command{
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(k.OI.OPERATOR_SHOOT_NOTE.getAsBoolean() && GD.G_ShooterSpeed > 0.1){
-      GD.G_ShooterIsFlipperRetracted = false;
-    } else {
-      GD.G_ShooterIsFlipperRetracted = true;
-    }
+    
 
   }
 

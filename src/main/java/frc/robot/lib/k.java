@@ -91,7 +91,9 @@ public final class k {
     // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
 
-    public static Trigger OPERATOR_SHOOT_NOTE = RobotContainer.s_operatorController.R1();
+    public static Trigger OPERATOR_FLIPPER_EXTEND = RobotContainer.s_operatorController.R1();
+    public static Trigger OPERATOR_FLIPPER_PRELOAD = RobotContainer.s_operatorController.L1();
+    public static Trigger OPERATOR_FLIPPER_BACK = RobotContainer.s_operatorController.touchpad();
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
     public static Trigger OPERATOR_SHOOTER_ON_HIGH = RobotContainer.s_operatorController.povUp();
@@ -132,10 +134,10 @@ public final class k {
     public static final double PID_Kv = k.ROBOT.BATTERY_MAX_VOLTS/k.DRIVE.MAX_VELOCITY_MeterPerSec;
     public static final double PID_Ks = 0.0;
     public static final double TARGET_ANGLE_DEADBAND = 0.8;
-    public static final double APRIL_AREA_FACTOR = 1.0;
-    public static final double APRIL_AREA_SHOT = 0.65;
-    public static final double APRIL_YAW_FACTOR = 1.0;
-    public static final double NOTE_YAW_FACTOR = 1.0;
+    public static final double APRIL_AREA_FACTOR = 3.0;
+    public static final double APRIL_AREA_SHOT = 0.61;
+    public static final double APRIL_YAW_FACTOR = 1.50;
+    public static final double NOTE_YAW_FACTOR = 2;
   }
   public static class STEER {
     private static final double MOTOR_PINION_TEETH = 8.0;
@@ -179,8 +181,8 @@ public final class k {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 3.5;
   }
   public static class CLIMBER {
-    public static final double LIMIT_UP_ROTATIONS = 10;
-    public static final double LIMIT_DOWN_ROTATIONS = -10;
+    public static final double LIMIT_UP_ROTATIONS = -60;
+    public static final double LIMIT_DOWN_ROTATIONS = 100;
     public static final double HOLD_VOLTAGE = 3.2;
   }
 

@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
@@ -62,7 +63,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterIsFlipperRetracted = false;
   }
   public void setShooterOnHigh(){
-    GD.G_ShooterSpeed = 0.65;
+    GD.G_ShooterSpeed = 0.7;
   }
   public void setShooterOnLow(){
     GD.G_ShooterSpeed = SmartDashboard.getNumber("Shot Speed", 0);
@@ -79,17 +80,21 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   private void extendFlippers() {
     m_leftServo.set(0.2);
     m_rightServo.set(0.69);
-
   }
-
+  private void preloadFlippers() {
+    m_leftServo.set(0.41);
+    m_rightServo.set(0.50);
+  }
   @Override
   public void periodic() {
     spin(GD.G_ShooterSpeed);
 
-    if (GD.G_ShooterIsFlipperRetracted) {
+    if(GD.G_FlipperState == FlipperStates.BACK){
       retractFlippers();
-    } else {
-      if (GD.G_ShooterSpeed > 0.1) {
+    }else if(GD.G_FlipperState == FlipperStates.PRELOAD){
+      preloadFlippers();
+    }else if(GD.G_FlipperState == FlipperStates.SHOOT){
+      if(GD.G_ShooterSpeed > 0.05){
         extendFlippers();
       }
     }
