@@ -12,6 +12,7 @@ import frc.robot.RobotContainer;
 import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
+import frc.robot.lib.NoteState;
 import frc.robot.lib.k;
 
 public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
@@ -61,6 +62,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   public void setFlipperExtended() {
     GD.G_FlipperState = FlipperStates.SHOOT;
+    GD.G_NoteState = NoteState.OUT;
   }
   public void setShooterOnHigh(){
     GD.G_ShooterSpeed = 0.7;

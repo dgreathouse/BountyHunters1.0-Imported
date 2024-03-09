@@ -5,11 +5,13 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
 import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
+import frc.robot.lib.NoteState;
 import frc.robot.lib.k;
 
 
@@ -18,7 +20,11 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   VoltageOut leftVoltageOut = new VoltageOut(0);
 
   public void updateDashboard() {
-
+    if(GD.G_NoteState == NoteState.IN){
+      SmartDashboard.putBoolean("Note State", true);
+    }else {
+      SmartDashboard.putBoolean("Note State", false);
+    }
   }
 
   /** Creates a new IntakeSubsystem. */
@@ -31,6 +37,9 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_LEFT_SPIN);
   }
   public void spinOn(){
+    if(m_leftMotor.getStatorCurrent().getValueAsDouble() > 10){
+      GD.G_NoteState = NoteState.IN;
+    }
     GD.G_Intake_Speed = k.INTAKE.SPIN_SPEED_DEFAULT_VOLT;
   }
   public void spinOff(){
