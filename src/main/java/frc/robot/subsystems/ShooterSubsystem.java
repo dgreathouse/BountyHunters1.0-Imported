@@ -56,11 +56,11 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
 
   public void setFlippersRetracted() {
-    GD.G_ShooterIsFlipperRetracted = true;
+    GD.G_FlipperState = FlipperStates.BACK;
   }
 
   public void setFlipperExtended() {
-    GD.G_ShooterIsFlipperRetracted = false;
+    GD.G_FlipperState = FlipperStates.SHOOT;
   }
   public void setShooterOnHigh(){
     GD.G_ShooterSpeed = 0.7;
@@ -99,9 +99,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       }
     }
     if(GD.G_FlipperState == FlipperStates.BACK){
-      RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+     // RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
     } else {
-      RobotContainer.m_LEDs.setAllianceColor();
+     // RobotContainer.m_LEDs.setAllianceColor();
     }
 
   }

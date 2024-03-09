@@ -136,7 +136,7 @@ public final class k {
     public static final double PID_Ks = 0.0;
     public static final double TARGET_ANGLE_DEADBAND = 0.8;
     public static final double APRIL_AREA_FACTOR = 3.0;
-    public static final double APRIL_AREA_SHOT = 0.61;
+    public static final double APRIL_AREA_SHOT = 1.0;
     public static final double APRIL_YAW_FACTOR = 1.50;
     public static final double NOTE_YAW_FACTOR = 2;
   }
@@ -179,7 +179,7 @@ public final class k {
 
   }
   public static class INTAKE {
-    public static final double SPIN_SPEED_DEFAULT_VOLT = 3.5;
+    public static final double SPIN_SPEED_DEFAULT_VOLT = 4.5;
   }
   public static class CLIMBER {
     public static final double LIMIT_UP_ROTATIONS = -60;

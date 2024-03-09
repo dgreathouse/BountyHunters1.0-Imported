@@ -77,28 +77,28 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void resetPose(){
     m_robotDrive.resetPose();
   }
-  public double getAprilArea(){
-    return RobotContainer.m_vision.getAprilArea();
-  }
-  public double getAprilYaw(){
-    return RobotContainer.m_vision.getAprilYaw();
-  }
-  public double getNoteYaw(){
-    return RobotContainer.m_vision.getNoteYaw();
-  }
+  // public double getAprilArea(){
+  // --    return RobotContainer.m_vision.getAprilArea();
+  // }
+  // public double getAprilYaw(){
+  // --    return RobotContainer.m_vision.getAprilYaw();
+  // }
+  // public double getNoteYaw(){
+  // --    return RobotContainer.m_vision.getNoteYaw();
+  // }
   public void updateDashboard(){
     SmartDashboard.putString(k.DRIVE.T_DRIVER_MODE, m_driveMode.toString());
     SmartDashboard.putString("Robot Target Angle", GD.G_RobotTargetAngle.getTargetAngle().toString());
     SmartDashboard.putNumber("Robot Angle", getRobotAngle());
-    SmartDashboard.putNumber("NoteYaw", RobotContainer.m_vision.getNoteYaw());
-    SmartDashboard.putNumber("AprilYaw", RobotContainer.m_vision.getAprilYaw());
+    // -- SmartDashboard.putNumber("NoteYaw", RobotContainer.m_vision.getNoteYaw());
+   // --  SmartDashboard.putNumber("AprilYaw", RobotContainer.m_vision.getAprilYaw());
     m_robotDrive.updateDashboard();
   }
   @Override
   public void periodic() {
 
-    RobotContainer.m_vision.findNote();
-    RobotContainer.m_vision.findApril();
+    // -- RobotContainer.m_vision.findNote();
+    // -- RobotContainer.m_vision.findApril();
 
   }
 }

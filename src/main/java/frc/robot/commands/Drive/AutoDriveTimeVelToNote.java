@@ -61,19 +61,19 @@ public class AutoDriveTimeVelToNote extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_drivetrain.getNoteYaw() < 180){
-      m_driveAngleAdjusted = m_driveAngle - (m_drivetrain.getNoteYaw() * k.DRIVE.APRIL_YAW_FACTOR);
-    }
-    double currentTime_sec = m_timer.get();
-    if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
-      m_currentSpeed = m_speed * (m_timeOut_sec - currentTime_sec) / m_rampDownTime_sec;
-    } else if (currentTime_sec < m_rampUpTime_sec) {// In the ramp up time
-      m_currentSpeed = m_speed * currentTime_sec / m_rampUpTime_sec;
-    } else { // past the ramp up time and not in ramp down time
-      m_currentSpeed = m_speed;
-    }
+    // if(m_drivetrain.getNoteYaw() < 180){
+    //   m_driveAngleAdjusted = m_driveAngle - (m_drivetrain.getNoteYaw() * k.DRIVE.APRIL_YAW_FACTOR);
+    // }
+    // double currentTime_sec = m_timer.get();
+    // if (currentTime_sec < m_timeOut_sec && currentTime_sec > m_timeOut_sec - m_rampDownTime_sec) { // In the ramp down time
+    //   m_currentSpeed = m_speed * (m_timeOut_sec - currentTime_sec) / m_rampDownTime_sec;
+    // } else if (currentTime_sec < m_rampUpTime_sec) {// In the ramp up time
+    //   m_currentSpeed = m_speed * currentTime_sec / m_rampUpTime_sec;
+    // } else { // past the ramp up time and not in ramp down time
+    //   m_currentSpeed = m_speed;
+    // }
 
-    m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,true);
+    // m_drivetrain.drivePolarFieldCentric(m_driveAngleAdjusted, m_robotAngle, m_currentSpeed,true,true);
 
     
 

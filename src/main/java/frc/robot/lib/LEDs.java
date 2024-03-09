@@ -27,6 +27,7 @@ public class LEDs {
         m_ledBuffer = new AddressableLEDBuffer(m_numLEDs);
         m_led.setLength(m_ledBuffer.getLength());
         m_led.setData(m_ledBuffer);
+        setAllianceColor();
         m_led.start();
     }
     /** Set all the LEDs to the requested RGB values
@@ -44,6 +45,7 @@ public class LEDs {
                 m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
             }
             m_led.setData(m_ledBuffer);
+            m_led.start();
         }
         
     }

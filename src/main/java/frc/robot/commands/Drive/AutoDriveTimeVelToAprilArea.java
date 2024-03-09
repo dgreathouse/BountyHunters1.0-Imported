@@ -70,10 +70,10 @@ public class AutoDriveTimeVelToAprilArea extends Command {
     // }
     
     
-    if(m_drivetrain.getAprilArea() < 5){
-      m_areaError = (k.DRIVE.APRIL_AREA_SHOT - m_drivetrain.getAprilArea()) * 3;
-    }
-    m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_robotAngle, m_areaError,true,true);
+    // if(m_drivetrain.getAprilArea() < 5){
+    //   m_areaError = (k.DRIVE.APRIL_AREA_SHOT - m_drivetrain.getAprilArea()) * 3;
+    // }
+    // m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_robotAngle, m_areaError,true,true);
   }
 
   // Called once the command ends or is interrupted.

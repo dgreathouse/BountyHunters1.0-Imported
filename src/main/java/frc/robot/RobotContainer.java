@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commandGroups.AutoBlueRightNoteR;
-import frc.robot.commandGroups.AutoBlueRight;
+import frc.robot.commandGroups.AutoBlueRightShoot1;
+import frc.robot.commandGroups.AutoBlueRightShootPark;
 import frc.robot.commandGroups.AutoDoNothing;
-import frc.robot.commandGroups.AutoRedLeft;
-import frc.robot.commandGroups.AutoRedRight;
+import frc.robot.commandGroups.AutoRedLeftShootPark;
+import frc.robot.commandGroups.AutoRedLeftShoot1;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
@@ -56,13 +56,13 @@ public class RobotContainer {
   private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
   private Notifier m_telemetry;
-  public static final OrangePi5Vision m_vision = new OrangePi5Vision();
+  //public static final OrangePi5Vision m_vision = new OrangePi5Vision();
   
   public static final CommandPS5Controller s_driverController = new CommandPS5Controller(k.OI.DRIVER_CONTROLLER_PORT);
   public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(k.OI.OPERATOR_CONTROLLER_PORT);
 
   SendableChooser<Command> autoChooser = new SendableChooser<>();
-  public static final LEDs m_LEDs = new LEDs(0);
+ // public static final LEDs m_LEDs = new LEDs(3);
   private void updateDashboard(){
     SmartDashboard.putString("RobotMode", GD.G_RobotMode.toString());
     Iterator<ISubsystem> it = subsystems.iterator();
@@ -82,10 +82,10 @@ public class RobotContainer {
 
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
-    autoChooser.addOption("Blue Right", new AutoBlueRight(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Blue Note R 1", new AutoBlueRightNoteR(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Red Right", new AutoRedRight());
-    autoChooser.addOption("Red Left", new AutoRedLeft());
+    autoChooser.addOption("Blue Right Shoot Park", new AutoBlueRightShootPark(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Blue Right Shoot 1", new AutoBlueRightShoot1(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Red Left Shoot 1", new AutoRedLeftShoot1(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Red Left Shoot Park", new AutoRedLeftShootPark(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.

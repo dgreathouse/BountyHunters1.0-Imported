@@ -76,11 +76,11 @@ public class AutoDriveTimeVelToAprilYaw extends Command {
     //   m_currentSpeed = m_speed;
     // }
     
-    m_areaError = (k.DRIVE.APRIL_AREA_SHOT - m_drivetrain.getAprilArea()) * 1.0;
-    if(m_drivetrain.getAprilYaw() < 90){
-      m_yawError = -m_drivetrain.getAprilYaw() * 0.025;
-    }
-    m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_robotAngle, m_yawError,true,true);
+    // m_areaError = (k.DRIVE.APRIL_AREA_SHOT - m_drivetrain.getAprilArea()) * 1.0;
+    // if(m_drivetrain.getAprilYaw() < 90){
+    //   m_yawError = -m_drivetrain.getAprilYaw() * 0.025;
+    // }
+    // m_drivetrain.drivePolarFieldCentric(m_driveAngle, m_robotAngle, m_yawError,true,true);
   }
 
   // Called once the command ends or is interrupted.

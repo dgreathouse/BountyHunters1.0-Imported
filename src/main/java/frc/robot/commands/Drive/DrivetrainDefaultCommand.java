@@ -21,7 +21,7 @@ public class DrivetrainDefaultCommand extends Command {
   SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(6);
   SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(6);
   SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(6);
-  double m_vYaw = 0;
+ // --  double m_vYaw = 0;
 
   /** Creates a new DrivetrainDefaultCommand. */
   public DrivetrainDefaultCommand(DrivetrainSubsystem _drivetrain) {
@@ -67,7 +67,7 @@ public class DrivetrainDefaultCommand extends Command {
     // speed.
     setShotData(rightXRaw, rightYRaw);
 
-    m_vYaw = RobotContainer.m_vision.getNoteYaw();
+    // -- m_vYaw = RobotContainer.m_vision.getNoteYaw();
 
     if (GD.G_RobotMode != RobotMode.AUTONOMOUS_PERIODIC) {
       // Call the appropriate drive mode. Selected by the driver controller Options
@@ -138,11 +138,11 @@ public class DrivetrainDefaultCommand extends Command {
           if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
           } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-32);
+            GD.G_RobotTargetAngle.setTargetAngle(-33);
           } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(0);
           } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-42);
+            GD.G_RobotTargetAngle.setTargetAngle(-54);
           }
         } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
           if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
@@ -159,7 +159,7 @@ public class DrivetrainDefaultCommand extends Command {
           if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(-15);
           } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(5);
+            GD.G_RobotTargetAngle.setTargetAngle(8);
           } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(30);
           } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
@@ -169,11 +169,11 @@ public class DrivetrainDefaultCommand extends Command {
           if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(-15);
           } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(42);
+            GD.G_RobotTargetAngle.setTargetAngle(54);
           } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
             GD.G_RobotTargetAngle.setTargetAngle(0);
           } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(32);
+            GD.G_RobotTargetAngle.setTargetAngle(33);
           }
         } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
           if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
@@ -209,6 +209,6 @@ public class DrivetrainDefaultCommand extends Command {
     SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(Y)", m_speeds.vyMetersPerSecond);
     SmartDashboard.putNumber("ChassisSpeeds(Command) Deg/Sec",
         m_speeds.omegaRadiansPerSecond * k.CONVERT.RADIANS_TO_DEGREES);
-    SmartDashboard.putNumber("vYaw", m_vYaw);
+    // -- SmartDashboard.putNumber("vYaw", m_vYaw);
   }
 }
