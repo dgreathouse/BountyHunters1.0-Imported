@@ -68,7 +68,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterSpeed = 0.7;
   }
   public void setShooterOnLow(){
-    GD.G_ShooterSpeed = SmartDashboard.getNumber("Shot Speed", 0);
+    GD.G_ShooterSpeed = 0.4;
   }
   public void setShooterOff(){
     GD.G_ShooterSpeed = 0.0;

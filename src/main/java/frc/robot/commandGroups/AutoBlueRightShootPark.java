@@ -42,16 +42,13 @@ public class AutoBlueRightShootPark extends SequentialCommandGroup {
      */
     addCommands( // Yay, explanation!
     new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
-    new AutoDriveTimeVel(_drive,2, 0,0, 2.1, 0.2 , 0.3, false),
+    new AutoDriveTimeVel(_drive,2, 0,0, 1.9, 0.2 , 0.3, false),
     
-    new AutoDriveRotateCommand(_drive, -48, 1),
+    new AutoDriveRotateCommand(_drive, -40, 1),
     new InstantCommand(_shooter::setFlipperExtended, _shooter),
     new AutoDriveDelayCommand(_drive, 1), 
-    new AutoDriveRotateCommand(_drive, -17.5, 1.0),
-    new InstantCommand(_intake::spinOn, _intake),
     new InstantCommand(_shooter::setFlippersRetracted, _shooter),
-    new AutoDriveDelayCommand(_drive, 1.2),
-    new AutoDriveTimeVel(_drive, 1, -90, 0, 3, 0.2, 0.2, false),
+    new AutoDriveTimeVel(_drive, 1, -90, 0, 2, 0.2, 0.2, false),
     new InstantCommand(_shooter::setFlippersRetracted, _shooter),
     new ShooterSetShotCommand(_shooter, 0, 0),
     new InstantCommand(_intake::spinOff, _intake),

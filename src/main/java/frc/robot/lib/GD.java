@@ -19,4 +19,5 @@ public class GD {
     public static Alliance G_Alliance = Alliance.Blue;
     public static FlipperStates G_FlipperState = FlipperStates.BACK;
     public static NoteState G_NoteState = NoteState.OUT;
+    public static SpeedState G_SpeedState = SpeedState.HIGH;
 }

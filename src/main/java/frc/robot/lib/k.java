@@ -86,6 +86,9 @@ public final class k {
     public static Trigger DRIVER_DRIVE_MODE_ROBOTCENTRIC = RobotContainer.s_driverController.povRight();
     public static Trigger DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC = RobotContainer.s_driverController.povDown();
 
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.triangle();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.cross();
+
     public static Trigger DRIVER_RESET_YAW = RobotContainer.s_driverController.create();
     
     // Operator controller
