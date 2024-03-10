@@ -22,19 +22,19 @@ public class AutoRedLeftShoot1 extends SequentialCommandGroup {
     // addCommands(new AutoDriveTimeVel(), new AutoRotateCommand());
     addCommands(
       new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
-      new AutoDriveTimeVel(_drive,2, 0,0, 1.9, 0.2 , 0.3, false),
+      new AutoDriveTimeVel(_drive,2, 0,0, 1.7, 0.2 , 0.3, false),
       
-      new AutoDriveRotateCommand(_drive, 40, 1),
+      new AutoDriveRotateCommand(_drive, 42, 1.5),
       new InstantCommand(_shooter::setFlipperExtended, _shooter),
       new AutoDriveDelayCommand(_drive, 1), 
-      new AutoDriveRotateCommand(_drive, 16.5, 1.0),
+      new AutoDriveRotateCommand(_drive, 16, 1.0),
       new InstantCommand(_intake::spinOn, _intake),
       new InstantCommand(_shooter::setFlippersRetracted, _shooter),
       // new AutoDriveTimeVel(_drive,3, 17.5,17.5, 1, 0.2 , 0.0, false),
       // new AutoDriveTimeVelToNote(_drive, 2,17.5, 17.5, 2, 0, 0.2),
-      new AutoDriveTimeVel(_drive, 2, 16.5, 16.5, 2.1, 0, 0.2, false),
+      new AutoDriveTimeVel(_drive, 2, 16, 16, 2.2, 0, 0.2, false),
       new AutoDriveDelayCommand(_drive, 0.8),
-      new AutoDriveTimeVel(_drive,2, -163.5,40, 2.1, 0.2 , 0.2, false),
+      new AutoDriveTimeVel(_drive,2, -164, 42, 2.3, 0.2 , 0.2, false),
       new AutoDriveDelayCommand(_drive, 0.8),
       // new AutoDriveTimeVelToAprilYaw(_drive, 3, -165, 38),
       // new AutoDriveTimeVelToAprilArea(_drive, 3, -30, 38),

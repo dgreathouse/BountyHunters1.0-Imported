@@ -185,7 +185,7 @@ public final class k {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 4.5;
   }
   public static class CLIMBER {
-    public static final double LIMIT_UP_ROTATIONS = -60;
+    public static final double LIMIT_UP_ROTATIONS = -68;
     public static final double LIMIT_DOWN_ROTATIONS = 100;
     public static final double HOLD_VOLTAGE = 3.2;
   }
