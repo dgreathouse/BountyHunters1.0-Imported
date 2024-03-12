@@ -2,6 +2,7 @@
 
 package frc.robot.lib;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 /** Global data file is available to all modules. Calibrations go in k.java.
@@ -20,4 +21,5 @@ public class GD {
     public static FlipperStates G_FlipperState = FlipperStates.BACK;
     public static NoteState G_NoteState = NoteState.OUT;
     public static SpeedState G_SpeedState = SpeedState.HIGH;
+    public static Pose2d G_RobotPose = new Pose2d();
 }

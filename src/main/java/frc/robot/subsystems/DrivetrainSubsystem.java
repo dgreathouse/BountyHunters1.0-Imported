@@ -2,6 +2,7 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
@@ -76,6 +77,9 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   }
   public void resetPose(){
     m_robotDrive.resetPose();
+  }
+  public void setPose(Pose2d _pose){
+    GD.G_RobotPose = _pose;
   }
   // public double getAprilArea(){
   // --    return RobotContainer.m_vision.getAprilArea();

@@ -2,6 +2,8 @@
 
 package frc.robot.commandGroups;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drive.AutoDriveDelayCommand;
@@ -23,6 +25,7 @@ public class AutoBlueRightShoot1 extends SequentialCommandGroup {
 
 
     addCommands(
+      new InstantCommand(() -> _drive.setPose(new Pose2d(0, 0, new Rotation2d(Math.toRadians(60)))), _drive),
       new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
       new AutoDriveTimeVel(_drive,2, 0,0, 1.7
       , 0.2 , 0.3, false),

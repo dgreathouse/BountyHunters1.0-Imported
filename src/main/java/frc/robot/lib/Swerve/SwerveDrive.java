@@ -15,6 +15,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.lib.GD;
 import frc.robot.lib.k;
 
 public class SwerveDrive {
@@ -56,7 +57,7 @@ public class SwerveDrive {
                 // Assume Pigeon2 is flat-and-level so latency compensation can be performed
                 double yawDegrees = m_pigeon2.getYaw().getValueAsDouble();//BaseStatusSignal.getLatencyCompensatedValue(m_pigeon2.getYaw(), m_pigeon2.getAngularVelocityZDevice());
 
-                m_odometry.update(Rotation2d.fromDegrees(yawDegrees), m_modulePositions);
+                GD.G_RobotPose = m_odometry.update(Rotation2d.fromDegrees(yawDegrees), m_modulePositions);
                 m_field.setRobotPose(m_odometry.getPoseMeters());
                 try{
                     Thread.sleep(5);
