@@ -65,10 +65,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_NoteState = NoteState.OUT;
   }
   public void setShooterOnHigh(){
-    GD.G_ShooterSpeed = 0.7;
+    GD.G_ShooterSpeed = 0.68;
   }
   public void setShooterOnLow(){
-    GD.G_ShooterSpeed = 0.4;
+    GD.G_ShooterSpeed = 0.35;
   }
   public void setShooterOff(){
     GD.G_ShooterSpeed = 0.0;
