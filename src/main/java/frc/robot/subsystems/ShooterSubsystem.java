@@ -62,7 +62,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   public void setFlipperExtended() {
     GD.G_FlipperState = FlipperStates.SHOOT;
-    GD.G_NoteState = NoteState.OUT;
+    
   }
   public void setShooterOnHigh(){
     GD.G_ShooterSpeed = 0.68;
@@ -98,13 +98,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     }else if(GD.G_FlipperState == FlipperStates.SHOOT){
       if(GD.G_ShooterSpeed > 0.05){
         extendFlippers();
+        GD.G_NoteState = NoteState.OUT;
       }
     }
-    if(GD.G_FlipperState == FlipperStates.BACK){
-     // RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
-    } else {
-     // RobotContainer.m_LEDs.setAllianceColor();
-    }
+    
 
   }
 }

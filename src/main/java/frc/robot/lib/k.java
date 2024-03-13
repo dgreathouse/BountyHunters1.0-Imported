@@ -116,7 +116,7 @@ public final class k {
   }
   public static class DRIVE {
     public static final String T_DRIVER_MODE = "DriveMode";
-    private static final double MOTOR_PINION_TEETH = 10.0;
+    private static final double MOTOR_PINION_TEETH = 12.0;
     private static final double GEAR_1_TEETH = 34.0;
     private static final double GEAR_2_DRIVE_TEETH = 26.0;
     private static final double GEAR_2_DRIVEN_TEETH = 20.0;
@@ -127,11 +127,14 @@ public final class k {
     public static final double WHEEL_DIAMETER_m = .10287;  // .10287
     private static final double WHEEL_CIRCUMFERENCE_m = Math.PI * WHEEL_DIAMETER_m;
     public static final double WHEEL_MotRotPerMeter = GEAR_RATIO / WHEEL_CIRCUMFERENCE_m;
-    private static final double MOTOR_MAX_VELOCITY_RotPerMin = 6380.0;
+    private static final double MOTOR_MAX_VELOCITY_RotPerMin = 6080.0;
     private static final double MOTOR_MAX_VELOCITY_RotPerSec = MOTOR_MAX_VELOCITY_RotPerMin / 60.0;
     private static final double WHEEL_MAX_VELOCITY_RotPerSec = MOTOR_MAX_VELOCITY_RotPerSec / GEAR_RATIO;
-    private static final double MOTOR_PEAK_EFFICIENCY_percent = 91.0;
-    public static final double MAX_VELOCITY_MeterPerSec = WHEEL_CIRCUMFERENCE_m * WHEEL_MAX_VELOCITY_RotPerSec * MOTOR_PEAK_EFFICIENCY_percent / 100.0;
+    private static final double MOTOR_PEAK_EFFICIENCY_percent = 87.0;
+    public static final double MAX_VELOCITY_MeterPerSec = WHEEL_CIRCUMFERENCE_m * WHEEL_MAX_VELOCITY_RotPerSec * MOTOR_PEAK_EFFICIENCY_percent / 100.0; 
+    // 10T = 3.63 Mps = 11.9 FtPSec, 
+    // 11T 3.994   Mps = 13.1 FtPSec, 
+    // 12T 4.35 Mps = 14.27 FtPSec, 91% Eff
     public static final double MAX_ANGULAR_VELOCITY_RadianPerSec = MAX_VELOCITY_MeterPerSec * (1/DRIVEBASE.WHEEL_BASE_MeterPerRad);
     public static final double PID_Kp = 1.5;
     public static final double PID_Ki = 0.5;
@@ -183,6 +186,9 @@ public final class k {
   }
   public static class INTAKE {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 4.5;
+    public static final double NOTE_CURRENT = 10;
+    public static final double INTAKE_RUNNING_CURRENT = 2;
+
   }
   public static class CLIMBER {
     public static final double LIMIT_UP_ROTATIONS = -68;

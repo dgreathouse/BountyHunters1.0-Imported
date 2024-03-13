@@ -18,7 +18,7 @@ import frc.robot.lib.k;
 public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;
   VoltageOut leftVoltageOut = new VoltageOut(0);
-
+  double m_previousCurrent = 0;
   public void updateDashboard() {
     if(GD.G_NoteState == NoteState.IN){
       SmartDashboard.putBoolean("Note State", true);
@@ -37,9 +37,10 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_LEFT_SPIN);
   }
   public void spinOn(){
-    if(m_leftMotor.getStatorCurrent().getValueAsDouble() > 10){
-      GD.G_NoteState = NoteState.IN;
-    }
+    double statorCurrent = m_leftMotor.getStatorCurrent().getValueAsDouble();
+
+
+
     GD.G_Intake_Speed = k.INTAKE.SPIN_SPEED_DEFAULT_VOLT;
   }
   public void spinOff(){
@@ -61,5 +62,22 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   @Override
   public void periodic() {
     spin(GD.G_Intake_Speed);
+    double statorCurrent = m_leftMotor.getStatorCurrent().getValueAsDouble();
+
+    if(GD.G_Intake_Speed > 0){
+      if(statorCurrent > k.INTAKE.NOTE_CURRENT){
+        m_previousCurrent = statorCurrent;
+      }else if(statorCurrent < k.INTAKE.NOTE_CURRENT && m_previousCurrent > k.INTAKE.NOTE_CURRENT){
+        m_previousCurrent = 0;
+        GD.G_NoteState = NoteState.IN;
+      }else {
+        GD.G_NoteState = NoteState.OUT;
+      }
+    }
+    if(GD.G_NoteState == NoteState.IN){
+      RobotContainer.m_LEDs.setBlinky(0.25, 0, 100, 0);
+    }else {
+      RobotContainer.m_LEDs.setAllianceColor();
+    }
   }
 }

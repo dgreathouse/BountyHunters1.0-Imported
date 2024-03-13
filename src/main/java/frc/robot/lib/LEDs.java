@@ -5,18 +5,20 @@ package frc.robot.lib;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 
 public class LEDs {
     private AddressableLED m_led;
     private AddressableLEDBuffer m_ledBuffer;
+    private Timer m_blinkTimer;
     /** Number of LEDs in the strip. Change this number to match the number of LEDs */
     private int m_numLEDs = 50;
     private int m_red = 0;
     private int m_green = 0;
     private int m_blue = 0;
-    
+    private boolean m_blinkState = true;
 
     /** This is a constructor for the class. It has the same name as the class and has no return type.
      * 
@@ -29,6 +31,8 @@ public class LEDs {
         m_led.setData(m_ledBuffer);
         setAllianceColor();
         m_led.start();
+        m_blinkTimer = new Timer();
+        m_blinkTimer.start();
     }
     /** Set all the LEDs to the requested RGB values
      * 
@@ -85,5 +89,17 @@ public class LEDs {
         }else {
             setAllianceColor();
         }
+    }
+    public void setBlinky(double _time, int _r, int _g, int _b){
+        if(m_blinkTimer.hasElapsed(_time)){
+            m_blinkState = !m_blinkState;
+            m_blinkTimer.restart();
+        }
+        if(m_blinkState){
+            setRGBColor(_r, _g, _b);    
+        }else {
+            setRGBColor(0, 0, 0);
+        }
+        
     }
 }

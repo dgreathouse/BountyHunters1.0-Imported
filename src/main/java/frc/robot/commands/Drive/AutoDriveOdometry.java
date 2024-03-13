@@ -19,7 +19,6 @@ public class AutoDriveOdometry extends Command {
   PIDController m_drivePID;
   double m_currentSpeed = 0;
   double m_driveSpeed;
-  double m_initialDistance;
   boolean m_isFinished = false;
   Timer m_timer = new Timer();
   double m_rampUpTime = 0.25;
@@ -42,7 +41,6 @@ public class AutoDriveOdometry extends Command {
   public void initialize() {
     // The drive PID based on distance to target and output of MPS.
     m_drivePID = new PIDController(0.0, 0.0, 0.0);
-    m_initialDistance = m_poseDesired.getTranslation().getDistance(GD.G_RobotPose.getTranslation());
     m_timer.start();
   }
 
@@ -51,22 +49,26 @@ public class AutoDriveOdometry extends Command {
   public void execute() {
     Pose2d trajectory = m_poseDesired.relativeTo(GD.G_RobotPose);               // Get a Trajectory to the desired Pose relative to the current pose.
     
-    double robotAngle = trajectory.getRotation().getDegrees();                  // The angle of the robot from the desired pose angle
+    double robotAngle = m_poseDesired.getRotation().getDegrees();               // The angle of the robot from the desired pose angle
     double targetAngle = trajectory.getTranslation().getAngle().getDegrees();   // The drive angle to the new pose.
     double targetDistance = m_poseDesired.getTranslation().getDistance(GD.G_RobotPose.getTranslation());   // The drive distance to the new pose.
 
-  
-    double speed = m_drivePID.calculate(targetDistance, 0);
-    double currentTime_sec = m_timer.get();
-    if(currentTime_sec < m_rampUpTime){
-      speed = speed * currentTime_sec / m_rampUpTime;
-    }
-    speed = MathUtil.clamp(speed, -m_driveSpeed, m_driveSpeed);
-    m_drive.drivePolarFieldCentric(targetAngle, robotAngle, speed, true, true);
+    double speed = m_drivePID.calculate(0,targetDistance);          // Speed from PID based on 0 target and a changing distance as the robot moves at a target angle towards the destination. Output is speed MPS targetDistance is in Meters
+                                                                                // targetDistance is the new setpoint since we are moving to 0 for the target distance. This seams a little reversed but should work.
+                                                                                // TODO speed may need to be reversed since the measurement is the current position and 0 is the target.
+    speed = rampUpValue(speed, m_rampUpTime);                                   // Ramp up the speed so a sudden step in voltage does not happen
+    speed = MathUtil.clamp(speed, -m_driveSpeed, m_driveSpeed);                 // Clamp the speed to the maximum requested
+    m_drive.drivePolarFieldCentric(targetAngle, robotAngle, speed, true, true); // Drive at a angle and speed and let the SwerveDrive move to the a robot angle.
     
     
   }
-
+  private double rampUpValue(double _val, double rampTime_sec){
+    double currentTime_sec = m_timer.get();                                        
+    if(currentTime_sec < rampTime_sec){
+      _val = _val * currentTime_sec / rampTime_sec;
+    }
+    return _val;
+  }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
