@@ -5,7 +5,6 @@ package frc.robot.commands.Climber;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.lib.k;
 import frc.robot.subsystems.ClimberSubsystem;
 
 public class ClimberDefaultCommand extends Command{

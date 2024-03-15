@@ -117,7 +117,7 @@ public final class k {
   }
   public static class DRIVE {
     public static final String T_DRIVER_MODE = "DriveMode";
-    private static final double MOTOR_PINION_TEETH = 12.0;
+    private static final double MOTOR_PINION_TEETH = 10.0;
     private static final double GEAR_1_TEETH = 34.0;
     private static final double GEAR_2_DRIVE_TEETH = 26.0;
     private static final double GEAR_2_DRIVEN_TEETH = 20.0;
