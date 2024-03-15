@@ -22,4 +22,5 @@ public class GD {
     public static NoteState G_NoteState = NoteState.OUT;
     public static SpeedState G_SpeedState = SpeedState.HIGH;
     public static Pose2d G_RobotPose = new Pose2d();
+    public static ShooterState G_ShooterState = ShooterState.OFF;
 }

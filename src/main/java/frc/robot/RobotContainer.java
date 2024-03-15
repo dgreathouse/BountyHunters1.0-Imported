@@ -105,12 +105,16 @@ public class RobotContainer {
     k.OI.OPERATOR_INTAKE_SPIN_ON.onTrue(new InstantCommand(m_intakeSubsystem::spinOn, m_intakeSubsystem));
     k.OI.OPERATOR_INTAKE_SPIN_OFF.onTrue(new InstantCommand(m_intakeSubsystem::spinOff, m_intakeSubsystem));
     k.OI.OPERATOR_INTAKE_SPIN_REVERSE.onTrue(new InstantCommand(m_intakeSubsystem::spinReverse, m_intakeSubsystem));
-    k.OI.OPERATOR_SHOOTER_ON_HIGH.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHigh, m_shooterSubsystem ));
+   
+    k.OI.OPERATOR_SHOOTER_ON_HIGH_LONG.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighLong, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_ON_HIGH_SHORT.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_ON_LOW.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
-    k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.SHOOT));
-    k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.PRELOAD));
-    k.OI.OPERATOR_FLIPPER_BACK.onTrue(new FlipperSetCommand(m_shooterSubsystem, FlipperStates.BACK));
+
+    k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
+    k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
+    k.OI.OPERATOR_FLIPPER_BACK.onTrue(new InstantCommand(m_shooterSubsystem::setFlippersRetracted, m_shooterSubsystem));
+   
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_AngleFieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_FIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_FieldCentric, m_drivetrainSubsystem));

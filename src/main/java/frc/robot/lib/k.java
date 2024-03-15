@@ -100,7 +100,8 @@ public final class k {
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
     public static Trigger OPERATOR_INTAKE_SPIN_REVERSE = RobotContainer.s_operatorController.square();
-    public static Trigger OPERATOR_SHOOTER_ON_HIGH = RobotContainer.s_operatorController.povUp();
+    public static Trigger OPERATOR_SHOOTER_ON_HIGH_LONG = RobotContainer.s_operatorController.povUp();
+    public static Trigger OPERATOR_SHOOTER_ON_HIGH_SHORT = RobotContainer.s_operatorController.povRight();
     public static Trigger OPERATOR_SHOOTER_ON_LOW = RobotContainer.s_operatorController.povLeft();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
   }
@@ -161,27 +162,29 @@ public final class k {
 
   }
   public static class SHOOTER {
-    public static final double ROTATE_GEAR_RATIO = 3*4*5;
-    private static final double ROTATE_MOTOR_CNT_PER_REV = 42;
-    private static final double ROTATE_SHAFT_CNTS_PER_REV = ROTATE_MOTOR_CNT_PER_REV * ROTATE_GEAR_RATIO;
-    public static final double ROTATE_CNTS_PER_DEG = ROTATE_SHAFT_CNTS_PER_REV / 360;
+    // public static final double ROTATE_GEAR_RATIO = 3*4*5;
+    // private static final double ROTATE_MOTOR_CNT_PER_REV = 42;
+    // private static final double ROTATE_SHAFT_CNTS_PER_REV = ROTATE_MOTOR_CNT_PER_REV * ROTATE_GEAR_RATIO;
+    // public static final double ROTATE_CNTS_PER_DEG = ROTATE_SHAFT_CNTS_PER_REV / 360;
     private static final double SPIN_DRIVE_PULLEY_TEETH_COUNT = 24;
     private static final double SPIN_DRIVEN_PULLEY_TEETH_COUNT = 18;
     public static final double SPIN_PULLEY_RATIO = SPIN_DRIVEN_PULLEY_TEETH_COUNT/ SPIN_DRIVE_PULLEY_TEETH_COUNT;
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
-    public static final double ROTATE_OFFSET_ANGLE_DEG = 29.5;
-    public static final double SPIN_SHOT_SPEED_RPS = .30;
-    public static final double ROTATE_FEEDFORWARD_KG = 0.7;
-    public static final double ROTATE_DS_FEEDFORWARD_KG = 0.5;
-    public static double ROTATE_PID_KP = 0.05;//10.0;
-    public static double ROTATE_PID_KI = 0.004;//4.0;
-    public static double ROTATE_DS_OFFSET_DISTANCE_MM = 58;
-    public static double ROTATE_DS_MAX = 170;
-    public static double ROTATE_DS_SHOT1_MM = 25.0;
-    public static double ROTATE_DS_SHOT2_MM = 50.0;
-    public static double ROTATE_DS_SHOT3_MM = 75.0;
-    public static double ROTATE_DS_SHOT4_MM = 100.0;
-    public static double ROTATE_DS_SHOT5_MM = 125.0;
+
+    public static final double SPIN_SPEED_HIGH_LONG = 0.68;
+    public static final double SPIN_SPEED_HIGH_SHORT = 0.68;
+    public static final double SPIN_SPEED_LOW = 0.68;
+    public static final double SPIN_SPEED_OFF = 0.0;
+
+    // public static double ROTATE_PID_KP = 0.05;//10.0;
+    // public static double ROTATE_PID_KI = 0.004;//4.0;
+    // public static double ROTATE_DS_OFFSET_DISTANCE_MM = 58;
+    // public static double ROTATE_DS_MAX = 170;
+    // public static double ROTATE_DS_SHOT1_MM = 25.0;
+    // public static double ROTATE_DS_SHOT2_MM = 50.0;
+    // public static double ROTATE_DS_SHOT3_MM = 75.0;
+    // public static double ROTATE_DS_SHOT4_MM = 100.0;
+    // public static double ROTATE_DS_SHOT5_MM = 125.0;
 
   }
   public static class INTAKE {
