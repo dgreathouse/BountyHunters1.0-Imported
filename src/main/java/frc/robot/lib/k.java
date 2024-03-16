@@ -41,6 +41,7 @@ public final class k {
     public static final int INTAKE_LEFT_SPIN = 41;
     public static final int CLIMBER_LEFT = 50;
     public static final int CLIMBER_RIGHT = 51;
+    public static final int PCM = 0;
 
   }
   public static class CONVERT{

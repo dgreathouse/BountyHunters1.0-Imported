@@ -32,7 +32,6 @@ public class ShooterSetShotCommand extends InstantCommand{
   // Called once since this is a InstantCommand
   @Override
   public void execute() {
-    GD.G_ShooterAngle = m_angle;
     GD.G_ShooterSpeed = m_speed;
   }
 

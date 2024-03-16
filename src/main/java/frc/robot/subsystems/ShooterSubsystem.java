@@ -49,10 +49,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor.setNeutralMode(NeutralModeValue.Brake);
     m_rightMotor.setNeutralMode(NeutralModeValue.Brake);
     SmartDashboard.putNumber("Shot Speed", 0);
-    m_leftServo = new Servo(1);
-    m_rightServo = new Servo(2);
+    m_leftServo = new Servo(0);
+    m_rightServo = new Servo(1);
 
-    m_pcm = new PneumaticsControlModule(0);
+    m_pcm = new PneumaticsControlModule(k.ROBORIO_CAN_IDS.PCM);
     m_lifterSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
     GD.G_ShooterState = ShooterState.OFF;
   }
