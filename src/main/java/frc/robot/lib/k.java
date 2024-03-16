@@ -101,9 +101,9 @@ public final class k {
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
     public static Trigger OPERATOR_INTAKE_SPIN_REVERSE = RobotContainer.s_operatorController.square();
-    public static Trigger OPERATOR_SHOOTER_ON_HIGH_LONG = RobotContainer.s_operatorController.povUp();
-    public static Trigger OPERATOR_SHOOTER_ON_HIGH_SHORT = RobotContainer.s_operatorController.povRight();
-    public static Trigger OPERATOR_SHOOTER_ON_LOW = RobotContainer.s_operatorController.povLeft();
+    public static Trigger OPERATOR_SHOOTER_ON_HIGH_SPEAKER = RobotContainer.s_operatorController.povUp();
+    public static Trigger OPERATOR_SHOOTER_ON_HIGH_PODIUM = RobotContainer.s_operatorController.povRight();
+    public static Trigger OPERATOR_SHOOTER_ON_STAGE = RobotContainer.s_operatorController.povLeft();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
   }
   public static class DRIVEBASE {
@@ -112,7 +112,7 @@ public final class k {
     private static final double WHEEL_BASE_XY_AVG_m = (WHEEL_BASE_Y_m + WHEEL_BASE_X_m)/2.0;
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
-    public static final double TURN_KP = 6;
+    public static final double TURN_KP = 1;
     public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.0;
   }
@@ -138,8 +138,8 @@ public final class k {
     // 11T 3.994   Mps = 13.1 FtPSec, 
     // 12T 4.35 Mps = 14.27 FtPSec, 91% Eff
     public static final double MAX_ANGULAR_VELOCITY_RadianPerSec = MAX_VELOCITY_MeterPerSec * (1/DRIVEBASE.WHEEL_BASE_MeterPerRad);
-    public static final double PID_Kp = 1.5;
-    public static final double PID_Ki = 0.5;
+    public static final double PID_Kp = 1.0;
+    public static final double PID_Ki = 0.0;
     public static final double PID_Kv = k.ROBOT.BATTERY_MAX_VOLTS/k.DRIVE.MAX_VELOCITY_MeterPerSec;
     public static final double PID_Ks = 0.0;
     public static final double TARGET_ANGLE_DEADBAND = 0.8;
@@ -174,7 +174,7 @@ public final class k {
 
     public static final double SPIN_SPEED_HIGH_LONG = 0.68;
     public static final double SPIN_SPEED_HIGH_SHORT = 0.68;
-    public static final double SPIN_SPEED_LOW = 0.68;
+    public static final double SPIN_SPEED_LOW = 0.38;
     public static final double SPIN_SPEED_OFF = 0.0;
 
     // public static double ROTATE_PID_KP = 0.05;//10.0;
@@ -196,8 +196,7 @@ public final class k {
   }
   public static class CLIMBER {
     public static final double LIMIT_UP_ROTATIONS = -68;
-    public static final double LIMIT_DOWN_ROTATIONS = 100;
-    public static final double HOLD_VOLTAGE = 3.2;
+    public static final double LIMIT_DOWN_ROTATIONS = 0;
   }
 
 }

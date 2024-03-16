@@ -42,10 +42,10 @@ public class DrivetrainDefaultCommand extends Command {
   public void execute() {
 
     // Set local variables to game thumbstick axis values
-    double leftYRaw = -RobotContainer.s_driverController.getLeftY();
-    double leftXRaw = -RobotContainer.s_driverController.getLeftX();
-    double rightXRaw = -RobotContainer.s_driverController.getRightX();
-    double rightYRaw = -RobotContainer.s_driverController.getRightY();
+    double leftYRaw = RobotContainer.s_driverController.getLeftY();
+    double leftXRaw = RobotContainer.s_driverController.getLeftX();
+    double rightXRaw = RobotContainer.s_driverController.getRightX();
+    double rightYRaw = RobotContainer.s_driverController.getRightY();
 
     // Limit the inputs for a deadband related to the joystick
     double leftYFiltered = MathUtil.applyDeadband(leftYRaw, 0.08, 1.0);

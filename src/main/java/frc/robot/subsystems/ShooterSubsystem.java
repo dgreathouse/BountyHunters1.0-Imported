@@ -5,12 +5,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsControlModule;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -25,9 +20,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   TalonFX m_leftMotor; // Declare a TalonFX motor controller class and call it m_leftMotor;
   TalonFX m_rightMotor; // Declare a TalonFX motor controller class and call it m_rightMotor;
-  
-  PneumaticsControlModule m_pcm;
-  DoubleSolenoid m_lifterSolenoid;
+
   Servo m_leftServo;
   Servo m_rightServo;
 
@@ -52,11 +45,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_leftServo = new Servo(0);
     m_rightServo = new Servo(1);
 
-    m_pcm = new PneumaticsControlModule(k.ROBORIO_CAN_IDS.PCM);
-    m_lifterSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
     GD.G_ShooterState = ShooterState.OFF;
   }
-
   /**
    * Spin the spinners
    * 
@@ -92,41 +82,39 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   public void setShooterOnHighLong(){
     GD.G_ShooterState = ShooterState.HIGH_LONG;
+    GD.G_ClimberVoltageMode = false;
+    GD.G_ClimberPosition = 0;
   }
   public void setShooterOnHighShort(){
     GD.G_ShooterState = ShooterState.HIGH_SHORT;
+    GD.G_ClimberVoltageMode = false;
+    GD.G_ClimberPosition = -10;
   }
   public void setShooterOnLow(){
     GD.G_ShooterState = ShooterState.LOW;
+    GD.G_ClimberVoltageMode = false;
+    GD.G_ClimberPosition = -10;
   }
   public void setShooterOff(){
     GD.G_ShooterState = ShooterState.OFF;
+    GD.G_ClimberVoltageMode = false;
   }
-  private void raiseShooter(){
-    m_lifterSolenoid.set(Value.kForward);
-  }
-  private void lowerShooter(){
-    m_lifterSolenoid.set(Value.kReverse);
-  }
+
   @Override
   public void periodic() {
     // Handle Shooter speed and shooter angle
     switch (GD.G_ShooterState) {
       case HIGH_LONG:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
-        lowerShooter();
         break;
       case HIGH_SHORT:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
-        raiseShooter();
         break;
       case LOW:
         spin(k.SHOOTER.SPIN_SPEED_LOW);
-        raiseShooter();
         break;
       case OFF:
         spin(k.SHOOTER.SPIN_SPEED_OFF);
-        lowerShooter();
         break;
 
       default:

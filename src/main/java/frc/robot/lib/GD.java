@@ -22,4 +22,7 @@ public class GD {
     public static SpeedState G_SpeedState = SpeedState.HIGH;
     public static Pose2d G_RobotPose = new Pose2d();
     public static ShooterState G_ShooterState = ShooterState.OFF;
+    public static double G_ClimberPerOut = 0.0;
+    public static boolean G_ClimberVoltageMode = false;
+    public static double G_ClimberPosition = 0.0;
 }

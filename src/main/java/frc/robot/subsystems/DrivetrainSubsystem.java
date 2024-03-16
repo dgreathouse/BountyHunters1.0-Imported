@@ -17,7 +17,7 @@ import frc.robot.lib.Swerve.SwerveDrive;
 
 public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public SwerveDrive m_robotDrive;
-  public EDriveMode m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
+  public EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
   
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() {

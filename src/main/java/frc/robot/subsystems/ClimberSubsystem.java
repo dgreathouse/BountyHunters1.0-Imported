@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.k;
 
@@ -39,20 +40,21 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
     return avg;
   }
   public void setVoltage(double _volts){
-     double setVoltage = _volts * 5;
-    if(_volts <= 0) {
-      if (leftMotor.getEncoder().getPosition() < k.CLIMBER.LIMIT_UP_ROTATIONS || rightMotor.getEncoder().getPosition() <  k.CLIMBER.LIMIT_UP_ROTATIONS){
+    double setVoltage = _volts * 5;
+    if(GD.G_ClimberVoltageMode){
+      if(_volts <= 0) {
+        if (leftMotor.getEncoder().getPosition() < k.CLIMBER.LIMIT_UP_ROTATIONS || rightMotor.getEncoder().getPosition() <  k.CLIMBER.LIMIT_UP_ROTATIONS){
+          setVoltage = 0;
+        }
+      } else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
         setVoltage = 0;
       }
-    } else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
-      setVoltage = 0;
     }
-
     SmartDashboard.putNumber("Climber Volts In Climber", setVoltage);
     SmartDashboard.putNumber("Climber Left", leftMotor.getEncoder().getPosition());
     SmartDashboard.putNumber("Climber Right", rightMotor.getEncoder().getPosition());
-    leftMotor.setVoltage(setVoltage);
-    rightMotor.setVoltage(setVoltage);
+   // leftMotor.setVoltage(setVoltage);
+   // rightMotor.setVoltage(setVoltage);
   }
   @Override
   public void periodic() {

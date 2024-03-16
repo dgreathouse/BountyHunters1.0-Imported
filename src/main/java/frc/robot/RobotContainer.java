@@ -106,9 +106,9 @@ public class RobotContainer {
     k.OI.OPERATOR_INTAKE_SPIN_OFF.onTrue(new InstantCommand(m_intakeSubsystem::spinOff, m_intakeSubsystem));
     k.OI.OPERATOR_INTAKE_SPIN_REVERSE.onTrue(new InstantCommand(m_intakeSubsystem::spinReverse, m_intakeSubsystem));
    
-    k.OI.OPERATOR_SHOOTER_ON_HIGH_LONG.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighLong, m_shooterSubsystem ));
-    k.OI.OPERATOR_SHOOTER_ON_HIGH_SHORT.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
-    k.OI.OPERATOR_SHOOTER_ON_LOW.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_ON_HIGH_SPEAKER.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighLong, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_ON_HIGH_PODIUM.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
+    k.OI.OPERATOR_SHOOTER_ON_STAGE.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
 
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
