@@ -4,6 +4,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -105,6 +106,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     GD.G_RobotMode = RobotMode.TELEOP_PERIODIC;
+    //SmartDashboard.putBoolean(`"", isAutonomous())
    // RobotContainer.m_LEDs.setMulticolorBlinky(0.1,0,150,0);
   }
 

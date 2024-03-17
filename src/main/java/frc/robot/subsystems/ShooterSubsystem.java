@@ -80,15 +80,6 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rightServo.set(0.50);
   }
 
-  // public void setShooterOnHighLong(){
-
-  //   GD.G_ClimberVoltageMode = false;
-  //   GD.G_ClimberPosition = 0;
-  // }
-  // public void setShooterOnHighShort(){
-  //   GD.G_ClimberVoltageMode = false;
-  //   GD.G_ClimberPosition = -10;
-  // }
   public void setShooterFeed(){
     GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = -10;

@@ -20,7 +20,7 @@ public class AutoRedLeftShootPark extends SequentialCommandGroup {
   public AutoRedLeftShootPark(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
     // addCommands(new AutoDriveTimeVel(), new AutoRotateCommand());
     addCommands(
-      new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
+    //  new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
       new AutoDriveTimeVel(_drive,2, 0,0, 1.9, 0.2 , 0.3, false),
       
       new AutoDriveRotateCommand(_drive, 40, 1),
@@ -29,7 +29,7 @@ public class AutoRedLeftShootPark extends SequentialCommandGroup {
       new InstantCommand(_shooter::setFlippersRetracted, _shooter),
       new AutoDriveTimeVel(_drive, 1, 90, 0, 2, 0.2, 0.2, false),
       new InstantCommand(_shooter::setFlippersRetracted, _shooter),
-      new ShooterSetShotCommand(_shooter, 0, 0),
+    //  new ShooterSetShotCommand(_shooter, 0, 0),
       new InstantCommand(_intake::spinOff, _intake),
       new AutoDriveDelayCommand(_drive, 2)
     );

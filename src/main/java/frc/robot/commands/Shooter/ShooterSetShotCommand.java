@@ -6,19 +6,20 @@ package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.lib.GD;
+import frc.robot.lib.ShooterState;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
 public class ShooterSetShotCommand extends InstantCommand{
   ShooterSubsystem m_shooter;
   double m_angle;
-  double m_speed;
+  ShooterState m_state;
 
 
-  public ShooterSetShotCommand(ShooterSubsystem _shooter, double _speed, double _angle) {
+  public ShooterSetShotCommand(ShooterSubsystem _shooter, ShooterState _state, double _angle) {
     m_shooter = _shooter;
     m_angle = _angle;
-    m_speed = _speed;
+    m_state = _state;
     addRequirements(_shooter);
 
   }
@@ -32,7 +33,7 @@ public class ShooterSetShotCommand extends InstantCommand{
   // Called once since this is a InstantCommand
   @Override
   public void execute() {
-    GD.G_ShooterSpeed = m_speed;
+    GD.G_ShooterState = m_state;
   }
 
 }

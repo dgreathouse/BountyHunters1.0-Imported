@@ -22,6 +22,7 @@ public class LEDs {
     private int m_blue = 0;
     private boolean m_blinkState = true;
     private Random _random = new Random();
+    private boolean otherLEDsActive;
 
     /**
      * This is a constructor for the class. It has the same name as the class and
@@ -48,20 +49,18 @@ public class LEDs {
      * @param _b Blue Value between 0-255
      */
     public void setRGBColor(int _r, int _g, int _b) {
-            if( _r != m_red || _g != m_green || _b != m_blue){
-                m_red = _r;
-                m_green = _g;
-                m_blue = _b;
-                for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-                    m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
-                }
-                m_led.setData(m_ledBuffer);
-                m_led.start();
-            }else {
-
+        if (_r != m_red || _g != m_green || _b != m_blue) {
+            m_red = _r;
+            m_green = _g;
+            m_blue = _b;
+            for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+                m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
             }
-            
-        
+            m_led.setData(m_ledBuffer);
+            m_led.start();
+        } else {
+
+        }
 
     }
 
@@ -92,6 +91,7 @@ public class LEDs {
     }
 
     public void celebration() {
+        otherLEDsActive = true;
         int rand = _random.nextInt(m_ledBuffer.getLength());
         if (m_blinkTimer.hasElapsed(0.05)) {
             m_blinkState = !m_blinkState;
@@ -108,6 +108,7 @@ public class LEDs {
         } else {
             setRGBColor(0, 0, 0);
         }
+        otherLEDsActive = false;
     }
 
     /**
@@ -125,15 +126,18 @@ public class LEDs {
      * then the color is green.
      */
     public void setAllianceColor() {
-        Color8Bit color = new Color8Bit();
-        if (DriverStation.getAlliance().get() == Alliance.Blue) {
-            color = new Color8Bit(0, 0, 100);
-        } else if (DriverStation.getAlliance().get() == Alliance.Red) {
-            color = new Color8Bit(100, 0, 0);
-        } else {
-            color = new Color8Bit(50, 50, 50);
+        if (otherLEDsActive) {
+            Color8Bit color = new Color8Bit();
+            if (DriverStation.getAlliance().get() == Alliance.Blue) {
+                color = new Color8Bit(0, 0, 100);
+            } else if (DriverStation.getAlliance().get() == Alliance.Red) {
+                color = new Color8Bit(100, 0, 0);
+            } else {
+                color = new Color8Bit(50, 50, 50);
+            }
+            setRGBColor(color);
         }
-        setRGBColor(color);
+
     }
 
     /**
@@ -154,6 +158,7 @@ public class LEDs {
     }
 
     public void setBlinky(double _time, int _r, int _g, int _b) {
+        otherLEDsActive = true;
         if (m_blinkTimer.hasElapsed(_time)) {
             m_blinkState = !m_blinkState;
             m_blinkTimer.restart();
@@ -163,10 +168,11 @@ public class LEDs {
         } else {
             setRGBColor(0, 0, 0);
         }
-
+        otherLEDsActive = false;
     }
 
     public void setMulticolorBlinky(double _time, int _r, int _g, int _b) {
+        otherLEDsActive = true;
         if (m_blinkTimer.hasElapsed(_time)) {
             m_blinkState = !m_blinkState;
             m_blinkTimer.restart();
@@ -188,5 +194,6 @@ public class LEDs {
                 setRGBColor(0, 0, 0);
             }
         }
+        otherLEDsActive = false;
     }
 }

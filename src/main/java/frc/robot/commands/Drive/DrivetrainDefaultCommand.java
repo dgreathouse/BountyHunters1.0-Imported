@@ -195,7 +195,7 @@ public class DrivetrainDefaultCommand extends Command {
     if(k.OI.DRIVER_SHOT_POSITION_PODIUM.getAsBoolean()){
       GD.G_ClimberPosition = -36;
       GD.G_ClimberVoltageMode = false;
-      GD.G_RobotTargetAngle.setTargetAngle(-33 * allianceSign);
+      GD.G_RobotTargetAngle.setTargetAngle(-25 * allianceSign);
       GD.G_ShooterState = ShooterState.PODIUM;
     }else if(k.OI.DRIVER_SHOT_POSITION_SPEAKER.getAsBoolean()){
       GD.G_ClimberPosition = -60;
