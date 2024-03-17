@@ -65,30 +65,30 @@ public final class k {
 
     // Driver controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    public static Trigger DRIVER_ENABLE_LEFT_TRIGGERS = RobotContainer.s_driverController.L1();
-    public static Trigger DRIVER_SHOT_POSITION_L1 = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_L2 = RobotContainer.s_driverController.square();
-    public static Trigger DRIVER_SHOT_POSITION_L3 = RobotContainer.s_driverController.cross();
-    public static Trigger DRIVER_SHOT_POSITION_L4 = RobotContainer.s_driverController.circle();
+    // public static Trigger DRIVER_ENABLE_LEFT_TRIGGERS = RobotContainer.s_driverController.L1();
+    public static Trigger DRIVER_SHOT_POSITION_SPEAKER = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_PODIUM = RobotContainer.s_driverController.triangle();
+    public static Trigger DRIVER_SHOT_POSITION_RIGHT = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_LEFT = RobotContainer.s_driverController.square();
 
     
-    public static Trigger DRIVER_ENABLE_RIGHT_TRIGGERS = RobotContainer.s_driverController.R1();
-    public static Trigger DRIVER_SHOT_POSITION_R1 = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.square();
-    public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.cross();
-    public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.circle();
+    // public static Trigger DRIVER_ENABLE_RIGHT_TRIGGERS = RobotContainer.s_driverController.R1();
+    // public static Trigger DRIVER_SHOT_POSITION_R1 = RobotContainer.s_driverController.triangle();
+    // public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.square();
+    // public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.cross();
+    // public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.circle();
 
-    public static Trigger DRIVER_ENABLE_CLIMB_TRIGGERS = RobotContainer.s_driverController.R2();
-    public static Trigger DRIVER_CLIMB_POSITION_1 = RobotContainer.s_driverController.square();
-    public static Trigger DRIVER_CLIMB_POSITION_2 = RobotContainer.s_driverController.circle();
-    public static Trigger DRIVER_CLIMB_POSITION_3 = RobotContainer.s_driverController.triangle();
+    // public static Trigger DRIVER_ENABLE_CLIMB_TRIGGERS = RobotContainer.s_driverController.R2();
+    // public static Trigger DRIVER_CLIMB_POSITION_1 = RobotContainer.s_driverController.square();
+    // public static Trigger DRIVER_CLIMB_POSITION_2 = RobotContainer.s_driverController.circle();
+    // public static Trigger DRIVER_CLIMB_POSITION_3 = RobotContainer.s_driverController.triangle();
 
     public static Trigger DRIVER_DRIVE_MODE_FIELDCENTRIC = RobotContainer.s_driverController.povLeft();
     public static Trigger DRIVER_DRIVE_MODE_ROBOTCENTRIC = RobotContainer.s_driverController.povRight();
     public static Trigger DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC = RobotContainer.s_driverController.povDown();
 
-    public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.touchpad();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.create();
 
     public static Trigger DRIVER_RESET_YAW = RobotContainer.s_driverController.create();
     
@@ -101,9 +101,9 @@ public final class k {
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
     public static Trigger OPERATOR_INTAKE_SPIN_REVERSE = RobotContainer.s_operatorController.square();
-    public static Trigger OPERATOR_SHOOTER_ON_HIGH_SPEAKER = RobotContainer.s_operatorController.povUp();
-    public static Trigger OPERATOR_SHOOTER_ON_HIGH_PODIUM = RobotContainer.s_operatorController.povRight();
-    public static Trigger OPERATOR_SHOOTER_ON_STAGE = RobotContainer.s_operatorController.povLeft();
+    // public static Trigger OPERATOR_SHOOTER_ON_HIGH_SPEAKER = RobotContainer.s_operatorController.povUp();
+    // public static Trigger OPERATOR_SHOOTER_ON_HIGH_PODIUM = RobotContainer.s_operatorController.povRight();
+    public static Trigger OPERATOR_SHOOTER_FEED = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
   }
   public static class DRIVEBASE {
@@ -112,13 +112,13 @@ public final class k {
     private static final double WHEEL_BASE_XY_AVG_m = (WHEEL_BASE_Y_m + WHEEL_BASE_X_m)/2.0;
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
-    public static final double TURN_KP = 1;
-    public static final double TURN_KI = 0.0;
+    public static final double TURN_KP = 10;
+    public static final double TURN_KI = .5;
     public static final double TURN_KD = 0.0;
   }
   public static class DRIVE {
     public static final String T_DRIVER_MODE = "DriveMode";
-    private static final double MOTOR_PINION_TEETH = 10.0;
+    private static final double MOTOR_PINION_TEETH = 11.0;
     private static final double GEAR_1_TEETH = 34.0;
     private static final double GEAR_2_DRIVE_TEETH = 26.0;
     private static final double GEAR_2_DRIVEN_TEETH = 20.0;
@@ -195,7 +195,7 @@ public final class k {
 
   }
   public static class CLIMBER {
-    public static final double LIMIT_UP_ROTATIONS = -68;
+    public static final double LIMIT_UP_ROTATIONS = -180;
     public static final double LIMIT_DOWN_ROTATIONS = 0;
   }
 

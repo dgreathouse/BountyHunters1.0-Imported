@@ -21,14 +21,10 @@ import frc.robot.commandGroups.AutoRedLeftShoot1;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
-import frc.robot.commands.Shooter.FlipperSetCommand;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
-import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
-import frc.robot.lib.LEDs;
 import frc.robot.lib.k;
-import frc.robot.lib.Vision.OrangePi5Vision;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -62,7 +58,7 @@ public class RobotContainer {
   public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(k.OI.OPERATOR_CONTROLLER_PORT);
 
   SendableChooser<Command> autoChooser = new SendableChooser<>();
-  public static final LEDs m_LEDs = new LEDs(3);
+  //public static final LEDs m_LEDs = new LEDs(3);
   private void updateDashboard(){
     SmartDashboard.putString("RobotMode", GD.G_RobotMode.toString());
     Iterator<ISubsystem> it = subsystems.iterator();
@@ -106,10 +102,11 @@ public class RobotContainer {
     k.OI.OPERATOR_INTAKE_SPIN_OFF.onTrue(new InstantCommand(m_intakeSubsystem::spinOff, m_intakeSubsystem));
     k.OI.OPERATOR_INTAKE_SPIN_REVERSE.onTrue(new InstantCommand(m_intakeSubsystem::spinReverse, m_intakeSubsystem));
    
-    k.OI.OPERATOR_SHOOTER_ON_HIGH_SPEAKER.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighLong, m_shooterSubsystem ));
-    k.OI.OPERATOR_SHOOTER_ON_HIGH_PODIUM.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
-    k.OI.OPERATOR_SHOOTER_ON_STAGE.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
+    // k.OI.OPERATOR_SHOOTER_ON_HIGH_SPEAKER.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighLong, m_shooterSubsystem ));
+    // k.OI.OPERATOR_SHOOTER_ON_HIGH_PODIUM.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
+    // k.OI.OPERATOR_SHOOTER_ON_STAGE.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
+
 
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
@@ -119,6 +116,8 @@ public class RobotContainer {
     k.OI.DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_AngleFieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_FIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_FieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ROBOTCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_RobotCentric, m_drivetrainSubsystem));
+    k.OI.DRIVER_DRIVE_MODE_SPEED_HI.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedHI, m_drivetrainSubsystem));
+    k.OI.DRIVER_DRIVE_MODE_SPEED_LOW.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedLOW, m_drivetrainSubsystem));
 
   }
   /**

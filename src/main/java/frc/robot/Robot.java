@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.lib.GD;
+import frc.robot.lib.LEDs;
 import frc.robot.lib.RobotMode;
 import frc.robot.lib.k;
 
@@ -32,7 +33,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-
+    //RobotContainer.m_LEDs.setAllianceColor();
   }
 
   /**
@@ -104,7 +105,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     GD.G_RobotMode = RobotMode.TELEOP_PERIODIC;
-    
+   // RobotContainer.m_LEDs.setMulticolorBlinky(0.1,0,150,0);
   }
 
   @Override

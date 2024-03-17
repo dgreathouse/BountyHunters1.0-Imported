@@ -74,20 +74,20 @@ public class SwerveDrive {
             "fr",
             13, true,
             23, true, 
-            3, -0.4634,
+            3, 0.03637,
             k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, -k.DRIVEBASE.WHEEL_BASE_Y_m / 2.0);
 
         SwerveModuleConstants m_frontLeft = new SwerveModuleConstants(
             "fl",
             12, false,
             22, true,  
-            2, -0.273, 
+            2,0.2234, 
             k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, k.DRIVEBASE.WHEEL_BASE_Y_m / 2.0);
         SwerveModuleConstants m_back = new SwerveModuleConstants(
             "b",
             11, false,  
             21, true, 
-            1, 0.2727, 
+            1,-0.2324, 
             -k.DRIVEBASE.WHEEL_BASE_X_m / 2.0, 0.0);
 
         initialize(m_frontLeft, m_frontRight, m_back);    
@@ -184,5 +184,9 @@ public class SwerveDrive {
        for (int i = 0; i < m_moduleCount; ++i) {
            m_modules[i].updateDashboard();
        }
+       SmartDashboard.putNumber("Robot Pose X", GD.G_RobotPose.getX());
+       SmartDashboard.putNumber("Robot Pose Y", GD.G_RobotPose.getY());
+       SmartDashboard.putNumber("Robot Pose Ang", GD.G_RobotPose.getRotation().getDegrees());
+
     }
 }

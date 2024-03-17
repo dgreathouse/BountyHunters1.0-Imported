@@ -81,37 +81,41 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
 
   public void setShooterOnHighLong(){
-    GD.G_ShooterState = ShooterState.HIGH_LONG;
+
     GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = 0;
   }
   public void setShooterOnHighShort(){
-    GD.G_ShooterState = ShooterState.HIGH_SHORT;
     GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = -10;
   }
   public void setShooterOnLow(){
-    GD.G_ShooterState = ShooterState.LOW;
     GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = -10;
   }
   public void setShooterOff(){
-    GD.G_ShooterState = ShooterState.OFF;
     GD.G_ClimberVoltageMode = false;
   }
 
   @Override
   public void periodic() {
+    // Look at the Shooter State
+    // Look at the Shooter Speed
+    // Look 
     // Handle Shooter speed and shooter angle
     switch (GD.G_ShooterState) {
-      case HIGH_LONG:
+      case PODIUM:
+        
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
-      case HIGH_SHORT:
+      case SPEAKER:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
         break;
-      case LOW:
+      case LEFT:
         spin(k.SHOOTER.SPIN_SPEED_LOW);
+        break;
+        case RIGHT:
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case OFF:
         spin(k.SHOOTER.SPIN_SPEED_OFF);
@@ -126,7 +130,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     }else if(GD.G_FlipperState == FlipperStates.PRELOAD){
       preloadFlippers();
     }else if(GD.G_FlipperState == FlipperStates.SHOOT){
-      if(GD.G_ShooterState == ShooterState.HIGH_LONG || GD.G_ShooterState == ShooterState.HIGH_SHORT || GD.G_ShooterState == ShooterState.LOW){
+      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.LEFT){
         extendFlippers();
         GD.G_NoteState = NoteState.OUT;
       }

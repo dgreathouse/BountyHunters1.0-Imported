@@ -9,6 +9,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
+import frc.robot.lib.DriveSpeedState;
 import frc.robot.lib.EDriveMode;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
@@ -17,7 +18,7 @@ import frc.robot.lib.Swerve.SwerveDrive;
 
 public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public SwerveDrive m_robotDrive;
-  public EDriveMode m_driveMode = EDriveMode.FIELD_CENTRIC;
+  public EDriveMode m_driveMode = EDriveMode.ANGLE_FIELD_CENTRIC;
   
   /** Creates a new DrivetrainSubsystem. */
   public DrivetrainSubsystem() {
@@ -58,8 +59,12 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void setDriveMode_RobotCentric(){
     m_driveMode = EDriveMode.ROBOT_CENTRIC;
   }
-
-
+  public void setDriveSpeedHI(){
+    GD.G_DriveSpeedState = DriveSpeedState.HIGH;
+  }
+  public void setDriveSpeedLOW(){
+    GD.G_DriveSpeedState = DriveSpeedState.LOW;
+  }
   public EDriveMode getDriveMode(){
     return m_driveMode;
   }

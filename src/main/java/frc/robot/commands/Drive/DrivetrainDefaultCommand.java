@@ -42,10 +42,10 @@ public class DrivetrainDefaultCommand extends Command {
   public void execute() {
 
     // Set local variables to game thumbstick axis values
-    double leftYRaw = RobotContainer.s_driverController.getLeftY();
-    double leftXRaw = RobotContainer.s_driverController.getLeftX();
-    double rightXRaw = RobotContainer.s_driverController.getRightX();
-    double rightYRaw = RobotContainer.s_driverController.getRightY();
+    double leftYRaw = -RobotContainer.s_driverController.getLeftY();
+    double leftXRaw = -RobotContainer.s_driverController.getLeftX();
+    double rightXRaw = -RobotContainer.s_driverController.getRightX();
+    double rightYRaw = -RobotContainer.s_driverController.getRightY();
 
     // Limit the inputs for a deadband related to the joystick
     double leftYFiltered = MathUtil.applyDeadband(leftYRaw, 0.08, 1.0);
@@ -122,73 +122,93 @@ public class DrivetrainDefaultCommand extends Command {
     // GD.G_Intake_Speed = 0.0;
     // }
     // Handle target angle buttons if pressed to set angles and speeds
-    switch (GD.G_Alliance) {
-      case Blue:
-        if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(15);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(30);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-30);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-8);
-          }
-        } else if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-33);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(0);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-54);
-          }
-        } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-61);
-          } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(59);
-          } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(180);
-          }
-        }
-        break;
-      case Red:
-        if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-15);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(8);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(30);
-          } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-30);
-          }
-        } else if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-15);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(54);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(0);
-          } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(33);
-          }
-        } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
-          if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(-61);
-          } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(59);
-          } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
-            GD.G_RobotTargetAngle.setTargetAngle(180);
-          }
-        }
-        break;
-      default:
-        break;
+    // switch (GD.G_Alliance) {
+    //   case Blue:
+    //     if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(15);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(30);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-30);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-8);
+    //       }
+    //     } else if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-27 * allianceSign);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-33);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(0);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-54);
+    //       }
+    //     } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-61);
+    //       } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(59);
+    //       } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(180);
+    //       }
+    //     }
+    //     break;
+    //   case Red:
+    //     if (k.OI.DRIVER_ENABLE_RIGHT_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_SHOT_POSITION_R1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-15);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(8);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(30);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_R4.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-30);
+    //       }
+    //     } else if (k.OI.DRIVER_ENABLE_LEFT_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_SHOT_POSITION_L1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-15);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(54);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(0);
+    //       } else if (k.OI.DRIVER_SHOT_POSITION_L4.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(33);
+    //       }
+    //     } else if (k.OI.DRIVER_ENABLE_CLIMB_TRIGGERS.getAsBoolean()) {
+    //       if (k.OI.DRIVER_CLIMB_POSITION_1.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(-61);
+    //       } else if (k.OI.DRIVER_CLIMB_POSITION_2.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(59);
+    //       } else if (k.OI.DRIVER_CLIMB_POSITION_3.getAsBoolean()) {
+    //         GD.G_RobotTargetAngle.setTargetAngle(180);
+    //       }
+    //     }
+    //     break;
+    //   default:
+    //     break;
 
+    // }
+
+
+    if(k.OI.DRIVER_SHOT_POSITION_PODIUM.getAsBoolean()){
+      GD.G_ClimberPosition = -33;
+      GD.G_ClimberVoltageMode = false;
+      GD.G_RobotTargetAngle.setTargetAngle(-33 * allianceSign);
+    }else if(k.OI.DRIVER_SHOT_POSITION_SPEAKER.getAsBoolean()){
+      GD.G_ClimberPosition = -60;
+      GD.G_ClimberVoltageMode = false;
+      GD.G_RobotTargetAngle.setTargetAngle(-60 * allianceSign);
+    }else if(k.OI.DRIVER_SHOT_POSITION_RIGHT.getAsBoolean()){
+      GD.G_ClimberPosition = -25;
+      GD.G_ClimberVoltageMode = false;
+      GD.G_RobotTargetAngle.setTargetAngle(-40 * allianceSign);
+    }else if(k.OI.DRIVER_SHOT_POSITION_LEFT.getAsBoolean()){
+      GD.G_ClimberPosition = -40;
+      GD.G_ClimberVoltageMode = false;
+      GD.G_RobotTargetAngle.setTargetAngle(0 * allianceSign);
     }
+
 
   }
 

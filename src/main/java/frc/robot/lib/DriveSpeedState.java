@@ -5,7 +5,7 @@
 package frc.robot.lib;
 
 /** Add your docs here. */
-public enum SpeedState {
+public enum DriveSpeedState {
     HIGH,
     MED,
     LOW

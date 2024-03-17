@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drive.AutoDriveDelayCommand;
+import frc.robot.commands.Drive.AutoDriveOdometry;
 import frc.robot.commands.Drive.AutoDriveRotateCommand;
 import frc.robot.commands.Drive.AutoDriveTimeVel;
 import frc.robot.commands.Drive.AutoDriveTimeVelToAprilArea;
@@ -23,33 +24,36 @@ public class AutoBlueRightShoot1 extends SequentialCommandGroup {
   /** Creates a new AutoBlueLeft. */
   public AutoBlueRightShoot1(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
 
-
+    
     addCommands(
-      new InstantCommand(() -> _drive.setPose(new Pose2d(0, 0, new Rotation2d(Math.toRadians(60)))), _drive),
-      new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
-      new AutoDriveTimeVel(_drive,2, 0,0, 1.7
-      , 0.2 , 0.3, false),
+       
+    //new AutoDriveTimeVel(_drive,2, 0,0, 2, 0.0 , 0.0, false)
+       new AutoDriveOdometry(_drive, new Pose2d(4.57, 0, new Rotation2d(Math.toRadians(0))), 1)
+      // new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
+      // new AutoDriveTimeVel(_drive,2, 0,0, 1.7
+      // , 0.2 , 0.3, false),
       
-      new AutoDriveRotateCommand(_drive, -42, 1.5),
-      new InstantCommand(_shooter::setFlipperExtended, _shooter),
-      new AutoDriveDelayCommand(_drive, 1), 
-      new AutoDriveRotateCommand(_drive, -16, 1.0),
-      new InstantCommand(_intake::spinOn, _intake),
-      new InstantCommand(_shooter::setFlippersRetracted, _shooter),
-      // new AutoDriveTimeVel(_drive,3, 17.5,17.5, 1, 0.2 , 0.0, false),
-      // new AutoDriveTimeVelToNote(_drive, 2,17.5, 17.5, 2, 0, 0.2),
-      new AutoDriveTimeVel(_drive, 2, -16, -16, 2.2, 0, 0.2, false),
-      new AutoDriveDelayCommand(_drive, 0.8),
-      new AutoDriveTimeVel(_drive,2, 164,-42, 2.3, 0.2 , 0.2, false),
-      new AutoDriveDelayCommand(_drive, 0.8),
-      // new AutoDriveTimeVelToAprilYaw(_drive, 3, -165, 38),
-      // new AutoDriveTimeVelToAprilArea(_drive, 3, -30, 38),
-      new InstantCommand(_shooter::setFlipperExtended, _shooter),
-      new AutoDriveDelayCommand(_drive, 1.2),
-      new InstantCommand(_shooter::setFlippersRetracted, _shooter),
-      new ShooterSetShotCommand(_shooter, 0, 0),
-      new InstantCommand(_intake::spinOff, _intake),
-      new AutoDriveDelayCommand(_drive, 2)
+      // new AutoDriveRotateCommand(_drive, -42, 1.5),
+      // new InstantCommand(_shooter::setFlipperExtended, _shooter),
+      // new AutoDriveDelayCommand(_drive, 1), 
+      // new AutoDriveRotateCommand(_drive, -16, 1.0),
+      // new InstantCommand(_intake::spinOn, _intake),
+      // new InstantCommand(_shooter::setFlippersRetracted, _shooter),
+      // // new AutoDriveTimeVel(_drive,3, 17.5,17.5, 1, 0.2 , 0.0, false),
+      // // new AutoDriveTimeVelToNote(_drive, 2,17.5, 17.5, 2, 0, 0.2),
+      // new AutoDriveTimeVel(_drive, 2, -16, -16, 2.2, 0, 0.2, false),
+      // new AutoDriveDelayCommand(_drive, 0.8),
+      // new AutoDriveTimeVel(_drive,2, 164,-42, 2.3, 0.2 , 0.2, false),
+      // new AutoDriveDelayCommand(_drive, 0.8),
+      // // new AutoDriveTimeVelToAprilYaw(_drive, 3, -165, 38),
+      // // new AutoDriveTimeVelToAprilArea(_drive, 3, -30, 38),
+      // new InstantCommand(_shooter::setFlipperExtended, _shooter),
+      // new AutoDriveDelayCommand(_drive, 1.2),
+      // new InstantCommand(_shooter::setFlippersRetracted, _shooter),
+      // new ShooterSetShotCommand(_shooter, 0, 0),
+      // new InstantCommand(_intake::spinOff, _intake),
+      // new AutoDriveDelayCommand(_drive, 2)
+
     );
   }
 }

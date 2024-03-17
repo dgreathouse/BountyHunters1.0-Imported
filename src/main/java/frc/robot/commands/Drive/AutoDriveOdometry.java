@@ -10,7 +10,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.GD;
-import frc.robot.lib.SpeedState;
+import frc.robot.lib.DriveSpeedState;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveOdometry extends Command {
@@ -21,7 +21,7 @@ public class AutoDriveOdometry extends Command {
   double m_driveSpeed;
   boolean m_isFinished = false;
   Timer m_timer = new Timer();
-  double m_rampUpTime = 0.25;
+  double m_rampUpTime = 0.0;
 
   /**
    * 
@@ -40,7 +40,7 @@ public class AutoDriveOdometry extends Command {
   @Override
   public void initialize() {
     // The drive PID based on distance to target and output of MPS.
-    m_drivePID = new PIDController(0.0, 0.0, 0.0);
+    m_drivePID = new PIDController(3.0, 0.50, 0.0);
     m_timer.start();
   }
 

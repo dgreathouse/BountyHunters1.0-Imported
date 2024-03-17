@@ -19,10 +19,10 @@ public class GD {
     public static Alliance G_Alliance = Alliance.Blue;
     public static FlipperStates G_FlipperState = FlipperStates.BACK;
     public static NoteState G_NoteState = NoteState.OUT;
-    public static SpeedState G_SpeedState = SpeedState.HIGH;
+    public static DriveSpeedState G_DriveSpeedState = DriveSpeedState.HIGH;
     public static Pose2d G_RobotPose = new Pose2d();
     public static ShooterState G_ShooterState = ShooterState.OFF;
     public static double G_ClimberPerOut = 0.0;
-    public static boolean G_ClimberVoltageMode = false;
+    public static boolean G_ClimberVoltageMode = true;
     public static double G_ClimberPosition = 0.0;
 }
