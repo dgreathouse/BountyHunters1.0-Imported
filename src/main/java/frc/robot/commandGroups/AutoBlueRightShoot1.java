@@ -26,9 +26,20 @@ public class AutoBlueRightShoot1 extends SequentialCommandGroup {
 
     
     addCommands(
-       
+       // Four Note
+
     //new AutoDriveTimeVel(_drive,2, 0,0, 2, 0.0 , 0.0, false)
-       new AutoDriveOdometry(_drive, new Pose2d(4.57, 0, new Rotation2d(Math.toRadians(0))), 1)
+    
+    new AutoDriveRotateCommand(_drive, 33, 1.0),
+    // Shoot
+    new AutoDriveDelayCommand(_drive, 1),
+    new AutoDriveRotateCommand(_drive, 0, 1.0),
+    new AutoDriveOdometry(_drive, new Pose2d(1.5, 0, new Rotation2d(Math.toRadians(0))), 2),
+    new AutoDriveRotateCommand(_drive, 33, 1.0),
+    // Shoot
+    new AutoDriveRotateCommand(_drive, 0, 1.0),
+    new AutoDriveOdometry(_drive, new Pose2d(1, -1, new Rotation2d(Math.toRadians(0))), 2),
+    new AutoDriveOdometry(_drive, new Pose2d(1, -2, new Rotation2d(Math.toRadians(0))), 2)
       // new ShooterSetShotCommand(_shooter, 0.7, 0), // Fire up the shooter.
       // new AutoDriveTimeVel(_drive,2, 0,0, 1.7
       // , 0.2 , 0.3, false),

@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
 import frc.robot.lib.RobotMode;
+import frc.robot.lib.ShooterState;
 import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -18,9 +19,9 @@ public class DrivetrainDefaultCommand extends Command {
 
   private DrivetrainSubsystem m_drive;
   ChassisSpeeds m_speeds = new ChassisSpeeds();
-  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(6);
-  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(6);
-  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(6);
+  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(4);
+  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(4);
+  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(4);
  // --  double m_vYaw = 0;
 
   /** Creates a new DrivetrainDefaultCommand. */
@@ -192,21 +193,25 @@ public class DrivetrainDefaultCommand extends Command {
 
 
     if(k.OI.DRIVER_SHOT_POSITION_PODIUM.getAsBoolean()){
-      GD.G_ClimberPosition = -33;
+      GD.G_ClimberPosition = -36;
       GD.G_ClimberVoltageMode = false;
       GD.G_RobotTargetAngle.setTargetAngle(-33 * allianceSign);
+      GD.G_ShooterState = ShooterState.PODIUM;
     }else if(k.OI.DRIVER_SHOT_POSITION_SPEAKER.getAsBoolean()){
       GD.G_ClimberPosition = -60;
       GD.G_ClimberVoltageMode = false;
       GD.G_RobotTargetAngle.setTargetAngle(-60 * allianceSign);
+      GD.G_ShooterState = ShooterState.SPEAKER;
     }else if(k.OI.DRIVER_SHOT_POSITION_RIGHT.getAsBoolean()){
       GD.G_ClimberPosition = -25;
       GD.G_ClimberVoltageMode = false;
       GD.G_RobotTargetAngle.setTargetAngle(-40 * allianceSign);
+      GD.G_ShooterState = ShooterState.RIGHT;
     }else if(k.OI.DRIVER_SHOT_POSITION_LEFT.getAsBoolean()){
       GD.G_ClimberPosition = -40;
       GD.G_ClimberVoltageMode = false;
       GD.G_RobotTargetAngle.setTargetAngle(0 * allianceSign);
+      GD.G_ShooterState = ShooterState.LEFT;
     }
 
 

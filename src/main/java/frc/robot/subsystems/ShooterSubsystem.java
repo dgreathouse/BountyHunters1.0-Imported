@@ -27,7 +27,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
 
   public void updateDashboard() {
-
+    SmartDashboard.putString("Shooter State", GD.G_ShooterState.toString());
   }
 
   /** Contructor that creates a new ShooterSubsystem. */
@@ -80,21 +80,23 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rightServo.set(0.50);
   }
 
-  public void setShooterOnHighLong(){
+  // public void setShooterOnHighLong(){
 
-    GD.G_ClimberVoltageMode = false;
-    GD.G_ClimberPosition = 0;
-  }
-  public void setShooterOnHighShort(){
+  //   GD.G_ClimberVoltageMode = false;
+  //   GD.G_ClimberPosition = 0;
+  // }
+  // public void setShooterOnHighShort(){
+  //   GD.G_ClimberVoltageMode = false;
+  //   GD.G_ClimberPosition = -10;
+  // }
+  public void setShooterFeed(){
     GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = -10;
-  }
-  public void setShooterOnLow(){
-    GD.G_ClimberVoltageMode = false;
-    GD.G_ClimberPosition = -10;
+    GD.G_ShooterState = ShooterState.FEED;
   }
   public void setShooterOff(){
     GD.G_ClimberVoltageMode = false;
+    GD.G_ShooterState = ShooterState.OFF;
   }
 
   @Override
@@ -120,7 +122,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       case OFF:
         spin(k.SHOOTER.SPIN_SPEED_OFF);
         break;
-
+        case FEED:
+        spin(k.SHOOTER.SPIN_SPEED_LOW);
+        break;
       default:
         break;
     }
@@ -130,7 +134,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     }else if(GD.G_FlipperState == FlipperStates.PRELOAD){
       preloadFlippers();
     }else if(GD.G_FlipperState == FlipperStates.SHOOT){
-      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.LEFT){
+      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.LEFT || GD.G_ShooterState == ShooterState.FEED){
         extendFlippers();
         GD.G_NoteState = NoteState.OUT;
       }

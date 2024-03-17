@@ -40,7 +40,8 @@ public class AutoDriveOdometry extends Command {
   @Override
   public void initialize() {
     // The drive PID based on distance to target and output of MPS.
-    m_drivePID = new PIDController(3.0, 0.50, 0.0);
+    m_drivePID = new PIDController(4.0, 0.750, 0.0);
+    m_drivePID.setTolerance(0.05);// 0.05M or 2 inches
     m_timer.start();
   }
 

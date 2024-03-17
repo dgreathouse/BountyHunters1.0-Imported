@@ -24,6 +24,7 @@ import frc.robot.commands.Intake.IntakeDefaultCommand;
 import frc.robot.commands.Shooter.ShooterDefaultCommand;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
+import frc.robot.lib.LEDs;
 import frc.robot.lib.k;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -58,7 +59,7 @@ public class RobotContainer {
   public static final CommandPS5Controller s_operatorController = new CommandPS5Controller(k.OI.OPERATOR_CONTROLLER_PORT);
 
   SendableChooser<Command> autoChooser = new SendableChooser<>();
-  //public static final LEDs m_LEDs = new LEDs(3);
+  public static final LEDs m_LEDs = new LEDs(3);
   private void updateDashboard(){
     SmartDashboard.putString("RobotMode", GD.G_RobotMode.toString());
     Iterator<ISubsystem> it = subsystems.iterator();
@@ -106,7 +107,7 @@ public class RobotContainer {
     // k.OI.OPERATOR_SHOOTER_ON_HIGH_PODIUM.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnHighShort, m_shooterSubsystem ));
     // k.OI.OPERATOR_SHOOTER_ON_STAGE.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOnLow, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
-
+    k.OI.OPERATOR_SHOOTER_FEED.onTrue(new InstantCommand(m_shooterSubsystem::setShooterFeed, m_shooterSubsystem ));
 
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));

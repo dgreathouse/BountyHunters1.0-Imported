@@ -19,12 +19,14 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;
   VoltageOut leftVoltageOut = new VoltageOut(0);
   double m_previousCurrent = 0;
+
   public void updateDashboard() {
     if(GD.G_NoteState == NoteState.IN){
       SmartDashboard.putBoolean("Note State", true);
     }else {
       SmartDashboard.putBoolean("Note State", false);
     }
+    SmartDashboard.putNumber("Intake Current", m_leftMotor.getStatorCurrent().getValueAsDouble());
   }
 
   /** Creates a new IntakeSubsystem. */
@@ -66,18 +68,13 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
 
     if(GD.G_Intake_Speed > 0){
       if(statorCurrent > k.INTAKE.NOTE_CURRENT){
-        m_previousCurrent = statorCurrent;
-      }else if(statorCurrent < k.INTAKE.NOTE_CURRENT && m_previousCurrent > k.INTAKE.NOTE_CURRENT){
-        m_previousCurrent = 0;
-        GD.G_NoteState = NoteState.IN;
-      }else {
-        GD.G_NoteState = NoteState.OUT;
+       GD.G_NoteState = NoteState.IN;
       }
     }
     if(GD.G_NoteState == NoteState.IN){
-     // RobotContainer.m_LEDs.setMulticolorBlinky(0.1, 0, 150, 0);
+      RobotContainer.m_LEDs.setMulticolorBlinky(0.1, 0, 100, 0);
     }else {
-      // RobotContainer.m_LEDs.setAllianceColor();
+       RobotContainer.m_LEDs.setAllianceColor();
     }
   }
 }

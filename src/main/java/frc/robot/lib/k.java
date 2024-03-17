@@ -173,7 +173,7 @@ public final class k {
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
 
     public static final double SPIN_SPEED_HIGH_LONG = 0.68;
-    public static final double SPIN_SPEED_HIGH_SHORT = 0.68;
+    public static final double SPIN_SPEED_HIGH_SHORT = 0.48;
     public static final double SPIN_SPEED_LOW = 0.38;
     public static final double SPIN_SPEED_OFF = 0.0;
 
@@ -190,8 +190,8 @@ public final class k {
   }
   public static class INTAKE {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 4.5;
-    public static final double NOTE_CURRENT = 10;
-    public static final double INTAKE_RUNNING_CURRENT = 2;
+    public static final double NOTE_CURRENT = 90;
+    public static final double INTAKE_RUNNING_CURRENT = 50;
 
   }
   public static class CLIMBER {
