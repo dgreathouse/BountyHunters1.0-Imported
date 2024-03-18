@@ -28,7 +28,7 @@ public class AutoSourceMidNote extends SequentialCommandGroup {
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                    // Set Shooter Speed High
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                      // Preload flippers
       new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive to shot
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 0 * GD.G_AllianceSign, 1.0),                                             // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note
       new AutoDriveDelayCommand(_drive, 0.5),                                                                // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                         // Set flippers back
@@ -43,7 +43,7 @@ public class AutoSourceMidNote extends SequentialCommandGroup {
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                    // Set Shooter Speed HIGH
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                      // Preload flippers
       new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive to Shot
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 0 * GD.G_AllianceSign, 1.0),                                             // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note
       new AutoDriveDelayCommand(_drive, 1),                                                                  // Delay for Note shot
       new ShooterSetShotCommand(_shooter, ShooterState.OFF)                                                        // Set Shooter Speed OFF

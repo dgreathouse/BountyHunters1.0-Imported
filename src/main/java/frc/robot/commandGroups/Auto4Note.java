@@ -4,7 +4,6 @@ package frc.robot.commandGroups;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drive.AutoDriveDelayCommand;
@@ -30,28 +29,28 @@ public class Auto4Note extends SequentialCommandGroup {
 
     addCommands(
        // Four Note
-      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                          // Set Shooter Speed
+      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                    // Set Shooter Speed
       new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 0 * GD.G_AllianceSign, 1.0),                                             // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note #1
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                         // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                         // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to Note at angle
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Speaker
+      new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to Note at angle
+      new AutoDriveRotateCommand(_drive, 0 * GD.G_AllianceSign, 1.0),                                             // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note #2
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                         // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Straight
-      new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive forward at angle
-      new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to note at angle
+      new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive forward at angle
+      new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to note at angle
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                         // Set flippers back
-      new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive forward at angle
-      new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to note at angle and robot angle
+      new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive forward at angle
+      new AutoDriveOdometry(_drive, new Pose2d(0,0 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back to note at angle and robot angle
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note #4
       new AutoDriveDelayCommand(_drive, 0.8),                                                                // Delay for Note to be released
