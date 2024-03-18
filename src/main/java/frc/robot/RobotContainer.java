@@ -120,6 +120,7 @@ public class RobotContainer {
     k.OI.DRIVER_DRIVE_MODE_SPEED_HI.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedHI, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_SPEED_LOW.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedLOW, m_drivetrainSubsystem));
 
+    k.OI.OPERATOR_FUNCTIONAL_LEDS_SWITCH.onTrue(new InstantCommand(m_LEDs::FunctionalLEDs));
   }
   /**
    * @return the command to run in autonomous routine

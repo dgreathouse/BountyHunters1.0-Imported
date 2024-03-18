@@ -5,6 +5,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -19,9 +20,10 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;
   VoltageOut leftVoltageOut = new VoltageOut(0);
   double m_previousCurrent = 0;
+  Timer m_timer = new Timer();
 
   public void updateDashboard() {
-    if(GD.G_NoteState == NoteState.IN){
+    if(GD.G_NoteState == NoteState.IN || GD.G_NoteState == NoteState.INNOFLASH){
       SmartDashboard.putBoolean("Note State", true);
     }else {
       SmartDashboard.putBoolean("Note State", false);
@@ -71,10 +73,19 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
        GD.G_NoteState = NoteState.IN;
       }
     }
-    if(GD.G_NoteState == NoteState.IN){
+    if(GD.G_NoteState == NoteState.IN && !m_timer.hasElapsed(2) && GD.G_ShooterFlashing == false){
       RobotContainer.m_LEDs.setMulticolorBlinky(0.1, 0, 100, 0);
-    }else {
+      m_timer.start();
+      GD.G_IntakeFlashing = true;
+    }else if (GD.G_ShooterFlashing == false) {
        RobotContainer.m_LEDs.setAllianceColor();
+       GD.G_IntakeFlashing = false;
+    }
+    if (m_timer.hasElapsed(2)) {
+      GD.G_NoteState = NoteState.INNOFLASH;
+      GD.G_IntakeFlashing = false;
+      m_timer.stop();
+      m_timer.reset();
     }
   }
 }

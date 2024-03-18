@@ -25,4 +25,6 @@ public class GD {
     public static double G_ClimberPerOut = 0.0;
     public static boolean G_ClimberVoltageMode = true;
     public static double G_ClimberPosition = 0.0;
+    public static boolean G_ShooterFlashing = false;
+    public static boolean G_IntakeFlashing = false;
 }

@@ -7,5 +7,6 @@ package frc.robot.lib;
 /** Add your docs here. */
 public enum NoteState {
     IN,
+    INNOFLASH,
     OUT
 }

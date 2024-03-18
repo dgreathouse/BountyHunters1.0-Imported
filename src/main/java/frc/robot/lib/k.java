@@ -105,6 +105,9 @@ public final class k {
     // public static Trigger OPERATOR_SHOOTER_ON_HIGH_PODIUM = RobotContainer.s_operatorController.povRight();
     public static Trigger OPERATOR_SHOOTER_FEED = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
+
+    public static Trigger OPERATOR_FUNCTIONAL_LEDS_SWITCH = RobotContainer.s_operatorController.circle();
+    
   }
   public static class DRIVEBASE {
     public static final double WHEEL_BASE_Y_m = 0.47738;

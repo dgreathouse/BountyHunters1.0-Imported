@@ -22,7 +22,9 @@ public class LEDs {
     private int m_blue = 0;
     private boolean m_blinkState = true;
     private Random _random = new Random();
-    private boolean otherLEDsActive;
+    private int ledMidBeggining = 15;
+    private int ledMidEnd = 31;
+    private boolean functionalLEDs = true;
 
     /**
      * This is a constructor for the class. It has the same name as the class and
@@ -41,6 +43,10 @@ public class LEDs {
         m_blinkTimer.start();
     }
 
+    public void FunctionalLEDs() {
+        functionalLEDs = !functionalLEDs;
+    }
+
     /**
      * Set all the LEDs to the requested RGB values
      * 
@@ -49,7 +55,7 @@ public class LEDs {
      * @param _b Blue Value between 0-255
      */
     public void setRGBColor(int _r, int _g, int _b) {
-        if (_r != m_red || _g != m_green || _b != m_blue) {
+        if (_r == m_red && _g == m_green && _b == m_blue) {
             m_red = _r;
             m_green = _g;
             m_blue = _b;
@@ -58,57 +64,51 @@ public class LEDs {
             }
             m_led.setData(m_ledBuffer);
             m_led.start();
-        } else {
-
         }
-
     }
 
     public void setLEDsThreePartRGBColor(int _r1, int _g1, int _b1, int _r2, int _g2, int _b2, int _r3, int _g3,
             int _b3) {
-
-        for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-            if (i <= 15) {
-                m_red = _r1;
-                m_green = _g1;
-                m_blue = _b1;
-                m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
-            } else if (i <= 31 && i > 15) {
-                m_red = _r2;
-                m_green = _g2;
-                m_blue = _b2;
-                m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
-            } else if (i > 30) {
-                m_red = _r3;
-                m_green = _g3;
-                m_blue = _b3;
-                m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
+        if (_r2 == m_red && _g2 == m_green && _b2 == m_blue) {
+            // do nothing
+        } else {
+            for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+                if (i <= ledMidBeggining) {
+                    m_ledBuffer.setRGB(i, _r1, _g1, _b1);
+                } else if (i <= ledMidEnd && i > ledMidBeggining) {
+                    m_red = _r2;
+                    m_green = _g2;
+                    m_blue = _b2;
+                    m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
+                } else if (i > ledMidEnd) {
+                    m_ledBuffer.setRGB(i, _r3, _g3, _b3);
+                }
             }
+            m_led.setData(m_ledBuffer);
+            m_led.start();
         }
-        m_led.setData(m_ledBuffer);
-        m_led.start();
 
     }
 
     public void celebration() {
-        otherLEDsActive = true;
-        int rand = _random.nextInt(m_ledBuffer.getLength());
-        if (m_blinkTimer.hasElapsed(0.05)) {
-            m_blinkState = !m_blinkState;
-            m_blinkTimer.restart();
-        }
-        if (m_blinkState) {
-            if (DriverStation.getAlliance().get() == Alliance.Blue) {
-                m_ledBuffer.setRGB(rand, 0, 0, 100);
-            } else if (DriverStation.getAlliance().get() == Alliance.Red) {
-                m_ledBuffer.setRGB(rand, 100, 0, 0);
+        if (functionalLEDs == false) {
+            int rand = _random.nextInt(m_ledBuffer.getLength());
+            if (m_blinkTimer.hasElapsed(0.05)) {
+                m_blinkState = !m_blinkState;
+                m_blinkTimer.restart();
             }
-            m_led.setData(m_ledBuffer);
-            m_led.start();
-        } else {
-            setRGBColor(0, 0, 0);
+            if (m_blinkState) {
+                if (DriverStation.getAlliance().get() == Alliance.Blue) {
+                    m_ledBuffer.setRGB(rand, 0, 0, 100);
+                } else if (DriverStation.getAlliance().get() == Alliance.Red) {
+                    m_ledBuffer.setRGB(rand, 100, 0, 0);
+                }
+                m_led.setData(m_ledBuffer);
+                m_led.start();
+            } else {
+                setRGBColor(0, 0, 0);
+            }
         }
-        otherLEDsActive = false;
     }
 
     /**
@@ -126,7 +126,7 @@ public class LEDs {
      * then the color is green.
      */
     public void setAllianceColor() {
-        if (otherLEDsActive) {
+        if (functionalLEDs) {
             Color8Bit color = new Color8Bit();
             if (DriverStation.getAlliance().get() == Alliance.Blue) {
                 color = new Color8Bit(0, 0, 100);
@@ -137,7 +137,6 @@ public class LEDs {
             }
             setRGBColor(color);
         }
-
     }
 
     /**
@@ -158,42 +157,42 @@ public class LEDs {
     }
 
     public void setBlinky(double _time, int _r, int _g, int _b) {
-        otherLEDsActive = true;
-        if (m_blinkTimer.hasElapsed(_time)) {
-            m_blinkState = !m_blinkState;
-            m_blinkTimer.restart();
-        }
-        if (m_blinkState) {
-            setRGBColor(_r, _g, _b);
-        } else {
-            setRGBColor(0, 0, 0);
-        }
-        otherLEDsActive = false;
-    }
-
-    public void setMulticolorBlinky(double _time, int _r, int _g, int _b) {
-        otherLEDsActive = true;
-        if (m_blinkTimer.hasElapsed(_time)) {
-            m_blinkState = !m_blinkState;
-            m_blinkTimer.restart();
-        }
-        if (m_blinkState) {
-            if (DriverStation.getAlliance().get() == Alliance.Blue) {
-                setLEDsThreePartRGBColor(0, 0, 100, _r, _g, _b, 0, 0, 100);
-            } else if (DriverStation.getAlliance().get() == Alliance.Red) {
-                setLEDsThreePartRGBColor(100, 0, 0, _r, _g, _b, 100, 0, 0);
-            } else {
-                setRGBColor(_r, _g, _b);
+        if (functionalLEDs) {
+            if (m_blinkTimer.hasElapsed(_time)) {
+                m_blinkState = !m_blinkState;
+                m_blinkTimer.restart();
             }
-        } else {
-            if (DriverStation.getAlliance().get() == Alliance.Blue) {
-                setLEDsThreePartRGBColor(0, 0, 100, 0, 0, 0, 0, 0, 100);
-            } else if (DriverStation.getAlliance().get() == Alliance.Red) {
-                setLEDsThreePartRGBColor(100, 0, 0, 0, 0, 0, 100, 0, 0);
+            if (m_blinkState) {
+                setRGBColor(_r, _g, _b);
             } else {
                 setRGBColor(0, 0, 0);
             }
         }
-        otherLEDsActive = false;
+    }
+
+    public void setMulticolorBlinky(double _time, int _r, int _g, int _b) {
+        if (functionalLEDs) {
+            if (m_blinkTimer.hasElapsed(_time)) {
+                m_blinkState = !m_blinkState;
+                m_blinkTimer.restart();
+            }
+            if (m_blinkState) {
+                if (DriverStation.getAlliance().get() == Alliance.Blue) {
+                    setLEDsThreePartRGBColor(0, 0, 100, _r, _g, _b, 0, 0, 100);
+                } else if (DriverStation.getAlliance().get() == Alliance.Red) {
+                    setLEDsThreePartRGBColor(100, 0, 0, _r, _g, _b, 100, 0, 0);
+                } else {
+                    setRGBColor(_r, _g, _b);
+                }
+            } else {
+                if (DriverStation.getAlliance().get() == Alliance.Blue) {
+                    setLEDsThreePartRGBColor(0, 0, 100, 0, 0, 0, 0, 0, 100);
+                } else if (DriverStation.getAlliance().get() == Alliance.Red) {
+                    setLEDsThreePartRGBColor(100, 0, 0, 0, 0, 0, 100, 0, 0);
+                } else {
+                    setRGBColor(0, 0, 0);
+                }
+            }
+        }
     }
 }
