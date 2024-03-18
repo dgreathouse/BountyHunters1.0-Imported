@@ -109,6 +109,7 @@ public class RobotContainer {
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_FEED.onTrue(new InstantCommand(m_shooterSubsystem::setShooterFeed, m_shooterSubsystem ));
 
+
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_BACK.onTrue(new InstantCommand(m_shooterSubsystem::setFlippersRetracted, m_shooterSubsystem));
@@ -119,7 +120,11 @@ public class RobotContainer {
     k.OI.DRIVER_DRIVE_MODE_ROBOTCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_RobotCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_SPEED_HI.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedHI, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_SPEED_LOW.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedLOW, m_drivetrainSubsystem));
-
+    
+    k.OI.DRIVER_SHOT_POSITION_PODIUM.onTrue(new InstantCommand(m_shooterSubsystem::setShooterPodium, m_shooterSubsystem ));
+    k.OI.DRIVER_SHOT_POSITION_STRAIGHT.onTrue(new InstantCommand(m_shooterSubsystem::setShooterStraight, m_shooterSubsystem ));
+    k.OI.DRIVER_SHOT_POSITION_SOURCE.onTrue(new InstantCommand(m_shooterSubsystem::setShooterSource, m_shooterSubsystem ));
+    k.OI.DRIVER_SHOT_POSITION_AMP.onTrue(new InstantCommand(m_shooterSubsystem::setShooterAmp, m_shooterSubsystem ));
   }
   /**
    * @return the command to run in autonomous routine

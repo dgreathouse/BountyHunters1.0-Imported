@@ -5,7 +5,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -26,6 +29,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
 
+  double m_allianceSign = 1.0;
   public void updateDashboard() {
     SmartDashboard.putString("Shooter State", GD.G_ShooterState.toString());
   }
@@ -46,6 +50,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rightServo = new Servo(1);
 
     GD.G_ShooterState = ShooterState.OFF;
+   
+   m_allianceSign = GD.G_Alliance == Alliance.Red ? -1.0 : 1.0;
   }
   /**
    * Spin the spinners
@@ -81,13 +87,39 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
 
   public void setShooterFeed(){
-    GD.G_ClimberVoltageMode = false;
+    //GD.G_ClimberVoltageMode = false;
     GD.G_ClimberPosition = -10;
     GD.G_ShooterState = ShooterState.FEED;
   }
   public void setShooterOff(){
-    GD.G_ClimberVoltageMode = false;
+    //GD.G_ClimberVoltageMode = false;
     GD.G_ShooterState = ShooterState.OFF;
+  }
+  public void setShooterPodium(){ // triangle
+    GD.G_RobotTargetAngle.setTargetAngle(-25 * m_allianceSign);
+    GD.G_ShooterState = ShooterState.PODIUM;
+  }
+  public void setShooterStraight(){ // cross
+    GD.G_RobotTargetAngle.setTargetAngle(0);
+    GD.G_ShooterState = ShooterState.STRAIGHT;
+  }
+  public void setShooterSource(){ // circle blue
+    if(m_allianceSign > 0){
+      GD.G_RobotTargetAngle.setTargetAngle(-35);
+    }else {
+      GD.G_RobotTargetAngle.setTargetAngle(25);
+    }
+    
+    GD.G_ShooterState = ShooterState.SOURCE;
+  }
+  public void setShooterAmp(){ // square blue
+    if(m_allianceSign > 0){
+      GD.G_RobotTargetAngle.setTargetAngle(35);
+    }else {
+      GD.G_RobotTargetAngle.setTargetAngle(-25);
+    }
+    
+    GD.G_ShooterState = ShooterState.AMP;
   }
 
   @Override
@@ -104,10 +136,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       case SPEAKER:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
         break;
-      case LEFT:
+      case STRAIGHT:
         spin(k.SHOOTER.SPIN_SPEED_LOW);
         break;
-        case RIGHT:
+        case SOURCE:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case OFF:
@@ -125,7 +157,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     }else if(GD.G_FlipperState == FlipperStates.PRELOAD){
       preloadFlippers();
     }else if(GD.G_FlipperState == FlipperStates.SHOOT){
-      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.LEFT || GD.G_ShooterState == ShooterState.FEED){
+      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.STRAIGHT || GD.G_ShooterState == ShooterState.FEED){
         extendFlippers();
         GD.G_NoteState = NoteState.OUT;
       }

@@ -8,8 +8,9 @@ package frc.robot.lib;
 public enum ShooterState {
     SPEAKER,
     PODIUM,
-    LEFT,
-    RIGHT,
+    STRAIGHT,
+    SOURCE,
     FEED,
+    AMP,
     OFF
 }

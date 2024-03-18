@@ -99,9 +99,8 @@ public class SwerveModule {
             m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
             m_driveVolts = MathUtil.clamp(m_driveVolts, -6, 6); // Limit the amount the PID can contribute to the Feedforward
             m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
-            if(GD.G_DriveSpeedState == DriveSpeedState.LOW){
-                m_driveVolts = m_driveVolts * 0.5;
-            }
+            m_driveVolts = GD.G_DriveSpeedState == DriveSpeedState.LOW ? m_driveVolts = m_driveVolts * 0.5 : m_driveVolts;
+            
             m_driveMotor.setControl(m_driveVoltageOut.withOutput(m_driveVolts).withEnableFOC(true));
         }
     }

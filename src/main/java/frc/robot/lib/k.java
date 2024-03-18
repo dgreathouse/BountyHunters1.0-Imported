@@ -66,10 +66,10 @@ public final class k {
     // Driver controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
     // public static Trigger DRIVER_ENABLE_LEFT_TRIGGERS = RobotContainer.s_driverController.L1();
-    public static Trigger DRIVER_SHOT_POSITION_SPEAKER = RobotContainer.s_driverController.cross();
+    public static Trigger DRIVER_SHOT_POSITION_AMP = RobotContainer.s_driverController.square();
     public static Trigger DRIVER_SHOT_POSITION_PODIUM = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_RIGHT = RobotContainer.s_driverController.circle();
-    public static Trigger DRIVER_SHOT_POSITION_LEFT = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_SHOT_POSITION_SOURCE = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_STRAIGHT = RobotContainer.s_driverController.cross();
 
     
     // public static Trigger DRIVER_ENABLE_RIGHT_TRIGGERS = RobotContainer.s_driverController.R1();
@@ -88,7 +88,7 @@ public final class k {
     public static Trigger DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC = RobotContainer.s_driverController.povDown();
 
     public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.touchpad();
-    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.create();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.options();
 
     public static Trigger DRIVER_RESET_YAW = RobotContainer.s_driverController.create();
     
