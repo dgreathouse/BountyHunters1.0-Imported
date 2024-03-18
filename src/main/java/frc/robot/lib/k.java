@@ -2,8 +2,6 @@
 
 package frc.robot.lib;
 
-import edu.wpi.first.wpilibj.ADXL345_I2C.Axes;
-import edu.wpi.first.wpilibj.PS5Controller.Axis;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.RobotContainer;
 
@@ -65,23 +63,10 @@ public final class k {
 
     // Driver controller 
     public static final int DRIVER_CONTROLLER_PORT = 0;
-    // public static Trigger DRIVER_ENABLE_LEFT_TRIGGERS = RobotContainer.s_driverController.L1();
-    public static Trigger DRIVER_SHOT_POSITION_AMP = RobotContainer.s_driverController.square();
+    public static Trigger DRIVER_SHOT_POSITION_LEFT = RobotContainer.s_driverController.square();
     public static Trigger DRIVER_SHOT_POSITION_PODIUM = RobotContainer.s_driverController.triangle();
-    public static Trigger DRIVER_SHOT_POSITION_SOURCE = RobotContainer.s_driverController.circle();
+    public static Trigger DRIVER_SHOT_POSITION_RIGHT = RobotContainer.s_driverController.circle();
     public static Trigger DRIVER_SHOT_POSITION_STRAIGHT = RobotContainer.s_driverController.cross();
-
-    
-    // public static Trigger DRIVER_ENABLE_RIGHT_TRIGGERS = RobotContainer.s_driverController.R1();
-    // public static Trigger DRIVER_SHOT_POSITION_R1 = RobotContainer.s_driverController.triangle();
-    // public static Trigger DRIVER_SHOT_POSITION_R2 = RobotContainer.s_driverController.square();
-    // public static Trigger DRIVER_SHOT_POSITION_R3 = RobotContainer.s_driverController.cross();
-    // public static Trigger DRIVER_SHOT_POSITION_R4 = RobotContainer.s_driverController.circle();
-
-    // public static Trigger DRIVER_ENABLE_CLIMB_TRIGGERS = RobotContainer.s_driverController.R2();
-    // public static Trigger DRIVER_CLIMB_POSITION_1 = RobotContainer.s_driverController.square();
-    // public static Trigger DRIVER_CLIMB_POSITION_2 = RobotContainer.s_driverController.circle();
-    // public static Trigger DRIVER_CLIMB_POSITION_3 = RobotContainer.s_driverController.triangle();
 
     public static Trigger DRIVER_DRIVE_MODE_FIELDCENTRIC = RobotContainer.s_driverController.povLeft();
     public static Trigger DRIVER_DRIVE_MODE_ROBOTCENTRIC = RobotContainer.s_driverController.povRight();
@@ -94,15 +79,14 @@ public final class k {
     
     // Operator controller
     public static final int OPERATOR_CONTROLLER_PORT = 1;
-
     public static Trigger OPERATOR_FLIPPER_EXTEND = RobotContainer.s_operatorController.R1();
     public static Trigger OPERATOR_FLIPPER_PRELOAD = RobotContainer.s_operatorController.L1();
     public static Trigger OPERATOR_FLIPPER_BACK = RobotContainer.s_operatorController.touchpad();
+
     public static Trigger OPERATOR_INTAKE_SPIN_ON = RobotContainer.s_operatorController.triangle();
     public static Trigger OPERATOR_INTAKE_SPIN_OFF = RobotContainer.s_operatorController.cross();
     public static Trigger OPERATOR_INTAKE_SPIN_REVERSE = RobotContainer.s_operatorController.square();
-    // public static Trigger OPERATOR_SHOOTER_ON_HIGH_SPEAKER = RobotContainer.s_operatorController.povUp();
-    // public static Trigger OPERATOR_SHOOTER_ON_HIGH_PODIUM = RobotContainer.s_operatorController.povRight();
+    
     public static Trigger OPERATOR_SHOOTER_FEED = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
   }
@@ -113,7 +97,7 @@ public final class k {
     private static final double WHEEL_BASE_CIRCUMFERENCE_m = Math.PI * WHEEL_BASE_XY_AVG_m;
     private static final double WHEEL_BASE_MeterPerRad = WHEEL_BASE_CIRCUMFERENCE_m/(2* Math.PI);
     public static final double TURN_KP = 10;
-    public static final double TURN_KI = .5;
+    public static final double TURN_KI = 0.0;
     public static final double TURN_KD = 0.0;
   }
   public static class DRIVE {

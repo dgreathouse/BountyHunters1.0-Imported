@@ -5,13 +5,11 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.lib.GD;
 import frc.robot.lib.RobotMode;
-import frc.robot.lib.ShooterState;
+
 import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -94,18 +92,10 @@ public class DrivetrainDefaultCommand extends Command {
   /**
    * If right stick X,Y Hyp is > 0.8 then set the target angle
    * Reset the Shooter angle and speed to default if button not pressed.
-   * 
-   * Set the following data if the appropriate buttons are pressed
-   * Robot Angle to turn to
-   * Shooter angle to move to
-   * Shooter speed to run at.
    */
   private void setShotData(double _x, double _y) {
     // set the target angle only if the x,y hyp are > deadband
     GD.G_RobotTargetAngle.setTargetAngle(_x, _y);
-    // Assume blue
-  
-
 
   }
 
@@ -122,10 +112,10 @@ public class DrivetrainDefaultCommand extends Command {
   }
 
   public void updateDashboard() {
-    SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(X)", m_speeds.vxMetersPerSecond);
-    SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(Y)", m_speeds.vyMetersPerSecond);
-    SmartDashboard.putNumber("ChassisSpeeds(Command) Deg/Sec",
-        m_speeds.omegaRadiansPerSecond * k.CONVERT.RADIANS_TO_DEGREES);
+    // SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(X)", m_speeds.vxMetersPerSecond);
+    // SmartDashboard.putNumber("ChassisSpeeds(Command) MPS(Y)", m_speeds.vyMetersPerSecond);
+    // SmartDashboard.putNumber("ChassisSpeeds(Command) Deg/Sec",
+    //     m_speeds.omegaRadiansPerSecond * k.CONVERT.RADIANS_TO_DEGREES);
     // -- SmartDashboard.putNumber("vYaw", m_vYaw);
   }
 }

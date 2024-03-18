@@ -17,6 +17,7 @@ public class GD {
     public static boolean G_ShooterIsFlipperRetracted = true;
     public static TargetAngle G_RobotTargetAngle = new TargetAngle();
     public static Alliance G_Alliance = Alliance.Blue;
+    public static double G_AllianceSign = 1.0;
     public static FlipperStates G_FlipperState = FlipperStates.BACK;
     public static NoteState G_NoteState = NoteState.OUT;
     public static DriveSpeedState G_DriveSpeedState = DriveSpeedState.HIGH;

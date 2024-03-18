@@ -3,10 +3,7 @@
 package frc.robot.commands.Drive;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.RobotContainer;
-import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveTimeVelToNote extends Command {

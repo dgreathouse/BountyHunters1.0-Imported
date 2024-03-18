@@ -3,9 +3,7 @@
 package frc.robot.commands.Shooter;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.lib.GD;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.lib.k;
 
 public class ShooterDefaultCommand extends Command{
   ShooterSubsystem m_shooter;

@@ -28,13 +28,9 @@ public class Auto4Note extends SequentialCommandGroup {
     // Pose X positive is away from the drivers and Y positive is to the right.
     // The starting Pose for the robot is (0,0) (X,Y)
 
-    double allianceSign = 1.0;
-    if(GD.G_Alliance == Alliance.Red){
-      allianceSign = -1.0;
-    }
     addCommands(
        // Four Note
-      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM, 0),                                          // Set Shooter Speed
+      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                          // Set Shooter Speed
       new AutoDriveOdometry(_drive, new Pose2d(0,0,new Rotation2d(Math.toDegrees(0))), 2),       // Drive back
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                             // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                        // Shoot Note #1

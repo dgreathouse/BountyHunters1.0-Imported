@@ -12,13 +12,11 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterSetShotCommand extends InstantCommand{
   ShooterSubsystem m_shooter;
-  double m_angle;
   ShooterState m_state;
 
 
-  public ShooterSetShotCommand(ShooterSubsystem _shooter, ShooterState _state, double _angle) {
+  public ShooterSetShotCommand(ShooterSubsystem _shooter, ShooterState _state) {
     m_shooter = _shooter;
-    m_angle = _angle;
     m_state = _state;
     addRequirements(_shooter);
 

@@ -5,8 +5,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -29,7 +27,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   VoltageOut m_spinVoltageOut = new VoltageOut(0);
 
-  double m_allianceSign = 1.0;
+ // double m_allianceSign = 1.0;
   public void updateDashboard() {
     SmartDashboard.putString("Shooter State", GD.G_ShooterState.toString());
   }
@@ -51,7 +49,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
     GD.G_ShooterState = ShooterState.OFF;
    
-   m_allianceSign = GD.G_Alliance == Alliance.Red ? -1.0 : 1.0;
+   //m_allianceSign = GD.G_Alliance == Alliance.Red ? -1.0 : 1.0;
   }
   /**
    * Spin the spinners
@@ -87,80 +85,78 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
 
   public void setShooterFeed(){
-    //GD.G_ClimberVoltageMode = false;
-    GD.G_ClimberPosition = -10;
     GD.G_ShooterState = ShooterState.FEED;
   }
   public void setShooterOff(){
-    //GD.G_ClimberVoltageMode = false;
     GD.G_ShooterState = ShooterState.OFF;
   }
   public void setShooterPodium(){ // triangle
-    GD.G_RobotTargetAngle.setTargetAngle(-25 * m_allianceSign);
+    GD.G_RobotTargetAngle.setTargetAngle(-25 * GD.G_AllianceSign);
     GD.G_ShooterState = ShooterState.PODIUM;
   }
   public void setShooterStraight(){ // cross
     GD.G_RobotTargetAngle.setTargetAngle(0);
     GD.G_ShooterState = ShooterState.STRAIGHT;
   }
-  public void setShooterSource(){ // circle blue
-    if(m_allianceSign > 0){
+  public void setShooterRight(){ // circle blue
+    if(GD.G_Alliance == Alliance.Blue){
       GD.G_RobotTargetAngle.setTargetAngle(-35);
-    }else {
-      GD.G_RobotTargetAngle.setTargetAngle(25);
-    }
-    
-    GD.G_ShooterState = ShooterState.SOURCE;
-  }
-  public void setShooterAmp(){ // square blue
-    if(m_allianceSign > 0){
-      GD.G_RobotTargetAngle.setTargetAngle(35);
     }else {
       GD.G_RobotTargetAngle.setTargetAngle(-25);
     }
-    
-    GD.G_ShooterState = ShooterState.AMP;
+    GD.G_ShooterState = ShooterState.RIGHT;
+  }
+  public void setShooterLeft(){ // square blue
+    if(GD.G_Alliance == Alliance.Blue){
+      GD.G_RobotTargetAngle.setTargetAngle(25);
+    }else {
+      GD.G_RobotTargetAngle.setTargetAngle(35);
+    }
+    GD.G_ShooterState = ShooterState.LEFT;
   }
 
   @Override
   public void periodic() {
-    // Look at the Shooter State
-    // Look at the Shooter Speed
-    // Look 
-    // Handle Shooter speed and shooter angle
+    // Handle Shooter Speed
     switch (GD.G_ShooterState) {
       case PODIUM:
-        
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
-        break;
-      case SPEAKER:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
         break;
       case STRAIGHT:
-        spin(k.SHOOTER.SPIN_SPEED_LOW);
-        break;
-        case SOURCE:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        break;
+      case RIGHT:
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        break;
+      case LEFT:
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        break;
+      case FEED:
+        spin(k.SHOOTER.SPIN_SPEED_LOW);
         break;
       case OFF:
         spin(k.SHOOTER.SPIN_SPEED_OFF);
-        break;
-        case FEED:
-        spin(k.SHOOTER.SPIN_SPEED_LOW);
         break;
       default:
         break;
     }
     // Handle flippers
-    if(GD.G_FlipperState == FlipperStates.BACK){
-      retractFlippers();
-    }else if(GD.G_FlipperState == FlipperStates.PRELOAD){
-      preloadFlippers();
-    }else if(GD.G_FlipperState == FlipperStates.SHOOT){
-      if(GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.SPEAKER || GD.G_ShooterState == ShooterState.STRAIGHT || GD.G_ShooterState == ShooterState.FEED){
-        extendFlippers();
-        GD.G_NoteState = NoteState.OUT;
-      }
+    switch (GD.G_FlipperState) {
+      case BACK:
+        retractFlippers();
+      break;
+      case PRELOAD:
+        preloadFlippers();
+      break;
+      case SHOOT:
+        if(GD.G_ShooterState != ShooterState.OFF){
+          extendFlippers();
+          GD.G_NoteState = NoteState.OUT;
+        }
+      break;
+      default:
+        retractFlippers();
+      break;
     }
     
 
