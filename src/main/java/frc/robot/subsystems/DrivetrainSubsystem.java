@@ -106,8 +106,6 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   @Override
   public void periodic() {
 
-    // -- RobotContainer.m_vision.findNote();
-    // -- RobotContainer.m_vision.findApril();
 
   }
 }

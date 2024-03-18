@@ -5,7 +5,7 @@
 package frc.robot.lib;
 
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 /** Add your docs here. */
 public class TargetAngle {
@@ -35,23 +35,23 @@ public class TargetAngle {
         m_hyp = Math.hypot(_x, _y);
         if(Math.abs(m_hyp) > k.DRIVE.TARGET_ANGLE_DEADBAND){
           m_actualAngle = Math.toDegrees(Math.atan2(_x,_y));
-          SmartDashboard.putNumber("m_actualAngle", m_actualAngle);
-          if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){
-            m_targetAngle =  Rotation2d.fromDegrees(0.0); 
-          }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){
-            m_targetAngle = Rotation2d.fromDegrees(-30);
-          }else if(m_actualAngle >= -112.5 && m_actualAngle < -67.5){
+          //SmartDashboard.putNumber("m_actualAngle", m_actualAngle);
+          if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){  // North
+            m_targetAngle = Rotation2d.fromDegrees(0.0);
+          }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){  // North East
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-30.0) : Rotation2d.fromDegrees(-60); 
+           }else if(m_actualAngle >= -112.5 && m_actualAngle < -67.5){ // East
             m_targetAngle = Rotation2d.fromDegrees(-90);
-          }else if(m_actualAngle >= -157.5 && m_actualAngle < -112.5){
-            m_targetAngle = Rotation2d.fromDegrees(-(150));
-          }else if((m_actualAngle >= 157.5 && m_actualAngle <= 180.0) || (m_actualAngle <= -157.5 && m_actualAngle > -179.99)){
+          }else if(m_actualAngle >= -157.5 && m_actualAngle < -112.5){ // South East
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-150.0) : Rotation2d.fromDegrees(60);
+          }else if((m_actualAngle >= 157.5 && m_actualAngle <= 180.0) || (m_actualAngle <= -157.5 && m_actualAngle > -179.99)){ // South
             m_targetAngle = Rotation2d.fromDegrees(180);
-          }else if(m_actualAngle <= 67.5 && m_actualAngle > 22.5){
-            m_targetAngle = Rotation2d.fromDegrees(30);
-          }else if(m_actualAngle <= 112.5 && m_actualAngle > 67.5){
+          }else if(m_actualAngle <= 67.5 && m_actualAngle > 22.5){ // North West
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(60.0) : Rotation2d.fromDegrees(30);
+          }else if(m_actualAngle <= 112.5 && m_actualAngle > 67.5){ // West
             m_targetAngle = Rotation2d.fromDegrees(90);
-          }else if(m_actualAngle <= 157.5 && m_actualAngle > 112.5){
-            m_targetAngle =Rotation2d.fromDegrees(150);
+          }else if(m_actualAngle <= 157.5 && m_actualAngle > 112.5){ // South West
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-60.0) : Rotation2d.fromDegrees(150);
           }
         }
         return m_targetAngle;

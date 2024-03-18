@@ -41,10 +41,6 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.INTAKE_LEFT_SPIN);
   }
   public void spinOn(){
-    double statorCurrent = m_leftMotor.getStatorCurrent().getValueAsDouble();
-
-
-
     GD.G_Intake_Speed = k.INTAKE.SPIN_SPEED_DEFAULT_VOLT;
   }
   public void spinOff(){

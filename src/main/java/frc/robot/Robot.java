@@ -4,12 +4,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.lib.GD;
-import frc.robot.lib.LEDs;
 import frc.robot.lib.RobotMode;
 import frc.robot.lib.k;
 
@@ -69,6 +67,7 @@ public class Robot extends TimedRobot {
     if(DriverStation.getAlliance().isPresent()){
       if(DriverStation.getAlliance().get() == Alliance.Red){
         GD.G_Alliance = Alliance.Red;
+        GD.G_AllianceSign = -1.0;
       }
     }
     RobotContainer.m_drivetrainSubsystem.resetYaw();
@@ -90,6 +89,7 @@ public class Robot extends TimedRobot {
     if(DriverStation.getAlliance().isPresent()){
       if(DriverStation.getAlliance().get() == Alliance.Red){
         GD.G_Alliance = Alliance.Red;
+        GD.G_AllianceSign = -1.0;
       }
     }
     // This makes sure that the autonomous stops running when

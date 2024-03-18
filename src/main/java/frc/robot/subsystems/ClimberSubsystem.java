@@ -40,26 +40,7 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
     double avg = (Math.abs(rightRotations) + Math.abs(leftRotations)) /2.0;
     return avg;
   }
-  private void setVoltage(double _volts){
-    double setVoltage = _volts * 5;
-    if(GD.G_ClimberVoltageMode){
-      if(_volts <= 0) {
-        if (leftMotor.getEncoder().getPosition() < k.CLIMBER.LIMIT_UP_ROTATIONS || rightMotor.getEncoder().getPosition() <  k.CLIMBER.LIMIT_UP_ROTATIONS){
-          setVoltage = 0;
-        }
-      } else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
-        setVoltage = 0;
-      }
-      leftMotor.setVoltage(setVoltage);
-      rightMotor.setVoltage(setVoltage);
-    }else {
-      // PID to position
-    }
-    SmartDashboard.putNumber("Climber Volts In Climber", setVoltage);
-    SmartDashboard.putNumber("Climber Left", leftMotor.getEncoder().getPosition());
-    SmartDashboard.putNumber("Climber Right", rightMotor.getEncoder().getPosition());
 
-  }
   @Override
   public void periodic() {
     if(GD.G_ClimberVoltageMode){

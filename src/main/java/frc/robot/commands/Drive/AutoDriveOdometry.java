@@ -10,7 +10,6 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.GD;
-import frc.robot.lib.DriveSpeedState;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveOdometry extends Command {
