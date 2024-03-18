@@ -83,5 +83,6 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
       m_timer.stop();
       m_timer.reset();
     }
+    SmartDashboard.putBoolean("Functional LEDs", RobotContainer.m_LEDs.functionalLEDs);
   }
 }

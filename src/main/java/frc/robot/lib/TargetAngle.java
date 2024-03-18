@@ -39,19 +39,19 @@ public class TargetAngle {
           if(m_actualAngle >= -22.5 && m_actualAngle <= 22.5){  // North
             m_targetAngle = Rotation2d.fromDegrees(0.0);
           }else if(m_actualAngle >= -67.5 && m_actualAngle < -22.5){  // North East
-            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-30.0) : Rotation2d.fromDegrees(-60); 
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-60.0) : Rotation2d.fromDegrees(-60); 
            }else if(m_actualAngle >= -112.5 && m_actualAngle < -67.5){ // East
             m_targetAngle = Rotation2d.fromDegrees(-90);
           }else if(m_actualAngle >= -157.5 && m_actualAngle < -112.5){ // South East
-            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-150.0) : Rotation2d.fromDegrees(60);
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-120.0) : Rotation2d.fromDegrees(-120);
           }else if((m_actualAngle >= 157.5 && m_actualAngle <= 180.0) || (m_actualAngle <= -157.5 && m_actualAngle > -179.99)){ // South
             m_targetAngle = Rotation2d.fromDegrees(180);
           }else if(m_actualAngle <= 67.5 && m_actualAngle > 22.5){ // North West
-            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(60.0) : Rotation2d.fromDegrees(30);
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(60.0) : Rotation2d.fromDegrees(60);
           }else if(m_actualAngle <= 112.5 && m_actualAngle > 67.5){ // West
             m_targetAngle = Rotation2d.fromDegrees(90);
           }else if(m_actualAngle <= 157.5 && m_actualAngle > 112.5){ // South West
-            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(-60.0) : Rotation2d.fromDegrees(150);
+            m_targetAngle =  GD.G_Alliance == Alliance.Blue ? Rotation2d.fromDegrees(120.0) : Rotation2d.fromDegrees(120.0);
           }
         }
         return m_targetAngle;

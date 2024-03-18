@@ -22,8 +22,9 @@ public class LEDs {
     private boolean m_blinkState = true;
     private Random _random = new Random();
     private int ledMidBeggining = 15;
-    private int ledMidEnd = 31;
-    private boolean functionalLEDs = true;
+    private int ledMidEnd = 32;
+    public boolean functionalLEDs = true;
+    public boolean setAllianceColorCalled = false;
 
     /**
      * This is a constructor for the class. It has the same name as the class and
@@ -44,6 +45,7 @@ public class LEDs {
 
     public void FunctionalLEDs() {
         functionalLEDs = !functionalLEDs;
+        setAllianceColorCalled = !setAllianceColorCalled;
     }
 
     /**
@@ -125,6 +127,7 @@ public class LEDs {
      * then the color is green.
      */
     public void setAllianceColor() {
+        setAllianceColorCalled = true;
         if (functionalLEDs) {
             Color8Bit color = new Color8Bit();
             if (DriverStation.getAlliance().get() == Alliance.Blue) {
