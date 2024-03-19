@@ -114,7 +114,8 @@ public class SwerveDrive {
 
         m_turnPid = new PIDController(k.DRIVEBASE.TURN_KP, k.DRIVEBASE.TURN_KI, k.DRIVEBASE.TURN_KD);
         m_turnPid.enableContinuousInput(-Math.PI, Math.PI);
-        m_turnPid.setTolerance(Math.toRadians(.5));
+        m_turnPid.setTolerance(Math.toRadians(.1),1);
+        
         SmartDashboard.putData("Robot Turn PID",m_turnPid);
         m_odometryThread = new OdometryThread();
         
