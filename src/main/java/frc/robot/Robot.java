@@ -5,6 +5,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.lib.GD;
@@ -23,6 +24,7 @@ public class Robot extends TimedRobot {
   public Robot(){
     super(k.ROBOT.PERIOD);
   }
+  public static int DELETE = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -32,7 +34,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    RobotContainer.m_LEDs.setAllianceColor();
   }
 
   /**
@@ -55,7 +56,10 @@ public class Robot extends TimedRobot {
   
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {GD.G_RobotMode = RobotMode.DISABLE_INIT;}
+  public void disabledInit() {
+    GD.G_RobotMode = RobotMode.DISABLE_INIT;
+    RobotContainer.m_LEDs.setRGBColor(100, 0, 0);
+  }
 
   @Override
   public void disabledPeriodic() {GD.G_RobotMode = RobotMode.DISABLE_PERIODIC;}
@@ -78,6 +82,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+    RobotContainer.m_LEDs.setRGBColor(50, 50, 0);
   }
 
   /** This function is called periodically during autonomous. */
@@ -100,6 +105,8 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     GD.G_RobotMode = RobotMode.TELEOP_INIT;
+    RobotContainer.m_LEDs.setAllianceColor();
+    DELETE += 1;
   }
 
   /** This function is called periodically during operator control. */
@@ -108,6 +115,10 @@ public class Robot extends TimedRobot {
     GD.G_RobotMode = RobotMode.TELEOP_PERIODIC;
     //SmartDashboard.putBoolean(`"", isAutonomous())
    // RobotContainer.m_LEDs.setMulticolorBlinky(0.1,0,150,0);
+    SmartDashboard.putBoolean("Functional LEDs", RobotContainer.m_LEDs.functionalLEDs);
+    SmartDashboard.putBoolean("Shooter Flashing", GD.G_ShooterFlashing);
+    SmartDashboard.putBoolean("Intake Flashing", GD.G_IntakeFlashing);
+    SmartDashboard.putNumber("Set Alliance Color Called", DELETE);
   }
 
   @Override

@@ -127,7 +127,7 @@ public class RobotContainer {
     k.OI.DRIVER_SHOT_POSITION_RIGHT.onTrue(new InstantCommand(m_shooterSubsystem::setShooterRight, m_shooterSubsystem ));
     k.OI.DRIVER_SHOT_POSITION_LEFT.onTrue(new InstantCommand(m_shooterSubsystem::setShooterLeft, m_shooterSubsystem ));
 
-    k.OI.OPERATOR_FUNCTIONAL_LEDS_SWITCH.onTrue(new InstantCommand(m_LEDs::FunctionalLEDs));
+    k.OI.OPERATOR_FUNCTIONAL_LEDS_SWITCH.onTrue(new InstantCommand(m_intakeSubsystem::LEDsFunctionalSwitch, m_intakeSubsystem));
   }
   /**
    * @return the command to run in autonomous routine

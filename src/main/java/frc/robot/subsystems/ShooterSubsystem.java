@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
@@ -159,7 +158,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         retractFlippers();
       break;
     }
-    if (GD.G_IntakeFlashing == false && (GD.G_ShooterState == ShooterState.LEFT || GD.G_ShooterState == ShooterState.RIGHT)) {
+    if (GD.G_IntakeFlashing == false && (GD.G_ShooterState == ShooterState.LEFT || GD.G_ShooterState == ShooterState.RIGHT || GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.STRAIGHT)) {
         GD.G_ShooterFlashing = true;
         RobotContainer.m_LEDs.setMulticolorBlinky(0.1, 100,100, 0);
     } else if (GD.G_IntakeFlashing == false && GD.G_ShooterState == ShooterState.FEED) {
