@@ -101,7 +101,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   public void setShooterRight(){ // circle blue
     if(GD.G_Alliance == Alliance.Blue){
-      GD.G_RobotTargetAngle.setTargetAngle(-35);
+      GD.G_RobotTargetAngle.setTargetAngle(-45);
     }else {
       GD.G_RobotTargetAngle.setTargetAngle(-25);
     }
@@ -111,7 +111,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     if(GD.G_Alliance == Alliance.Blue){
       GD.G_RobotTargetAngle.setTargetAngle(25);
     }else {
-      GD.G_RobotTargetAngle.setTargetAngle(35);
+      GD.G_RobotTargetAngle.setTargetAngle(45);
     }
     GD.G_ShooterState = ShooterState.LEFT;
   }
