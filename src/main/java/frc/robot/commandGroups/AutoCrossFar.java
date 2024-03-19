@@ -22,7 +22,7 @@ public class AutoCrossFar extends SequentialCommandGroup {
     addCommands(
        // Four Note
       
-      new AutoDriveOdometry(_drive, new Pose2d(3.5,0,new Rotation2d(Math.toDegrees(0))), 2)       // Cross Line Far
+      new AutoDriveOdometry(_drive, new Pose2d(7.36,0,new Rotation2d(Math.toDegrees(0))), 3.5)       // Cross Line Far
       
       
     );

@@ -20,7 +20,7 @@ public class AutoDriveOdometry extends Command {
   double m_driveSpeed;
   boolean m_isFinished = false;
   Timer m_timer = new Timer();
-  double m_rampUpTime = 0.0;
+  double m_rampUpTime = 0.5;
 
   /**
    * 
