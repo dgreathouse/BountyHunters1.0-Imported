@@ -58,7 +58,9 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     }
     m_leftMotor.setControl(leftVoltageOut.withOutput(volts).withEnableFOC(true));
   }
-
+  public void LEDsFunctionalSwitch() {
+    RobotContainer.m_LEDs.FunctionalLEDs();
+  }
   @Override
   public void periodic() {
     spin(GD.G_Intake_Speed);
@@ -83,6 +85,5 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
       m_timer.stop();
       m_timer.reset();
     }
-    SmartDashboard.putBoolean("Functional LEDs", RobotContainer.m_LEDs.functionalLEDs);
   }
 }
