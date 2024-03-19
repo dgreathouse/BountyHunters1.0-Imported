@@ -24,7 +24,6 @@ public class Robot extends TimedRobot {
   public Robot(){
     super(k.ROBOT.PERIOD);
   }
-  public static int DELETE = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -106,7 +105,6 @@ public class Robot extends TimedRobot {
     }
     GD.G_RobotMode = RobotMode.TELEOP_INIT;
     RobotContainer.m_LEDs.setAllianceColor();
-    DELETE += 1;
   }
 
   /** This function is called periodically during operator control. */
@@ -118,7 +116,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Functional LEDs", RobotContainer.m_LEDs.functionalLEDs);
     SmartDashboard.putBoolean("Shooter Flashing", GD.G_ShooterFlashing);
     SmartDashboard.putBoolean("Intake Flashing", GD.G_IntakeFlashing);
-    SmartDashboard.putNumber("Set Alliance Color Called", DELETE);
   }
 
   @Override

@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.util.Color8Bit;
-import frc.robot.Robot;
 
 import java.util.Random;
 
@@ -57,8 +55,11 @@ public class LEDs {
      */
     public void setRGBColor(int _r, int _g, int _b) {
         if (_r == m_red && _g == m_green && _b == m_blue) {
+            m_red = _r;
+            m_green = _g;
+            m_blue = _b;
             for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-                m_ledBuffer.setRGB(i, _r, _g, _b);
+                m_ledBuffer.setRGB(i, m_red, m_green, m_blue);
             }
             m_led.setData(m_ledBuffer);
             m_led.start();
@@ -126,14 +127,21 @@ public class LEDs {
     public void setAllianceColor() {
         if (functionalLEDs) {
             if (DriverStation.getAlliance().get() == Alliance.Blue) {
-                setRGBColor(0, 0, 100);
+                if (m_red == 0 && m_green == 0 && m_blue == 100) {
+
+                } else {
+                    setRGBColor(0, 0, 100);
+                }
             } else if (DriverStation.getAlliance().get() == Alliance.Red) {
-                setRGBColor(100, 0, 0);
+                if (m_red == 0 && m_green == 0 && m_blue == 100) {
+
+                } else {
+                    setRGBColor(100, 0, 0);
+                }
             } else {
-                setRGBColor(50, 50, 50);
+
             }
         }
-        Robot.DELETE += 1;
     }
 
     /**
