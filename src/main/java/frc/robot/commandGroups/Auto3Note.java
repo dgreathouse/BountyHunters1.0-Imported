@@ -19,15 +19,14 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
-public class Auto4Note extends SequentialCommandGroup {
-  public Auto4Note(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
+public class Auto3Note extends SequentialCommandGroup {
+  public Auto3Note(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
     // GD.G_AllianceSign is a mutilpier to change the direction of an X, Y Pose or an Angle.
     // By default this play is setup for the Blue side and when Red some values need to be multiplied by -1.0 to change the direction or location.
     // Pose X positive is away from the drivers and Y positive is to the left.
     // The starting Pose for the robot is (0,0) (X,Y)
 
     addCommands(
-       // Four Note
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                               // Set Shooter Speed
       new AutoDriveOdometry(_drive, new Pose2d(0.8128,0.1524,new Rotation2d(Math.toDegrees(0))), 1.85),                       // Drive to side
       new AutoDriveRotateCommand(_drive, 45 * GD.G_AllianceSign, 0.6),                                                        // Rotate to Speaker
@@ -50,16 +49,8 @@ public class Auto4Note extends SequentialCommandGroup {
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-3.2 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive at angle to be in front to 4th Note
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for note to be taken in
-      new AutoDriveOdometry(_drive, new Pose2d(1.625,-3.2 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive forward to get note
-      new AutoDriveRotateCommand(_drive, -35 * GD.G_AllianceSign, 0.6),                                                       // Rotate to speaker
-      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #4
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
-      new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new InstantCommand(_intake::spinOff),                                                                                   // Turn off spinners
-      new ShooterSetShotCommand(_shooter, ShooterState.OFF)                                                                   // Turn off shooter
-
+      new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                  // Set Shooter Speed
+      new InstantCommand(_intake::spinOff)                                                                                    // Turn on the intake
     );
   }
 }

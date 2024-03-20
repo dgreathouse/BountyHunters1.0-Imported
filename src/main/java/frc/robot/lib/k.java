@@ -40,6 +40,7 @@ public final class k {
     public static final int CLIMBER_LEFT = 50;
     public static final int CLIMBER_RIGHT = 51;
     public static final int PCM = 0;
+    public static final int AMP = 60;
 
   }
   public static class CONVERT{
@@ -89,6 +90,9 @@ public final class k {
     
     public static Trigger OPERATOR_SHOOTER_FEED = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
+
+    public static Trigger OPERATOR_AMP_UP = RobotContainer.s_operatorController.povRight();
+    public static Trigger OPERATOR_AMP_DOWN = RobotContainer.s_operatorController.povLeft();
 
     public static Trigger OPERATOR_FUNCTIONAL_LEDS_SWITCH = RobotContainer.s_operatorController.circle();
     

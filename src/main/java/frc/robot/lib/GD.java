@@ -28,4 +28,5 @@ public class GD {
     public static double G_ClimberPosition = 0.0;
     public static boolean G_ShooterFlashing = false;
     public static boolean G_IntakeFlashing = false;
+    public static AmpState G_AmpState = AmpState.DOWN;
 }
