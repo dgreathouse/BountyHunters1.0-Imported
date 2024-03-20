@@ -158,15 +158,5 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         retractFlippers();
       break;
     }
-    if (GD.G_IntakeFlashing == false && (GD.G_ShooterState == ShooterState.LEFT || GD.G_ShooterState == ShooterState.RIGHT || GD.G_ShooterState == ShooterState.PODIUM || GD.G_ShooterState == ShooterState.STRAIGHT)) {
-        GD.G_ShooterFlashing = true;
-        RobotContainer.m_LEDs.setMulticolorBlinky(0.1, 100,100, 0);
-    } else if (GD.G_IntakeFlashing == false && GD.G_ShooterState == ShooterState.FEED) {
-        GD.G_ShooterFlashing = true;
-        RobotContainer.m_LEDs.setMulticolorBlinky(0.3, 100, 100, 0);
-    } else if (GD.G_IntakeFlashing == false && GD.G_ShooterState == ShooterState.OFF) {
-      GD.G_ShooterFlashing = false;
-      RobotContainer.m_LEDs.setAllianceColor();
-    }
   }
 }

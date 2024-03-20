@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     GD.G_RobotMode = RobotMode.DISABLE_INIT;
-    RobotContainer.m_LEDs.setRGBColor(100, 0, 0);
+    RobotContainer.m_LEDs.setAllianceColor();
   }
 
   @Override
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     GD.G_RobotMode = RobotMode.TELEOP_INIT;
-    RobotContainer.m_LEDs.setAllianceColor();
+    
   }
 
   /** This function is called periodically during operator control. */
