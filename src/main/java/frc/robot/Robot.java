@@ -74,7 +74,6 @@ public class Robot extends TimedRobot {
         GD.G_AllianceSign = -1.0;
       }
     }
-    SmartDashboard.putNumber("AllianceSign", GD.G_AllianceSign);
     RobotContainer.m_drivetrainSubsystem.resetYaw();
     GD.G_RobotMode = RobotMode.AUTONOMOUS_INIT;
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
@@ -113,11 +112,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     GD.G_RobotMode = RobotMode.TELEOP_PERIODIC;
-    //SmartDashboard.putBoolean(`"", isAutonomous())
-   // RobotContainer.m_LEDs.setMulticolorBlinky(0.1,0,150,0);
-    SmartDashboard.putBoolean("Functional LEDs", RobotContainer.m_LEDs.functionalLEDs);
-    SmartDashboard.putBoolean("Shooter Flashing", GD.G_ShooterFlashing);
-    SmartDashboard.putBoolean("Intake Flashing", GD.G_IntakeFlashing);
   }
 
   @Override

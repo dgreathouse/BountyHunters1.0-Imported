@@ -17,18 +17,14 @@ import frc.robot.lib.k;
 
 public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
   TalonFX m_leftMotor;
-  VoltageOut leftVoltageOut = new VoltageOut(0);
+  VoltageOut m_leftVoltageOut = new VoltageOut(0);
   double m_previousCurrent = 0;
   Timer m_timer = new Timer();
-  int noteBlinkCnt = 0;
-  int noteBlinkEndCnt = 0;
+  int m_noteBlinkCnt = 0;
+  int m_noteBlinkEndCnt = 0;
+  boolean m_latch = false;
 
   public void updateDashboard() {
-    if (GD.G_NoteState == NoteState.IN || GD.G_NoteState == NoteState.INNOFLASH) {
-      SmartDashboard.putBoolean("Note State", true);
-    } else {
-      SmartDashboard.putBoolean("Note State", false);
-    }
     SmartDashboard.putNumber("Intake Current", m_leftMotor.getStatorCurrent().getValueAsDouble());
   }
 
@@ -61,35 +57,44 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     } else {
       volts = _volts;
     }
-    m_leftMotor.setControl(leftVoltageOut.withOutput(volts).withEnableFOC(true));
+    m_leftMotor.setControl(m_leftVoltageOut.withOutput(volts).withEnableFOC(true));
   }
 
   @Override
   public void periodic() {
     spin(GD.G_Intake_Speed);
     double statorCurrent = m_leftMotor.getStatorCurrent().getValueAsDouble();
-    if(GD.G_Intake_Speed > 0){
-      if(statorCurrent > k.INTAKE.NOTE_CURRENT){
-       GD.G_NoteState = NoteState.IN;
+    if (GD.G_Intake_Speed > 0) {
+      if (statorCurrent > k.INTAKE.NOTE_CURRENT && !m_latch) {
+        GD.G_NoteState = NoteState.IN;
+        m_latch = true;
       }
     }
     if (GD.G_NoteState == NoteState.IN) {
-      if (noteBlinkCnt < 5) {
-        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
-        noteBlinkCnt++;
-        noteBlinkEndCnt++;
-      } else if (noteBlinkCnt < 10) {
+      m_noteBlinkEndCnt++;
+      if(m_noteBlinkEndCnt > 0 && m_noteBlinkEndCnt < 10){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
-        noteBlinkCnt++;
-        noteBlinkEndCnt++;
-      } else if (noteBlinkCnt > 10) {
-        noteBlinkCnt = 0;
-        noteBlinkEndCnt++;
-        if (noteBlinkEndCnt > 100) {
-          RobotContainer.m_LEDs.setAllianceColor();
-          GD.G_NoteState = NoteState.OUT;
-          noteBlinkEndCnt = 0;
-        }
+      }else if(m_noteBlinkEndCnt >= 10 && m_noteBlinkEndCnt < 20){
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
+      }else if(m_noteBlinkEndCnt >= 20 && m_noteBlinkEndCnt < 30){
+        RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
+      }else if(m_noteBlinkEndCnt >= 30 && m_noteBlinkEndCnt < 40){
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
+      }else if(m_noteBlinkEndCnt >= 40 && m_noteBlinkEndCnt < 50){
+        RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
+      }else if(m_noteBlinkEndCnt >= 50 && m_noteBlinkEndCnt < 60){
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
+      }else if(m_noteBlinkEndCnt >= 60 && m_noteBlinkEndCnt < 70){
+        RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
+      }else if(m_noteBlinkEndCnt >= 70 && m_noteBlinkEndCnt < 80){
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
+      }else if(m_noteBlinkEndCnt >= 80 && m_noteBlinkEndCnt < 90){
+        RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
+      }else if(m_noteBlinkEndCnt >= 100 ){
+        m_noteBlinkEndCnt = 0;
+        GD.G_NoteState = NoteState.OUT;
+        m_latch = false;
+        RobotContainer.m_LEDs.setAllianceColor();
       }
     }
   }

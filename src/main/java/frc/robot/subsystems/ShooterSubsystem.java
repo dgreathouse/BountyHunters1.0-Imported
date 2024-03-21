@@ -151,7 +151,6 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       case SHOOT:
         if(GD.G_ShooterState != ShooterState.OFF){
           extendFlippers();
-          GD.G_NoteState = NoteState.OUT;
         }
       break;
       default:

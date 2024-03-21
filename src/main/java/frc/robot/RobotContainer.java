@@ -17,6 +17,7 @@ import frc.robot.commandGroups.AutoSourceWallNote;
 import frc.robot.commandGroups.Auto3Note;
 import frc.robot.commandGroups.Auto4Note;
 import frc.robot.commandGroups.AutoCrossFar;
+import frc.robot.commandGroups.AutoCrossFarGetNote;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoSourceMidNote;
@@ -92,6 +93,7 @@ public class RobotContainer {
     autoChooser.addOption("Three Note", new Auto3Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Source Wall Note", new AutoSourceWallNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     autoChooser.addOption("Source Mid Note", new AutoSourceMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Get Wall Note", new AutoCrossFarGetNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.

@@ -181,7 +181,7 @@ public final class k {
   }
   public static class INTAKE {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 5;
-    public static final double NOTE_CURRENT = 90;
+    public static final double NOTE_CURRENT = 70;
     public static final double INTAKE_RUNNING_CURRENT = 50;
 
   }

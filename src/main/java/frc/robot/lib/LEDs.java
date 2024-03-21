@@ -12,10 +12,7 @@ public class LEDs {
      * Number of LEDs in the strip. Change this number to match the number of LEDs
      */
     private int m_numLEDs = 48;
-    private int ledMidBegin = 16;
-    private int ledMidEnd = 32;
-    public boolean functionalLEDs = true;
-
+    private int m_r, m_g, m_b;
     /**
      * This is a constructor for the class. It has the same name as the class and
      * has no return type.
@@ -27,6 +24,7 @@ public class LEDs {
         m_ledBuffer = new AddressableLEDBuffer(m_numLEDs);
         m_led.setLength(m_ledBuffer.getLength());
         setAllianceColor();
+        updateLEDs();
     }
 
     public void updateLEDs() {
@@ -42,9 +40,14 @@ public class LEDs {
      * @param _b Blue Value between 0-255
      */
     public void setRGBColor(int _r, int _g, int _b) {
-        for (int i = 0; i < m_numLEDs; i++) {
-            m_ledBuffer.setRGB(i, _r, _g, _b);
+        if(m_r != _r || m_g != _g || m_b != _b){
+            for (int i = 0; i < m_numLEDs; i++) {
+                m_ledBuffer.setRGB(i, _r, _g, _b);
+            }
+            m_r = _r; m_g = _g; m_b = _b;
+            updateLEDs();
         }
+        
     }
 
     /**
@@ -67,32 +70,5 @@ public class LEDs {
         } else {
             setRGBColor(100, 0, 0);
         }
-        updateLEDs();
     }
-
-    public void setMiddleGreen() {
-        for (int i = ledMidBegin; i < ledMidEnd; i++) {
-            m_ledBuffer.setRGB(i, 0, 100, 0);
-        }
-        updateLEDs();
-    }
-
-    public void setMiddleOff() {
-        for (int i = ledMidBegin; i < ledMidEnd; i++) {
-            m_ledBuffer.setRGB(i, 0, 0, 0);
-        }
-        updateLEDs();
-    }
-
-    public void setMiddleAlliance() {
-        for (int i = ledMidBegin; i < ledMidEnd; i++) {
-            if (GD.G_Alliance == Alliance.Blue) {
-                m_ledBuffer.setRGB(i, 0, 0, 100);
-            } else {
-                m_ledBuffer.setRGB(i, 100, 0, 0);
-            }
-        }
-    }
-
-
 }
