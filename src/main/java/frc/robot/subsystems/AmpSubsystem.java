@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.lib.AmpState;
@@ -16,6 +17,7 @@ import frc.robot.lib.k;
 
 public class AmpSubsystem extends SubsystemBase {
   CANSparkMax m_motor;
+  PIDController m_pid;
   /** Creates a new AmpSubsystem. */
   public AmpSubsystem() {
     initialize();
@@ -23,6 +25,8 @@ public class AmpSubsystem extends SubsystemBase {
   private void initialize(){
     m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
     m_motor.setIdleMode(IdleMode.kBrake);
+    m_pid = new PIDController(.1, .01, 0);
+    m_pid.setTolerance(1);
   }
   public void setAmpUp( ){
     GD.G_AmpState = AmpState.UP;
@@ -32,11 +36,20 @@ public class AmpSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    double ampVolts = -.0;
+    double ampVolts = 0;
     if(GD.G_AmpState == AmpState.UP){
-      ampVolts = 0;
+      ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), k.AMP.LIMPT_UP_ROTATION);
+      if(m_pid.atSetpoint()){
+        ampVolts = .5;
+      }
+    }else {
+
+      ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), 0);
+      if(m_pid.atSetpoint()){
+        ampVolts = -.5;
+      }
     }
+
     m_motor.setVoltage(ampVolts);
-    SmartDashboard.putNumber("AmpVolts", ampVolts);
   }
 }

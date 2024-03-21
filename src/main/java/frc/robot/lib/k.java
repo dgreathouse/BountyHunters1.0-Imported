@@ -189,5 +189,9 @@ public final class k {
     public static final double LIMIT_UP_ROTATIONS = -100;
     public static final double LIMIT_DOWN_ROTATIONS = 75;
   }
+  public static class AMP {
+    public static final double LIMPT_UP_ROTATION = 6.25;
+
+  }
 
 }
