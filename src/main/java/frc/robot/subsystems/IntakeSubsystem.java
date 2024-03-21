@@ -67,6 +67,7 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     if (GD.G_Intake_Speed > 0) {
       if (statorCurrent > k.INTAKE.NOTE_CURRENT && !m_latch) {
         GD.G_NoteState = NoteState.IN;
+        m_latch = true;
       }
     }
     if (GD.G_NoteState == NoteState.IN) {
@@ -74,24 +75,25 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
       if(m_noteBlinkEndCnt > 0 && m_noteBlinkEndCnt < 10){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
       }else if(m_noteBlinkEndCnt >= 10 && m_noteBlinkEndCnt < 20){
-        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
       }else if(m_noteBlinkEndCnt >= 20 && m_noteBlinkEndCnt < 30){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
       }else if(m_noteBlinkEndCnt >= 30 && m_noteBlinkEndCnt < 40){
-        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
       }else if(m_noteBlinkEndCnt >= 40 && m_noteBlinkEndCnt < 50){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
       }else if(m_noteBlinkEndCnt >= 50 && m_noteBlinkEndCnt < 60){
-        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
       }else if(m_noteBlinkEndCnt >= 60 && m_noteBlinkEndCnt < 70){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
       }else if(m_noteBlinkEndCnt >= 70 && m_noteBlinkEndCnt < 80){
-        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
+        RobotContainer.m_LEDs.setRGBColor(0, 80, 0);
       }else if(m_noteBlinkEndCnt >= 80 && m_noteBlinkEndCnt < 90){
         RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
       }else if(m_noteBlinkEndCnt >= 100 ){
         m_noteBlinkEndCnt = 0;
         GD.G_NoteState = NoteState.OUT;
+        m_latch = false;
         RobotContainer.m_LEDs.setAllianceColor();
       }
     }
