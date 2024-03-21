@@ -91,8 +91,8 @@ public final class k {
     public static Trigger OPERATOR_SHOOTER_FEED = RobotContainer.s_operatorController.povUp();
     public static Trigger OPERATOR_SHOOTER_OFF = RobotContainer.s_operatorController.povDown();
 
-    public static Trigger OPERATOR_AMP_UP = RobotContainer.s_operatorController.povRight();
-    public static Trigger OPERATOR_AMP_DOWN = RobotContainer.s_operatorController.povLeft();
+    public static Trigger OPERATOR_AMP_UP = RobotContainer.s_operatorController.povLeft();
+    public static Trigger OPERATOR_AMP_DOWN = RobotContainer.s_operatorController.povRight();
 
     public static Trigger OPERATOR_FUNCTIONAL_LEDS_SWITCH = RobotContainer.s_operatorController.circle();
     
@@ -186,8 +186,8 @@ public final class k {
 
   }
   public static class CLIMBER {
-    public static final double LIMIT_UP_ROTATIONS = -180;
-    public static final double LIMIT_DOWN_ROTATIONS = 0;
+    public static final double LIMIT_UP_ROTATIONS = -100;
+    public static final double LIMIT_DOWN_ROTATIONS = 75;
   }
 
 }

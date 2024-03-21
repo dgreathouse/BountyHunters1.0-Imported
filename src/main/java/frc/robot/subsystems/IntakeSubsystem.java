@@ -75,18 +75,18 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     }
     if (GD.G_NoteState == NoteState.IN) {
       if (noteBlinkCnt < 5) {
-        RobotContainer.m_LEDs.setMiddleGreen();
+        RobotContainer.m_LEDs.setRGBColor(0, 100, 0);
         noteBlinkCnt++;
         noteBlinkEndCnt++;
       } else if (noteBlinkCnt < 10) {
-        RobotContainer.m_LEDs.setMiddleOff();
+        RobotContainer.m_LEDs.setRGBColor(0, 0, 0);
         noteBlinkCnt++;
         noteBlinkEndCnt++;
       } else if (noteBlinkCnt > 10) {
         noteBlinkCnt = 0;
         noteBlinkEndCnt++;
         if (noteBlinkEndCnt > 100) {
-          RobotContainer.m_LEDs.setMiddleAlliance();
+          RobotContainer.m_LEDs.setAllianceColor();
           GD.G_NoteState = NoteState.OUT;
           noteBlinkEndCnt = 0;
         }

@@ -5,6 +5,7 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.lib.GD;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 public class AutoDriveRotateCommand extends Command{
@@ -27,6 +28,7 @@ public class AutoDriveRotateCommand extends Command{
     m_drivetrain = _drive;
     m_timeOut = _timeOut;
     m_robotAngle = _robotAngle;
+    
     addRequirements(m_drivetrain);
 
   }
@@ -35,7 +37,9 @@ public class AutoDriveRotateCommand extends Command{
   @Override
   public void initialize() {
     m_timer.start();
+    m_robotAngle *= GD.G_AllianceSign;
     m_drivetrain.setLastTargetAngle(new Rotation2d(Math.toRadians(m_robotAngle)));
+    
    //m_rotationAngle = new Rotation2d(m_robotAngle);
   }
 

@@ -7,6 +7,7 @@ package frc.robot.commands.Drive;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.lib.GD;
@@ -42,6 +43,7 @@ public class AutoDriveOdometry extends Command {
     m_drivePID = new PIDController(4.0, 0.750, 0.0);
     m_drivePID.setTolerance(0.05);// 0.05M or 2 inches
     m_timer.start();
+    m_poseDesired = new Pose2d(m_poseDesired.getX(), m_poseDesired.getY() * GD.G_AllianceSign, new Rotation2d(m_poseDesired.getRotation().getRadians()));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

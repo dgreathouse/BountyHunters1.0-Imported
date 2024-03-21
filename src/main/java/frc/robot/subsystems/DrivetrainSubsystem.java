@@ -6,6 +6,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotContainer;
@@ -76,7 +78,17 @@ public class DrivetrainSubsystem extends SubsystemBase implements ISubsystem{
   public void resetYaw(){
     m_robotDrive.resetYaw();
   }
-
+public double getAllianceSign(){
+  return GD.G_AllianceSign;
+}
+public void setAllianceSign(){
+  if(DriverStation.getAlliance().isPresent()){
+    if(DriverStation.getAlliance().get() == Alliance.Red){
+      GD.G_Alliance = Alliance.Red;
+      GD.G_AllianceSign = -1.0;
+    }
+  }
+}
   public void setLastTargetAngle(Rotation2d _targetAngle){
     GD.G_RobotTargetAngle.setTargetAngle(_targetAngle.getDegrees());
   }
