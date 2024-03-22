@@ -73,14 +73,14 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   private void retractFlippers() {
     m_leftServo.set(.6);
-    m_rightServo.set(.325);
+    m_rightServo.set(.3);
   }
   private void extendFlippers() {
     m_leftServo.set(0.2);
     m_rightServo.set(0.69);
   }
   private void preloadFlippers() {
-    m_leftServo.set(0.41);
+    m_leftServo.set(0.39);
     m_rightServo.set(0.50);
   }
 

@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    RobotContainer.m_LEDs.setRGBColor(50, 50, 0);
+    //RobotContainer.m_LEDs.setRGBColor(50, 50, 0);
   }
 
   /** This function is called periodically during autonomous. */
