@@ -31,30 +31,30 @@ public class Auto4Note extends SequentialCommandGroup {
       new InstantCommand(_drive::setAllianceSign, _drive),
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                               // Set Shooter Speed
       new AutoDriveOdometry(_drive, new Pose2d(0.8128,0.1524,new Rotation2d(Math.toDegrees(0))), 1.85),                       // Drive to side
-      new AutoDriveRotateCommand(_drive, 45 * _drive.getAllianceSign(), 0.6),                                                        // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 45, 0.6),                                                        // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #1
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                    // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(0.8128,-0.357 * _drive.getAllianceSign(),new Rotation2d(Math.toDegrees(0))), 1.85),   // Strafe to second note
-      new AutoDriveOdometry(_drive, new Pose2d(1.65,-0.307 * _drive.getAllianceSign(),new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive back to Note 
-      new AutoDriveRotateCommand(_drive, 30 * GD.G_AllianceSign, 0.6),                                                        // Rotate to Speaker
+      new AutoDriveOdometry(_drive, new Pose2d(0.8128,-0.357,new Rotation2d(Math.toDegrees(0))), 1.85),   // Strafe to second note
+      new AutoDriveOdometry(_drive, new Pose2d(1.65,-0.307,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive back to Note 
+      new AutoDriveRotateCommand(_drive, 30, 0.6),                                                        // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #2
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
-      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-0.357 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),   // Drive forward
-      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-1.8 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),     // Strafe to 3rd Note
-      new AutoDriveOdometry(_drive, new Pose2d(1.7,-1.8 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),        // Drive back to note
+      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-0.357,new Rotation2d(Math.toDegrees(0))), 1.85),   // Drive forward
+      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-1.8,new Rotation2d(Math.toDegrees(0))), 1.85),     // Strafe to 3rd Note
+      new AutoDriveOdometry(_drive, new Pose2d(1.7,-1.8,new Rotation2d(Math.toDegrees(0))), 1.85),        // Drive back to note
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-3.2 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive at angle to be in front to 4th Note
+      new AutoDriveOdometry(_drive, new Pose2d(0.7112,-3.2,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive at angle to be in front to 4th Note
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for note to be taken in
-      new AutoDriveOdometry(_drive, new Pose2d(1.625,-3.2 * GD.G_AllianceSign,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive forward to get note
-      new AutoDriveRotateCommand(_drive, -35 * GD.G_AllianceSign, 0.6),                                                       // Rotate to speaker
+      new AutoDriveOdometry(_drive, new Pose2d(1.625,-3.2,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive forward to get note
+      new AutoDriveRotateCommand(_drive, -35, 0.6),                                                       // Rotate to speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #4
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back

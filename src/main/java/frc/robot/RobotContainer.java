@@ -18,6 +18,7 @@ import frc.robot.commandGroups.Auto3Note;
 import frc.robot.commandGroups.Auto4Note;
 import frc.robot.commandGroups.AutoCrossFar;
 import frc.robot.commandGroups.AutoCrossFarGetNote;
+import frc.robot.commandGroups.AutoCrossFarGetNoteFast;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoSourceMidNote;
@@ -57,8 +58,8 @@ public class RobotContainer {
   public static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
-  public static final AmpSubsystem m_ampSubsystem = new AmpSubsystem();
-  private final AmpDefaultCommand m_ampDefaultCommand = new AmpDefaultCommand(m_ampSubsystem);
+  // public static final AmpSubsystem m_ampSubsystem = new AmpSubsystem();
+  // private final AmpDefaultCommand m_ampDefaultCommand = new AmpDefaultCommand(m_ampSubsystem);
   private Notifier m_telemetry;
   //public static final OrangePi5Vision m_vision = new OrangePi5Vision();
   
@@ -80,7 +81,7 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(m_drivetrainDefaultCommand);
     m_intakeSubsystem.setDefaultCommand(m_intakeDefaultCommand);
     m_shooterSubsystem.setDefaultCommand(m_shooterDefaultCommand);
-    m_ampSubsystem.setDefaultCommand(m_ampDefaultCommand);
+    //m_ampSubsystem.setDefaultCommand(m_ampDefaultCommand);
     // Configure the trigger bindings
     configureBindings();
 
@@ -93,7 +94,8 @@ public class RobotContainer {
     autoChooser.addOption("Three Note", new Auto3Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Source Wall Note", new AutoSourceWallNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     autoChooser.addOption("Source Mid Note", new AutoSourceMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
-    autoChooser.addOption("Get Wall Note", new AutoCrossFarGetNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Get Wall Note Slow", new AutoCrossFarGetNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Get Wall Note Fast", new AutoCrossFarGetNoteFast(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.
@@ -119,8 +121,8 @@ public class RobotContainer {
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_BACK.onTrue(new InstantCommand(m_shooterSubsystem::setFlippersRetracted, m_shooterSubsystem));
     
-    k.OI.OPERATOR_AMP_UP.onTrue(new InstantCommand(m_ampSubsystem::setAmpUp, m_ampSubsystem ));
-    k.OI.OPERATOR_AMP_DOWN.onTrue(new InstantCommand(m_ampSubsystem::setAmpDown, m_ampSubsystem ));
+    // k.OI.OPERATOR_AMP_UP.onTrue(new InstantCommand(m_ampSubsystem::setAmpUp, m_ampSubsystem ));
+    // k.OI.OPERATOR_AMP_DOWN.onTrue(new InstantCommand(m_ampSubsystem::setAmpDown, m_ampSubsystem ));
 
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_AngleFieldCentric, m_drivetrainSubsystem));
