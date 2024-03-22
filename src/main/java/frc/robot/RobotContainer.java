@@ -100,8 +100,6 @@ public class RobotContainer {
     m_telemetry = new Notifier(this::updateDashboard);
     m_telemetry.startPeriodic(0.1);
 
-    // Configure the trigger bindings
-    configureBindings();
   }
  
   /**

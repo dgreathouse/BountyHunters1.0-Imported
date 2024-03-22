@@ -36,7 +36,7 @@ public class AutoSourceMidNote extends SequentialCommandGroup {
       new AutoDriveRotateCommand(_drive, 0, 1),                                                                   // Rotate to Straight
       new AutoDriveOdometry(_drive, new Pose2d(3.6,-1.9,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive to Mid area
       new InstantCommand(_intake::spinOn),                                                                          // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(6.75,0.1,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive to Note
+      new AutoDriveOdometry(_drive, new Pose2d(6.75,0.05,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive to Note
       new AutoDriveDelayCommand(_drive, 0.5),                                                                       // Delay for Note to be grabbed
       new AutoDriveOdometry(_drive, new Pose2d(3.6,-1.9,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive to Mid area
       new InstantCommand(_intake::spinOff),                                                                         // Turn off intake
