@@ -35,6 +35,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   /** Contructor that creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     initialize();
+    
   }
 
   public void initialize() {
@@ -80,8 +81,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_rightServo.set(0.69);
   }
   private void preloadFlippers() {
-    m_leftServo.set(0.39);
-    m_rightServo.set(0.50);
+    m_leftServo.set(0.45);
+    m_rightServo.set(0.44);
   }
 
   public void setShooterFeed(){

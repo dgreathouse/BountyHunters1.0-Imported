@@ -44,7 +44,8 @@ public class AutoCrossFarGetNoteFast extends SequentialCommandGroup {
       new InstantCommand(_intake::spinOff),                                                                         // Turn off intake
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                     // Set Shooter Speed HIGH
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                       // Preload flippers
-      new AutoDriveOdometry(_drive, new Pose2d(0.96,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot
+      //new AutoDriveOdometry(_drive, new Pose2d(0.96,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot
+      new AutoDriveOdometry(_drive, new Pose2d(1.03,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot  Red
       new AutoDriveRotateCommand(_drive, -45, 1),                                               // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                         // Shoot Note
       new AutoDriveDelayCommand(_drive, 1),                                                                         // Delay for Note shot
