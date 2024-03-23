@@ -11,5 +11,6 @@ public enum ShooterState {
     RIGHT,
     FEED,
     LEFT,
+    AMP,
     OFF
 }

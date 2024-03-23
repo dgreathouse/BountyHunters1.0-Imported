@@ -19,8 +19,8 @@ import frc.robot.lib.k;
 
 public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
-  TalonFX m_leftMotor; // Declare a TalonFX motor controller class and call it m_leftMotor;
-  TalonFX m_rightMotor; // Declare a TalonFX motor controller class and call it m_rightMotor;
+  TalonFX m_topMotor; // Declare a TalonFX motor controller class and call it m_leftMotor;
+  TalonFX m_botMotor; // Declare a TalonFX motor controller class and call it m_rightMotor;
 
   Servo m_leftServo;
   Servo m_rightServo;
@@ -40,10 +40,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
 
   public void initialize() {
     RobotContainer.subsystems.add(this);
-    m_leftMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT, k.ROBORIO_CAN_IDS.NAME);
-    m_rightMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, k.ROBORIO_CAN_IDS.NAME);
-    m_leftMotor.setNeutralMode(NeutralModeValue.Brake);
-    m_rightMotor.setNeutralMode(NeutralModeValue.Brake);
+    m_topMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_LEFT, k.ROBORIO_CAN_IDS.NAME);
+    m_botMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, k.ROBORIO_CAN_IDS.NAME);
+    m_topMotor.setNeutralMode(NeutralModeValue.Brake);
+    m_botMotor.setNeutralMode(NeutralModeValue.Brake);
     SmartDashboard.putNumber("Shot Speed", 0);
     m_leftServo = new Servo(0);
     m_rightServo = new Servo(1);
@@ -57,10 +57,10 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
    * 
    * @param _speed +/- 1.0
    */
-  public void spin(double _speed) {
+  public void spin(double _speedTop, double _speedBot) {
     // Set the left and right motor voltage.
-    m_leftMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(_speed * k.ROBOT.BATTERY_MAX_VOLTS));
-    m_rightMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(-_speed * k.ROBOT.BATTERY_MAX_VOLTS));
+    m_topMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(_speedTop * k.ROBOT.BATTERY_MAX_VOLTS));
+    m_botMotor.setControl(m_spinVoltageOut.withEnableFOC(true).withOutput(-_speedBot * k.ROBOT.BATTERY_MAX_VOLTS));
   }
 
   public void setFlippersRetracted() {
@@ -84,7 +84,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_leftServo.set(0.45);
     m_rightServo.set(0.44);
   }
-
+  public void setShooterAmp(){
+    GD.G_ShooterState = ShooterState.AMP;
+  }
   public void setShooterFeed(){
     GD.G_ShooterState = ShooterState.FEED;
   }
@@ -121,22 +123,25 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     // Handle Shooter Speed
     switch (GD.G_ShooterState) {
       case PODIUM:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case STRAIGHT:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case RIGHT:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case LEFT:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG);
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case FEED:
-        spin(k.SHOOTER.SPIN_SPEED_LOW);
+        spin(k.SHOOTER.SPIN_SPEED_LOW,k.SHOOTER.SPIN_SPEED_LOW);
         break;
       case OFF:
-        spin(k.SHOOTER.SPIN_SPEED_OFF);
+        spin(k.SHOOTER.SPIN_SPEED_OFF,k.SHOOTER.SPIN_SPEED_OFF);
+        break;
+      case AMP:
+        spin(0.38,0.38);
         break;
       default:
         break;
