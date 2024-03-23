@@ -22,7 +22,6 @@ import frc.robot.commandGroups.AutoCrossFarGetNoteFast;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoSourceMidNote;
-import frc.robot.commands.Amp.AmpDefaultCommand;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
@@ -31,7 +30,7 @@ import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.LEDs;
 import frc.robot.lib.k;
-import frc.robot.subsystems.AmpSubsystem;
+
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -116,7 +115,8 @@ public class RobotContainer {
 
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_FEED.onTrue(new InstantCommand(m_shooterSubsystem::setShooterFeed, m_shooterSubsystem ));
-
+    k.OI.OPERATOR_AMP.onTrue(new InstantCommand(m_shooterSubsystem::setShooterAmp, m_shooterSubsystem ));
+    
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_BACK.onTrue(new InstantCommand(m_shooterSubsystem::setFlippersRetracted, m_shooterSubsystem));
