@@ -43,7 +43,7 @@ public class AutoSourceWallNote extends SequentialCommandGroup {
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                     // Set Shooter Speed HIGH
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                       // Preload flippers
       new AutoDriveOdometry(_drive, new Pose2d(0.88,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot
-      new AutoDriveRotateCommand(_drive, -53, 1),                                               // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, -53, 1.2),                                               // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                         // Shoot Note
       new AutoDriveDelayCommand(_drive, 1),                                                                         // Delay for Note shot
       new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                         // Set Shooter Speed OFF

@@ -38,7 +38,7 @@ public class Auto4Note extends SequentialCommandGroup {
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                    // Turn on the intake
       new AutoDriveOdometry(_drive, new Pose2d(0.8128,-0.357,new Rotation2d(Math.toDegrees(0))), 1.85),   // Strafe to second note
-      new AutoDriveOdometry(_drive, new Pose2d(1.65,-0.307,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive back to Note 
+      new AutoDriveOdometry(_drive, new Pose2d(1.62,-0.307,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive back to Note 
       new AutoDriveRotateCommand(_drive, 30, 0.6),                                                        // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #2
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
@@ -46,7 +46,7 @@ public class Auto4Note extends SequentialCommandGroup {
       new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
       new AutoDriveOdometry(_drive, new Pose2d(0.7112,-0.357,new Rotation2d(Math.toDegrees(0))), 1.85),   // Drive forward
       new AutoDriveOdometry(_drive, new Pose2d(0.7112,-1.8,new Rotation2d(Math.toDegrees(0))), 1.85),     // Strafe to 3rd Note
-      new AutoDriveOdometry(_drive, new Pose2d(1.7,-1.8,new Rotation2d(Math.toDegrees(0))), 1.85),        // Drive back to note
+      new AutoDriveOdometry(_drive, new Pose2d(1.75,-1.8,new Rotation2d(Math.toDegrees(0))), 1.85),        // Drive back to note
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
@@ -54,7 +54,7 @@ public class Auto4Note extends SequentialCommandGroup {
       new AutoDriveOdometry(_drive, new Pose2d(0.7112,-3.2,new Rotation2d(Math.toDegrees(0))), 1.85),     // Drive at angle to be in front to 4th Note
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for note to be taken in
       new AutoDriveOdometry(_drive, new Pose2d(1.625,-3.2,new Rotation2d(Math.toDegrees(0))), 1.85),      // Drive forward to get note
-      new AutoDriveRotateCommand(_drive, -35, 0.6),                                                       // Rotate to speaker
+      new AutoDriveRotateCommand(_drive, -35, 1),                                                       // Rotate to speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #4
       new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back

@@ -95,7 +95,7 @@ public class SwerveDrive {
 
     public void initialize(SwerveModuleConstants... _modules){
         m_moduleCount = _modules.length;
-        m_pigeon2 = new Pigeon2(k.CANIVORE_IDS.PIGEON2_CANID, k.CANIVORE_IDS.NAME);
+        m_pigeon2 = new Pigeon2(k.CANIVORE_IDS.PIGEON2_CANID, k.ROBORIO_CAN_IDS.NAME);
         
         m_modules = new SwerveModule[m_moduleCount];
         m_modulePositions = new SwerveModulePosition[m_moduleCount];
