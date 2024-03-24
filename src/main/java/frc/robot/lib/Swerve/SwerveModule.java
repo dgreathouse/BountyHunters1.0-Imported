@@ -2,7 +2,9 @@
 
 package frc.robot.lib.Swerve;
 
+import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -58,6 +60,9 @@ public class SwerveModule {
             : InvertedValue.CounterClockwise_Positive;
         m_driveMotor.setNeutralMode(NeutralModeValue.Brake);
         m_driveMotor.getConfigurator().apply(talonDriveConfigs);                // Apply the drive motor configuration
+       
+        CurrentLimitsConfigs cunnentConfigs = new CurrentLimitsConfigs().withStatorCurrentLimit(30).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true).withSupplyCurrentLimit(40);
+        m_driveMotor.getConfigurator().apply(cunnentConfigs);
 
         // Configure Steer Motor
         m_steerPID.enableContinuousInput(-180.0, +180.0);                    // Set the PID to allow role overs and adjust for optimization
