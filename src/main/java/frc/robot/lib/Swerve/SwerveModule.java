@@ -101,7 +101,7 @@ public class SwerveModule {
         if(_enableDrive){
             m_driveSetVelocity_mps = optimized.speedMetersPerSecond; // Get the velocity we want to set
             m_driveActualVelocity_mps = m_driveMotor.getVelocity().getValueAsDouble() /  k.DRIVE.WHEEL_MotRotPerMeter;
-            m_driveActualVelocity_mps = GD.G_DriveSpeedState == DriveSpeedState.LOW ? m_driveActualVelocity_mps = m_driveActualVelocity_mps * 0.5 : m_driveActualVelocity_mps;
+            m_driveSetVelocity_mps = GD.G_DriveSpeedState == DriveSpeedState.LOW ? m_driveSetVelocity_mps = m_driveSetVelocity_mps * 0.5 : m_driveSetVelocity_mps;
             m_driveVolts = m_drivePID.calculate(m_driveActualVelocity_mps, m_driveSetVelocity_mps);
             m_driveVolts = MathUtil.clamp(m_driveVolts, -6, 6); // Limit the amount the PID can contribute to the Feedforward
             m_driveVolts = m_driveVolts + m_driveFF.calculate(m_driveSetVelocity_mps);
@@ -128,13 +128,13 @@ public class SwerveModule {
     }
 
     public void updateDashboard(){
-        SmartDashboard.putNumber(m_name+"_set_deg", m_steerSetAngle_deg);
+        //SmartDashboard.putNumber(m_name+"_set_deg", m_steerSetAngle_deg);
         SmartDashboard.putNumber(m_name+"_set_mps", m_driveSetVelocity_mps);
         SmartDashboard.putNumber(m_name+"_act_deg", m_steerActualAngle_deg);
         SmartDashboard.putNumber(m_name+"_act_mps", m_driveActualVelocity_mps);
        
-        SmartDashboard.putNumber(m_name+"_CC_rot", m_cancoder.getPosition().getValueAsDouble());
-        SmartDashboard.putNumber(m_name + "_steerVolts", m_steerVolts);
+        //SmartDashboard.putNumber(m_name+"_CC_rot", m_cancoder.getPosition().getValueAsDouble());
+        //SmartDashboard.putNumber(m_name + "_steerVolts", m_steerVolts);
         SmartDashboard.putNumber(m_name + "_driveVolts", m_driveVolts);
     }
 

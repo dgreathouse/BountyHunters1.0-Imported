@@ -22,6 +22,7 @@ import frc.robot.commandGroups.AutoCrossFarGetNoteFast;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoSourceMidNote;
+import frc.robot.commands.Amp.AmpDefaultCommand;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
 import frc.robot.commands.Intake.IntakeDefaultCommand;
@@ -30,7 +31,7 @@ import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
 import frc.robot.lib.LEDs;
 import frc.robot.lib.k;
-
+import frc.robot.subsystems.AmpSubsystem;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -57,8 +58,8 @@ public class RobotContainer {
   public static final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ShooterDefaultCommand m_shooterDefaultCommand = new ShooterDefaultCommand(m_shooterSubsystem);
 
-  // public static final AmpSubsystem m_ampSubsystem = new AmpSubsystem();
-  // private final AmpDefaultCommand m_ampDefaultCommand = new AmpDefaultCommand(m_ampSubsystem);
+  public static final AmpSubsystem m_ampSubsystem = new AmpSubsystem();
+  private final AmpDefaultCommand m_ampDefaultCommand = new AmpDefaultCommand(m_ampSubsystem);
   private Notifier m_telemetry;
   //public static final OrangePi5Vision m_vision = new OrangePi5Vision();
   
@@ -80,7 +81,7 @@ public class RobotContainer {
     m_drivetrainSubsystem.setDefaultCommand(m_drivetrainDefaultCommand);
     m_intakeSubsystem.setDefaultCommand(m_intakeDefaultCommand);
     m_shooterSubsystem.setDefaultCommand(m_shooterDefaultCommand);
-    //m_ampSubsystem.setDefaultCommand(m_ampDefaultCommand);
+    m_ampSubsystem.setDefaultCommand(m_ampDefaultCommand);
     // Configure the trigger bindings
     configureBindings();
 
@@ -115,19 +116,19 @@ public class RobotContainer {
 
     k.OI.OPERATOR_SHOOTER_OFF.onTrue(new InstantCommand(m_shooterSubsystem::setShooterOff, m_shooterSubsystem ));
     k.OI.OPERATOR_SHOOTER_FEED.onTrue(new InstantCommand(m_shooterSubsystem::setShooterFeed, m_shooterSubsystem ));
-    k.OI.OPERATOR_AMP.onTrue(new InstantCommand(m_shooterSubsystem::setShooterAmp, m_shooterSubsystem ));
     
     k.OI.OPERATOR_FLIPPER_EXTEND.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperExtended, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_PRELOAD.onTrue(new InstantCommand(m_shooterSubsystem::setFlipperPreload, m_shooterSubsystem));
     k.OI.OPERATOR_FLIPPER_BACK.onTrue(new InstantCommand(m_shooterSubsystem::setFlippersRetracted, m_shooterSubsystem));
     
-    // k.OI.OPERATOR_AMP_UP.onTrue(new InstantCommand(m_ampSubsystem::setAmpUp, m_ampSubsystem ));
-    // k.OI.OPERATOR_AMP_DOWN.onTrue(new InstantCommand(m_ampSubsystem::setAmpDown, m_ampSubsystem ));
+    k.OI.OPERATOR_AMP_UP.onTrue(new InstantCommand(m_ampSubsystem::setAmpUp, m_ampSubsystem ));
+    k.OI.OPERATOR_AMP_DOWN.onTrue(new InstantCommand(m_ampSubsystem::setAmpDown, m_ampSubsystem ));
 
     k.OI.DRIVER_RESET_YAW.onTrue(new InstantCommand(m_drivetrainSubsystem::resetYaw, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_AngleFieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_FIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_FieldCentric, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_ROBOTCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_RobotCentric, m_drivetrainSubsystem));
+    k.OI.DRIVER_DRIVE_MODE_ROTATEFIELDCENTRIC.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveMode_RotateFieldCentric, m_drivetrainSubsystem));
 
     k.OI.DRIVER_DRIVE_MODE_SPEED_HI.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedHI, m_drivetrainSubsystem));
     k.OI.DRIVER_DRIVE_MODE_SPEED_LOW.onTrue(new InstantCommand(m_drivetrainSubsystem::setDriveSpeedLOW, m_drivetrainSubsystem));

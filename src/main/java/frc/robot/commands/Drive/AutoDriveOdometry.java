@@ -54,7 +54,6 @@ public class AutoDriveOdometry extends Command {
     double robotAngle = m_poseDesired.getRotation().getDegrees();               // The angle of the robot from the desired pose angle
     double targetAngle = trajectory.getTranslation().getAngle().getDegrees();   // The drive angle to the new pose.
     double targetDistance = m_poseDesired.getTranslation().getDistance(GD.G_RobotPose.getTranslation());   // The drive distance to the new pose.
-
     double speed = m_drivePID.calculate(0,targetDistance);          // Speed from PID based on 0 target and a changing distance as the robot moves at a target angle towards the destination. Output is speed MPS targetDistance is in Meters
                                                                                 // targetDistance is the new setpoint since we are moving to 0 for the target distance. This seams a little reversed but should work.
                                                                                 // TODO speed may need to be reversed since the measurement is the current position and 0 is the target.
