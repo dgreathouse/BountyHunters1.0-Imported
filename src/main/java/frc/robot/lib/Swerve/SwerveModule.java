@@ -136,6 +136,7 @@ public class SwerveModule {
         //SmartDashboard.putNumber(m_name+"_CC_rot", m_cancoder.getPosition().getValueAsDouble());
         //SmartDashboard.putNumber(m_name + "_steerVolts", m_steerVolts);
         SmartDashboard.putNumber(m_name + "_driveVolts", m_driveVolts);
+        SmartDashboard.putNumber(m_name + "_driveOutputVolts", m_driveMotor.getMotorVoltage().getValueAsDouble());
     }
 
 
