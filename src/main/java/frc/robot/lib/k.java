@@ -176,7 +176,8 @@ public final class k {
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
 
     public static final double SPIN_SPEED_HIGH_LONG = 0.68;
-    public static final double SPIN_SPEED_HIGH_SHORT = 0.48;
+    public static final double SPIN_SPEED_HIGH_SHORT = 0.44;
+
     public static final double SPIN_SPEED_LOW = 0.38;
     public static final double SPIN_SPEED_OFF = 0.0;
 

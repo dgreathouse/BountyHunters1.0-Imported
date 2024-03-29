@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.lib.AmpState;
 import frc.robot.lib.GD;
+import frc.robot.lib.ShooterState;
 import frc.robot.lib.k;
 
 public class AmpSubsystem extends SubsystemBase {
@@ -30,9 +31,11 @@ public class AmpSubsystem extends SubsystemBase {
   }
   public void setAmpUp( ){
     GD.G_AmpState = AmpState.UP;
+    GD.G_ShooterState = ShooterState.AMP;
   }
   public void setAmpDown( ){
     GD.G_AmpState = AmpState.DOWN;
+    GD.G_ShooterState = ShooterState.OFF;
   }
   @Override
   public void periodic() {
