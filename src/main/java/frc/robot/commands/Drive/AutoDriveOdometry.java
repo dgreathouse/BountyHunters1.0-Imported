@@ -70,6 +70,13 @@ public class AutoDriveOdometry extends Command {
     }
     return _val;
   }
+  private double rampDownValue(double _val, double rampTime_sec){
+    double currentTime_sec = m_timer.get();                                        
+    if(currentTime_sec < rampTime_sec){
+      _val = _val * currentTime_sec / rampTime_sec;
+    }
+    return _val;
+  }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

@@ -11,7 +11,7 @@ public class LEDs {
     /**
      * Number of LEDs in the strip. Change this number to match the number of LEDs
      */
-    private int m_numLEDs = 48;
+    private int m_numLEDs = 70;
     private int m_r, m_g, m_b;
     /**
      * This is a constructor for the class. It has the same name as the class and
