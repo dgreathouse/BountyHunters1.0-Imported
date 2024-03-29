@@ -43,13 +43,13 @@ public class AmpSubsystem extends SubsystemBase {
     if(GD.G_AmpState == AmpState.UP){
       ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), k.AMP.LIMPT_UP_ROTATION);
       if(m_pid.atSetpoint()){
-        ampVolts = .25;
+        ampVolts = .0;
       }
     }else {
 
       ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), 0);
       if(m_pid.atSetpoint()){
-        ampVolts = -.25;
+        ampVolts = -.0;
       }
     }
 
