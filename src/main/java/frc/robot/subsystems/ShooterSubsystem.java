@@ -94,7 +94,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterState = ShooterState.OFF;
   }
   public void setShooterPodium(){ // triangle
-    GD.G_RobotTargetAngle.setTargetAngle(-29 * GD.G_AllianceSign);
+    GD.G_RobotTargetAngle.setTargetAngle(-33 * GD.G_AllianceSign);
     GD.G_ShooterState = ShooterState.PODIUM;
   }
   public void setShooterStraight(){ // cross
@@ -103,7 +103,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   }
   public void setShooterRight(){ // circle blue
     if(GD.G_Alliance == Alliance.Blue){
-      GD.G_RobotTargetAngle.setTargetAngle(-45);
+      GD.G_RobotTargetAngle.setTargetAngle(-12.5);
     }else {
       GD.G_RobotTargetAngle.setTargetAngle(-25);
     }
@@ -113,7 +113,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     if(GD.G_Alliance == Alliance.Blue){
       GD.G_RobotTargetAngle.setTargetAngle(25);
     }else {
-      GD.G_RobotTargetAngle.setTargetAngle(45);
+      GD.G_RobotTargetAngle.setTargetAngle(12.5);
     }
     GD.G_ShooterState = ShooterState.LEFT;
   }
@@ -141,7 +141,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         spin(k.SHOOTER.SPIN_SPEED_OFF,k.SHOOTER.SPIN_SPEED_OFF);
         break;
       case AMP:
-        spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT,k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
+        spin(0,.7);
         break;
       default:
         break;

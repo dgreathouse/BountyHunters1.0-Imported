@@ -26,7 +26,7 @@ public class AmpSubsystem extends SubsystemBase {
   private void initialize(){
     m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
     m_motor.setIdleMode(IdleMode.kBrake);
-    m_pid = new PIDController(.3, .01, 0);
+    m_pid = new PIDController(.4, .01, 0);
     m_pid.setTolerance(.2);
   }
   public void setAmpUp( ){
@@ -43,13 +43,13 @@ public class AmpSubsystem extends SubsystemBase {
     if(GD.G_AmpState == AmpState.UP){
       ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), k.AMP.LIMPT_UP_ROTATION);
       if(m_pid.atSetpoint()){
-        ampVolts = .0;
+        ampVolts = .2;
       }
     }else {
 
       ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), 0);
       if(m_pid.atSetpoint()){
-        ampVolts = -.0;
+        ampVolts = -.2;
       }
     }
 

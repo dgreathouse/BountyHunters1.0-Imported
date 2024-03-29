@@ -48,9 +48,10 @@ public final class k {
 
   }
 
-  public static class CONVERT {
+  public static class CV {
     public static final double DEGREES_TO_RADIANS = 0.017453292519943295;
     public static final double RADIANS_TO_DEGREES = 57.29577951308232;
+    public static final double INCHES_TO_METERS = 0.0254;
   }
 
   public static class ROBOT {
@@ -121,7 +122,7 @@ public final class k {
 
     public static final double GEAR_RATIO = (GEAR_1_TEETH / MOTOR_PINION_TEETH)
         * (GEAR_2_DRIVEN_TEETH / GEAR_2_DRIVE_TEETH) * (GEAR_BEVEL_DRIVEN_TEETH / GEAR_BEVEL_DRIVE_TEETH);
-    public static final double WHEEL_DIAMETER_m = .10287; // .10287
+    public static final double WHEEL_DIAMETER_m = .1015; // .10287
     private static final double WHEEL_CIRCUMFERENCE_m = Math.PI * WHEEL_DIAMETER_m;
     public static final double WHEEL_MotRotPerMeter = GEAR_RATIO / WHEEL_CIRCUMFERENCE_m;
     private static final double MOTOR_MAX_VELOCITY_RotPerMin = 6080.0;

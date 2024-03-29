@@ -14,6 +14,7 @@ import frc.robot.commands.Shooter.ShooterSetShotCommand;
 import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ShooterState;
+import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -30,36 +31,36 @@ public class Auto4Note extends SequentialCommandGroup {
        // Four Note
       new InstantCommand(_drive::setAllianceSign, _drive),
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                               // Set Shooter Speed
-      new AutoDriveOdometry(_drive, new Pose2d(0.87,0.155,new Rotation2d(Math.toDegrees(0))), 4),                       // Drive to side
-      new AutoDriveRotateCommand(_drive, 45, 0.6),                                                        // Rotate to Speaker
+      new AutoDriveOdometry(_drive, new Pose2d(32 * k.CV.INCHES_TO_METERS,6.1 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),                       // Drive to side
+      new AutoDriveRotateCommand(_drive, 45, 0.5),                                                        // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #1
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
+      new AutoDriveRotateCommand(_drive, 0, .5),                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                    // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(0.8128,-0.357,new Rotation2d(Math.toDegrees(0))), 4),   // Strafe to second note
-      new AutoDriveOdometry(_drive, new Pose2d(1.65,-0.315,new Rotation2d(Math.toDegrees(0))), 4),     // Drive back to Note 
-      new AutoDriveRotateCommand(_drive, 30, 0.6),                                                        // Rotate to Speaker
+      new AutoDriveOdometry(_drive, new Pose2d(32 * k.CV.INCHES_TO_METERS,-14.05 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),   // Strafe to second note
+      new AutoDriveOdometry(_drive, new Pose2d(60 * k.CV.INCHES_TO_METERS,-12.4 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),     // Drive back to Note 
+      new AutoDriveRotateCommand(_drive, 30, 0.5),                                                        // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #2
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new AutoDriveRotateCommand(_drive, 0, 1.0),                                                                             // Rotate to Straight
+      new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                             // Rotate to Straight
       //new AutoDriveOdometry(_drive, new Pose2d(0.8112,-0.357,new Rotation2d(Math.toDegrees(0))), 4),   // Drive forward
-      new AutoDriveOdometry(_drive, new Pose2d(0.8112,-1.38,new Rotation2d(Math.toDegrees(0))), 4),     // Strafe to 3rd Note
-      new AutoDriveOdometry(_drive, new Pose2d(2,-1.65,new Rotation2d(Math.toDegrees(0))), 4),        // Drive back to note
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be grabbed
+      new AutoDriveOdometry(_drive, new Pose2d(31.94 * k.CV.INCHES_TO_METERS,-64.00 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),     // Strafe to 3rd Note
+      new AutoDriveOdometry(_drive, new Pose2d(78.74 * k.CV.INCHES_TO_METERS,-64.00 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),        // Drive back to note
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #3
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
-      new AutoDriveOdometry(_drive, new Pose2d(0.8112,-3.1,new Rotation2d(Math.toDegrees(0))), 4),     // Drive at angle to be in front to 4th Note
+      new AutoDriveOdometry(_drive, new Pose2d(31.93 * k.CV.INCHES_TO_METERS,-122.05 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),     // Drive at angle to be in front to 4th Note
       //
-      new AutoDriveOdometry(_drive, new Pose2d(1.8,-3.1,new Rotation2d(Math.toDegrees(0))), 4),      // Drive forward to get note
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for note to be taken in
-      new AutoDriveOdometry(_drive, new Pose2d(1.8,-1.75,new Rotation2d(Math.toDegrees(0))), 4),      // Drive to cneter get note
-      new AutoDriveOdometry(_drive, new Pose2d(2.5,-1.75,new Rotation2d(Math.toDegrees(0))), 4),        // Drive back to note
+      new AutoDriveOdometry(_drive, new Pose2d(68 * k.CV.INCHES_TO_METERS,-122.05 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),      // Drive forward to get note
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for note to be taken in
+      new AutoDriveOdometry(_drive, new Pose2d(68 * k.CV.INCHES_TO_METERS,-68.9 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),      // Drive to cneter get note
+      new AutoDriveOdometry(_drive, new Pose2d(75.48 * k.CV.INCHES_TO_METERS,-68.9 * k.CV.INCHES_TO_METERS,new Rotation2d(Math.toDegrees(0))), 4),        // Drive back to note
       //new AutoDriveRotateCommand(_drive, -35, 1),                                                       // Rotate to speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                   // Shoot Note #4
-      new AutoDriveDelayCommand(_drive, 0.6),                                                                                 // Delay for Note to be released
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                    // Set flippers back
       new InstantCommand(_intake::spinOff),                                                                                   // Turn off spinners
       new ShooterSetShotCommand(_shooter, ShooterState.OFF)                                                                   // Turn off shooter
