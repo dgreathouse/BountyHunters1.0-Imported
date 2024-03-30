@@ -77,8 +77,8 @@ public final class k {
     public static Trigger DRIVER_DRIVE_MODE_ANGLEFIELDCENTRIC = RobotContainer.s_driverController.povDown();
     public static Trigger DRIVER_DRIVE_MODE_ROTATEFIELDCENTRIC = RobotContainer.s_driverController.povUp();
 
-    public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.touchpad();
-    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.options();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_HI = RobotContainer.s_driverController.R1();
+    public static Trigger DRIVER_DRIVE_MODE_SPEED_LOW = RobotContainer.s_driverController.L1();
 
     public static Trigger DRIVER_RESET_YAW = RobotContainer.s_driverController.create();
 
@@ -177,7 +177,7 @@ public final class k {
     public static final double SPIN_VELOCITY_MAX_ROT_PER_SEC = 100;
 
     public static final double SPIN_SPEED_HIGH_LONG = 0.68;
-    public static final double SPIN_SPEED_HIGH_SHORT = 0.44;
+    public static final double SPIN_SPEED_HIGH_SHORT = 0.55;
 
     public static final double SPIN_SPEED_LOW = 0.38;
     public static final double SPIN_SPEED_OFF = 0.0;

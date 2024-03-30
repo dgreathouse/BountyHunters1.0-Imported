@@ -44,6 +44,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     m_botMotor = new TalonFX(k.ROBORIO_CAN_IDS.SHOOTER_RIGHT, k.ROBORIO_CAN_IDS.NAME);
     m_topMotor.setNeutralMode(NeutralModeValue.Brake);
     m_botMotor.setNeutralMode(NeutralModeValue.Brake);
+    m_botMotor.setInverted(true);
     SmartDashboard.putNumber("Shot Speed", 0);
     m_leftServo = new Servo(0);
     m_rightServo = new Servo(1);
@@ -94,7 +95,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterState = ShooterState.OFF;
   }
   public void setShooterPodium(){ // triangle
-    GD.G_RobotTargetAngle.setTargetAngle(-33 * GD.G_AllianceSign);
+    GD.G_RobotTargetAngle.setTargetAngle(-39 * GD.G_AllianceSign);
     GD.G_ShooterState = ShooterState.PODIUM;
   }
   public void setShooterStraight(){ // cross
@@ -135,7 +136,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
       case FEED:
-        spin(k.SHOOTER.SPIN_SPEED_LOW,k.SHOOTER.SPIN_SPEED_LOW);
+        spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT,k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
         break;
       case OFF:
         spin(k.SHOOTER.SPIN_SPEED_OFF,k.SHOOTER.SPIN_SPEED_OFF);
