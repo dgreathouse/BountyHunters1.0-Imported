@@ -13,6 +13,19 @@ public class LEDs {
      */
     private int m_numLEDs = 70;
     private int m_r, m_g, m_b;
+    private int m_start = 5;
+    private int m_midTop = 50;
+    private int m_midBot = 20;
+    private int[][] map = new int[2][m_numLEDs];
+    private int m_meteorCnt = 0;
+    private int m_meteorCnt1 = 0;
+    private int m_meteorCnt2 = 0;
+    private int m_meteorTimeCnt = 0;
+    private Color8Bit m_allianceColor1 = null;
+    private Color8Bit m_allianceColor2= null;
+    private Color8Bit m_allianceColor3 = null;
+    private Color8Bit m_allianceColor4 = null;
+    private Color8Bit m_allianceColor5 = null;
     /**
      * This is a constructor for the class. It has the same name as the class and
      * has no return type.
@@ -49,7 +62,37 @@ public class LEDs {
         }
         
     }
+    public void meteorDown(){
 
+        if(++m_meteorTimeCnt > 5){
+            m_meteorTimeCnt = 0;
+            
+            clearLEDBuffer();
+            m_ledBuffer.setLED(m_midTop-m_meteorCnt, m_allianceColor1);
+            m_ledBuffer.setLED(m_midTop-m_meteorCnt+1, m_allianceColor2);
+            m_ledBuffer.setLED(m_midTop-m_meteorCnt+2, m_allianceColor3);
+            m_ledBuffer.setLED(m_midTop-m_meteorCnt+3, m_allianceColor4);
+            m_ledBuffer.setLED(m_midTop-m_meteorCnt+4, m_allianceColor5);
+
+            m_ledBuffer.setLED(m_midTop+m_meteorCnt, m_allianceColor1);
+            m_ledBuffer.setLED(m_midTop+m_meteorCnt+1, m_allianceColor2);
+            m_ledBuffer.setLED(m_midTop+m_meteorCnt+2, m_allianceColor3);
+            m_ledBuffer.setLED(m_midTop+m_meteorCnt+3, m_allianceColor4);
+            m_ledBuffer.setLED(m_midTop+m_meteorCnt+4, m_allianceColor5);
+            if(m_meteorCnt > (m_numLEDs - m_start)/2){
+
+            }
+            if(m_meteorCnt > m_numLEDs - m_start){
+                m_meteorCnt2 = m_start;
+                m_meteorCnt1 = m_midTop-m_meteorCnt;
+            }else {
+                m_meteorCnt2 = m_midTop+m_meteorCnt;
+                m_meteorCnt1 = m_midTop-m_meteorCnt;
+            }
+
+
+        }
+    }
     /**
      * Set all the LEDs to the Color8Bit value
      *
@@ -67,8 +110,25 @@ public class LEDs {
     public void setAllianceColor() {
         if (GD.G_Alliance == Alliance.Blue) {
             setRGBColor(0, 0, 100);
+            m_allianceColor1 = new Color8Bit(0, 0, 150);
+            m_allianceColor2 = new Color8Bit(0, 0, 120);
+            m_allianceColor3 = new Color8Bit(0, 0, 90);
+            m_allianceColor4 = new Color8Bit(0, 0, 60);
+            m_allianceColor5 = new Color8Bit(0, 0, 30);
+
         } else {
             setRGBColor(100, 0, 0);
+            m_allianceColor1 = new Color8Bit(150, 0, 0);
+            m_allianceColor2 = new Color8Bit(120, 0, 0);
+            m_allianceColor3 = new Color8Bit(90, 0, 0);
+            m_allianceColor4 = new Color8Bit(60, 0, 0);
+            m_allianceColor5 = new Color8Bit(30, 0, 0);
         }
+    }
+    public void clearLEDBuffer(){
+        for (int i = 0; i < m_numLEDs; i++){
+            m_ledBuffer.setRGB(i, 0, 0, 0);
+        }
+        
     }
 }
