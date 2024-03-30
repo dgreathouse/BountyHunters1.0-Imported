@@ -19,9 +19,9 @@ import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
-public class AutoCrossFarGetNoteFast extends SequentialCommandGroup {
+public class AutoWallNote extends SequentialCommandGroup {
   /** Creates a new AutoBlueLeft. */
-  public AutoCrossFarGetNoteFast(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
+  public AutoWallNote(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
     // Both AutoDriveOdometry and AutoDriveRotate will handle the sign for Red vs Blue
     // By default this play is setup for the blue side and red some values need to be multiplied by -1.0 to change the direction.
     // Pose X positive is away from the drivers and Y positive is to the left.
@@ -32,15 +32,12 @@ public class AutoCrossFarGetNoteFast extends SequentialCommandGroup {
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(15),Units.inchesToMeters(0),new Rotation2d(Math.toDegrees(0))), 4),       // Drive to shot
       new AutoDriveRotateCommand(_drive, -58, 1),                                                                                           // Rotate to Speaker
-
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                 // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                    // Set flippers back
       new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                                  // Set Shooter Speed OFF
       new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                                          // Turn on the intake
-      //new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(230),Units.inchesToMeters(-80),new Rotation2d(Math.toDegrees(0))), 4),  // Drive to Mid area
-
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(290),Units.inchesToMeters(-100),new Rotation2d(Math.toDegrees(0))), 4),  // Drive to Note
       new AutoDriveDelayCommand(_drive, 1.5),                                                                                                 // Delay for Note to be grabbed
       new InstantCommand(_intake::spinOff),                                                                                                   // Turn off intake

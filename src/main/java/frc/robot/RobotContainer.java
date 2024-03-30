@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.commandGroups.AutoSourceWallNote;
+import frc.robot.commandGroups.AutoCenterNote;
 import frc.robot.commandGroups.Auto3Note;
 import frc.robot.commandGroups.Auto4Note;
 import frc.robot.commandGroups.AutoCrossFar;
-import frc.robot.commandGroups.AutoCrossFarGetNote;
+import frc.robot.commandGroups.AutoWallNote;
 import frc.robot.commandGroups.AutoCrossFarGetNoteFast;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
-import frc.robot.commandGroups.AutoSourceMidNote;
+import frc.robot.commandGroups.AutoMidNote;
 import frc.robot.commands.Amp.AmpDefaultCommand;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
@@ -92,10 +92,10 @@ public class RobotContainer {
     autoChooser.addOption("Cross Line Far", new AutoCrossFar(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Four Note", new Auto4Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Three Note", new Auto3Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Source Wall Note", new AutoSourceWallNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
-    autoChooser.addOption("Source Mid Note", new AutoSourceMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
-    autoChooser.addOption("Get Wall Note Slow", new AutoCrossFarGetNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
-    autoChooser.addOption("Get Wall Note Fast", new AutoCrossFarGetNoteFast(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Center Note", new AutoCenterNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Mid Note", new AutoMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Wall Note", new AutoWallNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.

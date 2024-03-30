@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.lib.GD;
 import frc.robot.lib.k;
+import edu.wpi.first.math.util.Units;
 
 public class SwerveDrive {
     private int m_moduleCount;
@@ -185,8 +186,8 @@ public class SwerveDrive {
        for (int i = 0; i < m_moduleCount; ++i) {
            m_modules[i].updateDashboard();
        }
-       SmartDashboard.putNumber("Robot Pose X", GD.G_RobotPose.getX());
-       SmartDashboard.putNumber("Robot Pose Y", GD.G_RobotPose.getY());
+       SmartDashboard.putNumber("Robot Pose X", Units.metersToInches(GD.G_RobotPose.getX()));
+       SmartDashboard.putNumber("Robot Pose Y", Units.metersToInches(GD.G_RobotPose.getY()));
        SmartDashboard.putNumber("Robot Pose Ang", GD.G_RobotPose.getRotation().getDegrees());
 
     }
