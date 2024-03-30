@@ -4,6 +4,7 @@ package frc.robot.commandGroups;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Drive.AutoDriveDelayCommand;
@@ -27,30 +28,30 @@ public class AutoCrossFarGetNoteFast extends SequentialCommandGroup {
     // The starting Pose for the robot is (0,0) (X,Y)
 
     addCommands(
-      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                     // Set Shooter Speed High
-      new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                       // Preload flippers
-      new AutoDriveOdometry(_drive, new Pose2d(0.66,0,new Rotation2d(Math.toDegrees(0))), 3),      // Drive to shot
-      new AutoDriveRotateCommand(_drive, -53, .5),                                               // Rotate to Speaker
-      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                         // Shoot Note
-      new AutoDriveDelayCommand(_drive, .5),                                                                       // Delay for Note to be released
-      new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                          // Set flippers back
-      new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                        // Set Shooter Speed OFF
-      new AutoDriveRotateCommand(_drive, 0, 1),                                                                   // Rotate to Straight
-      new AutoDriveOdometry(_drive, new Pose2d(3.6,-2.27,new Rotation2d(Math.toDegrees(0))), 3.5),      // Drive to Mid area
-      new InstantCommand(_intake::spinOn),                                                                          // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(7.36,-2.27,new Rotation2d(Math.toDegrees(0))), 3.5),      // Drive to Note
-      new AutoDriveDelayCommand(_drive, 0.5),                                                                       // Delay for Note to be grabbed
-      new AutoDriveOdometry(_drive, new Pose2d(3.6,-2.27,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Mid area
-      new InstantCommand(_intake::spinOff),                                                                         // Turn off intake
-      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                     // Set Shooter Speed HIGH
-      new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                       // Preload flippers
-      //new AutoDriveOdometry(_drive, new Pose2d(0.96,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot
-      new AutoDriveOdometry(_drive, new Pose2d(1.03,0 ,new Rotation2d(Math.toDegrees(0))), 2),      // Drive to Shot  Red
-      new AutoDriveRotateCommand(_drive, -45, 1),                                               // Rotate to Speaker
-      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                         // Shoot Note
-      new AutoDriveDelayCommand(_drive, 1),                                                                         // Delay for Note shot
-      new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                         // Set Shooter Speed OFF
-      new FlipperSetCommand(_shooter, FlipperStates.BACK)                                                          // Set flippers back
+      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed High
+      new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(26),Units.inchesToMeters(0),new Rotation2d(Math.toDegrees(0))), 4),       // Drive to shot
+      new AutoDriveRotateCommand(_drive, -53, 0.5),                                                                                           // Rotate to Speaker
+
+      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
+      new AutoDriveDelayCommand(_drive, 0.5),                                                                                                 // Delay for Note to be released
+      new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                    // Set flippers back
+      new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                                  // Set Shooter Speed OFF
+      new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                             // Rotate to Straight
+
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(260),Units.inchesToMeters(-89.5),new Rotation2d(Math.toDegrees(0))), 4),  // Drive to Mid area
+      new InstantCommand(_intake::spinOn),                                                                                                    // Turn on the intake
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(290),Units.inchesToMeters(-89.5),new Rotation2d(Math.toDegrees(0))), 4),  // Drive to Note
+      new AutoDriveDelayCommand(_drive, 1),                                                                                                 // Delay for Note to be grabbed
+      new InstantCommand(_intake::spinOff),                                                                                                   // Turn off intake
+      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed HIGH
+      new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(26),Units.inchesToMeters(0) ,new Rotation2d(Math.toDegrees(0))), 4),    // Drive to Shot  Red
+      new AutoDriveRotateCommand(_drive, -53, 0.5),                                                                                           // Rotate to Speaker
+      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
+      new AutoDriveDelayCommand(_drive, 1),                                                                                                 // Delay for Note shot
+      new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                                  // Set Shooter Speed OFF
+      new FlipperSetCommand(_shooter, FlipperStates.BACK)                                                                                     // Set flippers back
     );
   }
 }
