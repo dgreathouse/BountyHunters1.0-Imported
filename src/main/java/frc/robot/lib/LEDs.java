@@ -14,18 +14,20 @@ public class LEDs {
     private int m_numLEDs = 70;
     private int m_r, m_g, m_b;
     private int m_start = 5;
-    private int m_midTop = 50;
+    private int m_midTop = 48;
     private int m_midBot = 20;
-    private int[][] map = new int[2][m_numLEDs];
-    private int m_meteorCnt = 0;
-    private int m_meteorCnt1 = 0;
-    private int m_meteorCnt2 = 0;
+    private int[] mapL = {48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,3,4,5,6,7,8,9,10,11,12,13,14,15};
+    private int m_meteorCntR = 0;
+    private int m_meteorCntL = 0;
+
     private int m_meteorTimeCnt = 0;
     private Color8Bit m_allianceColor1 = null;
     private Color8Bit m_allianceColor2= null;
     private Color8Bit m_allianceColor3 = null;
     private Color8Bit m_allianceColor4 = null;
-    private Color8Bit m_allianceColor5 = null;
+    private boolean fadeDir = true;
+    private int fadeCnt = 0;
+
     /**
      * This is a constructor for the class. It has the same name as the class and
      * has no return type.
@@ -38,6 +40,7 @@ public class LEDs {
         m_led.setLength(m_ledBuffer.getLength());
         setAllianceColor();
         updateLEDs();
+
     }
 
     public void updateLEDs() {
@@ -62,36 +65,52 @@ public class LEDs {
         }
         
     }
-    public void meteorDown(){
+    public void meteor(){
 
-        if(++m_meteorTimeCnt > 5){
+        if(++m_meteorTimeCnt > 4){
             m_meteorTimeCnt = 0;
-            
+            if(m_meteorCntL > mapL.length-1){ 
+                m_meteorCntL = 0;
+            }
             clearLEDBuffer();
-            m_ledBuffer.setLED(m_midTop-m_meteorCnt, m_allianceColor1);
-            m_ledBuffer.setLED(m_midTop-m_meteorCnt+1, m_allianceColor2);
-            m_ledBuffer.setLED(m_midTop-m_meteorCnt+2, m_allianceColor3);
-            m_ledBuffer.setLED(m_midTop-m_meteorCnt+3, m_allianceColor4);
-            m_ledBuffer.setLED(m_midTop-m_meteorCnt+4, m_allianceColor5);
-
-            m_ledBuffer.setLED(m_midTop+m_meteorCnt, m_allianceColor1);
-            m_ledBuffer.setLED(m_midTop+m_meteorCnt+1, m_allianceColor2);
-            m_ledBuffer.setLED(m_midTop+m_meteorCnt+2, m_allianceColor3);
-            m_ledBuffer.setLED(m_midTop+m_meteorCnt+3, m_allianceColor4);
-            m_ledBuffer.setLED(m_midTop+m_meteorCnt+4, m_allianceColor5);
-            if(m_meteorCnt > (m_numLEDs - m_start)/2){
-
+            m_ledBuffer.setLED(mapL[m_meteorCntL]-0, m_allianceColor1);
+            m_ledBuffer.setLED(mapL[m_meteorCntL]-1, m_allianceColor2);
+            m_ledBuffer.setLED(mapL[m_meteorCntL]-2, m_allianceColor3);
+            m_ledBuffer.setLED(mapL[m_meteorCntL]-3, m_allianceColor4);
+            if(m_meteorCntR > 34){
+                m_meteorCntR = 0;
             }
-            if(m_meteorCnt > m_numLEDs - m_start){
-                m_meteorCnt2 = m_start;
-                m_meteorCnt1 = m_midTop-m_meteorCnt;
-            }else {
-                m_meteorCnt2 = m_midTop+m_meteorCnt;
-                m_meteorCnt1 = m_midTop-m_meteorCnt;
-            }
+         
+            m_ledBuffer.setLED(m_midTop-m_meteorCntR-1, m_allianceColor1);
+            m_ledBuffer.setLED(m_midTop-m_meteorCntR, m_allianceColor2);
+            m_ledBuffer.setLED(m_midTop-m_meteorCntR+1, m_allianceColor3);
+            m_ledBuffer.setLED(m_midTop-m_meteorCntR+2, m_allianceColor4);
 
-
+            m_meteorCntR++;
+            m_meteorCntL++;
+            updateLEDs();
         }
+    }
+    public void fade(){
+
+        if(++fadeCnt < 100){
+            if(fadeDir){
+                if(GD.G_Alliance == Alliance.Red){
+                    setRGBColor(100-fadeCnt, 0, 0);
+                }else {
+                    setRGBColor(0, 0, 100-fadeCnt);
+                }
+            }else {
+                if(GD.G_Alliance == Alliance.Red){
+                    setRGBColor(fadeCnt, 0, 0);
+                }else {
+                    setRGBColor(0, 0, fadeCnt);
+                }
+            }
+         }else {
+             fadeDir = !fadeDir;
+             fadeCnt = 0;
+         }
     }
     /**
      * Set all the LEDs to the Color8Bit value
@@ -110,19 +129,19 @@ public class LEDs {
     public void setAllianceColor() {
         if (GD.G_Alliance == Alliance.Blue) {
             setRGBColor(0, 0, 100);
-            m_allianceColor1 = new Color8Bit(0, 0, 150);
-            m_allianceColor2 = new Color8Bit(0, 0, 120);
-            m_allianceColor3 = new Color8Bit(0, 0, 90);
-            m_allianceColor4 = new Color8Bit(0, 0, 60);
-            m_allianceColor5 = new Color8Bit(0, 0, 30);
+            m_allianceColor1 = new Color8Bit(0, 0, 180);
+            m_allianceColor2 = new Color8Bit(0, 0, 80);
+            m_allianceColor3 = new Color8Bit(0, 0, 40);
+            m_allianceColor4 = new Color8Bit(0, 0, 10);
+
 
         } else {
             setRGBColor(100, 0, 0);
-            m_allianceColor1 = new Color8Bit(150, 0, 0);
-            m_allianceColor2 = new Color8Bit(120, 0, 0);
-            m_allianceColor3 = new Color8Bit(90, 0, 0);
-            m_allianceColor4 = new Color8Bit(60, 0, 0);
-            m_allianceColor5 = new Color8Bit(30, 0, 0);
+            m_allianceColor1 = new Color8Bit(180, 0, 0);
+            m_allianceColor2 = new Color8Bit(80, 0, 0);
+            m_allianceColor3 = new Color8Bit(40, 0, 0);
+            m_allianceColor4 = new Color8Bit(10, 0, 0);
+
         }
     }
     public void clearLEDBuffer(){

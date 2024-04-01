@@ -62,7 +62,21 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void disabledPeriodic() {GD.G_RobotMode = RobotMode.DISABLE_PERIODIC;}
+  public void disabledPeriodic() {
+    GD.G_RobotMode = RobotMode.DISABLE_PERIODIC;
+    if(DriverStation.getAlliance().isPresent()){
+      if(DriverStation.getAlliance().get() == Alliance.Red){
+        GD.G_Alliance = Alliance.Red;
+        GD.G_AllianceSign = -1.0;
+      }else {
+        GD.G_Alliance = Alliance.Blue;
+        GD.G_AllianceSign = 1.0;
+      }
+    }
+    //RobotContainer.m_LEDs.setAllianceColor();
+    //RobotContainer.m_LEDs.meteor();
+    RobotContainer.m_LEDs.fade();
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
