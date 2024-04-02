@@ -74,8 +74,8 @@ public class Robot extends TimedRobot {
       }
     }
     //RobotContainer.m_LEDs.setAllianceColor();
-    //RobotContainer.m_LEDs.meteor();
-    RobotContainer.m_LEDs.fade();
+    RobotContainer.m_LEDs.meteor();
+    //RobotContainer.m_LEDs.fade();
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */

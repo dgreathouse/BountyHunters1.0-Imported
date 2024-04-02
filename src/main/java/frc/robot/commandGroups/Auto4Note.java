@@ -46,19 +46,19 @@ public class Auto4Note extends SequentialCommandGroup {
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                                       // Rotate to Straight
 
-       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(31.94),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to 3rd Note
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(78.74),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),         // Drive back to note
+       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(24),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to 3rd Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(74.74),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),         // Drive back to note
 
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back
 
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(31.93),Units.inchesToMeters(-122.05),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to be in front to #4 Note
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(68),Units.inchesToMeters(-122.05),new Rotation2d(Math.toDegrees(0))), 4),           // Drive forward to get note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(25),Units.inchesToMeters(-122.05),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to be in front to #4 Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(62),Units.inchesToMeters(-122.05),new Rotation2d(Math.toDegrees(0))), 4),           // Drive forward to get note
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for note to be taken in
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(68),Units.inchesToMeters(-68.9),new Rotation2d(Math.toDegrees(0))), 4),             // Drive to center
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(75.48),Units.inchesToMeters(-68.9),new Rotation2d(Math.toDegrees(0))), 4),          // Drive back to shoot
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(87.48),Units.inchesToMeters(-68.9),new Rotation2d(Math.toDegrees(0))), 4),          // Drive back to shoot
 
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #4
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be released

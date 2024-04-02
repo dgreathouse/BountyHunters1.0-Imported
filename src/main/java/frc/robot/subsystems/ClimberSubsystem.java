@@ -51,8 +51,8 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
       }else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
         GD.G_ClimberPerOut = 0.0;
       }
-      leftMotor.setVoltage(GD.G_ClimberPerOut * 5);
-      rightMotor.setVoltage(GD.G_ClimberPerOut * 5);
+      //leftMotor.setVoltage(GD.G_ClimberPerOut * 5);
+      //rightMotor.setVoltage(GD.G_ClimberPerOut * 5);
     }else{
       
     }
