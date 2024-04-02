@@ -28,12 +28,12 @@ public class ClimberDefaultCommand extends Command{
     double downPerOut = RobotContainer.s_operatorController.getL2Axis() + 1;
     double perOut = upPerOut - downPerOut;
 
-    if(perOut > 0.2){
-      GD.G_ClimberVoltageMode = true;
+    if(Math.abs(perOut) > 0.1){
+      GD.G_ClimberPerOut = perOut;
+    }else {
+      GD.G_ClimberPerOut = 0.0;
     }
     SmartDashboard.putNumber("Climber Percent Out", perOut);
-    GD.G_ClimberPerOut = perOut;
-   // m_climber.setVoltage(voltage);
   }
 
   // Called once the command ends or is interrupted.
