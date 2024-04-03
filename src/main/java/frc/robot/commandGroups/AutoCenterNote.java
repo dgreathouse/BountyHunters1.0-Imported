@@ -37,7 +37,7 @@ public class AutoCenterNote extends SequentialCommandGroup {
       new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                                          // Turn on the intake
       
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(290),Units.inchesToMeters(60),new Rotation2d(Math.toDegrees(0))), 3),  // Drive to Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(280),Units.inchesToMeters(50),new Rotation2d(Math.toDegrees(0))), 3),  // Drive to Note
       new AutoDriveDelayCommand(_drive, 1.5),                                                                                                 // Delay for Note to be grabbed
       new InstantCommand(_intake::spinOff),                                                                                                   // Turn off intake
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed HIGH
