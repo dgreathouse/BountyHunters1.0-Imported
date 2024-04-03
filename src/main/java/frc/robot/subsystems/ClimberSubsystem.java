@@ -43,20 +43,16 @@ public class ClimberSubsystem extends SubsystemBase  implements ISubsystem{
 
   @Override
   public void periodic() {
-    if(GD.G_ClimberVoltageMode){
-      if(GD.G_ClimberPerOut <= 0){
-        if (leftMotor.getEncoder().getPosition() < k.CLIMBER.LIMIT_UP_ROTATIONS || rightMotor.getEncoder().getPosition() <  k.CLIMBER.LIMIT_UP_ROTATIONS){
-          GD.G_ClimberPerOut = 0.0;
-        }
-      }else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
+
+    if(GD.G_ClimberPerOut <= 0){
+      if (leftMotor.getEncoder().getPosition() < k.CLIMBER.LIMIT_UP_ROTATIONS || rightMotor.getEncoder().getPosition() <  k.CLIMBER.LIMIT_UP_ROTATIONS){
         GD.G_ClimberPerOut = 0.0;
       }
-      leftMotor.setVoltage(GD.G_ClimberPerOut * 5);
-      rightMotor.setVoltage(GD.G_ClimberPerOut * 5);
-    }else{
-      
+    }else if (leftMotor.getEncoder().getPosition() > k.CLIMBER.LIMIT_DOWN_ROTATIONS || rightMotor.getEncoder().getPosition() >  k.CLIMBER.LIMIT_DOWN_ROTATIONS){
+      GD.G_ClimberPerOut = 0.0;
     }
+    leftMotor.setVoltage(GD.G_ClimberPerOut * 5);
+    rightMotor.setVoltage(GD.G_ClimberPerOut * 5);
 
-    // This method will be called once per scheduler run
   }
 }
