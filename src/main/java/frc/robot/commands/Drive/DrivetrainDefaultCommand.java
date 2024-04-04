@@ -17,9 +17,9 @@ public class DrivetrainDefaultCommand extends Command {
 
   private DrivetrainSubsystem m_drive;
   ChassisSpeeds m_speeds = new ChassisSpeeds();
-  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(4);
-  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(4);
-  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(4);
+  SlewRateLimiter m_stickLimiterLX = new SlewRateLimiter(3);
+  SlewRateLimiter m_stickLimiterLY = new SlewRateLimiter(3);
+  SlewRateLimiter m_stickLimiterRX = new SlewRateLimiter(3);
  // --  double m_vYaw = 0;
 
   /** Creates a new DrivetrainDefaultCommand. */
