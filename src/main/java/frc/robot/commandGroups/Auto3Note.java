@@ -30,9 +30,9 @@ public class Auto3Note extends SequentialCommandGroup {
 
     addCommands(
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                                         // Set Shooter Speed
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(32),Units.inchesToMeters(6.1),new Rotation2d(Math.toDegrees(0))), 4),               // Drive to side
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(36),Units.inchesToMeters(6.1),new Rotation2d(Math.toDegrees(0))), 4),               // Drive to side
 
-      new AutoDriveRotateCommand(_drive, 45, 0.5),                                                                                                      // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 44, 0.5),                                                                                                      // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #1
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back
@@ -48,14 +48,13 @@ public class Auto3Note extends SequentialCommandGroup {
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back
       new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                                       // Rotate to Straight
 
-       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(31.94),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to 3rd Note
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(78.74),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),         // Drive back to note
+       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(30),Units.inchesToMeters(-67.00),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to 3rd Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(74.74),Units.inchesToMeters(-64.00),new Rotation2d(Math.toDegrees(0))), 4),         // Drive back to note
 
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be grabbed
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #3
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back
-
       new InstantCommand(_intake::spinOff),                                                                                                             // Turn off spinners
       new ShooterSetShotCommand(_shooter, ShooterState.OFF)                                                                                             // Turn off shooter
     );
