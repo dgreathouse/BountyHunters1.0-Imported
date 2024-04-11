@@ -27,7 +27,7 @@ public class AmpSubsystem extends SubsystemBase {
     m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
     m_motor.setIdleMode(IdleMode.kBrake);
     m_pid = new PIDController(.7, .01, 0);
-    m_pid.setTolerance(.2);
+    m_pid.setTolerance(.1);
   }
   public void setAmpUp( ){
     GD.G_AmpState = AmpState.UP;
@@ -56,6 +56,7 @@ public class AmpSubsystem extends SubsystemBase {
     m_motor.setVoltage(ampVolts);
     SmartDashboard.putNumber("AmpPos", m_motor.getEncoder().getPosition());
     SmartDashboard.putNumber("AmpVolts", ampVolts);
-  
+    SmartDashboard.putBoolean("Amp AtSetPoint", m_pid.atSetpoint());
+    
   }
 }

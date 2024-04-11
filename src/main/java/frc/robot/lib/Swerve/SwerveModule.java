@@ -61,8 +61,8 @@ public class SwerveModule {
         m_driveMotor.setNeutralMode(NeutralModeValue.Brake);
         m_driveMotor.getConfigurator().apply(talonDriveConfigs);                // Apply the drive motor configuration
        
-        CurrentLimitsConfigs cunnentConfigs = new CurrentLimitsConfigs().withStatorCurrentLimit(70).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true).withSupplyCurrentLimit(70);
-        m_driveMotor.getConfigurator().apply(cunnentConfigs);
+        CurrentLimitsConfigs currentConfigs = new CurrentLimitsConfigs().withStatorCurrentLimit(70).withStatorCurrentLimitEnable(true).withSupplyCurrentLimitEnable(true).withSupplyCurrentLimit(70);
+        m_driveMotor.getConfigurator().apply(currentConfigs);
 
         // Configure Steer Motor
         m_steerPID.enableContinuousInput(-180.0, +180.0);                    // Set the PID to allow role overs and adjust for optimization
