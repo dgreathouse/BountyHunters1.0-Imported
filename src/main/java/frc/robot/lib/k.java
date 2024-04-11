@@ -57,7 +57,7 @@ public final class k {
   public static class ROBOT {
     public static final double PERIOD = 0.02;
 
-    public static final double BATTERY_MAX_VOLTS = 12.0;
+    public static final double BATTERY_MAX_VOLTS = 12.8;
 
     public static final int PD_CANID = 1; // Power Distribution, Rev or CTRE
 
@@ -196,7 +196,7 @@ public final class k {
 
   public static class INTAKE {
     public static final double SPIN_SPEED_DEFAULT_VOLT = 5;
-    public static final double NOTE_CURRENT = 60;
+    public static final double NOTE_CURRENT = 80;
     public static final double INTAKE_RUNNING_CURRENT = 50;
 
   }

@@ -43,7 +43,7 @@ public class AutoWallNote extends SequentialCommandGroup {
       new InstantCommand(_intake::spinOff),                                                                                                   // Turn off intake
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed HIGH
       new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(50),Units.inchesToMeters(10) ,new Rotation2d(Math.toDegrees(0))), 2),    // Drive to Shot  Red
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(60),Units.inchesToMeters(15) ,new Rotation2d(Math.toDegrees(0))), 2),    // Drive to Shot  Red
       new AutoDriveRotateCommand(_drive, -50, 1),                                                                                           // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
       new AutoDriveDelayCommand(_drive, 1),                                                                                                 // Delay for Note shot

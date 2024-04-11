@@ -142,7 +142,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         spin(k.SHOOTER.SPIN_SPEED_OFF,k.SHOOTER.SPIN_SPEED_OFF);
         break;
       case AMP:
-        spin(0,.7);
+        spin(0,.8);
         break;
       default:
         break;
