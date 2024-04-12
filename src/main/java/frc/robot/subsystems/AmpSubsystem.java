@@ -26,7 +26,7 @@ public class AmpSubsystem extends SubsystemBase {
   private void initialize(){
     m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
     m_motor.setIdleMode(IdleMode.kBrake);
-    m_pid = new PIDController(.7, .01, 0);
+    m_pid = new PIDController(1, .01, 0);
     m_pid.setTolerance(.1);
   }
   public void setAmpUp( ){
