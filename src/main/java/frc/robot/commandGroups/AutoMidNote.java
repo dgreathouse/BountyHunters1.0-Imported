@@ -13,7 +13,6 @@ import frc.robot.commands.Drive.AutoDriveRotateCommand;
 import frc.robot.commands.Shooter.FlipperSetCommand;
 import frc.robot.commands.Shooter.ShooterSetShotCommand;
 import frc.robot.lib.FlipperStates;
-import frc.robot.lib.GD;
 import frc.robot.lib.ShooterState;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;

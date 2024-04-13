@@ -13,7 +13,6 @@ import frc.robot.RobotContainer;
 import frc.robot.lib.FlipperStates;
 import frc.robot.lib.GD;
 import frc.robot.lib.ISubsystem;
-import frc.robot.lib.NoteState;
 import frc.robot.lib.ShooterState;
 import frc.robot.lib.k;
 

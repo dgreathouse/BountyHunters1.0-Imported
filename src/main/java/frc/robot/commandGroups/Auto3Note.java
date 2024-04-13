@@ -13,9 +13,7 @@ import frc.robot.commands.Drive.AutoDriveRotateCommand;
 import frc.robot.commands.Shooter.FlipperSetCommand;
 import frc.robot.commands.Shooter.ShooterSetShotCommand;
 import frc.robot.lib.FlipperStates;
-import frc.robot.lib.GD;
 import frc.robot.lib.ShooterState;
-import frc.robot.lib.k;
 import frc.robot.subsystems.DrivetrainSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -32,7 +30,7 @@ public class Auto3Note extends SequentialCommandGroup {
       new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                                         // Set Shooter Speed
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(36),Units.inchesToMeters(6.1),new Rotation2d(Math.toDegrees(0))), 4),               // Drive to side
 
-      new AutoDriveRotateCommand(_drive, 44, 0.5),                                                                                                      // Rotate to Speaker
+      new AutoDriveRotateCommand(_drive, 40, 0.5),                                                                                                      // Rotate to Speaker
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #1
       new AutoDriveDelayCommand(_drive, 0.5),                                                                                                           // Delay for Note to be released
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back

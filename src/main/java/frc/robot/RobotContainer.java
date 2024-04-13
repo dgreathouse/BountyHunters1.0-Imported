@@ -18,7 +18,6 @@ import frc.robot.commandGroups.Auto3Note;
 import frc.robot.commandGroups.AutoAmpWall;
 import frc.robot.commandGroups.AutoCrossFar;
 import frc.robot.commandGroups.AutoWallNote;
-import frc.robot.commandGroups.AutoCrossFarGetNoteFast;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoMidNote;

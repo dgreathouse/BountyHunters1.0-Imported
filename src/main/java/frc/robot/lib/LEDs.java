@@ -13,9 +13,7 @@ public class LEDs {
      */
     private int m_numLEDs = 70;
     private int m_r, m_g, m_b;
-    private int m_start = 5;
     private int m_midTop = 48;
-    private int m_midBot = 20;
     private int[] mapL = {48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,3,4,5,6,7,8,9,10,11,12,13,14,15};
     private int m_meteorCntR = 0;
     private int m_meteorCntL = 0;

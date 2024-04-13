@@ -15,10 +15,6 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class AutoCrossFar extends SequentialCommandGroup {
   /** Creates a new AutoBlueLeft. */
   public AutoCrossFar(DrivetrainSubsystem _drive, ShooterSubsystem _shooter, IntakeSubsystem _intake) {
-    // allianceSign is a mutilpier to change the direction of an X, Y Pose or an Angle.
-    // By default this play is setup for the blue side and red some values need to be multiplied by -1.0 to change the direction.
-    // Pose X positive is away from the drivers and Y positive is to the right.
-    // The starting Pose for the robot is (0,0) (X,Y)
 
     addCommands(
        // Four Note
