@@ -202,8 +202,8 @@ public final class k {
   }
 
   public static class CLIMBER {
-    public static final double LIMIT_UP_ROTATIONS = -100;
-    public static final double LIMIT_DOWN_ROTATIONS = 75;
+    public static final double LIMIT_UP_ROTATIONS = -142;
+    public static final double LIMIT_DOWN_ROTATIONS = 32;
   }
 
   public static class AMP {

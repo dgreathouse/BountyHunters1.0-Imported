@@ -9,7 +9,8 @@ public enum ShooterState {
     PODIUM,
     STRAIGHT,
     RIGHT,
-    FEED,
+    FEEDLONG,
+    FEEDSHORT,
     LEFT,
     AMP,
     OFF

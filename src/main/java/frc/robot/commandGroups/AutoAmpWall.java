@@ -34,7 +34,7 @@ public class AutoAmpWall extends SequentialCommandGroup {
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(64),Units.inchesToMeters(16),new Rotation2d(Math.toDegrees(0))), 4),
       new InstantCommand(_intake::spinOn), 
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(300),Units.inchesToMeters(3),new Rotation2d(Math.toDegrees(0))), 4),             // Drive back to Note 
-      new ShooterSetShotCommand(_shooter, ShooterState.FEED), 
+      new ShooterSetShotCommand(_shooter, ShooterState.FEEDLONG), 
       new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                             // Shoot Note #2
       new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(300),Units.inchesToMeters(-65.00),new Rotation2d(Math.toDegrees(0))), 4),        // Drive at angle to 3rd Note
       new FlipperSetCommand(_shooter, FlipperStates.BACK),                                                                                              // Set flippers back

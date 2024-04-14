@@ -88,7 +88,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
     GD.G_ShooterState = ShooterState.AMP;
   }
   public void setShooterFeed(){
-    GD.G_ShooterState = ShooterState.FEED;
+    GD.G_ShooterState = ShooterState.FEEDSHORT;
   }
   public void setShooterOff(){
     GD.G_ShooterState = ShooterState.OFF;
@@ -104,14 +104,12 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
   public void setShooterRight(){ // circle blue
 
       GD.G_RobotTargetAngle.setTargetAngle(-39 * GD.G_AllianceSign);
-      GD.G_ShooterState = ShooterState.FEED;
+      GD.G_ShooterState = ShooterState.FEEDLONG;
   }
   public void setShooterLeft(){ // square blue
-    if(GD.G_Alliance == Alliance.Blue){
-      GD.G_RobotTargetAngle.setTargetAngle(25);
-    }else {
-      GD.G_RobotTargetAngle.setTargetAngle(12.5);
-    }
+    
+      GD.G_RobotTargetAngle.setTargetAngle(25 * GD.G_AllianceSign);
+    
     GD.G_ShooterState = ShooterState.LEFT;
   }
 
@@ -131,7 +129,7 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
       case LEFT:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_LONG,k.SHOOTER.SPIN_SPEED_HIGH_LONG);
         break;
-      case FEED:
+      case FEEDLONG:
         spin(k.SHOOTER.SPIN_SPEED_HIGH_SHORT,k.SHOOTER.SPIN_SPEED_HIGH_SHORT);
         break;
       case OFF:
@@ -139,6 +137,9 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         break;
       case AMP:
         spin(0,.8);
+        break;
+        case FEEDSHORT:
+        spin(0.35,0.35);
         break;
       default:
         break;
@@ -160,5 +161,8 @@ public class ShooterSubsystem extends SubsystemBase implements ISubsystem {
         retractFlippers();
       break;
     }
+  }
+  public double getShooterSpeed(){
+    return m_spinVoltageOut.Output;
   }
 }

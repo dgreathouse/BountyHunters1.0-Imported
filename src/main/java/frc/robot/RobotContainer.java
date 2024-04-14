@@ -4,9 +4,15 @@ package frc.robot;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.shuffleboard.WidgetType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,6 +27,7 @@ import frc.robot.commandGroups.AutoWallNote;
 import frc.robot.commandGroups.AutoCrossShort;
 import frc.robot.commandGroups.AutoDoNothing;
 import frc.robot.commandGroups.AutoMidNote;
+import frc.robot.commandGroups.AutoSourceShootGoWall;
 import frc.robot.commands.Amp.AmpDefaultCommand;
 import frc.robot.commands.Climber.ClimberDefaultCommand;
 import frc.robot.commands.Drive.DrivetrainDefaultCommand;
@@ -42,7 +49,8 @@ import frc.robot.subsystems.ShooterSubsystem;
  * 
  */
 public class RobotContainer {
-
+  public static ShuffleboardTab matchTab = Shuffleboard.getTab("Match");
+  public static PowerDistribution m_pd = new PowerDistribution();
   public static Set<ISubsystem> subsystems = new HashSet<>();
 
   public static final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
@@ -83,6 +91,7 @@ public class RobotContainer {
     m_ampSubsystem.setDefaultCommand(m_ampDefaultCommand);
     // Configure the trigger bindings
     configureBindings();
+    
 
     // Add all autonomous command groups to the list on the Smartdashboard
     autoChooser.setDefaultOption("Do Nothing", new AutoDoNothing());
@@ -95,12 +104,14 @@ public class RobotContainer {
     autoChooser.addOption("Mid Note", new AutoMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     autoChooser.addOption("Wall Note", new AutoWallNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     autoChooser.addOption("Wall Amp Note", new AutoAmpWall(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+    autoChooser.addOption("Source Shoot Go Wall", new AutoSourceShootGoWall(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
+
     SmartDashboard.putData("Autonomous Play",autoChooser);
 
     // Setup the dashboard notifier that runs at a slower rate than our main robot periodic.
     m_telemetry = new Notifier(this::updateDashboard);
     m_telemetry.startPeriodic(0.1);
-
+    configShuffelBoard();
   }
  
   /**
@@ -142,5 +153,13 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     return autoChooser.getSelected();
+  }
+  private void configShuffelBoard(){
+    
+    Shuffleboard.selectTab("Match");
+    matchTab.add("Autonomous Play",autoChooser).withPosition(6,0).withSize(4, 2);
+    matchTab.add("Note State", GD.G_NoteState.toString()).withPosition(14, 0).withSize(4,4);
+    matchTab.add("Battery Volts", m_pd.getVoltage()).withPosition(6, 3).withSize(12,6).withWidget(BuiltInWidgets.kGraph);
+   // matchTab.add("Shooter Volts", m_shooterSubsystem.getShooterSpeed()).withPosition(7, 2).withSize(2,2).withWidget(BuiltInWidgets.kDial);
   }
 }
