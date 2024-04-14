@@ -157,9 +157,13 @@ public class RobotContainer {
   private void configShuffelBoard(){
     
     Shuffleboard.selectTab("Match");
-    matchTab.add("Autonomous Play",autoChooser).withPosition(6,0).withSize(4, 2);
-    matchTab.add("Note State", GD.G_NoteState.toString()).withPosition(14, 0).withSize(4,4);
-    matchTab.add("Battery Volts", m_pd.getVoltage()).withPosition(6, 3).withSize(12,6).withWidget(BuiltInWidgets.kGraph);
+    matchTab.add("Autonomous Play",autoChooser).withPosition(5,0).withSize(3, 2);
+    matchTab.add("Note State", GD.G_NoteState.toString()).withPosition(8, 0).withSize(2,2);
+    matchTab.add("Shooter State", GD.G_ShooterState.toString()).withPosition(10, 0).withSize(2,2);
+    matchTab.add("Flipper State", GD.G_ShooterState.toString()).withPosition(12, 0).withSize(2,2);
+    matchTab.add("Drive State", m_drivetrainSubsystem.getDriveMode().toString()).withPosition(14, 0).withSize(3,2);
+    matchTab.add("Battery Volts", m_pd.getVoltage()).withPosition(5, 2).withSize(12,3).withWidget(BuiltInWidgets.kGraph);
+    matchTab.add("Intake Current", m_intakeSubsystem.getCurrent()).withPosition(5, 6).withSize(12,3).withWidget(BuiltInWidgets.kGraph);
    // matchTab.add("Shooter Volts", m_shooterSubsystem.getShooterSpeed()).withPosition(7, 2).withSize(2,2).withWidget(BuiltInWidgets.kDial);
   }
 }

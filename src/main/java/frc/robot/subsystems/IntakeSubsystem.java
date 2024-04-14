@@ -59,7 +59,9 @@ public class IntakeSubsystem extends SubsystemBase implements ISubsystem {
     }
     m_leftMotor.setControl(m_leftVoltageOut.withOutput(volts).withEnableFOC(true));
   }
-
+  public double getCurrent(){
+    return m_leftMotor.getStatorCurrent().getValueAsDouble();
+  }
   @Override
   public void periodic() {
     spin(GD.G_Intake_Speed);
