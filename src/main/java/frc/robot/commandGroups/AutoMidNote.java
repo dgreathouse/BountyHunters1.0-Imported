@@ -35,18 +35,18 @@ public class AutoMidNote extends SequentialCommandGroup {
       new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                                  // Set Shooter Speed OFF
       new AutoDriveRotateCommand(_drive, 0, 0.5),                                                                                             // Rotate to Straight
       new InstantCommand(_intake::spinOn),                                                                                                          // Turn on the intake
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(200),Units.inchesToMeters(-50),new Rotation2d(Math.toDegrees(0))), 2.5),  // Drive to Note
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(260),Units.inchesToMeters(13),new Rotation2d(Math.toDegrees(0))), 2.2),  // Drive to Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(200),Units.inchesToMeters(-50),new Rotation2d(Math.toDegrees(0))), 3.5),  // Drive to Note
+      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(278),Units.inchesToMeters(13),new Rotation2d(Math.toDegrees(0))), 3.5),  // Drive to Note
       new AutoDriveDelayCommand(_drive, 1.5),                                                                                                 // Delay for Note to be grabbed
       new InstantCommand(_intake::spinOff),                                                                                                   // Turn off intake
-      new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed HIGH
-      new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(200),Units.inchesToMeters(-50) ,new Rotation2d(Math.toDegrees(0))), 3.5),    // Drive to Shot  Red
-      new InstantCommand(_intake::spinOff),
-      new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(38),Units.inchesToMeters(5),new Rotation2d(Math.toDegrees(0))), 3.5),       // Drive to shot
-      new AutoDriveRotateCommand(_drive, -60, 1),                                                                                           // Rotate to Speaker
-      new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
-      new AutoDriveDelayCommand(_drive, 1),                                                                                                 // Delay for Note shot
+      // new ShooterSetShotCommand(_shooter, ShooterState.PODIUM),                                                                               // Set Shooter Speed HIGH
+      // new FlipperSetCommand(_shooter, FlipperStates.PRELOAD),                                                                                 // Preload flippers
+      // new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(200),Units.inchesToMeters(-50) ,new Rotation2d(Math.toDegrees(0))), 3.5),    // Drive to Shot  Red
+      // new InstantCommand(_intake::spinOff),
+      // new AutoDriveOdometry(_drive, new Pose2d(Units.inchesToMeters(38),Units.inchesToMeters(5),new Rotation2d(Math.toDegrees(0))), 3.5),       // Drive to shot
+      // new AutoDriveRotateCommand(_drive, -60, 1),                                                                                           // Rotate to Speaker
+      // new FlipperSetCommand(_shooter, FlipperStates.SHOOT),                                                                                   // Shoot Note
+      // new AutoDriveDelayCommand(_drive, 1),                                                                                                 // Delay for Note shot
       new ShooterSetShotCommand(_shooter, ShooterState.OFF),                                                                                  // Set Shooter Speed OFF
       new FlipperSetCommand(_shooter, FlipperStates.BACK)                                                                                     // Set flippers back
       

@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commandGroups.AutoCenterNote;
 import frc.robot.commandGroups.Auto3Note;
+import frc.robot.commandGroups.Auto4Note;
 import frc.robot.commandGroups.AutoAmpWall;
 import frc.robot.commandGroups.AutoCrossFar;
 import frc.robot.commandGroups.AutoWallNote;
@@ -98,7 +99,7 @@ public class RobotContainer {
 
     autoChooser.addOption("Cross Line Short", new AutoCrossShort(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Cross Line Far", new AutoCrossFar(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
-    autoChooser.addOption("Four Note", new AutoAmpWall(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
+    autoChooser.addOption("Four Note", new Auto4Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Three Note", new Auto3Note(m_drivetrainSubsystem,m_shooterSubsystem,m_intakeSubsystem));
     autoChooser.addOption("Center Note", new AutoCenterNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));
     autoChooser.addOption("Mid Note", new AutoMidNote(m_drivetrainSubsystem, m_shooterSubsystem, m_intakeSubsystem));

@@ -17,17 +17,17 @@ import frc.robot.lib.ShooterState;
 import frc.robot.lib.k;
 
 public class AmpSubsystem extends SubsystemBase {
-  CANSparkMax m_motor;
-  PIDController m_pid;
+//  CANSparkMax m_motor;
+//  PIDController m_pid;
   /** Creates a new AmpSubsystem. */
   public AmpSubsystem() {
     initialize();
   }
   private void initialize(){
-    m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
-    m_motor.setIdleMode(IdleMode.kBrake);
-    m_pid = new PIDController(1, .01, 0);
-    m_pid.setTolerance(.1);
+    // m_motor = new CANSparkMax(k.ROBORIO_CAN_IDS.AMP, MotorType.kBrushless);
+    // m_motor.setIdleMode(IdleMode.kBrake);
+    // m_pid = new PIDController(1, .01, 0);
+    // m_pid.setTolerance(.1);
   }
   public void setAmpUp( ){
     GD.G_AmpState = AmpState.UP;
@@ -39,24 +39,24 @@ public class AmpSubsystem extends SubsystemBase {
   }
   @Override
   public void periodic() {
-    double ampVolts = 0;
-    if(GD.G_AmpState == AmpState.UP){
-      ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), k.AMP.LIMPT_UP_ROTATION);
-      if(m_pid.atSetpoint()){
-        ampVolts = .2;
-      }
-    }else {
+    // double ampVolts = 0;
+    // if(GD.G_AmpState == AmpState.UP){
+    //   ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), k.AMP.LIMPT_UP_ROTATION);
+    //   if(m_pid.atSetpoint()){
+    //     ampVolts = .2;
+    //   }
+    // }else {
 
-      ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), 0);
-      if(m_pid.atSetpoint()){
-        ampVolts = -.2;
-      }
-    }
+    //   ampVolts = m_pid.calculate(m_motor.getEncoder().getPosition(), 0);
+    //   if(m_pid.atSetpoint()){
+    //     ampVolts = -.2;
+    //   }
+    // }
 
-    m_motor.setVoltage(ampVolts);
-    SmartDashboard.putNumber("AmpPos", m_motor.getEncoder().getPosition());
-    SmartDashboard.putNumber("AmpVolts", ampVolts);
-    SmartDashboard.putBoolean("Amp AtSetPoint", m_pid.atSetpoint());
+    // m_motor.setVoltage(ampVolts);
+    // SmartDashboard.putNumber("AmpPos", m_motor.getEncoder().getPosition());
+    // SmartDashboard.putNumber("AmpVolts", ampVolts);
+    // SmartDashboard.putBoolean("Amp AtSetPoint", m_pid.atSetpoint());
     
   }
 }
